@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.TerrenosComodatos.Web", "eMAS.TerrenosComodatos.Web.csproj", "{C552DC9D-1D2C-4104-8DB1-A3435C9E8AAC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.TerrenosComodatos.Domain", "..\eMAS.TerrenosComodatos.Domain\eMAS.TerrenosComodatos.Domain.csproj", "{26188742-8A84-4A94-AE6F-F55ED5A573B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMAS.TerrenosComodatos.Infrastructure", "..\eMAS.TerrenosComodatos.Infrastructure\eMAS.TerrenosComodatos.Infrastructure.csproj", "{A5B565B0-7013-4D62-8873-5D179AA9B29B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{C552DC9D-1D2C-4104-8DB1-A3435C9E8AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C552DC9D-1D2C-4104-8DB1-A3435C9E8AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C552DC9D-1D2C-4104-8DB1-A3435C9E8AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26188742-8A84-4A94-AE6F-F55ED5A573B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26188742-8A84-4A94-AE6F-F55ED5A573B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26188742-8A84-4A94-AE6F-F55ED5A573B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26188742-8A84-4A94-AE6F-F55ED5A573B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B565B0-7013-4D62-8873-5D179AA9B29B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B565B0-7013-4D62-8873-5D179AA9B29B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B565B0-7013-4D62-8873-5D179AA9B29B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B565B0-7013-4D62-8873-5D179AA9B29B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

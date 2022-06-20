@@ -1,4 +1,5 @@
-﻿function eMASReferencialJs() { };
+﻿
+function eMASReferencialJs() { };
 
 eMASReferencialJs.serverPath = "";
 eMASReferencialJs.instrumentationKey = "";
@@ -10,7 +11,15 @@ eMASReferencialJs.tipoMensaje = {
     Prompt: 3,
     Contrato: 4
 };
-
+eMASReferencialJs.Advertencia = {
+    Titulo: "Advertencia"
+};
+eMASReferencialJs.Informativo = {
+    Titulo: "Informativo"
+};
+eMASReferencialJs.Exito = {
+    Titulo: "Exito"
+};
 eMASReferencialJs.tipoPersona = {
     Empleado: 1,
     Familiar: 2
@@ -330,10 +339,7 @@ eMASReferencialJs.generateBuscador = function (buscador, nombreBuscador, nombreB
     return buscador;
 };
 
-
-//////////////////////////////////////////////////////////////////////
 ////////////////////////////// BUSCADOR //////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
 /*Crea el componente del buscador*/
 eMASReferencialJs.GenerarComponenteBuscador = function (buscador, nombre, requerido) {
@@ -347,9 +353,7 @@ eMASReferencialJs.GenerarComponenteBuscador = function (buscador, nombre, requer
     return buscador;
 };
 
-//////////////////////////////////////////////////////////////////////
 /////////////////////////// EVENTO Y ACCIÓN //////////////////////////
-//////////////////////////////////////////////////////////////////////
 
 /*Bloquea a los componentes el evento pegar*/
 eMASReferencialJs.EventoNoPegar = function () {
@@ -435,10 +439,7 @@ $.fn.serializeFormJSON = function () {
     return o;
 };
 
-
-//////////////////////////////////////////////////////////////////////
 //////////////////////////// FECHA Y HORA ////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
 /*Crea el componente de la fecha y hora*/
 eMASReferencialJs.GenerarComponenteFechaHora = function (dateTimePicker, format, defaultDateTime, name, isRequired) {
@@ -553,11 +554,7 @@ eMASReferencialJs.FormatoFecha = function (valor, fila, posicion) {
     return moment(valor).format('MM/DD/YYYY');
 };
 
-
-
-//////////////////////////////////////////////////////////////////////
 /////////////////////////////// TABLA ////////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
 /*Crea el componente de la tabla*/
 eMASReferencialJs.GenerarComponenteTabla = function (table, uniqueId, columns, idToolbar, data, search) {
@@ -604,10 +601,7 @@ eMASReferencialJs.ObtenerSelecciones = function (table) {
     });
 };
 
-
-//////////////////////////////////////////////////////////////////////
 ////////////////////////////// SELECTOR //////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
 /*Crea el componente del selector*/
 eMASReferencialJs.GenerarComponenteSelector = function (select) {
@@ -659,10 +653,7 @@ eMASReferencialJs.LimpiarComponenteSelector = function (select) {
     select.trigger("chosen:updated");
 };
 
-
-//////////////////////////////////////////////////////////////////////
 /////////////////////////// LLAMADA AJAX /////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
 eMASReferencialJs.Ajax = function (request, failFunction, typeMessage) {
     $.ajax(
@@ -698,3 +689,135 @@ eMASReferencialJs.Ajax = function (request, failFunction, typeMessage) {
         }
     });
 };
+
+// General Formularios Configuración
+
+eMASReferencialJs.SetearEventosPanel = function () {
+    $('.panel-collapse').on('show.bs.collapse', function () {
+        $(this).siblings('.panel-heading').addClass('active');
+    });
+
+    $('.panel-collapse').on('hide.bs.collapse', function () {
+        $(this).siblings('.panel-heading').removeClass('active');
+    });
+};
+
+eMASReferencialJs.ObtenerAppConfig = function () {
+    let _rutaBase = $("#hdnRutaBase").val();
+
+
+    let _appConfig = {
+        "RutaBase": _rutaBase
+    }
+
+    return _appConfig;
+};
+
+eMASReferencialJs.FormSetVisibilityConsult = function (visibility, tableName) {
+    debugger;
+    let _consultLs = document.querySelector(".consult-ls");
+
+    if (_consultLs != undefined)
+        _consultLs.style.display = visibility ? "" : "none";
+
+    if (tableName == "" || tableName == undefined) {
+        return;
+    }
+
+    let dataConsulta = $("#" + tableName).bootstrapTable('getOptions');
+
+    if (!(dataConsulta == null && dataConsulta == undefined)) {
+        if (dataConsulta.totalRows == 0) {
+            if (visibility) {
+                if (_consultLs != undefined)
+                    _consultLs.style.display = "none";
+            }
+        }
+    }
+};
+
+eMASReferencialJs.FormSetVisibilityPanel = function (visibility) {
+    let _panelFilter = document.querySelector(".panel-filter");
+    
+    if (_panelFilter != undefined)
+        _panelFilter.style.display = visibility ? "" : "none";
+};
+
+eMASReferencialJs.htmlToElement = function(html) {
+    var template = document.createElement('template');
+    html = html.trim(); 
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
+
+eMASReferencialJs.SetearMensajeDefaultAdvertencia = function (mensaje) {
+    eMASReferencialJs.mostrarMensajes(eMASReferencialJs.Advertencia.Titulo
+        , eMASReferencialJs.tipoMensaje.Advertencia
+        , [{ Description: mensaje }]
+        , [eMASReferencialJs.botonAceptar]);
+};
+
+eMASReferencialJs.SetearMensajeDefaultExito = function (mensaje) {
+    eMASReferencialJs.mostrarMensajes(eMASReferencialJs.Exito.Titulo
+        , eMASReferencialJs.tipoMensaje.Exito
+        , [{ Description: mensaje }]
+        , [eMASReferencialJs.botonAceptar]);
+};
+
+eMASReferencialJs.SetearPlantillaPagineo = function (metodoBusqueda, pagineoContainer, totalPaginas, paginaActual) {
+    let plantilla = "";
+    let listaNumeracion = "";
+    let TotalPaginas = totalPaginas;
+    let PaginaActual = paginaActual;
+    let Pagineo = $("#" + pagineoContainer);
+    let ArrNumeroPaginas = Array();
+
+    let contador = 1;
+    for (let i = PaginaActual; i <= TotalPaginas; i++) {
+        ArrNumeroPaginas[0] = paginaActual;
+        if (TotalPaginas != PaginaActual
+            && ArrNumeroPaginas[contador - 1] != TotalPaginas) {
+            ArrNumeroPaginas[contador] = i + 1;
+        }
+        contador++;
+    }
+    // Dejamos solo 5 páginas para navegar
+    ArrNumeroPaginas = ArrNumeroPaginas.slice(0, 5);
+    let primeraPagina = 1;
+    let ultimaPagina = TotalPaginas;
+    let avanzar = 1;
+    if (TotalPaginas != PaginaActual) {
+        avanzar = PaginaActual + 1;
+    }
+    let retroceder = 1;
+    if (PaginaActual > 1) {
+        retroceder = PaginaActual - 1;
+    }
+
+    plantilla += "<ul class=\"pagination justify-content-center\">";
+    plantilla += "<li class=\"page-item\">";
+    plantilla += "<a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda +"('" + primeraPagina + "')\">";
+    plantilla += "<i class=\"fa fa-fast-backward\"></i>";
+    plantilla += "</a></li>";
+    plantilla += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda + "('" + retroceder + "')\">";
+    plantilla += "<i class=\"fa fa-backward\"></i></a></li>";
+
+    for (let i = 0; i < ArrNumeroPaginas.length; i++) {
+        listaNumeracion += "<li class=\"page-item\">"
+        listaNumeracion += "<a class=\"page-link active\" onclick=\"" + metodoBusqueda + "('" + ArrNumeroPaginas[i] + "')\" href=\"#\">";
+        listaNumeracion += (ArrNumeroPaginas[i] === PaginaActual ? "<strong>" + ArrNumeroPaginas[i] + "</strong>" : ArrNumeroPaginas[i]) + '</a>';
+        listaNumeracion += "</li>"
+    }
+
+    plantilla += listaNumeracion + "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda + "('" + avanzar + "')\">";
+    plantilla += "<i class=\"fa fa-forward\"></i></a></li>";
+    plantilla += "<li class=\"page-item\">";
+    plantilla += "<a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda + "('" + ultimaPagina + "')\">";
+    plantilla += "<i class=\"fa fa-fast-forward\"></i></a></li></ul>";
+
+    Pagineo.append(plantilla);
+}
+
+eMASReferencialJs.EncontrarMensaje = function (mensaje) {
+    return mensaje.codigo == this.codigo;
+}

@@ -12,18 +12,74 @@
 
     <!-- Estilos -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-table.min.css" />
     <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/chosen.min.css" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/style-sufe.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/style-sufe.min.css" />
+    </environment>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/estilos-comunes.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/estilos-comunes.min.css" />
+    </environment>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" />
+    </environment>
+
 
     <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/funciones-comunes.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-table.min.js"></script>
+
+    <script src="~/js/main.js"></script>
+
+    <environment include="Development">
+        <script src="~/js/funciones-comunes.js"></script>
+        <script src="~/js/Comodatos/stc50001.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/funciones-comunes.min.js"></script>
+    </environment>
 
 </head>
 <body>
+    <partial name="_VariablesGlobales" />
 
+    <partial name="_Menu"/>
+    <!-- Left Panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <partial name="_Header" />
+        <!-- Header-->
+        <partial name="_ToolbarHeader" />
+        <div class="right_col" role="main">
+            <div id="pageContainer" class="container">
+                @RenderBody()
+            </div>
+        </div>
+        <partial name="_Mensajes" />
+    </div><!-- /#right-panel -->
+    <!-- Right Panel -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

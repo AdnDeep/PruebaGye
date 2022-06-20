@@ -1,0 +1,5 @@
+﻿@if (TempData["RutaBase"] != null)
+{
+    string rutaBase = (string)TempData["RutaBase"];
+    @Html.Hidden("hdnRutaBase", rutaBase)
+}
