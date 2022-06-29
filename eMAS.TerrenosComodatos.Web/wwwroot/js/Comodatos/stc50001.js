@@ -2,8 +2,27 @@ const STC50001 = function () {
     const nameConsult1 = "beneficiarios";
     const nameEditAction = "EditView";
     const nameSaveAction = "EditSave";
+    const nameDeleteAction = "EditDelete";
     const nameArea = "Comodatos";
     const nameController = "STC50001";
+
+    const fnRespuestaEliminarRegistro = function (response) {
+        if (response == null || response == undefined) {
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("No se obtuvo una respuesta correcta del Aplicativo.");
+            return;
+        }
+        if (response.tipo != "EXITO") {
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
+            return;
+        } else {
+            eMASReferencialJs.SetearMensajeDefaultExito("Se eliminó el registro con éxito.");
+            fnDestruirFormularioEdicion();
+            fnBtnConsultar(1);
+            eMASReferencialJs.FormSetVisibilityPanel(true);
+            eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios");
+            return;
+        }
+    };
 
     const fnRespuestaGuardarRegistro = function (response) {
         if (response == null || response == undefined) {
@@ -21,7 +40,6 @@ const STC50001 = function () {
             eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios");
             return;
         }
-
     };
     // Reconsulta en caso de Actualizaciones o datos
     const fnRespuestaGuardarRegistro2 = function (responseMensajes) {
@@ -80,6 +98,28 @@ const STC50001 = function () {
     };
 
     const fnEliminarRegistro = function () {
+        let _id = document.getElementById("IdBeneficiario");
+
+        // Envio Datos al servidor
+        let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+
+        let rutaBase = _appConfig.RutaBase;
+        rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+        let url = rutaBase + nameArea + "/" + nameController + "/" + nameDeleteAction;
+
+        let dataRegistroJson = {
+            id: _id.value
+        };
+
+        eMASReferencialJs.Ajax({
+            type: "POST",
+            data: dataRegistroJson,
+            url: url,
+            beforeSend: function (response) {
+                eMASReferencialJs.mostrarProgress();
+            },
+            success: fnRespuestaEliminarRegistro
+        }, function () { eMASReferencialJs.ocultarProgress(); });
     };
 
     const EvtCancelarFormulario = function () {
@@ -103,22 +143,7 @@ const STC50001 = function () {
     };
 
     const fnSetearEvtFormulario = function () {
-        let _RegresarCtrl = document.querySelector(".regresar-edit");
-        let _CancelarCtrl = document.querySelector(".cancelar-edit");
-        let _GuardarCtrl = document.querySelector(".guardar-edit");
-        let _EliminarCtrl = document.querySelector(".eliminar-edit");
-
-        _RegresarCtrl.removeEventListener('click', EvtRegresarFormulario);
-        _RegresarCtrl.addEventListener('click', EvtRegresarFormulario);
-
-        _CancelarCtrl.removeEventListener('click', EvtCancelarFormulario);
-        _CancelarCtrl.addEventListener('click', EvtCancelarFormulario);
-
-        _GuardarCtrl.removeEventListener('click', EvtGuardarFormulario);
-        _GuardarCtrl.addEventListener('click', EvtGuardarFormulario);
-
-        _EliminarCtrl.removeEventListener('click', EvtEliminarFormularo);
-        _EliminarCtrl.addEventListener('click', EvtEliminarFormularo);
+        eMASReferencialJs.SetearEvtFormularioGenerico(EvtRegresarFormulario, EvtCancelarFormulario, EvtGuardarFormulario, EvtEliminarFormularo);
     };
 
     const fnDestruirFormularioEdicion = function () {
@@ -220,7 +245,6 @@ const STC50001 = function () {
         }
         
         let DataInfoConsult = $("#" + response.dataresult.resultcontainer);
-        debugger;
         DataInfoConsult.bootstrapTable('destroy');
         DataInfoConsult.bootstrapTable();
         let data = [];
@@ -276,23 +300,7 @@ const STC50001 = function () {
     };
 
     const fnLimpiarFormularioPanel = function () {
-        let _nameCtrl = document.getElementById("name");
-        let _representativeNameCtrl = document.getElementById("representative-name");
-        let _rucCtrl = document.getElementById("ruc");
-        let _contactoCtrl = document.getElementById("contacto");
-
-        if (_nameCtrl != undefined) {
-            _nameCtrl.value = "";
-        }
-        if (_representativeNameCtrl != undefined) {
-            _representativeNameCtrl.value = "";
-        }
-        if (_rucCtrl != undefined) {
-            _rucCtrl.value = "";
-        }
-        if (_contactoCtrl != undefined) {
-            _contactoCtrl.value = "";
-        }
+        eMASReferencialJs.LimpiarControlesHtml(".ctrl-panelFilterForm");
     };
 
     const fnLimpiarConsulta = function () {
@@ -311,6 +319,7 @@ const STC50001 = function () {
     }
 
     const EvtBtnNuevo = function () {
+        console.log("click1");
         let _appConfig = eMASReferencialJs.ObtenerAppConfig();
 
         let rutaBase = _appConfig.RutaBase;
@@ -331,28 +340,7 @@ const STC50001 = function () {
     }
 
     const inicializacionPanel = function () {
-        let _panelFilter = document.querySelector("#panelFilterBeneficiario .panel-body");
-        let _consultLs = document.querySelector(".consult-ls");
-        let _btnConsultar = document.querySelector(".consultar");
-        let _btnLimpiar = document.querySelector(".limpiar");
-        let _btnNuevo = document.querySelector(".nuevo");
-
-        if (_panelFilter != undefined) 
-            eMASReferencialJs.SetearEventosPanel();
-    
-        if (_consultLs != undefined)
-            _consultLs.style.display = "none";
-
-        if (_btnConsultar != undefined) {
-            _btnConsultar.addEventListener('click', EvtBtnConsultar);
-        }
-        if (_btnLimpiar != undefined) {
-            _btnLimpiar.addEventListener('click', EvtBtnLimpiarFormPanel);
-        }
-        if (_btnNuevo != undefined) {
-            _btnNuevo.addEventListener('click', EvtBtnNuevo);
-        }
-        eMASReferencialJs.FormSetVisibilityConsult(false);
+        eMASReferencialJs.InicializarPanelGenerico("panelFilterBeneficiario", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar);
     };
 
     return {

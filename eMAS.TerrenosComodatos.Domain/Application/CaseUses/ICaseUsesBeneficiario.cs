@@ -17,7 +17,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
         /// CUEBD0003 - ERROR BD, Se escribe en log, Presentador informa Se ha producido un error en la aplicación.
         /// </summary>
         /// <param name="id"></param>
-        void EliminarBeneficiario(int id);
+        ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteModel model, string usuario, string controlador, string pcclient);
     }
     public interface ICaseUseEscribirBeneficiario
     {

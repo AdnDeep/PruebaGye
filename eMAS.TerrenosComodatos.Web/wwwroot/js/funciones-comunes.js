@@ -714,20 +714,18 @@ eMASReferencialJs.ObtenerAppConfig = function () {
 };
 
 eMASReferencialJs.FormSetVisibilityConsult = function (visibility, tableName) {
-    debugger;
     let _consultLs = document.querySelector(".consult-ls");
 
     if (_consultLs != undefined)
         _consultLs.style.display = visibility ? "" : "none";
 
-    if (tableName == "" || tableName == undefined) {
+    if (tableName == "" || tableName == undefined)
         return;
-    }
 
     let dataConsulta = $("#" + tableName).bootstrapTable('getOptions');
 
     if (!(dataConsulta == null && dataConsulta == undefined)) {
-        if (dataConsulta.totalRows == 0) {
+        if (dataConsulta.totalRows == 0 || dataConsulta.totalRows == undefined) {
             if (visibility) {
                 if (_consultLs != undefined)
                     _consultLs.style.display = "none";
@@ -820,4 +818,123 @@ eMASReferencialJs.SetearPlantillaPagineo = function (metodoBusqueda, pagineoCont
 
 eMASReferencialJs.EncontrarMensaje = function (mensaje) {
     return mensaje.codigo == this.codigo;
+}
+
+eMASReferencialJs.SetearEvtFormularioGenerico = function (fnRegresar, fnCancelar, fnGuardar, fnEliminar) {
+    let _RegresarCtrl = document.querySelector(".regresar-edit");
+    let _CancelarCtrl = document.querySelector(".cancelar-edit");
+    let _GuardarCtrl = document.querySelector(".guardar-edit");
+    let _EliminarCtrl = document.querySelector(".eliminar-edit");
+
+    _RegresarCtrl.removeEventListener('click', fnRegresar);
+    _RegresarCtrl.addEventListener('click', fnRegresar);
+
+    _CancelarCtrl.removeEventListener('click', fnCancelar);
+    _CancelarCtrl.addEventListener('click', fnCancelar);
+
+    _GuardarCtrl.removeEventListener('click', fnGuardar);
+    _GuardarCtrl.addEventListener('click', fnGuardar);
+
+    _EliminarCtrl.removeEventListener('click', fnEliminar);
+    _EliminarCtrl.addEventListener('click', fnEliminar);
+};
+
+eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar) {
+    let _panelFilter = document.querySelector("#" + nombrePanel + " .panel-body");
+    let _consultLs = document.querySelector(".consult-ls");
+    let _btnConsultar = document.querySelector(".consultar");
+    let _btnLimpiar = document.querySelector(".limpiar");
+    let _btnNuevo = document.querySelector(".nuevo");
+
+    if (_panelFilter != undefined)
+        eMASReferencialJs.SetearEventosPanel();
+
+    if (_consultLs != undefined)
+        _consultLs.style.display = "none";
+
+    if (_btnConsultar != undefined) {
+        _btnConsultar.addEventListener('click', fnConsultar);
+    }
+    if (_btnLimpiar != undefined) {
+        _btnLimpiar.addEventListener('click', fnLimpiar);
+    }
+    if (_btnNuevo != undefined) {
+        _btnNuevo.addEventListener('click', fnNuevo);
+    }
+    eMASReferencialJs.FormSetVisibilityConsult(false);
+}
+
+eMASReferencialJs.CargarCombosGenerico = function (data) {    
+    data.forEach(function (_dataItem) {
+        let dataBody = { key1: _dataItem.key, target: _dataItem.ctrl };
+        eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta);
+    });
+};
+
+eMASReferencialJs.LimpiarControlesHtml = function (panelName) {
+    let ctrlContenedor = document.querySelector(panelName);
+    if (ctrlContenedor == null || ctrlContenedor == undefined)
+        return;
+
+    // Limpiar Inputs
+    let inputs = ctrlContenedor.querySelectorAll("input");
+
+    if (!(inputs == null || inputs == undefined)) {
+        inputs.forEach(function (element) {
+            element.value = "";
+        });
+    }
+    let selects = ctrlContenedor.querySelectorAll("select");
+
+    if (!(selects == null || selects == undefined)) {
+        selects.forEach(function (element) {
+            element.selectedIndex = -1;
+        });
+    }
+};
+
+eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
+    debugger;
+    if (data == null || data == undefined) {
+        console.log("Respuesta incorrecta del servidor CargarCombosGenerico (1)");
+        return;
+    }
+    if (data.key == null || data.key == undefined || data.key == ""
+        || data.target == null || data.target == undefined || data.target == "") {
+        console.log("Respuesta incorrecta del servidor CargarCombosGenerico (2)");
+        return;
+    }
+    if (!(data.datasource == null || data.datasource == undefined)) {
+        let itemCtrlSelect = document.querySelector(`#${data.target}`);
+        if (!(itemCtrlSelect == undefined || itemCtrlSelect == null)) {
+            let options = "";
+            data.datasource.forEach(function(item) {
+                options += `<option value=${item.key}>${item.value}</option>\n`;
+            });
+            itemCtrlSelect.innerHTML = options;
+            itemCtrlSelect.selectedIndex = -1;
+        }
+    }
+};
+
+eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback) {
+    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+    let rutaBase = _appConfig.RutaBase;
+    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+    let url = rutaBase + ruta;
+
+    fetch(url, {
+        method: 'POST',
+        headers: { "Content-type": "application/json;charset=UTF-8" },
+        body: JSON.stringify(dataBody)
+    }).then(res => res.json())
+        .then(fnSuccessCallback)
+        .catch(function (error) {
+            console.log('Fetchpost Generic Error', error);
+        });
+};
+
+eMASReferencialJs.ObtenerAnioSistema = function () {
+    const date = new Date();
+    return date.getFullYear();
 }

@@ -1,15 +1,11 @@
 ﻿using eMAS.TerrenosComodatos.Domain.Application.CaseUses.Mappers;
 using eMAS.TerrenosComodatos.Domain.Application.CaseUses.Validations;
 using eMAS.TerrenosComodatos.Domain.DTOs;
-using eMAS.TerrenosComodatos.Domain.Entities;
 using eMAS.TerrenosComodatos.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
 {

@@ -19,7 +19,6 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             _configuration = configuration;
             _cadenaConexion = _configuration["ConnectionStrings:ComodatoDatabaseLectura"];
         }
-
         public ResultadoDTO<Tuple<Beneficiario, string, short>> GetBeneficiarioPorId(short id)
         {
             short contador = 0;
@@ -102,12 +101,10 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
 
             return respuesta;
         }
-
         public ResultadoDTO<Beneficiario> GetBeneficiarioPorNombre(string nombre)
         {
             throw new NotImplementedException();
         }
-
         public ResultadoDTO<Tuple<IList<Beneficiario>, int>> GetBeneficiarioTodosPaginado(BeneficiariosPanelFilterModel panelModel, int numeroPagina, int numeroFilas)
         {
             int totalPaginas = 0;

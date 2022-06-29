@@ -3,6 +3,26 @@
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public class KeyValueParam
+    {
+        public string key1 { get; set; }
+        public string target { get; set; }
+    }
+    public class KeyValueSelect : GenericKeyValueSelect
+    {
+        
+    }
+    public class StructKeyValueSelect
+    {
+        public string key { get; set; }
+        public string target { get; set; }
+        public List<KeyValueSelect> datasource { get; set; }
+    }
+    public abstract class GenericKeyValueSelect
+    {
+        public string key { get; set; }
+        public string value { get; set; }
+    }
     public class ResultadoViewJson
     {
         public bool cancontinue { get; set; }
@@ -54,6 +74,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
             mensajes = new List<Mensaje>();
             this.tipo = "EXITO";
             this.mensaje = "OK";
+            dataresult = default(T);
         }
     }
     public class Mensaje 

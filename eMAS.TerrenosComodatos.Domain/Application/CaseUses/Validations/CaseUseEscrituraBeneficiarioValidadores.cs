@@ -32,14 +32,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses.Validations
                 salida.mensaje = "Se produjo un error en el proceso de grabar en la aplicacion. (2)";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
-            }
-            if (string.IsNullOrEmpty(entrada.dataresult) || string.IsNullOrWhiteSpace(entrada.dataresult))
-            {
-                _logger.LogError($"El objeto Respuesta del servidor para la accion crear es nulo. (3)");
-                salida.mensaje = "Se produjo un error en el proceso de grabar en la aplicacion. (3)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
+            }            
             var mensajeInternoBD = entrada.mensajes?.FirstOrDefault(fod => fod.codigo == "GRBIMPLESCINT001")?.descripcion;
             if (!(string.IsNullOrEmpty(mensajeInternoBD) || string.IsNullOrWhiteSpace(mensajeInternoBD)))
             {

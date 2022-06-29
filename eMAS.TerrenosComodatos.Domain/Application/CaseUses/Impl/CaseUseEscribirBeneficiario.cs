@@ -6,9 +6,6 @@ using eMAS.TerrenosComodatos.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
 {

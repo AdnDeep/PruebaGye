@@ -24,4 +24,8 @@ namespace eMAS.TerrenosComodatos.Domain.Interfaces
         ResultadoDTO<Beneficiario> GetBeneficiarioPorNombre(string nombre);
         ResultadoDTO<Tuple<Beneficiario, string, short>> GetBeneficiarioPorId(short id);
     }
+    public interface IGestionRepositorioLecturaGenerica
+    {
+        ResultadoDTO<Tuple<List<KeyValueSelect>, string>> ObtenerListadoGenerico(string keyparam);
+    }
 }

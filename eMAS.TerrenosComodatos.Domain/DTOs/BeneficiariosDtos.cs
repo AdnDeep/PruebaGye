@@ -13,6 +13,11 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public string ruc { get; set; }
         public string contacto { get; set; }
     }
+
+    public class BeneficiarioDeleteModel
+    {
+        public short id { get; set; }
+    }
     public class BeneficiarioEditModel
     {
         public short id { get; set; }
