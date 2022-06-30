@@ -11,30 +11,24 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ValidadoresLecturaTramite
     {
-        private readonly ILogger<ValidadoresLecturaTramite> _logger;
-        public ValidadoresLecturaTramite(ILogger<ValidadoresLecturaTramite> logger)
-        {
-            _logger = logger;
-        }
-        public bool ResultadoLogicConsultaPorId(ref Tuple<SmcTramiteEdit, string, short> entradaAValidar
-                            , ref ResultadoDTO<TramiteEditViewModel> salida)
+        public bool ResultadoLogicConsultaAnexoPorId(ref Tuple<SmcAnexoTramiteEdit, string, short> entradaAValidar
+                            , ref ResultadoDTO<AnexoTramiteEditViewModel> salida)
         {
             var parametros = $"ValidadoresLecturaTramite Service Layer";
             var props = new Dictionary<string, object>(){
-                            { "Metodo", "ResultadoLogicConsultaPorId" },
+                            { "Metodo", "ResultadoLogicConsultaAnexoPorId" },
                             { "Sitio", "COMODATO-API" },
                             { "Parametros", parametros }
                     };
             List<Mensaje> lsMensajes = new List<Mensaje>();
             bool puedeContinuar = false;
+            salida.dataresult = new AnexoTramiteEditViewModel();
             if (entradaAValidar == null)
             {
                 using (_logger.BeginScope(props))
                 {
-                    _logger.LogError($"ConsultarPorId El objeto devuelto de la base de datos es nulo");
+                    _logger.LogError($"ResultadoLogicConsultaAnexoPorId El objeto devuelto de la base de datos es nulo");
                 }
-
-                salida.dataresult = new TramiteEditViewModel();
                 salida.mensaje = "Se produjo un error en la aplicación (1). Vuelva a intentar.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
@@ -46,8 +40,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 {
                     _logger.LogError($"ConsultarPorId El objeto devuelto de la base de datos es nulo (1)");
                 }
-
-                salida.dataresult = new TramiteEditViewModel();
                 salida.mensaje = "Se produjo un error en la aplicación (2). Vuelva a intentar.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
@@ -59,8 +51,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 {
                     _logger.LogError($"ConsultarPorId El objeto devuelto de la base de datos es nulo (2)");
                 }
-
-                salida.dataresult = new TramiteEditViewModel();
                 salida.mensaje = "Se produjo un error en la aplicación (3). Vuelva a intentar.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
@@ -79,7 +69,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 });
                 salida.mensajes = lsMensajes;
 
-                salida.dataresult = new TramiteEditViewModel();
                 salida.mensaje = "Hay Errores en los datos de la aplicación.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
@@ -98,7 +87,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 });
                 salida.mensajes = lsMensajes;
 
-                salida.dataresult = new TramiteEditViewModel();
                 salida.mensaje = "El registro seleccionado no existe, por favor cree uno nuevo.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
@@ -107,33 +95,45 @@ namespace eMAS.Api.TerrenosComodatos.Services
             puedeContinuar = true;
             return puedeContinuar;
         }
-        public bool ResultadoLogicConsultaPaginado(ref Tuple<List<SmcTramitePaginado>, int> entrada
-            , ref ResultadoDTO<DataPagineada<TramitesListViewModel>> salida)
-        {
-            bool puedeContinuar = false;
 
-            var parametros = $"ValidadoresLecturaTramite Service Layer: ResultadoLogicConsultaPaginado";
+        public bool ResultadoLogicConsultaAnexoPorIdTramite(ref Tuple<List<SmcAnexoTramiteEdit>, string> entrada
+            , ref ResultadoDTO<List<AnexoTramiteListViewModel>> salida)
+        {
+            var parametros = $"ValidadoresLecturaTramite Service Layer";
             var props = new Dictionary<string, object>(){
-                            { "Metodo", "ResultadoLogicConsultaPaginado" },
+                            { "Metodo", "ResultadoLogicConsultaAnexoPorIdTramite" },
                             { "Sitio", "COMODATO-API" },
                             { "Parametros", parametros }
                     };
+            List<Mensaje> lsMensajes = new List<Mensaje>();
+            bool puedeContinuar = false;
+            salida.dataresult = new List<AnexoTramiteListViewModel>();
 
             if (entrada == null)
             {
                 using (_logger.BeginScope(props))
                 {
-                    _logger.LogError($"El objeto devuelto de la base de datos es nulo.");
+                    _logger.LogError($"El objeto devuelto de la base de datos es nulo (1).");
                 }
 
-                salida.dataresult = new DataPagineada<TramitesListViewModel>();
+                salida.mensaje = "Se produjo un error en la aplicación (1). Vuelva a intentar.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+            if (entrada.Item1 == null)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"El objeto devuelto de la base de datos es nulo (2).");
+                }
+
                 salida.mensaje = "Se produjo un error en la aplicación (2). Vuelva a intentar.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-
             puedeContinuar = true;
             return puedeContinuar;
+
         }
     }
 }

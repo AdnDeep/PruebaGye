@@ -13,14 +13,13 @@ using eMAS.Api.TerrenosComodatos.IRepository;
 
 namespace eMAS.Api.TerrenosComodatos.Repository
 {
-    public class RepositorioTramiteLectura : IGestionRepositorioLecturaTramites
+    public partial class RepositorioTramiteLectura : IGestionRepositorioLecturaTramites
     {
         private readonly IServiceProvider _serviceProvider;
         public RepositorioTramiteLectura(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
-
         public Tuple<SmcTramiteEdit, string, short> GetTramitePorId(short id)
         {
             short iContador = 0;
@@ -42,6 +41,8 @@ namespace eMAS.Api.TerrenosComodatos.Repository
                                      @Mensaje = {mensaje} OUTPUT").AsEnumerable()
                                 .FirstOrDefault();
 
+                _tramiteEdit = _tramiteEdit ?? new SmcTramiteEdit();
+                
                 sMensaje = mensaje.Value?.ToString();
                 var sContador = contador.Value?.ToString();
                 Int16.TryParse(sContador, out iContador);
@@ -50,7 +51,6 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             return data;
         }
-
         public Tuple<List<SmcTramitePaginado>, int> GetTramitesVistaTodosPaginado(TramitesPanelFilterModel panelModel, int numeroPagina, int numeroFilas)
         {
             string strPanelFilterParameter = "";
@@ -83,6 +83,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
                                      @NumeroFilas = {numeroFilas},
                                      @TotalPaginas = {totalPaginas} OUTPUT").ToList();
 
+                lsTramites = lsTramites ?? new List<SmcTramitePaginado>();
                 var sTotalPaginas = totalPaginas.Value?.ToString();
                 Int32.TryParse(sTotalPaginas, out iTotalPaginas);
             }
@@ -90,6 +91,5 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             return data;
         }
-
     }
 }

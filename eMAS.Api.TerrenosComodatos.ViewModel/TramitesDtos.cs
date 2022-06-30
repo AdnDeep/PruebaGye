@@ -5,37 +5,37 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
 {
     public class TramiteEditViewModel
     {
-        public short IdTramite { get; set; }
-        public short Anio { get; set; }
-        public short Secuencia { get; set; }
-        public short IdSector { get; set; }
-        public short Manzana { get; set; }
-        public short Lote { get; set; }
-        public short Division { get; set; }
-        public short Phv { get; set; }
-        public short Phh { get; set; }
-        public short Numero { get; set; }
-        public short IdBeneficiario { get; set; }
-        public string NombreBeneficiario { get; set; }
-        public short IdTipoContrato { get; set; }
-        public string TipoContrato { get; set; }
-        public decimal? AreaSolar { get; set; }
-        public string AniosPlazo { get; set; }
-        public short IdEstado { get; set; }
-        public string Estado { get; set; }
-        public short? IdDireccion { get; set; }
-        public string Direccion { get; set; }
-        public string AprobacionConcejoMun { get; set; }
-        public DateTime? FechaAprobConcejoMun { get; set; }
-        public DateTime? FechaEscritura { get; set; }
-        public DateTime? FechaInsRegProp { get; set; }
-        public string OficioRevocatoriaMod { get; set; }
-        public DateTime? FechaInsRevocatoria { get; set; }
-        public string ObservacionJuridico { get; set; }
-        public string BaseOrigen { get; set; }
-        public string OficioAg { get; set; }
-        public string OficioDase { get; set; }
-        public bool PdpEstado { get; set; }
+        public short idtramite { get; set; }
+        public short anio { get; set; }
+        public short secuencia { get; set; }
+        public short idsector { get; set; }
+        public short manzana { get; set; }
+        public short lote { get; set; }
+        public short division { get; set; }
+        public short phv { get; set; }
+        public short phh { get; set; }
+        public short numero { get; set; }
+        public short idbeneficiario { get; set; }
+        public string nombrebeneficiario { get; set; }
+        public short idtipocontrato { get; set; }
+        public string tipocontrato { get; set; }
+        public decimal? areasolar { get; set; }
+        public string aniosplazo { get; set; }
+        public short idestado { get; set; }
+        public string estado { get; set; }
+        public short? iddireccion { get; set; }
+        public string direccion { get; set; }
+        public string aprobacionconcejomun { get; set; }
+        public DateTime? fechaaprobconcejomun { get; set; }
+        public DateTime? fechaescritura { get; set; }
+        public DateTime? fechainsregprop { get; set; }
+        public string oficiorevocatoriamod { get; set; }
+        public DateTime? fechainsrevocatoria { get; set; }
+        public string observacionjuridico { get; set; }
+        public string baseorigen { get; set; }
+        public string oficioag { get; set; }
+        public string oficiodase { get; set; }
+        public bool pdpestado { get; set; }
     }
     public class TramitesPanelFilterModel
     {

@@ -12,12 +12,12 @@ namespace eMAS.Api.TerrenosComodatos.Services
     public partial class ServiceTramiteLectura : IServiceTramiteLectura
     {
 
-        public ResultadoDTO<string> ConsultarTopografiaPorId(short id)
+        public ResultadoDTO<TopografiaTerrenoEditViewMoel> ConsultarTopografiaPorId(short id)
         {
             throw new NotImplementedException();
         }
 
-        public ResultadoDTO<string> ConsultarTopografiasPorIdTramite(short idTramite)
+        public ResultadoDTO<List<TopografiaTerrenoListViewMoel>> ConsultarTopografiasPorIdTramite(short idTramite)
         {
             throw new NotImplementedException();
         }

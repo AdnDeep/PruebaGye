@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.Services
 {
-    public class MapeadoresLecturaTramite
+    public partial class MapeadoresLecturaTramite
     {
         public MapeadoresLecturaTramite()
         { 
@@ -41,37 +41,37 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             TramiteEditViewModel _tramiteEditViewModel = new TramiteEditViewModel();
 
-            _tramiteEditViewModel.IdTramite = entrada.IdTramite;
-            _tramiteEditViewModel.Anio = entrada.Anio;
-            _tramiteEditViewModel.Secuencia = entrada.Secuencia;
-            _tramiteEditViewModel.IdSector = entrada.IdSector;
-            _tramiteEditViewModel.Manzana = entrada.Manzana;
-            _tramiteEditViewModel.Lote = entrada.Lote;
-            _tramiteEditViewModel.Division = entrada.Division;
-            _tramiteEditViewModel.Phv = entrada.Phv;
-            _tramiteEditViewModel.Phh = entrada.Phh;
-            _tramiteEditViewModel.Numero = entrada.Numero;
-            _tramiteEditViewModel.IdBeneficiario = entrada.IdBeneficiario;
-            _tramiteEditViewModel.NombreBeneficiario = entrada.NombreBeneficiario;
-            _tramiteEditViewModel.IdTipoContrato = entrada.IdTipoContrato;
-            _tramiteEditViewModel.TipoContrato = entrada.TipoContrato;
-            _tramiteEditViewModel.AreaSolar = entrada.AreaSolar;
-            _tramiteEditViewModel.AniosPlazo = entrada.AniosPlazo;
-            _tramiteEditViewModel.IdEstado = entrada.IdEstado;
-            _tramiteEditViewModel.Estado = entrada.Estado;
-            _tramiteEditViewModel.IdDireccion = entrada.IdDireccion;
-            _tramiteEditViewModel.Direccion = entrada.Direccion;
-            _tramiteEditViewModel.AprobacionConcejoMun = entrada.AprobacionConcejoMun;
-            _tramiteEditViewModel.FechaAprobConcejoMun = entrada.FechaAprobConcejoMun;
-            _tramiteEditViewModel.FechaEscritura = entrada.FechaEscritura;
-            _tramiteEditViewModel.FechaInsRegProp = entrada.FechaInsRegProp;
-            _tramiteEditViewModel.OficioRevocatoriaMod = entrada.OficioRevocatoriaMod;
-            _tramiteEditViewModel.FechaInsRevocatoria = entrada.FechaInsRevocatoria;
-            _tramiteEditViewModel.ObservacionJuridico = entrada.ObservacionJuridico;
-            _tramiteEditViewModel.BaseOrigen = entrada.BaseOrigen;
-            _tramiteEditViewModel.OficioAg = entrada.OficioAg;
-            _tramiteEditViewModel.OficioDase = entrada.OficioDase;
-            _tramiteEditViewModel.PdpEstado = entrada.PdpEstado;
+            _tramiteEditViewModel.idtramite = entrada.IdTramite;
+            _tramiteEditViewModel.anio = entrada.Anio;
+            _tramiteEditViewModel.secuencia = entrada.Secuencia;
+            _tramiteEditViewModel.idsector = entrada.IdSector;
+            _tramiteEditViewModel.manzana = entrada.Manzana;
+            _tramiteEditViewModel.lote = entrada.Lote;
+            _tramiteEditViewModel.division = entrada.Division;
+            _tramiteEditViewModel.phv = entrada.Phv;
+            _tramiteEditViewModel.phh = entrada.Phh;
+            _tramiteEditViewModel.numero = entrada.Numero;
+            _tramiteEditViewModel.idbeneficiario = entrada.IdBeneficiario;
+            _tramiteEditViewModel.nombrebeneficiario = entrada.NombreBeneficiario;
+            _tramiteEditViewModel.idtipocontrato = entrada.IdTipoContrato;
+            _tramiteEditViewModel.tipocontrato = entrada.TipoContrato;
+            _tramiteEditViewModel.areasolar = entrada.AreaSolar;
+            _tramiteEditViewModel.aniosplazo = entrada.AniosPlazo;
+            _tramiteEditViewModel.idestado = entrada.IdEstado;
+            _tramiteEditViewModel.estado = entrada.Estado;
+            _tramiteEditViewModel.iddireccion = entrada.IdDireccion;
+            _tramiteEditViewModel.direccion = entrada.Direccion;
+            _tramiteEditViewModel.aprobacionconcejomun = entrada.AprobacionConcejoMun;
+            _tramiteEditViewModel.fechaaprobconcejomun = entrada.FechaAprobConcejoMun;
+            _tramiteEditViewModel.fechaescritura = entrada.FechaEscritura;
+            _tramiteEditViewModel.fechainsregprop = entrada.FechaInsRegProp;
+            _tramiteEditViewModel.oficiorevocatoriamod = entrada.OficioRevocatoriaMod;
+            _tramiteEditViewModel.fechainsrevocatoria = entrada.FechaInsRevocatoria;
+            _tramiteEditViewModel.observacionjuridico = entrada.ObservacionJuridico;
+            _tramiteEditViewModel.baseorigen = entrada.BaseOrigen;
+            _tramiteEditViewModel.oficioag = entrada.OficioAg;
+            _tramiteEditViewModel.oficiodase = entrada.OficioDase;
+            _tramiteEditViewModel.pdpestado = entrada.PdpEstado;
 
             salida.dataresult = _tramiteEditViewModel;
         }

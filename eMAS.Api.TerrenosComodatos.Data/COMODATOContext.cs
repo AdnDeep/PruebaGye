@@ -32,6 +32,10 @@ namespace eMAS.Api.TerrenosComodatos.Data
         public virtual DbSet<SmcTopografiaTerreno> SmcTopografiaTerrenos { get; set; }
         public virtual DbSet<SmcTramite> SmcTramites { get; set; }
         public virtual DbSet<SmcTramiteEdit> SmcTramitesEdit { get; set; }
+        public virtual DbSet<SmcAnexoTramiteEdit> SmcAnexoTramitesEdit { get; set; }
+        public virtual DbSet<SmcTramitesDescEdit> SmcTramitesDescsEdit { get; set; }
+        public virtual DbSet<SmcTopografiaTerrenoEdit> SmcTopografiaTerrenosEdit { get; set; }
+        public virtual DbSet<SmcOficioOtrasDireccioneEdit> SmcOficioOtrasDireccionesEdit { get; set; }
         public virtual DbSet<SmcTramitePaginado> SmcTramitesPaginado { get; set; }
         public virtual DbSet<SmcTramitesDesc> SmcTramitesDescs { get; set; }
         public virtual DbSet<KeyValueSelect> KeyValueSelects { get; set; }
@@ -689,6 +693,26 @@ namespace eMAS.Api.TerrenosComodatos.Data
             });
 
             modelBuilder.Entity<SmcBeneficiarioEdit>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcAnexoTramiteEdit>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcTramitesDescEdit>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcTopografiaTerrenoEdit>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcOficioOtrasDireccioneEdit>(entity =>
             {
                 entity.HasNoKey();
             });

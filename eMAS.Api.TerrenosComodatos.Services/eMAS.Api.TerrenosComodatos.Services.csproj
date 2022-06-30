@@ -14,4 +14,8 @@
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.Logic\eMAS.Api.TerrenosComodatos.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tramites\Escritura\" />
+  </ItemGroup>
+
 </Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eMAS.Api.TerrenosComodatos.Logic
 {
-    public class TramiteLogicLectura
+    public partial class TramiteLogicLectura
     {
         private readonly IGestionRepositorioLecturaTramites _repositorioTramiteLectura;
         public TramiteLogicLectura(IGestionRepositorioLecturaTramites repositorioTramiteLectura)

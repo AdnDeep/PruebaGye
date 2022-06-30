@@ -7,15 +7,15 @@ namespace eMAS.Api.TerrenosComodatos.IRepository
 {
     public interface IGestionRepositorioEscrituraTramites
     {
-        void Agregar();
-        void Actualizar();
-        void AgregarAnexo();
-        void ActualizarAnexo();
-        void AgregarObservacion();
-        void ActualizarObservacion();
-        void AgregarTopografiaTerreno();
-        void ActualizarTopografiaTerreno();
-        void AgregarSeguimientoOficio();
-        void ActualizarSeguimientoOficio();
+        Tuple<short, string> Agregar(SmcTramite tramite);
+        Tuple<short, string> Actualizar(SmcTramite tramite);
+        Tuple<short, string> AgregarAnexo(SmcAnexoTramite anexoTramite);
+        Tuple<short, string> ActualizarAnexo(SmcAnexoTramite anexoTramite);
+        Tuple<short, string> AgregarObservacion(SmcTramitesDesc observacionTramite);
+        Tuple<short, string> ActualizarObservacion(SmcTramitesDesc observacionTramite);
+        Tuple<short, string> AgregarTopografiaTerreno(SmcTopografiaTerreno topografiaTramite);
+        Tuple<short, string> ActualizarTopografiaTerreno(SmcTopografiaTerreno topografiaTramite);
+        Tuple<short, string> AgregarSeguimientoOficio(SmcOficioOtrasDireccione oficioTramite);
+        Tuple<short, string> ActualizarSeguimientoOficio(SmcOficioOtrasDireccione oficioTramite);
     }
 }

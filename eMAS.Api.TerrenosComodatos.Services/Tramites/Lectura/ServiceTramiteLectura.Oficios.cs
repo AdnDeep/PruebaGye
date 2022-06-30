@@ -11,12 +11,12 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ServiceTramiteLectura : IServiceTramiteLectura
     {
-        public ResultadoDTO<string> ConsultarOficioPorId(short id)
+        public ResultadoDTO<OficioTramiteEditViewModel> ConsultarOficioPorId(short id)
         {
             throw new NotImplementedException();
         }
 
-        public ResultadoDTO<string> ConsultarOficiosPorIdTramite(short idTramite)
+        public ResultadoDTO<List<OficioTramiteListViewModel>> ConsultarOficiosPorIdTramite(short idTramite)
         {
             throw new NotImplementedException();
         }

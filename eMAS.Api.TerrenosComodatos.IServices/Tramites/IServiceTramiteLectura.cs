@@ -1,4 +1,5 @@
 ﻿using eMAS.Api.TerrenosComodatos.ViewModel;
+using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.IServices
 {
@@ -7,13 +8,13 @@ namespace eMAS.Api.TerrenosComodatos.IServices
         ResultadoDTO<DataPagineada<TramitesListViewModel>> ConsultarTramitesTodosPaginado(string panelFilter
             , string resultContainer, int numeroPagina, int numeroFila);
         ResultadoDTO<TramiteEditViewModel> ConsultarPorId(short id);
-        ResultadoDTO<string> ConsultarAnexosPorIdTramite(short idTramite);
-        ResultadoDTO<string> ConsultarAnexoPorId(short id);
-        ResultadoDTO<string> ConsultarObservacionesPorIdTramite(short idTramite);
-        ResultadoDTO<string> ConsultarObservacionPorId(short id);
-        ResultadoDTO<string> ConsultarTopografiasPorIdTramite(short idTramite);
-        ResultadoDTO<string> ConsultarTopografiaPorId(short id);
-        ResultadoDTO<string> ConsultarOficiosPorIdTramite(short idTramite);
-        ResultadoDTO<string> ConsultarOficioPorId(short id);
+        ResultadoDTO<List<AnexoTramiteListViewModel>> ConsultarAnexosPorIdTramite(short idTramite);
+        ResultadoDTO<AnexoTramiteEditViewModel> ConsultarAnexoPorId(short id);
+        ResultadoDTO<List<ObservacionTramiteListViewModel>> ConsultarObservacionesPorIdTramite(short idTramite);
+        ResultadoDTO<ObservacionTramiteEditViewModel> ConsultarObservacionPorId(short id);
+        ResultadoDTO<List<TopografiaTerrenoListViewMoel>> ConsultarTopografiasPorIdTramite(short idTramite);
+        ResultadoDTO<TopografiaTerrenoEditViewMoel> ConsultarTopografiaPorId(short id);
+        ResultadoDTO<List<OficioTramiteListViewModel>> ConsultarOficiosPorIdTramite(short idTramite);
+        ResultadoDTO<OficioTramiteEditViewModel> ConsultarOficioPorId(short id);
     }
 }
