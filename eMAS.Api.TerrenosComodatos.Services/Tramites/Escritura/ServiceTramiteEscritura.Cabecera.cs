@@ -22,17 +22,13 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     };
             ResultadoDTO<int> resultadoVista = new ResultadoDTO<int>();
 
-            bool respuestaValidacion = _validadores
-                .ValidarDatosClienteTramiteEditViewModel(ref model, ref resultadoVista);
-
-            if (!respuestaValidacion)
-                return resultadoVista;
-
             Tuple<List<SmcValidaDataServidor>, string> respuestaLogicDataValidation = null;
             
+            model.idtramite = 0;
+
             string strParamValidator =_mapeadores
                                         .MapearTramiteEditViewModelADataValidationEscritura(ref model);
-            
+
             try
             {
                 respuestaLogicDataValidation = _logic.ValidarEntidadAEscribir(strParamValidator, objValidadotEscrituraTramite);
@@ -50,9 +46,15 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool validaRespuestaLogicDataValidation = _validadores
-                                    .ValidaRespuestLogicDataValidationEscrituraTramiteServidor(ref respuestaLogicDataValidation, ref resultadoVista);
+                                    .ValidaRespuestLogicDataValidationEscrituraTramiteServidor(model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
 
             if (!validaRespuestaLogicDataValidation)
+                return resultadoVista;
+
+            bool respuestaValidacion = _validadores
+                .ValidarDatosClienteTramiteEditViewModel(ref model, ref resultadoVista);
+
+            if (!respuestaValidacion)
                 return resultadoVista;
 
             SmcTramite _tramiteEntidad = new SmcTramite();
@@ -92,12 +94,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     };
             ResultadoDTO<int> resultadoVista = new ResultadoDTO<int>();
 
-            bool respuestaValidacion = _validadores
-                .ValidarDatosClienteTramiteEditViewModel(ref model, ref resultadoVista);
-
-            if (!respuestaValidacion)
-                return resultadoVista;
-
             Tuple<List<SmcValidaDataServidor>, string> respuestaLogicDataValidation = null;
 
             string strParamValidator = _mapeadores
@@ -120,9 +116,15 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool validaRespuestaLogicDataValidation = _validadores
-                                    .ValidaRespuestLogicDataValidationEscrituraTramiteServidor(ref respuestaLogicDataValidation, ref resultadoVista);
+                                    .ValidaRespuestLogicDataValidationEscrituraTramiteServidor(model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
 
             if (!validaRespuestaLogicDataValidation)
+                return resultadoVista;
+
+            bool respuestaValidacion = _validadores
+                .ValidarDatosClienteTramiteEditViewModel(ref model, ref resultadoVista);
+
+            if (!respuestaValidacion)
                 return resultadoVista;
 
             SmcTramite _tramiteEntidad = new SmcTramite();

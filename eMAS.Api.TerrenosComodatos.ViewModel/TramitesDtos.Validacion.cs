@@ -2,6 +2,7 @@
 {
     public class TramiteDataValidationEscritura
     {
+        public short idtramite { get; set; }
         public short idbeneficiario { get; set; }
         public short iddireccion { get; set; }
         public short idestado { get; set; }

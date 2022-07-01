@@ -71,8 +71,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             _tramiteEditViewModel.baseorigen = entrada.BaseOrigen;
             _tramiteEditViewModel.oficioag = entrada.OficioAg;
             _tramiteEditViewModel.oficiodase = entrada.OficioDase;
-            _tramiteEditViewModel.pdpestado = entrada.PdpEstado;
-
+            
             salida.dataresult = _tramiteEditViewModel;
         }
     }

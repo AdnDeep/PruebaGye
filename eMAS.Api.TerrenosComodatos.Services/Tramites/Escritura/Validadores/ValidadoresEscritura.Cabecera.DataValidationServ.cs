@@ -4,14 +4,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ValidadoresEscrituraTramite
     {
-        public bool ValidaRespuestLogicDataValidationEscrituraTramiteServidor(ref Tuple<List<SmcValidaDataServidor>,string> entrada
+        public bool ValidaRespuestLogicDataValidationEscrituraTramiteServidor(int idTramite, ref Tuple<List<SmcValidaDataServidor>,string> entrada
             , ref ResultadoDTO<int> salida)
         {
             var parametros = $"ValidadoresEscrituraTramite Service Layer";
@@ -64,17 +62,34 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
             var lsValidacion = entrada.Item1;
 
-            if (lsValidacion.Count() != 4) 
+            if (idTramite > 0) 
             {
-                using (_logger.BeginScope(props))
+                var existeTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETRAMITE");
+                if (existeTramiteTmp == null)
                 {
-                    _logger.LogError($"Error BD ConsultaDataValidation Se produjo un error" +
-                        $", la BD no devolvió la cantidad de datos correctas para Validación.");
+                    using (_logger.BeginScope(props))
+                    {
+                        _logger.LogError($"La clave EXISTEBENEFICIARIO no se encuentra en la BD.");
+                    }
+                    salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                    salida.tipo = "ADVERTENCIA";
+                    return puedeContinuar;
                 }
-                salida.mensaje = "Se produjo en error en el aplicativo.";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
+                if (!existeTramiteTmp.VALORBOOLEANO)
+                {
+                    lsMensajes.Add(new Mensaje
+                    {
+                        codigo = "VLNVALSERV",
+                        descripcion = "El trámite indicado no existe en el sistema o está dado de baja.",
+                        tipo = "ADVERTENCIA"
+                    });
+                    salida.mensajes = lsMensajes;
+                    salida.mensaje = "El trámite indicado no existe en el sistema o está dado de baja.";
+                    salida.tipo = "ADVERTENCIA";
+                    return puedeContinuar;
+                }
             }
+
             var existeBeneficiarioTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTEBENEFICIARIO");
             if (existeBeneficiarioTmp == null)
             {
@@ -87,7 +102,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 return puedeContinuar;
             }
 
-            if (existeBeneficiarioTmp.VALORNUMERICO == 0)
+            if (!existeBeneficiarioTmp.VALORBOOLEANO)
             {
                 lsMensajes.Add(new Mensaje
                 {
@@ -113,7 +128,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 return puedeContinuar;
             }
 
-            if (existeDireccionTmp.VALORNUMERICO == 0)
+            if (!existeDireccionTmp.VALORBOOLEANO)
             {
                 lsMensajes.Add(new Mensaje
                 {
@@ -139,7 +154,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 return puedeContinuar;
             }
 
-            if (existeEstadoTmp.VALORNUMERICO == 0)
+            if (!existeEstadoTmp.VALORBOOLEANO)
             {
                 lsMensajes.Add(new Mensaje
                 {
@@ -164,7 +179,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 return puedeContinuar;
             }
 
-            if (existeTipoContratoTmp.VALORNUMERICO == 0)
+            if (!existeTipoContratoTmp.VALORBOOLEANO)
             {
                 lsMensajes.Add(new Mensaje
                 {

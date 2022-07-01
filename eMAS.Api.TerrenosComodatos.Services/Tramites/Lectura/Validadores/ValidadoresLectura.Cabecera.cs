@@ -73,7 +73,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
                 lsMensajes.Add(new Mensaje
                 {
-                    codigo = "RESPREPTC",
+                    codigo = "RESPERRSERV",
                     descripcion = $"{entradaAValidar.Item2}",
                     tipo = "ADVERTENCIA"
                 });
@@ -92,7 +92,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
                 lsMensajes.Add(new Mensaje
                 {
-                    codigo = "RESPREPTC",
+                    codigo = "RESPERRSERV",
                     descripcion = $"{entradaAValidar.Item2}",
                     tipo = "ADVERTENCIA"
                 });
@@ -103,7 +103,18 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
+            if (entradaAValidar.Item2 != "OK")
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"ConsultarPorId Error {entradaAValidar.Item2}");
+                }
 
+                salida.dataresult = new TramiteEditViewModel();
+                salida.mensaje = "Se produjo un error en la aplicación (3). Vuelva a intentar.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
             puedeContinuar = true;
             return puedeContinuar;
         }

@@ -133,16 +133,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            if (entrada.Item2 != "OK")
-            {
-                using (_logger.BeginScope(props))
-                {
-                    _logger.LogError($"La respuesta de  Escritura Servidor de datos es incorrecta {entrada.Item2}");
-                }
-                salida.mensaje = "Se produjo en error en el aplicativo (1).";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
             if (entrada.Item1 == 0 || entrada.Item1 > 1)
             {
                 using (_logger.BeginScope(props))
@@ -160,7 +150,17 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-
+            if (entrada.Item2 != "OK")
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"La respuesta de  Escritura Servidor de datos es incorrecta {entrada.Item2}");
+                }
+                salida.mensaje = "Se produjo en error en el aplicativo (1).";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+            
             puedeContinuar = true;
             return puedeContinuar;
         }

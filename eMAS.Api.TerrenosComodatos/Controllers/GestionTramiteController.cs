@@ -10,19 +10,25 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
     [ApiController]
     public class GestionTramiteController : ControllerBase
     {
+        private readonly ValidadoresEliminacionTramite _validadoresEliminacion;
         private readonly ValidadoresEscrituraTramite _validadoresEscritura;
         private readonly ValidadoresTramitesRequest _validadoresRequest;
+        private readonly IServiceTramiteEliminacion _serviceTramiteEliminacion;
         private readonly IServiceTramiteEscritura _serviceTramiteEscritura;
         private readonly IServiceTramiteLectura _serviceTramiteLectura;
         public GestionTramiteController(IServiceTramiteLectura serviceTramiteLectura
             , IServiceTramiteEscritura serviceTramiteEscritura
+            , IServiceTramiteEliminacion serviceTramiteEliminacion
+            , ValidadoresEliminacionTramite validadoresEliminacion
             , ValidadoresEscrituraTramite validadoresEscritura
             , ValidadoresTramitesRequest validadoresRequest)
         {
+            _validadoresEliminacion = validadoresEliminacion;
             _validadoresRequest = validadoresRequest;
             _validadoresEscritura = validadoresEscritura;
             _serviceTramiteLectura = serviceTramiteLectura;
             _serviceTramiteEscritura = serviceTramiteEscritura;
+            _serviceTramiteEliminacion = serviceTramiteEliminacion;
         }
         [HttpGet]
         [Route("ObtenerListadoPorPagina")]
@@ -71,6 +77,19 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
                 return BadRequest(respuesta);
 
             respuesta = _serviceTramiteEscritura.Actualizar(model, usuario, controlador, pcclient);
+
+            return Ok(respuesta);
+        }
+        [HttpDelete]
+        [Route("Eliminar")]
+        public ActionResult<ResultadoDTO<int>> Eliminar(short idTramite, string usuario, string controlador, string pcclient)
+        {
+            ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
+
+            if (!(_validadoresEliminacion.DataRequestToDelete(idTramite, usuario, controlador, pcclient, ref respuesta)))
+                return BadRequest(respuesta);
+
+            respuesta = _serviceTramiteEliminacion.Eliminar(idTramite, usuario, controlador, pcclient);
 
             return Ok(respuesta);
         }

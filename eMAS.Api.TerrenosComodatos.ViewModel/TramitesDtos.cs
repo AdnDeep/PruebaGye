@@ -35,7 +35,6 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
         public string baseorigen { get; set; }
         public string oficioag { get; set; }
         public string oficiodase { get; set; }
-        public bool pdpestado { get; set; }
     }
     public class TramitesPanelFilterModel
     {

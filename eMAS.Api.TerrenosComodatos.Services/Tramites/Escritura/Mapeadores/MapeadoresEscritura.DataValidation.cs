@@ -11,7 +11,8 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             string respuesta = string.Empty;
             TramiteDataValidationEscritura modelValidacion = new TramiteDataValidationEscritura();
-            
+
+            modelValidacion.idtramite = entrada.idtramite;
             modelValidacion.idbeneficiario = entrada.idbeneficiario;
             modelValidacion.iddireccion = entrada.iddireccion ?? 0;
             modelValidacion.idestado = entrada.idestado;

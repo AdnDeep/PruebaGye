@@ -27,7 +27,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
             string mensajeDB = "";
             var tramiteParameter = new
             {
-                Id = tramite.IdBeneficiario,
+                Id = tramite.IdTramite,
                 PdpEstado = tramite.PdpEstado,
                 PdpUsuarioUltimaModificacion = tramite.PdpUsuarioUltimaModificacion,
                 PdpFechaUltimaModificacion = tramite.PdpFechaUltimaModificacion,

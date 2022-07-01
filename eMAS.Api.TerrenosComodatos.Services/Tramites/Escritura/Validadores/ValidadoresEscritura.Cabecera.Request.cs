@@ -75,7 +75,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
             if (entrada.idtramite <= 0)
             {
-                salida.mensaje = "El parámetro de Entrada Id debe ser 0";
+                salida.mensaje = "El parámetro de Entrada Id debe ser mayor a 0";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }

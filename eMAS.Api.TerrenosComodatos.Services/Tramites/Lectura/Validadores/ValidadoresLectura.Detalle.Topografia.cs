@@ -91,7 +91,17 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
+            if (entradaAValidar.Item2 != "OK")
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"ResultadoLogicConsultaTopografiaPorId Error {entradaAValidar.Item2}");
+                }
 
+                salida.mensaje = "Se produjo un error en la aplicación (3). Vuelva a intentar.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
             puedeContinuar = true;
             return puedeContinuar;
         }
