@@ -7,6 +7,7 @@ namespace eMAS.Api.TerrenosComodatos.IRepository
 {
     public interface IGestionRepositorioEscrituraTramites
     {
+        Tuple<List<SmcValidaDataServidor>, string> GetDataValidation(string paramFilter, string objObtieneDataValidacion);
         Tuple<short, string> Agregar(SmcTramite tramite);
         Tuple<short, string> Actualizar(SmcTramite tramite);
         Tuple<short, string> AgregarAnexo(SmcAnexoTramite anexoTramite);

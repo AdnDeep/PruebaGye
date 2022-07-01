@@ -16,15 +16,20 @@ namespace eMAS.Api.TerrenosComodatos
         {
             // Repositorios
             services.AddTransient<IGestionRepositorioLecturaTramites, RepositorioTramiteLectura>();
+            services.AddTransient<IGestionRepositorioEscrituraTramites, RepositorioTramiteEscritura>();
             // Logica
             services.AddTransient<TramiteLogicLectura>();
+            services.AddTransient<TramiteLogicEscritura>();
 
             // Servicios
             services.AddTransient<IServiceTramiteLectura, ServiceTramiteLectura>();
+            services.AddTransient<IServiceTramiteEscritura, ServiceTramiteEscritura>();
 
             // Auxiliares
             services.AddTransient<MapeadoresLecturaTramite>();
+            services.AddTransient<MapeadoresEscrituraTramite>();
             services.AddTransient<ValidadoresLecturaTramite>();
+            services.AddTransient<ValidadoresEscrituraTramite>();
             services.AddTransient<ValidadoresTramitesRequest>();
         }
         public static void AddServicesGenericExtensions(this IServiceCollection services)

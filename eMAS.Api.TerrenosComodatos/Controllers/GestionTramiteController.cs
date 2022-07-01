@@ -10,13 +10,19 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
     [ApiController]
     public class GestionTramiteController : ControllerBase
     {
+        private readonly ValidadoresEscrituraTramite _validadoresEscritura;
         private readonly ValidadoresTramitesRequest _validadoresRequest;
+        private readonly IServiceTramiteEscritura _serviceTramiteEscritura;
         private readonly IServiceTramiteLectura _serviceTramiteLectura;
         public GestionTramiteController(IServiceTramiteLectura serviceTramiteLectura
+            , IServiceTramiteEscritura serviceTramiteEscritura
+            , ValidadoresEscrituraTramite validadoresEscritura
             , ValidadoresTramitesRequest validadoresRequest)
         {
             _validadoresRequest = validadoresRequest;
+            _validadoresEscritura = validadoresEscritura;
             _serviceTramiteLectura = serviceTramiteLectura;
+            _serviceTramiteEscritura = serviceTramiteEscritura;
         }
         [HttpGet]
         [Route("ObtenerListadoPorPagina")]
@@ -42,6 +48,31 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
-        
+        [HttpPost]
+        [Route("Agregar")]
+        public ActionResult<ResultadoDTO<int>> Agregar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
+        {
+            ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
+
+            if (!(_validadoresEscritura.DataRequestToAdd(ref model, usuario, controlador, pcclient, ref respuesta)))
+                return BadRequest(respuesta);
+
+            respuesta = _serviceTramiteEscritura.Agregar(model, usuario, controlador, pcclient);
+
+            return Ok(respuesta);
+        }
+        [HttpPut]
+        [Route("Actualizar")]
+        public ActionResult<ResultadoDTO<int>> Actualizar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
+        {
+            ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
+
+            if (!(_validadoresEscritura.DataRequestToUpdate(ref model, usuario, controlador, pcclient, ref respuesta)))
+                return BadRequest(respuesta);
+
+            respuesta = _serviceTramiteEscritura.Actualizar(model, usuario, controlador, pcclient);
+
+            return Ok(respuesta);
+        }
     }
 }

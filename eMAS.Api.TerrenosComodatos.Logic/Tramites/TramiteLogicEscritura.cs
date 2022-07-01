@@ -1,6 +1,7 @@
 ﻿using eMAS.Api.TerrenosComodatos.Entities;
 using eMAS.Api.TerrenosComodatos.IRepository;
 using System;
+using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.Logic
 {
@@ -70,6 +71,13 @@ namespace eMAS.Api.TerrenosComodatos.Logic
             var resultadoBD = _repositorioTramitesEscritura
                                     .ActualizarSeguimientoOficio(oficioTramite);
             return resultadoBD;
+        }
+        public Tuple<List<SmcValidaDataServidor>, string> ValidarEntidadAEscribir(string paramFilter
+            , string objObtieneDataValidacion)
+        {
+            var respuestaDB = _repositorioTramitesEscritura
+                                    .GetDataValidation(paramFilter, objObtieneDataValidacion);
+            return respuestaDB;
         }
     }
 }

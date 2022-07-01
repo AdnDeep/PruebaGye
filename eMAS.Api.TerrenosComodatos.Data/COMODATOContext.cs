@@ -39,7 +39,8 @@ namespace eMAS.Api.TerrenosComodatos.Data
         public virtual DbSet<SmcTramitePaginado> SmcTramitesPaginado { get; set; }
         public virtual DbSet<SmcTramitesDesc> SmcTramitesDescs { get; set; }
         public virtual DbSet<KeyValueSelect> KeyValueSelects { get; set; }
-        public virtual DbSet<SmcValidacionEscritura> SmcValidacionsEscritura { get; set; }        
+        public virtual DbSet<SmcValidacionEscritura> SmcValidacionsEscritura { get; set; }    
+        public virtual DbSet<SmcValidaDataServidor> SmcValidaDatasServidor { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -693,6 +694,11 @@ namespace eMAS.Api.TerrenosComodatos.Data
             });
 
             modelBuilder.Entity<SmcBeneficiarioEdit>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcValidaDataServidor>(entity => 
             {
                 entity.HasNoKey();
             });

@@ -17,6 +17,5 @@ namespace eMAS.Api.TerrenosComodatos.IRepository
         Tuple<List<SmcTopografiaTerrenoEdit>, string> GetTopografiaTerrenoPorIdTramite(short idTramite);
         Tuple<SmcOficioOtrasDireccioneEdit, string, short> GetSeguimientoOficioPorId(short id);
         Tuple<List<SmcOficioOtrasDireccioneEdit>, string> GetSeguimientoOficioPorIdTramite(short idTramite);
-
     }
 }
