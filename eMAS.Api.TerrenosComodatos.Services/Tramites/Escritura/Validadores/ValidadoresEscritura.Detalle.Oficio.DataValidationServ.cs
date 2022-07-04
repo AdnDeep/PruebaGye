@@ -9,7 +9,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ValidadoresEscrituraTramite
     {
-        public bool ValidaRespuestLogicDataValidationEscrituraTramiteOficioServidor(int idoficiotramite, ref Tuple<List<SmcValidaDataServidor>,string> entrada
+        public bool ValidaRespuestLogicDataValidationEscrituraTramiteOficioServidor(int idoficiotramite, int idTramite, ref Tuple<List<SmcValidaDataServidor>,string> entrada
             , ref ResultadoDTO<int> salida)
         {
             var parametros = $"ValidadoresEscrituraTramite Service Layer";
@@ -62,6 +62,32 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
             var lsValidacion = entrada.Item1;
 
+            var existeTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETRAMITE");
+            if (existeTramiteTmp == null)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"La clave EXISTETRAMITE no se encuentra en la BD.");
+                }
+                salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+
+            if (!existeTramiteTmp.VALORBOOLEANO)
+            {
+                lsMensajes.Add(new Mensaje
+                {
+                    codigo = "VLNVALSERV",
+                    descripcion = "El trámite indicado no existe en el sistema o está dado de baja.",
+                    tipo = "ADVERTENCIA"
+                });
+                salida.mensajes = lsMensajes;
+                salida.mensaje = "El trámite indicado no existe en el sistema o está dado de baja.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+
             if (idoficiotramite > 0) 
             {
                 var existeOficioTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTEOFICIOTRAMITE");
@@ -88,32 +114,33 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     salida.tipo = "ADVERTENCIA";
                     return puedeContinuar;
                 }
-            }
-
-            var existeTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETRAMITE");
-            if (existeTramiteTmp == null)
-            {
-                using (_logger.BeginScope(props))
+                if (idTramite > 0)
                 {
-                    _logger.LogError($"La clave EXISTETRAMITE no se encuentra en la BD.");
+                    var existeRelacionOficioTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTERELACION");
+                    if (existeRelacionOficioTramiteTmp == null)
+                    {
+                        using (_logger.BeginScope(props))
+                        {
+                            _logger.LogError($"La clave EXISTERELACION no se encuentra en la BD.");
+                        }
+                        salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                        salida.tipo = "ADVERTENCIA";
+                        return puedeContinuar;
+                    }
+                    if (!existeRelacionOficioTramiteTmp.VALORBOOLEANO)
+                    {
+                        lsMensajes.Add(new Mensaje
+                        {
+                            codigo = "VLNVALSERV",
+                            descripcion = "El Oficio no tiene relación con el trámite indicado no existe en el sistema o está dado de baja.",
+                            tipo = "ADVERTENCIA"
+                        });
+                        salida.mensajes = lsMensajes;
+                        salida.mensaje = "El Oficio no tiene relación con el trámite indicado no existe en el sistema o está dado de baja.";
+                        salida.tipo = "ADVERTENCIA";
+                        return puedeContinuar;
+                    }
                 }
-                salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
-
-            if (!existeTramiteTmp.VALORBOOLEANO)
-            {
-                lsMensajes.Add(new Mensaje
-                {
-                    codigo = "VLNVALSERV",
-                    descripcion = "El trámite indicado no existe en el sistema o está dado de baja.",
-                    tipo = "ADVERTENCIA"
-                });
-                salida.mensajes = lsMensajes;
-                salida.mensaje = "El trámite indicado no existe en el sistema o está dado de baja.";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
             }
 
             puedeContinuar = true;

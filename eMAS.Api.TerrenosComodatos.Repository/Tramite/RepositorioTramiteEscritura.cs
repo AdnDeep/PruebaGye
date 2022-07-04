@@ -70,7 +70,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetTramiteAdd
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcTramites_SetTramiteAdd
                                                     @Tramite = {strTramiteParam},
                                                     @IdInserted = {idinserted} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");
@@ -134,7 +134,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetTramiteUpdate
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcTramites_SetTramiteUpdate
                                                     @Tramite = {strTramiteParam},
                                                     @Contador = {paramContador} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");

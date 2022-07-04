@@ -27,7 +27,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                _anexoTramiteEdit = db.SmcAnexoTramitesEdit.FromSqlInterpolated(@$"SmcComodato_GetAnexoTramitePorId
+                _anexoTramiteEdit = db.SmcAnexoTramitesEdit.FromSqlInterpolated(@$"SmcPr_SmcAnexoTramite_GetAnexoTramitePorId
                                      @Id =  {id},
                                      @Contador = {contador} OUTPUT,
                                      @Mensaje = {mensaje} OUTPUT").AsEnumerable()
@@ -58,7 +58,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                _observacionTramiteEdit = db.SmcTramitesDescsEdit.FromSqlInterpolated(@$"SmcComodato_GetObservacionTramitePorId
+                _observacionTramiteEdit = db.SmcTramitesDescsEdit.FromSqlInterpolated(@$"SmcPr_SmcTramites_GetObservacionTramitePorId
                                      @Id =  {id},
                                      @Contador = {contador} OUTPUT,
                                      @Mensaje = {mensaje} OUTPUT").AsEnumerable()
@@ -87,7 +87,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                _oficioTramiteEdit = db.SmcOficioOtrasDireccionesEdit.FromSqlInterpolated(@$"SmcComodato_GetOficioTramitePorId
+                _oficioTramiteEdit = db.SmcOficioOtrasDireccionesEdit.FromSqlInterpolated(@$"SmcPr_SmcOficioOtrasDirecciones_GetOficioTramitePorId
                                      @Id =  {id},
                                      @Contador = {contador} OUTPUT,
                                      @Mensaje = {mensaje} OUTPUT").AsEnumerable()
@@ -116,7 +116,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                _topografiaTramiteEdit = db.SmcTopografiaTerrenosEdit.FromSqlInterpolated(@$"SmcComodato_GetTopografiaTramitePorId
+                _topografiaTramiteEdit = db.SmcTopografiaTerrenosEdit.FromSqlInterpolated(@$"SmcPr_SmcTopografiaTerreno_GetTopografiaTramitePorId
                                      @Id =  {id},
                                      @Contador = {contador} OUTPUT,
                                      @Mensaje = {mensaje} OUTPUT").AsEnumerable()

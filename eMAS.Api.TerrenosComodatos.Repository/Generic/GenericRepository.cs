@@ -35,7 +35,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
             mensaje.Direction = ParameterDirection.Output;
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsKeyValue = db.KeyValueSelects.FromSqlInterpolated(@$"SmcComodato_GetDataDsrGeneric
+                lsKeyValue = db.KeyValueSelects.FromSqlInterpolated(@$"SmcPr_SmcTramites_GetDataDsrGeneric
                                  @Params =  {strParamKey},
                                  @Mensaje = {mensaje} OUTPUT").AsEnumerable().ToList();
 

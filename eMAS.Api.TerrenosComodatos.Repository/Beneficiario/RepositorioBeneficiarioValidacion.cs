@@ -39,7 +39,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsEntidadValidacion = db.SmcValidacionsEscritura.FromSqlInterpolated(@$"SmcComodato_GetDataValidationBeneficiarios1
+                lsEntidadValidacion = db.SmcValidacionsEscritura.FromSqlInterpolated(@$"SmcPr_SmcBeneficiario_GetDataValidationBeneficiarios1
                                      @validate_filter =  {strBenficiarioFilterParameter},
                                      @Mensaje = {mensaje} OUTPUT").ToList();
 

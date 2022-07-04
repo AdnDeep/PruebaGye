@@ -9,7 +9,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ValidadoresEscrituraTramite
     {
-        public bool ValidaRespuestLogicDataValidationEscrituraTramiteObservacionServidor(int idtramiteobservacion, ref Tuple<List<SmcValidaDataServidor>,string> entrada
+        public bool ValidaRespuestLogicDataValidationEscrituraTramiteObservacionServidor(int idtramiteobservacion, int idTramite, ref Tuple<List<SmcValidaDataServidor>,string> entrada
             , ref ResultadoDTO<int> salida)
         {
             var parametros = $"ValidadoresEscrituraTramite Service Layer";
@@ -62,34 +62,6 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
             var lsValidacion = entrada.Item1;
 
-            if (idtramiteobservacion > 0) 
-            {
-                var existeObservacionTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTEOBSERVACIONTRAMITE");
-                if (existeObservacionTramiteTmp == null)
-                {
-                    using (_logger.BeginScope(props))
-                    {
-                        _logger.LogError($"La clave EXISTEOBSERVACIONTRAMITE no se encuentra en la BD.");
-                    }
-                    salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
-                    salida.tipo = "ADVERTENCIA";
-                    return puedeContinuar;
-                }
-                if (!existeObservacionTramiteTmp.VALORBOOLEANO)
-                {
-                    lsMensajes.Add(new Mensaje
-                    {
-                        codigo = "VLNVALSERV",
-                        descripcion = "La Observación trámite indicado no existe en el sistema o está dado de baja.",
-                        tipo = "ADVERTENCIA"
-                    });
-                    salida.mensajes = lsMensajes;
-                    salida.mensaje = "La Observación trámite indicado no existe en el sistema o está dado de baja.";
-                    salida.tipo = "ADVERTENCIA";
-                    return puedeContinuar;
-                }
-            }
-
             var existeTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETRAMITE");
             if (existeTramiteTmp == null)
             {
@@ -116,6 +88,62 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 return puedeContinuar;
             }
 
+            if (idtramiteobservacion > 0) 
+            {
+                var existeObservacionTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTEOBSERVACIONTRAMITE");
+                if (existeObservacionTramiteTmp == null)
+                {
+                    using (_logger.BeginScope(props))
+                    {
+                        _logger.LogError($"La clave EXISTEOBSERVACIONTRAMITE no se encuentra en la BD.");
+                    }
+                    salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                    salida.tipo = "ADVERTENCIA";
+                    return puedeContinuar;
+                }
+                if (!existeObservacionTramiteTmp.VALORBOOLEANO)
+                {
+                    lsMensajes.Add(new Mensaje
+                    {
+                        codigo = "VLNVALSERV",
+                        descripcion = "La Observación trámite indicado no existe en el sistema o está dado de baja.",
+                        tipo = "ADVERTENCIA"
+                    });
+                    salida.mensajes = lsMensajes;
+                    salida.mensaje = "La Observación trámite indicado no existe en el sistema o está dado de baja.";
+                    salida.tipo = "ADVERTENCIA";
+                    return puedeContinuar;
+                }
+                if(idTramite > 0) 
+                {
+                    var existeRelacionObservacionTramiteTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTERELACION");
+                    if (existeRelacionObservacionTramiteTmp == null)
+                    {
+                        using (_logger.BeginScope(props))
+                        {
+                            _logger.LogError($"La clave EXISTERELACION no se encuentra en la BD.");
+                        }
+                        salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                        salida.tipo = "ADVERTENCIA";
+                        return puedeContinuar;
+                    }
+                    if (!existeRelacionObservacionTramiteTmp.VALORBOOLEANO)
+                    {
+                        lsMensajes.Add(new Mensaje
+                        {
+                            codigo = "VLNVALSERV",
+                            descripcion = "La Observación no tiene relación con el trámite indicado no existe en el sistema o está dado de baja.",
+                            tipo = "ADVERTENCIA"
+                        });
+                        salida.mensajes = lsMensajes;
+                        salida.mensaje = "La Observación no tiene relación con el trámite indicado no existe en el sistema o está dado de baja.";
+                        salida.tipo = "ADVERTENCIA";
+                        return puedeContinuar;
+                    }
+                }
+            }
+
+            
             puedeContinuar = true;
             return puedeContinuar;
         }

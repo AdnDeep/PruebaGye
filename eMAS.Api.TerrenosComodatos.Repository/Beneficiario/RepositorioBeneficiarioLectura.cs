@@ -37,7 +37,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                _beneficiarioEdit = db.SmcBeneficiariosEdit.FromSqlInterpolated(@$"SmcComodato_GetBeneficarioPorId
+                _beneficiarioEdit = db.SmcBeneficiariosEdit.FromSqlInterpolated(@$"SmcPr_SmcBeneficiario_GetBeneficarioPorId
                                  @Id =  {id},
                                  @Contador = {contador} OUTPUT,
                                  @Mensaje = {mensaje} OUTPUT").AsEnumerable()
@@ -71,7 +71,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsBeneficiario = await db.SmcBeneficiariosPaginado.FromSqlInterpolated(@$"SmcComodato_GetBeneficariosTodosPaginado
+                lsBeneficiario = await db.SmcBeneficiariosPaginado.FromSqlInterpolated(@$"SmcPr_SmcBeneficiario_GetBeneficariosTodosPaginado
                                  @PanelFilter =  {strPanelFilterParameter},
                                  @NumeroPagina = {numeroPagina},
                                  @NumeroFilas = {numeroFilas},

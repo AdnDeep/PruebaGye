@@ -45,7 +45,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetTramiteDelete
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcTramites_SetTramiteDelete
                                                     @Tramite = {strTramiteParam},
                                                     @Contador = {paramContador} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");

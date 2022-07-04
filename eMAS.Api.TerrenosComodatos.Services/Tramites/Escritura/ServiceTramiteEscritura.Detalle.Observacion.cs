@@ -11,26 +11,26 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ServiceTramiteEscritura : IServiceTramiteEscritura
     {
-        public ResultadoDTO<int> Agregar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
+        public ResultadoDTO<int> AgregarObservacion(ObservacionTramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {
             var parametros = $"ServiceTramiteEscritura Service Layer Try: Modelo {model}";
             var props = new Dictionary<string, object>(){
-                            { "Metodo", "Agregar" },
+                            { "Metodo", "AgregarObservacion" },
                             { "Sitio", "COMODATO-API" },
                             { "Parametros", parametros }
                     };
             ResultadoDTO<int> resultadoVista = new ResultadoDTO<int>();
 
             Tuple<List<SmcValidaDataServidor>, string> respuestaLogicDataValidation = null;
-            
-            model.idtramite = 0;
 
-            string strParamValidator =_mapeadores
-                                        .MapearTramiteEditViewModelADataValidationEscritura(ref model);
+            model.idtramitedesc = 0;
+
+            string strParamValidator = _mapeadores
+                                        .MapearObservacionTramiteEditViewModelADataValidationEscritura(ref model);
 
             try
             {
-                respuestaLogicDataValidation = _logic.ValidarEntidadAEscribir(strParamValidator, objValidadotEscrituraTramite);
+                respuestaLogicDataValidation = _logic.ValidarEntidadAEscribir(strParamValidator, objValidadotEscrituraTramiteObservacion);
             }
             catch (Exception ex)
             {
@@ -45,26 +45,27 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool validaRespuestaLogicDataValidation = _validadores
-                                    .ValidaRespuestLogicDataValidationEscrituraTramiteServidor(model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
+                                    .ValidaRespuestLogicDataValidationEscrituraTramiteObservacionServidor(model.idtramitedesc
+                                    , model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
 
             if (!validaRespuestaLogicDataValidation)
                 return resultadoVista;
 
             bool respuestaValidacion = _validadores
-                .ValidarDatosClienteTramiteEditViewModel(ref model, ref resultadoVista);
+                                        .ValidarDatosClienteTramiteObservacionEditViewModel(ref model, ref resultadoVista);
 
             if (!respuestaValidacion)
                 return resultadoVista;
 
-            SmcTramite _tramiteEntidad = new SmcTramite();
+            SmcTramitesDesc _observacionTramiteEntidad = new SmcTramitesDesc();
 
             _mapeadores
-                .MapearTramiteEditViewModelASmcTramite(ref model, ref _tramiteEntidad, usuario, controlador, pcclient);
+                .MapearObservacionTramiteEditViewModelASmcTramiteDesc(ref model, ref _observacionTramiteEntidad, usuario, controlador, pcclient);
 
             Tuple<short, string> respuestaLogicDB = null;
             try
             {
-                respuestaLogicDB = _logic.Agregar(_tramiteEntidad);
+                respuestaLogicDB = _logic.AgregarObservacion(_observacionTramiteEntidad);
             }
             catch (Exception ex)
             {
@@ -79,15 +80,15 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool respuestaGestionGrabar = _validadores
-                                                .ValidarRespuestaServidorEntidadPrincipalAccionAgregar(ref respuestaLogicDB, ref resultadoVista);
+                                                .ValidarRespuestaServidorTramiteObservacionAccionAgregar(ref respuestaLogicDB, ref resultadoVista);
 
             return resultadoVista;
         }
-        public ResultadoDTO<int> Actualizar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
+        public ResultadoDTO<int> ActualizarObservacion(ObservacionTramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {
             var parametros = $"ServiceTramiteEscritura Service Layer Try: Modelo {model}";
             var props = new Dictionary<string, object>(){
-                            { "Metodo", "Actualizar" },
+                            { "Metodo", "ActualizarObservacion" },
                             { "Sitio", "COMODATO-API" },
                             { "Parametros", parametros }
                     };
@@ -96,11 +97,11 @@ namespace eMAS.Api.TerrenosComodatos.Services
             Tuple<List<SmcValidaDataServidor>, string> respuestaLogicDataValidation = null;
 
             string strParamValidator = _mapeadores
-                                        .MapearTramiteEditViewModelADataValidationEscritura(ref model);
+                                        .MapearObservacionTramiteEditViewModelADataValidationEscritura(ref model);
 
             try
             {
-                respuestaLogicDataValidation = _logic.ValidarEntidadAEscribir(strParamValidator, objValidadotEscrituraTramite);
+                respuestaLogicDataValidation = _logic.ValidarEntidadAEscribir(strParamValidator, objValidadotEscrituraTramiteObservacion);
             }
             catch (Exception ex)
             {
@@ -115,26 +116,27 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool validaRespuestaLogicDataValidation = _validadores
-                                    .ValidaRespuestLogicDataValidationEscrituraTramiteServidor(model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
+                                    .ValidaRespuestLogicDataValidationEscrituraTramiteObservacionServidor(model.idtramitedesc
+                                    , model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
 
             if (!validaRespuestaLogicDataValidation)
                 return resultadoVista;
 
             bool respuestaValidacion = _validadores
-                .ValidarDatosClienteTramiteEditViewModel(ref model, ref resultadoVista);
+                                        .ValidarDatosClienteTramiteObservacionEditViewModel(ref model, ref resultadoVista);
 
             if (!respuestaValidacion)
                 return resultadoVista;
 
-            SmcTramite _tramiteEntidad = new SmcTramite();
+            SmcTramitesDesc _observacionTramiteEntidad = new SmcTramitesDesc();
 
             _mapeadores
-                .MapearTramiteEditViewModelASmcTramite(ref model, ref _tramiteEntidad, usuario, controlador, pcclient);
+                .MapearObservacionTramiteEditViewModelASmcTramiteDesc(ref model, ref _observacionTramiteEntidad, usuario, controlador, pcclient);
 
             Tuple<short, string> respuestaLogicDB = null;
             try
             {
-                respuestaLogicDB = _logic.Actualizar(_tramiteEntidad);
+                respuestaLogicDB = _logic.ActualizarObservacion(_observacionTramiteEntidad);
             }
             catch (Exception ex)
             {
@@ -149,7 +151,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool respuestaGestionGrabar = _validadores
-                                                .ValidarRespuestaServidorEntidadPrincipalAccionActualizar(ref respuestaLogicDB, ref resultadoVista);
+                                                .ValidarRespuestaServidorTramiteObservacionAccionActualizar(ref respuestaLogicDB, ref resultadoVista);
 
             return resultadoVista;
         }

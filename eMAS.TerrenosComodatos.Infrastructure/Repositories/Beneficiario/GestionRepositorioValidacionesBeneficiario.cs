@@ -39,7 +39,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_GetDataValidationBeneficiarios1", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcBeneficiario_GetDataValidationBeneficiarios1", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 

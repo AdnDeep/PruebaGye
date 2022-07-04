@@ -40,7 +40,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetAnexoTramiteDelete
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcAnexoTramite_SetAnexoTramiteDelete
                                                     @AnexoTramite = {strAnexoTramiteParam},
                                                     @Contador = {paramContador} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");
@@ -79,7 +79,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetObservacionTramiteDelete
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcTramitesDescs_SetObservacionTramiteDelete
                                                     @ObservacionTramite = {strObservacionTramiteParam},
                                                     @Contador = {paramContador} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");
@@ -118,7 +118,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetOficioTramiteDelete
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcOficioOtrasDirecciones_SetOficioTramiteDelete
                                                     @OficioTramite = {strOficioTramiteParam},
                                                     @Contador = {paramContador} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");
@@ -157,7 +157,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                db.Database.ExecuteSqlInterpolated($@"SmcComodato_SetTopografiaTramiteDelete
+                db.Database.ExecuteSqlInterpolated($@"SmcPr_SmcTopografiaTerreno_SetTopografiaTramiteDelete
                                                     @TopografiaTramite = {strTopografiaTramiteParam},
                                                     @Contador = {paramContador} OUTPUT,
                                                     @Mensaje = {mensaje} OUTPUT");

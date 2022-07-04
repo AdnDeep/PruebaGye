@@ -33,7 +33,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_GetBeneficarioPorId", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcBeneficiario_GetBeneficarioPorId", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -128,7 +128,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_GetBeneficariosTodosPaginado", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcBeneficiario_GetBeneficariosTodosPaginado", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 

@@ -10,12 +10,24 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
     [ApiController]
     public class GestionTramiteAnexoController : ControllerBase
     {
-        private readonly ValidadoresTramitesRequest _validadoresRequest;
+        private readonly IServiceTramiteEscritura _serviceTramiteEscritura;
+        private readonly IServiceTramiteEliminacion _serviceTramiteEliminacion;
+        private readonly ValidadoresEliminacionTramite _validadoresEliminacion;
+        private readonly ValidadoresEscrituraTramite _validadoresEscritura;
         private readonly IServiceTramiteLectura _serviceTramiteLectura;
+        
         public GestionTramiteAnexoController(IServiceTramiteLectura serviceTramiteLectura
-            , ValidadoresTramitesRequest validadoresRequest)
+            , IServiceTramiteEscritura serviceTramiteEscritura
+            , IServiceTramiteEliminacion serviceTramiteEliminacion
+            , ValidadoresEliminacionTramite validadoresEliminacion
+            , ValidadoresEscrituraTramite validadoresEscritura)
         {
-            _validadoresRequest = validadoresRequest;
+            _serviceTramiteEscritura = serviceTramiteEscritura;
+            _serviceTramiteEliminacion = serviceTramiteEliminacion;
+
+            _validadoresEliminacion = validadoresEliminacion;
+            _validadoresEscritura = validadoresEscritura;
+
             _serviceTramiteLectura = serviceTramiteLectura;
         }
         [HttpGet]
@@ -37,6 +49,46 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
             respuesta = _serviceTramiteLectura.ConsultarAnexosPorIdTramite(id);
 
             return Ok(respuesta);
-        }        
+        }
+        [HttpPost]
+        [Route("Agregar")]
+        public ActionResult<ResultadoDTO<int>> Agregar(AnexoTramiteEditViewModel model, string usuario, string controlador, string pcclient)
+        {
+            ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
+
+            if (!(_validadoresEscritura.AnexoDataRequestToAdd(ref model, usuario, controlador, pcclient, ref respuesta)))
+                return BadRequest(respuesta);
+
+            respuesta = _serviceTramiteEscritura.AgregarAnexo(model, usuario, controlador, pcclient);
+
+            return Ok(respuesta);
+        }
+        [HttpPut]
+        [Route("Actualizar")]
+        public ActionResult<ResultadoDTO<int>> Actualizar(AnexoTramiteEditViewModel model, string usuario, string controlador, string pcclient)
+        {
+            ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
+
+            if (!(_validadoresEscritura.AnexoRequestToUpdate(ref model, usuario, controlador, pcclient, ref respuesta)))
+                return BadRequest(respuesta);
+
+            respuesta = _serviceTramiteEscritura.ActualizarAnexo(model, usuario, controlador, pcclient);
+
+            return Ok(respuesta);
+        }
+        [HttpDelete]
+        [Route("Eliminar")]
+        public ActionResult<ResultadoDTO<int>> Eliminar(short idAnexoTramite, string usuario, string controlador, string pcclient)
+        {
+            ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
+
+            if (!(_validadoresEliminacion.DataAnexoRequestToDelete(idAnexoTramite, usuario, controlador, pcclient, ref respuesta)))
+                return BadRequest(respuesta);
+
+            respuesta = _serviceTramiteEliminacion.EliminarAnexo(idAnexoTramite, usuario, controlador, pcclient);
+
+            return Ok(respuesta);
+        }
+
     }
 }

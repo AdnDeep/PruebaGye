@@ -49,7 +49,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_GetTramitesTodosPaginado", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcTramites_GetTramitesTodosPaginado", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -137,7 +137,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_GetTramitePorId", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcTramites_GetTramitePorId", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 

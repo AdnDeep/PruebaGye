@@ -42,7 +42,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_SetBeneficarioDelete", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcBeneficiario_SetBeneficarioDelete", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 

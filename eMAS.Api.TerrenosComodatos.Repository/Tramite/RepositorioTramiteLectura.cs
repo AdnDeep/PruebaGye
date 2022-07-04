@@ -35,7 +35,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                _tramiteEdit = db.SmcTramitesEdit.FromSqlInterpolated(@$"SmcComodato_GetTramitePorId
+                _tramiteEdit = db.SmcTramitesEdit.FromSqlInterpolated(@$"SmcPr_SmcTramites_GetTramitePorId
                                      @Id =  {id},
                                      @Contador = {contador} OUTPUT,
                                      @Mensaje = {mensaje} OUTPUT").AsEnumerable()
@@ -77,7 +77,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsTramites = db.SmcTramitesPaginado.FromSqlInterpolated(@$"SmcComodato_GetTramitesTodosPaginado
+                lsTramites = db.SmcTramitesPaginado.FromSqlInterpolated(@$"SmcPr_SmcTramites_GetTramitesTodosPaginado
                                      @PanelFilter =  {strPanelFilterParameter},
                                      @NumeroPagina = {numeroPagina},
                                      @NumeroFilas = {numeroFilas},

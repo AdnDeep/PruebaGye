@@ -34,7 +34,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsAnexosTramite = db.SmcAnexoTramitesEdit.FromSqlInterpolated(@$"SmcComodato_GetAnexoTramiteAll
+                lsAnexosTramite = db.SmcAnexoTramitesEdit.FromSqlInterpolated(@$"SmcPr_SmcAnexoTramite_GetAnexoTramiteAll
                                      @AnexoTramite =  {strAnexoTramiteFilter},
                                      @Mensaje = {mensaje} OUTPUT").ToList();
 
@@ -64,7 +64,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsObservacionsTramite = db.SmcTramitesDescsEdit.FromSqlInterpolated(@$"SmcComodato_GetObservacionTramiteAll
+                lsObservacionsTramite = db.SmcTramitesDescsEdit.FromSqlInterpolated(@$"SmcPr_SmcTramites_GetObservacionTramiteAll
                                      @ObservacionTramite =  {strObservacionTramiteFilter},
                                      @Mensaje = {mensaje} OUTPUT").ToList();
                 lsObservacionsTramite = lsObservacionsTramite ?? new List<SmcTramitesDescEdit>();
@@ -93,7 +93,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsOficioTramite = db.SmcOficioOtrasDireccionesEdit.FromSqlInterpolated(@$"SmcComodato_GetOficioTramiteAll
+                lsOficioTramite = db.SmcOficioOtrasDireccionesEdit.FromSqlInterpolated(@$"SmcPr_SmcOficioOtrasDirecciones_GetOficioTramiteAll
                                      @OficioTramite =  {strOficioTramiteFilter},
                                      @Mensaje = {mensaje} OUTPUT").ToList();
                 lsOficioTramite = lsOficioTramite ?? new List<SmcOficioOtrasDireccioneEdit>();
@@ -122,7 +122,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             using (var db = _serviceProvider.GetService<COMODATOContext>())
             {
-                lsTopografiaTramite = db.SmcTopografiaTerrenosEdit.FromSqlInterpolated(@$"SmcComodato_GetTopografiaTramiteAll
+                lsTopografiaTramite = db.SmcTopografiaTerrenosEdit.FromSqlInterpolated(@$"SmcPr_SmcTopografiaTerreno_GetTopografiaTramiteAll
                                      @TopografiaTramite =  {strTopografiaTramiteFilter},
                                      @Mensaje = {mensaje} OUTPUT").ToList();
                 lsTopografiaTramite = lsTopografiaTramite ?? new List<SmcTopografiaTerrenoEdit>();

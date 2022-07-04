@@ -11,6 +11,12 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ServiceTramiteEscritura : IServiceTramiteEscritura
     {
+        private const string objValidadotEscrituraTramiteTopografia = "SmcPr_SmcTopografiaTerreno_GetDataValidationTramiteTopografiaEscritura";
+        private const string objValidadotEscrituraTramiteObservacion = "SmcPr_SmcTramitesDescs_GetDataValidationTramiteObservacionEscritura";
+        private const string objValidadotEscrituraTramiteOficio = "SmcPr_SmcOficioOtrasDirecciones_GetDataValidationTramiteOficioEscritura";
+        private const string objValidadotEscrituraTramiteAnexo = "SmcPr_SmcAnexoTramite_GetDataValidationTramiteAnexoEscritura";
+        private const string objValidadotEscrituraTramite = "SmcPr_SmcTramites_GetDataValidationTramiteEscritura";
+
         private readonly MapeadoresEscrituraTramite _mapeadores;
         private readonly ValidadoresEscrituraTramite _validadores;
         private readonly TramiteLogicEscritura _logic;

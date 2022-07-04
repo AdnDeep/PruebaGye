@@ -45,14 +45,14 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool validaRespuestaLogicDataValidation = _validadores
-                                    .ValidaRespuestLogicDataValidationEscrituraTramiteAnexoServidor(model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
+                                    .ValidaRespuestLogicDataValidationEscrituraTramiteAnexoServidor(model.idanexotramite
+                                    , model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
 
             if (!validaRespuestaLogicDataValidation)
                 return resultadoVista;
 
-            bool respuestaValidacion = false; 
-                //_validadores
-                //.vali(ref model, ref resultadoVista);
+            bool respuestaValidacion = _validadores
+                                        .ValidarDatosClienteTramiteAnexoEditViewModel(ref model, ref resultadoVista);
 
             if (!respuestaValidacion)
                 return resultadoVista;
@@ -80,13 +80,80 @@ namespace eMAS.Api.TerrenosComodatos.Services
             }
 
             bool respuestaGestionGrabar = _validadores
-                                                .ValidarRespuestaServidorEntidadPrincipalAccionAgregar(ref respuestaLogicDB, ref resultadoVista);
+                                                .ValidarRespuestaServidorTramiteAnexoAccionAgregar(ref respuestaLogicDB, ref resultadoVista);
 
             return resultadoVista;
         }
         public ResultadoDTO<int> ActualizarAnexo(AnexoTramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {
-            throw new NotImplementedException();
+            var parametros = $"ServiceTramiteEscritura Service Layer Try: Modelo {model}";
+            var props = new Dictionary<string, object>(){
+                            { "Metodo", "ActualizarAnexo" },
+                            { "Sitio", "COMODATO-API" },
+                            { "Parametros", parametros }
+                    };
+            ResultadoDTO<int> resultadoVista = new ResultadoDTO<int>();
+
+            Tuple<List<SmcValidaDataServidor>, string> respuestaLogicDataValidation = null;
+
+            string strParamValidator = _mapeadores
+                                        .MapearAnexoTramiteEditViewModelADataValidationEscritura(ref model);
+
+            try
+            {
+                respuestaLogicDataValidation = _logic.ValidarEntidadAEscribir(strParamValidator, objValidadotEscrituraTramiteAnexo);
+            }
+            catch (Exception ex)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"Error {ex.Message}");
+                }
+
+                resultadoVista.mensaje = "Se produjo un error en la aplicación [1]. Vuelva a intentar.";
+                resultadoVista.tipo = "ADVERTENCIA";
+                return resultadoVista;
+            }
+
+            bool validaRespuestaLogicDataValidation = _validadores
+                                    .ValidaRespuestLogicDataValidationEscrituraTramiteAnexoServidor(model.idanexotramite
+                                    , model.idtramite, ref respuestaLogicDataValidation, ref resultadoVista);
+
+            if (!validaRespuestaLogicDataValidation)
+                return resultadoVista;
+
+            bool respuestaValidacion = _validadores
+                                        .ValidarDatosClienteTramiteAnexoEditViewModel(ref model, ref resultadoVista);
+
+            if (!respuestaValidacion)
+                return resultadoVista;
+
+            SmcAnexoTramite _anexoTramiteEntidad = new SmcAnexoTramite();
+
+            _mapeadores
+                .MapearAnexoTramiteEditViewModelASmcAnexoTramite(ref model, ref _anexoTramiteEntidad, usuario, controlador, pcclient);
+
+            Tuple<short, string> respuestaLogicDB = null;
+            try
+            {
+                respuestaLogicDB = _logic.ActualizarAnexo(_anexoTramiteEntidad);
+            }
+            catch (Exception ex)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"Error {ex.Message}");
+                }
+
+                resultadoVista.mensaje = "Se produjo un error en la aplicación [2]. Vuelva a intentar.";
+                resultadoVista.tipo = "ADVERTENCIA";
+                return resultadoVista;
+            }
+
+            bool respuestaGestionGrabar = _validadores
+                                                .ValidarRespuestaServidorTramiteAnexoAccionActualizar(ref respuestaLogicDB, ref resultadoVista);
+
+            return resultadoVista;
         }
     }
 }

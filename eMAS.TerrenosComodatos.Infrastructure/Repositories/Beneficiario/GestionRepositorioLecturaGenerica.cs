@@ -39,7 +39,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("SmcComodato_GetDataDsrGeneric", cn))
+                using (SqlCommand cmd = new SqlCommand("SmcPr_SmcTramites_GetDataDsrGeneric", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
