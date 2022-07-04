@@ -11,6 +11,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ServiceTramiteEscritura : IServiceTramiteEscritura
     {
+        private const string objValidadotEscrituraTramiteAnexo = "SmcComodato_GetDataValidationTramiteAnexo_Escritura";
         private const string objValidadotEscrituraTramite = "SmcComodato_GetDataValidationTramite_Escritura";
         public ResultadoDTO<int> Agregar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {

@@ -12,15 +12,14 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             OficioTramiteEditViewModel _oficioTramiteEditViewModel = new OficioTramiteEditViewModel();
             
-            _oficioTramiteEditViewModel.IdOficioOtrasDirecciones = entrada.IdOficioOtrasDirecciones;
-            _oficioTramiteEditViewModel.IdTramite = entrada.IdTramite;
-            _oficioTramiteEditViewModel.Secuencia = entrada.Secuencia;
-            _oficioTramiteEditViewModel.IdDireccion = entrada.IdDireccion;
-            _oficioTramiteEditViewModel.Oficio = entrada.Oficio;
-            _oficioTramiteEditViewModel.FechaEnvio = entrada.FechaEnvio;
-            _oficioTramiteEditViewModel.OficioRespuesta = entrada.OficioRespuesta;
-            _oficioTramiteEditViewModel.FechaRespuesta = entrada.FechaRespuesta;
-            _oficioTramiteEditViewModel.PdpEstado = entrada.PdpEstado;
+            _oficioTramiteEditViewModel.idoficiootrasdirecciones = entrada.IdOficioOtrasDirecciones;
+            _oficioTramiteEditViewModel.idtramite = entrada.IdTramite;
+            _oficioTramiteEditViewModel.secuencia = entrada.Secuencia;
+            _oficioTramiteEditViewModel.iddireccion = entrada.IdDireccion;
+            _oficioTramiteEditViewModel.oficio = entrada.Oficio;
+            _oficioTramiteEditViewModel.fechaenvio = entrada.FechaEnvio;
+            _oficioTramiteEditViewModel.oficiorespuesta = entrada.OficioRespuesta;
+            _oficioTramiteEditViewModel.fecharespuesta = entrada.FechaRespuesta;
             
             salida.dataresult = _oficioTramiteEditViewModel;
         }
@@ -33,15 +32,14 @@ namespace eMAS.Api.TerrenosComodatos.Services
             {
                 lsOficioTramiteViewModel.Add(new OficioTramiteListViewModel
                 {
-                    IdOficioOtrasDirecciones = det.IdOficioOtrasDirecciones,
-                    IdTramite = det.IdTramite,
-                    Secuencia = det.Secuencia,
-                    IdDireccion = det.IdDireccion,
-                    Oficio = det.Oficio,
-                    FechaEnvio = det.FechaEnvio,
-                    OficioRespuesta = det.OficioRespuesta,
-                    FechaRespuesta = det.FechaRespuesta,
-                    PdpEstado = det.PdpEstado
+                    idoficiootrasdirecciones = det.IdOficioOtrasDirecciones,
+                    idtramite = det.IdTramite,
+                    secuencia = det.Secuencia,
+                    iddireccion = det.IdDireccion,
+                    oficio = det.Oficio,
+                    fechaenvio = det.FechaEnvio,
+                    oficiorespuesta = det.OficioRespuesta,
+                    fecharespuesta = det.FechaRespuesta
                 });
             }
             salida.dataresult = lsOficioTramiteViewModel;

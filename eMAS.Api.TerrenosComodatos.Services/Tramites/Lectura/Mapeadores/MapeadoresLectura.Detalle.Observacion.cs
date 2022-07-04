@@ -12,12 +12,11 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             ObservacionTramiteEditViewModel _observacionTramiteEditViewModel = new ObservacionTramiteEditViewModel();
 
-            _observacionTramiteEditViewModel.IdTramiteDesc = entrada.IdTramiteDesc;
-            _observacionTramiteEditViewModel.IdTramite = entrada.IdTramite;
-            _observacionTramiteEditViewModel.Fecha = entrada.Fecha;
-            _observacionTramiteEditViewModel.Observacion = entrada.Observacion;
-            _observacionTramiteEditViewModel.PdpEstado = entrada.PdpEstado;
-
+            _observacionTramiteEditViewModel.idtramitedesc = entrada.IdTramiteDesc;
+            _observacionTramiteEditViewModel.idtramite = entrada.IdTramite;
+            _observacionTramiteEditViewModel.fecha = entrada.Fecha;
+            _observacionTramiteEditViewModel.observacion = entrada.Observacion;
+            
             salida.dataresult = _observacionTramiteEditViewModel;
         }
         public void MapearListaObservacionTramiteEditAObservacionTramiteListViewModel(ref List<SmcTramitesDescEdit> entrada
@@ -28,11 +27,10 @@ namespace eMAS.Api.TerrenosComodatos.Services
             {
                 lsObservacionTramiteViewModel.Add(new ObservacionTramiteListViewModel
                 {
-                    IdTramiteDesc = det.IdTramiteDesc,
-                    IdTramite = det.IdTramite,
-                    Fecha = det.Fecha,
-                    Observacion = det.Observacion,
-                    PdpEstado = det.PdpEstado
+                    idtramitedesc = det.IdTramiteDesc,
+                    idtramite = det.IdTramite,
+                    fecha = det.Fecha,
+                    observacion = det.Observacion
                 });
             }
             salida.dataresult = lsObservacionTramiteViewModel;

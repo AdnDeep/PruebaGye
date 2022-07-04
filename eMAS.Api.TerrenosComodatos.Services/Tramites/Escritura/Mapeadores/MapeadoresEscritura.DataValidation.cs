@@ -22,5 +22,59 @@ namespace eMAS.Api.TerrenosComodatos.Services
 
             return respuesta;
         }
+        public string MapearAnexoTramiteEditViewModelADataValidationEscritura(ref AnexoTramiteEditViewModel entrada)
+        {
+            string respuesta = string.Empty;
+            var modelValidacion = new 
+            {
+                idanexotramite= entrada.idanexotramite,
+                idtramite = entrada.idtramite
+            };
+            respuesta = JsonSerializer.Serialize(modelValidacion);
+
+            return respuesta;
+        }
+        public string MapearObservacionTramiteEditViewModelADataValidationEscritura(ref ObservacionTramiteEditViewModel entrada)
+        {
+            string respuesta = string.Empty;
+
+            var modelValidacion = new
+            {
+                idobservaciontramite = entrada.idtramitedesc,
+                idtramite = entrada.idtramite
+            };
+
+            respuesta = JsonSerializer.Serialize(modelValidacion);
+
+            return respuesta;
+        }
+        public string MapearOficioTramiteEditViewModelADataValidationEscritura(ref OficioTramiteEditViewModel entrada)
+        {
+            string respuesta = string.Empty;
+
+            var modelValidacion = new
+            {
+                idoficiotramite = entrada.idoficiootrasdirecciones,
+                idtramite = entrada.idtramite
+            };
+
+            respuesta = JsonSerializer.Serialize(modelValidacion);
+
+            return respuesta;
+        }
+        public string MapearTopografiaTramiteEditViewModelADataValidationEscritura(ref TopografiaTerrenoEditViewMoel entrada)
+        {
+            string respuesta = string.Empty;
+
+            var modelValidacion = new
+            {
+                idtopografiatramite = entrada.idtopografiaterreno,
+                idtramite = entrada.idtramite
+            };
+
+            respuesta = JsonSerializer.Serialize(modelValidacion);
+
+            return respuesta;
+        }
     }
 }

@@ -12,14 +12,13 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             TopografiaTerrenoEditViewMoel _topografiaTramiteEditViewModel = new TopografiaTerrenoEditViewMoel();
             
-            _topografiaTramiteEditViewModel.IdTopografiaTerreno = entrada.IdTopografiaTerreno;
-            _topografiaTramiteEditViewModel.IdTipoTopografiaTerreno = entrada.IdTipoTopografiaTerreno;
-            _topografiaTramiteEditViewModel.IdTramite = entrada.IdTramite;
-            _topografiaTramiteEditViewModel.Oficio = entrada.Oficio;
-            _topografiaTramiteEditViewModel.FechaEnvio = entrada.FechaEnvio;
-            _topografiaTramiteEditViewModel.OficioRespuesta = entrada.OficioRespuesta;
-            _topografiaTramiteEditViewModel.FechaRespuesta = entrada.FechaRespuesta;
-            _topografiaTramiteEditViewModel.PdpEstado = entrada.PdpEstado;
+            _topografiaTramiteEditViewModel.idtopografiaterreno = entrada.IdTopografiaTerreno;
+            _topografiaTramiteEditViewModel.idtipotopografiaterreno = entrada.IdTipoTopografiaTerreno;
+            _topografiaTramiteEditViewModel.idtramite = entrada.IdTramite;
+            _topografiaTramiteEditViewModel.oficio = entrada.Oficio;
+            _topografiaTramiteEditViewModel.fechaenvio = entrada.FechaEnvio;
+            _topografiaTramiteEditViewModel.oficiorespuesta = entrada.OficioRespuesta;
+            _topografiaTramiteEditViewModel.fecharespuesta = entrada.FechaRespuesta;
             
             salida.dataresult = _topografiaTramiteEditViewModel;
         }
@@ -32,14 +31,13 @@ namespace eMAS.Api.TerrenosComodatos.Services
             {
                 lsTopografiaTramiteViewModel.Add(new TopografiaTerrenoListViewMoel
                 {
-                    IdTopografiaTerreno = det.IdTopografiaTerreno,
-                    IdTipoTopografiaTerreno = det.IdTipoTopografiaTerreno,
-                    IdTramite = det.IdTramite,
-                    Oficio = det.Oficio,
-                    FechaEnvio = det.FechaEnvio,
-                    OficioRespuesta = det.OficioRespuesta,
-                    FechaRespuesta = det.FechaRespuesta,
-                    PdpEstado = det.PdpEstado,
+                    idtopografiaterreno = det.IdTopografiaTerreno,
+                    idtipoTopografiaterreno = det.IdTipoTopografiaTerreno,
+                    idtramite = det.IdTramite,
+                    oficio = det.Oficio,
+                    fechaenvio = det.FechaEnvio,
+                    oficiorespuesta = det.OficioRespuesta,
+                    fecharespuesta = det.FechaRespuesta
                 });
             }
             salida.dataresult = lsTopografiaTramiteViewModel;

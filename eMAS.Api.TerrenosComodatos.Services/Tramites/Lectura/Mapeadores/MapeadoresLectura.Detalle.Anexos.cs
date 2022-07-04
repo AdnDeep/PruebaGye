@@ -12,10 +12,9 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             AnexoTramiteEditViewModel _anexoTramiteEditViewModel = new AnexoTramiteEditViewModel();
 
-            _anexoTramiteEditViewModel.IdAnexoTramite = entrada.IdAnexoTramite;
-            _anexoTramiteEditViewModel.IdTramite = entrada.IdTramite;
-            _anexoTramiteEditViewModel.Link = entrada.Link;
-            _anexoTramiteEditViewModel.PdpEstado = entrada.PdpEstado;
+            _anexoTramiteEditViewModel.idanexotramite = entrada.IdAnexoTramite;
+            _anexoTramiteEditViewModel.idtramite = entrada.IdTramite;
+            _anexoTramiteEditViewModel.link = entrada.Link;
             
             salida.dataresult = _anexoTramiteEditViewModel;
         }
@@ -28,10 +27,9 @@ namespace eMAS.Api.TerrenosComodatos.Services
             {
                 lsAnexoTramiteViewModel.Add(new AnexoTramiteListViewModel
                 {
-                    IdAnexoTramite = det.IdAnexoTramite,
-                    IdTramite = det.IdTramite,
-                    Link = det.Link,
-                    PdpEstado = det.PdpEstado
+                    idanexotramite = det.IdAnexoTramite,
+                    idtramite = det.IdTramite,
+                    link = det.Link
                 });
             }
             salida.dataresult = lsAnexoTramiteViewModel;
