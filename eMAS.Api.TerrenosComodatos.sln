@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos", "eMAS.Api.TerrenosComodatos\eMAS.Api.TerrenosComodatos.csproj", "{E34CD64E-E77E-4662-A2CA-0276B19C2883}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Comun", "eMAS.Api.TerrenosComodatos.Comun\eMAS.Api.TerrenosComodatos.Comun.csproj", "{446826CA-6D94-4AA4-A39F-05F428434105}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Data", "eMAS.Api.TerrenosComodatos.Data\eMAS.Api.TerrenosComodatos.Data.csproj", "{0FE1EB82-5F03-4906-9B61-D469D1C96BF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Entities", "eMAS.Api.TerrenosComodatos.Entities\eMAS.Api.TerrenosComodatos.Entities.csproj", "{90BB0DD5-6E8C-4EEB-A402-5AFFDFF5A4B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.IRepository", "eMAS.Api.TerrenosComodatos.IRepository\eMAS.Api.TerrenosComodatos.IRepository.csproj", "{7CC2D1AB-1C80-4A54-B1CF-448F80C6A886}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.IServices", "eMAS.Api.TerrenosComodatos.IServices\eMAS.Api.TerrenosComodatos.IServices.csproj", "{E9B784B4-D45A-4B83-B0E3-992CC96315A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Logic", "eMAS.Api.TerrenosComodatos.Logic\eMAS.Api.TerrenosComodatos.Logic.csproj", "{1CCAE6D2-68E2-4F85-BF5C-851D4903D098}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Repository", "eMAS.Api.TerrenosComodatos.Repository\eMAS.Api.TerrenosComodatos.Repository.csproj", "{CE872EF2-A0B1-416C-B33A-4A01C730945F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Services", "eMAS.Api.TerrenosComodatos.Services\eMAS.Api.TerrenosComodatos.Services.csproj", "{09030B2C-B4E4-4B6E-A758-1A78B7768F80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.ViewModel", "eMAS.Api.TerrenosComodatos.ViewModel\eMAS.Api.TerrenosComodatos.ViewModel.csproj", "{73078E99-73DF-4B39-B69F-DC7A8257FA76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E34CD64E-E77E-4662-A2CA-0276B19C2883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34CD64E-E77E-4662-A2CA-0276B19C2883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34CD64E-E77E-4662-A2CA-0276B19C2883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34CD64E-E77E-4662-A2CA-0276B19C2883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446826CA-6D94-4AA4-A39F-05F428434105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446826CA-6D94-4AA4-A39F-05F428434105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446826CA-6D94-4AA4-A39F-05F428434105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446826CA-6D94-4AA4-A39F-05F428434105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE1EB82-5F03-4906-9B61-D469D1C96BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE1EB82-5F03-4906-9B61-D469D1C96BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE1EB82-5F03-4906-9B61-D469D1C96BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE1EB82-5F03-4906-9B61-D469D1C96BF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90BB0DD5-6E8C-4EEB-A402-5AFFDFF5A4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90BB0DD5-6E8C-4EEB-A402-5AFFDFF5A4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90BB0DD5-6E8C-4EEB-A402-5AFFDFF5A4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90BB0DD5-6E8C-4EEB-A402-5AFFDFF5A4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CC2D1AB-1C80-4A54-B1CF-448F80C6A886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC2D1AB-1C80-4A54-B1CF-448F80C6A886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC2D1AB-1C80-4A54-B1CF-448F80C6A886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC2D1AB-1C80-4A54-B1CF-448F80C6A886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9B784B4-D45A-4B83-B0E3-992CC96315A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9B784B4-D45A-4B83-B0E3-992CC96315A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9B784B4-D45A-4B83-B0E3-992CC96315A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9B784B4-D45A-4B83-B0E3-992CC96315A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CCAE6D2-68E2-4F85-BF5C-851D4903D098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCAE6D2-68E2-4F85-BF5C-851D4903D098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCAE6D2-68E2-4F85-BF5C-851D4903D098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCAE6D2-68E2-4F85-BF5C-851D4903D098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE872EF2-A0B1-416C-B33A-4A01C730945F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE872EF2-A0B1-416C-B33A-4A01C730945F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE872EF2-A0B1-416C-B33A-4A01C730945F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE872EF2-A0B1-416C-B33A-4A01C730945F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09030B2C-B4E4-4B6E-A758-1A78B7768F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09030B2C-B4E4-4B6E-A758-1A78B7768F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09030B2C-B4E4-4B6E-A758-1A78B7768F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09030B2C-B4E4-4B6E-A758-1A78B7768F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73078E99-73DF-4B39-B69F-DC7A8257FA76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73078E99-73DF-4B39-B69F-DC7A8257FA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73078E99-73DF-4B39-B69F-DC7A8257FA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73078E99-73DF-4B39-B69F-DC7A8257FA76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F18B4F56-1338-4BA2-8526-CF3FC167C31A}
+	EndGlobalSection
+EndGlobal

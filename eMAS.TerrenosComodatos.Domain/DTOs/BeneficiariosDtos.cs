@@ -1,12 +1,7 @@
 ﻿
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
-    public class BeneficiariosValidacion1Filter
-    {
-        public int Id { get; set; }
-        public string nombre { get; set; }
-    }
-    public class BeneficiariosPanelFilterModel
+    public class BeneficiarioPanelFilterViewModel
     {
         public string nombre { get; set; }
         public string representante { get; set; }
@@ -14,11 +9,11 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public string contacto { get; set; }
     }
 
-    public class BeneficiarioDeleteModel
+    public class BeneficiarioDeleteViewModel
     {
         public short id { get; set; }
     }
-    public class BeneficiarioEditModel
+    public class BeneficiarioEditViewModel
     {
         public short id { get; set; }
         public string nombre { get; set; }
@@ -27,7 +22,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public string contacto { get; set; }
         public string usuario { get; set; }
     }
-    public class BeneficiariosViewModel
+    public class BeneficiarioListViewModel
     {
         public short id { get; set; }
         public string nombre { get; set; }

@@ -1,8 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public abstract class EntidadMunicipalAud
+    {
+        public bool PdpEstado { get; set; }
+        public string PdpUsuarioCreacion { get; set; }
+        public DateTime? PdpFechaCreacion { get; set; }
+        public string PdpUsuarioUltimaModificacion { get; set; }
+        public DateTime? PdpFechaUltimaModificacion { get; set; }
+        public string PdpUltimaTransaccion { get; set; }
+        public string PdpUltimaPcCliente { get; set; }
+        public EntidadMunicipalAud()
+        {
+            this.PdpEstado = true;
+            this.PdpFechaCreacion = DateTime.Now;
+        }
+    }
     public class KeyValueParam
     {
         public string key1 { get; set; }

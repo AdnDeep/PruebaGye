@@ -1,7 +1,7 @@
 ﻿
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
-    public class TramitesPanelFilterModel
+    public class TramitePanelFilterViewModel
     {
         public short anioexp { get; set; }
         public string secexp { get; set; }
@@ -15,7 +15,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short numero { get; set; }
         public short idestado { get; set; }
     }
-    public class TramitesListViewModel
+    public class TramiteListViewModel
     {
         public short id { get; set; }
         public short anioexp { get; set; }
@@ -23,5 +23,8 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public string beneficiario { get; set; }
         public string ruc { get; set; }
         public string codigoCatastral { get; set; }
+    }
+    public class TramiteEditViewModel
+    { 
     }
 }
