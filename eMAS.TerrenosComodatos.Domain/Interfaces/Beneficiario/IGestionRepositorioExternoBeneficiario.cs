@@ -9,11 +9,7 @@ namespace eMAS.TerrenosComodatos.Domain.Interfaces
         ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model);
         ResultadoDTO<string> CrearBeneficiario(BeneficiarioEditViewModel model);
         ResultadoDTO<string> ActualizarBeneficiario(BeneficiarioEditViewModel model);
-        ResultadoDTO<Tuple<IList<BeneficiariosListViewModel>, int>> GetBeneficiarioTodosPaginado(BeneficiariosPanelFilterModel panelModel, int numeroPagina, int numeroFilas);
+        ResultadoDTO<Tuple<IList<BeneficiarioListViewModel>, int>> GetBeneficiarioTodosPaginado(BeneficiarioPanelFilterViewModel panelModel, int numeroPagina, int numeroFilas);
         ResultadoDTO<Tuple<BeneficiarioEditViewModel, string, short>> GetBeneficiarioPorId(short id);
-    }
-    public interface IGestionRepositorioExternoLecturaGenerica
-    {
-        ResultadoDTO<Tuple<List<KeyValueSelect>, string>> ObtenerListadoGenerico(string keyparam);
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
+namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class ValidadoresBeneficiario
     {

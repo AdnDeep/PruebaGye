@@ -1,0 +1,23 @@
+﻿using eMAS.TerrenosComodatos.Domain.DTOs;
+using Microsoft.Extensions.Logging;
+
+namespace eMAS.TerrenosComodatos.Domain.Application
+{
+    public partial class CasesUsesGestionBeneficiario : ICasesUsesGestionBeneficiario
+    {
+        private readonly ILogger<CasesUsesGestionBeneficiario> _logger;
+        public CasesUsesGestionBeneficiario(ILogger<CasesUsesGestionBeneficiario> logger)
+        {
+            _logger = logger;
+        }
+        public ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model, string usuario, string controlador, string pcclient)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ResultadoDTO<BeneficiarioEditViewModel> GrabarBeneficiario(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

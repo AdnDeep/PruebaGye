@@ -1,12 +1,12 @@
 ﻿
 using Microsoft.Extensions.Logging;
 
-namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
+namespace eMAS.TerrenosComodatos.Domain.Application
 {
-    public partial class ValidadoresBeneficiario
+    public partial class MapeadoresBeneficiario
     {
-        private readonly ILogger<ValidadoresBeneficiario> _logger;
-        public ValidadoresBeneficiario(ILogger<ValidadoresBeneficiario> logger)
+        private readonly ILogger<MapeadoresBeneficiario> _logger;
+        public MapeadoresBeneficiario(ILogger<MapeadoresBeneficiario> logger)
         {
             _logger = logger;
         }

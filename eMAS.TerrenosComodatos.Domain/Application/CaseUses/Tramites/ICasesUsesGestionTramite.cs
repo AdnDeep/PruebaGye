@@ -1,13 +1,8 @@
 ﻿using eMAS.TerrenosComodatos.Domain.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
+namespace eMAS.TerrenosComodatos.Domain.Application
 {
-    public interface ICaseUseLecturaTramite
+    public interface ICasesUsesGestionTramite
     {
         ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> LeerTodosPaginado(string dataPanel, string resultContainer, int numeroPagina, int numeroFila);
 

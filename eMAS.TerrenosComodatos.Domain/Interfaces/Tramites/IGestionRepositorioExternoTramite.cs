@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace eMAS.TerrenosComodatos.Domain.Interfaces
 {
-    public interface IGestionRepositorioExternoTramites
+    public interface IGestionRepositorioExternoTramite
     {
         ResultadoDTO<Tuple<List<TramiteListViewModel>,int>> GetTramitesVistaTodosPaginado(TramitePanelFilterViewModel panelModel, int numeroPagina, int numeroFilas);
         ResultadoDTO<Tuple<TramiteEditViewModel, string, short>> GetTramitePorId(short id);

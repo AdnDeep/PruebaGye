@@ -1,5 +1,4 @@
-﻿using eMAS.TerrenosComodatos.Domain.Application.CaseUses;
-using eMAS.TerrenosComodatos.Domain.Auxiliars;
+﻿using eMAS.TerrenosComodatos.Domain.Application;
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Web.Controllers;
 using eMAS.TerrenosComodatos.Web.Extensions;
@@ -13,20 +12,16 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
     [Area("Comodatos")]
     public class STC50001Controller : BaseController
     {
+        private readonly ICasesUsesGestionBeneficiario _casesUsesBeneficiario;
         private readonly ILogger<STC50001Controller> _logger;
-        private readonly ICaseUseLecturaBeneficiario _caseUseLecturaBeneficiario;
-        private readonly ICaseUseEscribirBeneficiario _caseUseEscrituraBeneficiario;
-        private readonly ICaseUseEliminarBeneficiario _caseUseEliminarBeneficiario;
-        public STC50001Controller(ILogger<STC50001Controller> logger, ILogger<BaseController> loggerBase
-            , ICaseUseLecturaBeneficiario caseUseLecturaBeneficiario
-            , ICaseUseEliminarBeneficiario caseUseEliminarBeneficiario
-            , ICaseUseEscribirBeneficiario caseUseEscrituraBeneficiario
-            , GenericDataProvider genericDataProvider) 
-            : base(loggerBase, caseUseLecturaBeneficiario, genericDataProvider)
+        public STC50001Controller(ILogger<STC50001Controller> logger
+            , ICasesUsesGestionBeneficiario casesUsesBeneficiario
+            , ILogger<BaseController> loggerBase
+            , ICasesUsesGeneric casesUsesGeneric
+            ) 
+            : base(loggerBase, casesUsesGeneric)
         {
-            _caseUseEliminarBeneficiario = caseUseEliminarBeneficiario;
-            _caseUseLecturaBeneficiario = caseUseLecturaBeneficiario;
-            _caseUseEscrituraBeneficiario = caseUseEscrituraBeneficiario;
+            _casesUsesBeneficiario = casesUsesBeneficiario;
             _logger = logger;
         }
         [HttpPost]
@@ -39,13 +34,13 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         {
             string partialEditViewHtml = string.Empty;
             var response = new ResultadoViewJson();
-            BeneficiarioEditModel editModel = null;
+            BeneficiarioEditViewModel editModel = null;
 
             try
             {
                 short sId = 0;
                 Int16.TryParse(id, out sId);
-                var resultadoCasoUso = _caseUseLecturaBeneficiario.LeerPorId(sId);
+                var resultadoCasoUso = _casesUsesBeneficiario.LeerPorId(sId);
 
                 if (resultadoCasoUso.mensaje == "OK")
                 {
@@ -67,13 +62,13 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             return Json(response);
         }
         [HttpPost]
-        public IActionResult EditSave(BeneficiarioEditModel modelEdit)
+        public IActionResult EditSave(BeneficiarioEditViewModel modelEdit)
         {
             string partialEditViewHtml = string.Empty;
-            ResultadoDTO<BeneficiarioEditModel> response = new ResultadoDTO<BeneficiarioEditModel>();            
+            ResultadoDTO<BeneficiarioEditViewModel> response = new ResultadoDTO<BeneficiarioEditViewModel>();            
             try
             {
-                response = _caseUseEscrituraBeneficiario.GrabarBeneficiario(modelEdit, "test", "STC50001", "WEBCLIENT");
+                response = _casesUsesBeneficiario.GrabarBeneficiario(modelEdit, "test", "STC50001", "WEBCLIENT");
             }
             catch (Exception ex)
             {
@@ -85,12 +80,12 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             return Json(response);
         }
         [HttpPost]
-        public IActionResult EditDelete(BeneficiarioDeleteModel modelEdit)
+        public IActionResult EditDelete(BeneficiarioDeleteViewModel modelEdit)
         {
             ResultadoDTO<string> response = new ResultadoDTO<string>();
             try
             {
-                response = _caseUseEliminarBeneficiario.EliminarBeneficiario(modelEdit, "test", "STC50001", "WEBCLIENT");
+                response = _casesUsesBeneficiario.EliminarBeneficiario(modelEdit, "test", "STC50001", "WEBCLIENT");
             }
             catch (Exception ex)
             {
@@ -100,6 +95,19 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             }
 
             return Json(response);
+        }
+        [HttpPost]
+        public ActionResult GetPagedData(string data
+            , string typeSearch
+            , string resultContainer
+            , int numeroPagina = 1
+            , int tamanioPagina = 5)
+        {
+            ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> resultadoVista = new ResultadoDTO<DataPagineada<BeneficiarioListViewModel>>();
+
+            resultadoVista = _casesUsesBeneficiario.LeerTodosPaginado(data, resultContainer, numeroPagina, tamanioPagina);
+
+            return Json(resultadoVista);        
         }
     }
 }

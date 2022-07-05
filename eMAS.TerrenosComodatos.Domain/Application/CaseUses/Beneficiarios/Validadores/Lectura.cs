@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.Extensions.Logging;
 
-namespace eMAS.TerrenosComodatos.Domain.Application.CaseUses
+namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class ValidadoresBeneficiario
     {
