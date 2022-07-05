@@ -7,10 +7,18 @@ namespace eMAS.TerrenosComodatos.Domain.Application
     {
         public ResultadoDTO<BeneficiarioEditViewModel> LeerPorId(short id)
         {
+            BeneficiarioEditViewModel modelo = null;
             ResultadoDTO<BeneficiarioEditViewModel> resultadoVista = new ResultadoDTO<BeneficiarioEditViewModel>();
             if (id == 0)
-            { 
+            {
+                modelo = new BeneficiarioEditViewModel();
 
+            }
+            else if (id > 0)
+            {
+            }
+            else
+            { 
             }
             return resultadoVista;
         }

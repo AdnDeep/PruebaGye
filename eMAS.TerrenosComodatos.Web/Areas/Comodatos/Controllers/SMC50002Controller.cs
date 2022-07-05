@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
 {
     [Area("Comodatos")]
-    public class STC50002Controller : BaseController
+    public class SMC50002Controller : BaseController
     {
         private readonly ICasesUsesGestionTramite _casesUsesTramite;
-        private readonly ILogger<STC50002Controller> _logger;
-        public STC50002Controller(ILogger<STC50002Controller> logger
+        private readonly ILogger<SMC50002Controller> _logger;
+        public SMC50002Controller(ILogger<SMC50002Controller> logger
             , ILogger<BaseController> loggerBase
             , ICasesUsesGestionTramite casesUsesTramite
             , ICasesUsesGeneric casesUsesGeneric)
