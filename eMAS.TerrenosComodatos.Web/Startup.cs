@@ -59,7 +59,7 @@ namespace eMAS.TerrenosComodatos.Web
             {
                 endpoints.MapControllerRoute(
                     name: "areaRoute",
-                    pattern: "{area:exists}/{controller=STC50001}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=SMC50001}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

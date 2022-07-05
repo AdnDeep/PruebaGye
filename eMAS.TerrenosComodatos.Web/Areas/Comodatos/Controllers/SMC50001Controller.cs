@@ -68,7 +68,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             ResultadoDTO<BeneficiarioEditViewModel> response = new ResultadoDTO<BeneficiarioEditViewModel>();            
             try
             {
-                response = _casesUsesBeneficiario.GrabarBeneficiario(modelEdit, "test", "STC50001", "WEBCLIENT");
+                response = _casesUsesBeneficiario.GrabarBeneficiario(modelEdit, "test", "SMC50001", "WEBCLIENT");
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             ResultadoDTO<string> response = new ResultadoDTO<string>();
             try
             {
-                response = _casesUsesBeneficiario.EliminarBeneficiario(modelEdit, "test", "STC50001", "WEBCLIENT");
+                response = _casesUsesBeneficiario.EliminarBeneficiario(modelEdit, "test", "SMC50001", "WEBCLIENT");
             }
             catch (Exception ex)
             {

@@ -1,10 +1,10 @@
-const STC50001 = function () {
+const SMC50001 = function () {
     const nameConsult1 = "beneficiarios";
     const nameEditAction = "EditView";
     const nameSaveAction = "EditSave";
     const nameDeleteAction = "EditDelete";
     const nameArea = "Comodatos";
-    const nameController = "STC50001";
+    const nameController = "SMC50001";
 
     const fnRespuestaEliminarRegistro = function (response) {
         if (response == null || response == undefined) {
@@ -266,7 +266,7 @@ const STC50001 = function () {
         DataInfoConsult.bootstrapTable("load", data);
         SetearEventosDataGridListado();
             
-        eMASReferencialJs.SetearPlantillaPagineo("objSTC50001.BtnConsultar", "pagineoListadoBeneficiarios", response.dataresult.totalpaginas, response.dataresult.paginaactual);
+        eMASReferencialJs.SetearPlantillaPagineo("objSMC50001.BtnConsultar", "pagineoListadoBeneficiarios", response.dataresult.totalpaginas, response.dataresult.paginaactual);
 
         let _consultLs = document.querySelector(".consult-ls");
         _consultLs.style.display = "";
@@ -353,4 +353,4 @@ const STC50001 = function () {
     };
 }
 
-var objSTC50001 = new STC50001();
+var objSMC50001 = new SMC50001();

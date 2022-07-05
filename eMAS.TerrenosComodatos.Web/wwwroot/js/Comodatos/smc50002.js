@@ -1,10 +1,10 @@
-const STC50002 = function () {
+const SMC50002 = function () {
     const nameConsult1 = "beneficiarios";
     const nameEditAction = "EditView";
     const nameSaveAction = "EditSave";
     const nameDeleteAction = "EditDelete";
     const nameArea = "Comodatos";
-    const nameController = "STC50002";
+    const nameController = "SMC50002";
     const dsrBeneficiarios = "DSRBENEFICIARIOS";
     const dsrEstados = "DSRESTADOSTRAMITES";
     /*
@@ -246,7 +246,7 @@ const STC50002 = function () {
         DataInfoConsult.bootstrapTable("load", data);
         SetearEventosDataGridListado();
 
-        eMASReferencialJs.SetearPlantillaPagineo("objSTC50002.BtnConsultar", "pagineoListadoTramites", response.dataresult.totalpaginas, response.dataresult.paginaactual);
+        eMASReferencialJs.SetearPlantillaPagineo("objSMC50002.BtnConsultar", "pagineoListadoTramites", response.dataresult.totalpaginas, response.dataresult.paginaactual);
 
         let _consultLs = document.querySelector(".consult-ls");
         _consultLs.style.display = "";
@@ -349,8 +349,8 @@ const STC50002 = function () {
 
     const cargaDatosCombosPanel = function () {
         let arr = [];
-        arr.push({ key: dsrBeneficiarios, ctrl: "nombre-beneficiario", ruta: "Comodatos/STC50002/GetDataDsrGeneric"});
-        arr.push({ key: dsrEstados, ctrl: "estado", ruta: "Comodatos/STC50002/GetDataDsrGeneric" });
+        arr.push({ key: dsrBeneficiarios, ctrl: "nombre-beneficiario", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"});
+        arr.push({ key: dsrEstados, ctrl: "estado", ruta: "Comodatos/SMC50002/GetDataDsrGeneric" });
         eMASReferencialJs.CargarCombosGenerico(arr);
     };
 
@@ -370,4 +370,4 @@ const STC50002 = function () {
     };
 }
 
-var objSTC50002 = new STC50002();
+var objSMC50002 = new SMC50002();
