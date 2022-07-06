@@ -53,7 +53,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             bool puedeContinuar = false;
             salida.mensaje = "OK";
-            salida.tipo = "OK";
+            salida.tipo = "EXITO";
             if (entrada == null)
             {
                 salida.mensaje = "No existe el parámetro de entrada";

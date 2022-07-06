@@ -143,6 +143,31 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
             }
 
+            var existeTipoTopografiaTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETIPOTOPOGRAFIA");
+            if (existeTipoTopografiaTmp == null)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"La clave EXISTETIPOTOPOGRAFIA no se encuentra en la BD.");
+                }
+                salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+
+            if (!existeTipoTopografiaTmp.VALORBOOLEANO)
+            {
+                lsMensajes.Add(new Mensaje
+                {
+                    codigo = "VLNVALSERV",
+                    descripcion = "El Tipo Topográfico indicado no existe en el sistema o está dado de baja.",
+                    tipo = "ADVERTENCIA"
+                });
+                salida.mensajes = lsMensajes;
+                salida.mensaje = "El Tipo Topográfico indicado no existe en el sistema o está dado de baja.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
 
 
             puedeContinuar = true;

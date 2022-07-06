@@ -18,7 +18,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             List<Mensaje> lsMensajes = new List<Mensaje>();
             bool puedeContinuar = false;
             salida.mensaje = "OK";
-            salida.tipo = "OK";
+            salida.tipo = "EXITO";
             if (entrada == null)
             {
                 salida.mensaje = "No existe el parámetro de entrada";
@@ -66,7 +66,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             List<Mensaje> lsMensajes = new List<Mensaje>();
             bool puedeContinuar = false;
             salida.mensaje = "OK";
-            salida.tipo = "OK";
+            salida.tipo = "EXITO";
             if (entrada == null)
             {
                 salida.mensaje = "No existe el parámetro de entrada";

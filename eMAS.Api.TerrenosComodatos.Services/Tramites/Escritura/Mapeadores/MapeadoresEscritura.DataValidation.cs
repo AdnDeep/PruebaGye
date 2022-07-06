@@ -68,6 +68,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
 
             var modelValidacion = new
             {
+                idtipotopografia = entrada.idtipotopografiaterreno,
                 idtopografiatramite = entrada.idtopografiaterreno,
                 idtramite = entrada.idtramite
             };

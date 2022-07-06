@@ -18,7 +18,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             List<Mensaje> lsMensajes = new List<Mensaje>();
             bool puedeContinuar = false;
             salida.mensaje = "OK";
-            salida.tipo = "OK";
+            salida.tipo = "EXITO";
             
             if (idOficioTramite <= 0)
             {

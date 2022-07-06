@@ -19,7 +19,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             bool puedeContinuar = false;
             salida.mensaje = "OK";
-            salida.tipo = "OK";
+            salida.tipo = "EXITO";
             List<Mensaje> lsMensajes = new List<Mensaje>();
 
             if (string.IsNullOrEmpty(entrada.nombre) || string.IsNullOrWhiteSpace(entrada.nombre))
