@@ -168,11 +168,13 @@ eMASReferencialJs.botonNo = {
 };
 
 eMASReferencialJs.mostrarProgress = function () {
-    $("#loaderGif").show();
+    let strLoaderHtml = '<div style="" id="loaderGif"><div class="loader">Loading...</div></div>';
+    let elementLoaderHtml = eMASReferencialJs.htmlToElement(strLoaderHtml);
+    document.body.appendChild(elementLoaderHtml);
 };
 
 eMASReferencialJs.ocultarProgress = function () {
-    $("#loaderGif").hide();
+    eMASReferencialJs.FadeOutEffect("#loaderGif", 500, function () { document.querySelector('#loaderGif').remove(); })
 };
 
 eMASReferencialJs.mostrarPopup = function (titulo, url, funcionCargar, funcionCerrar) {
@@ -655,7 +657,7 @@ eMASReferencialJs.LimpiarComponenteSelector = function (select) {
 
 /////////////////////////// LLAMADA AJAX /////////////////////////////
 
-eMASReferencialJs.Ajax = function (request, failFunction, typeMessage) {
+eMASReferencialJs.Ajax = function (request, failFunction, typeMessage, alwaysFunction) {
     $.ajax(
         request
 	).fail(function (response, textstatus, errorThrown) {
@@ -687,6 +689,9 @@ eMASReferencialJs.Ajax = function (request, failFunction, typeMessage) {
 				eMASReferencialJs.mostrarMensajes("Error", eMASReferencialJs.tipoMensaje.Error, [{ Description: mensaje }], [eMASReferencialJs.botonAceptar]);
 			}                
         }
+    }).always(function () {
+        if (alwaysFunction != undefined)
+            alwaysFunction();
     });
 };
 
@@ -937,4 +942,22 @@ eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback) {
 eMASReferencialJs.ObtenerAnioSistema = function () {
     const date = new Date();
     return date.getFullYear();
+}
+
+eMASReferencialJs.FadeOutEffect = function (selector, timeInterval, callback) {
+    let _targetSelector = document.querySelector(selector);
+
+    let _time = timeInterval / 1000;
+    _targetSelector.style.transition = _time + 's';
+    _targetSelector.style.opacity = 0
+
+    const fnFadeEffect = setInterval(function () {
+
+        if (_targetSelector.style.opacity <= 0) {
+            clearInterval(fnFadeEffect);
+            if (callback != undefined) {
+                callback();
+            }
+        }
+    }, timeInterval);
 }

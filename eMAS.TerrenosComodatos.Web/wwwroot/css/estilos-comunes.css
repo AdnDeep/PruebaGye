@@ -106,7 +106,7 @@
 }*/
 
 
-.loader {
+/*.loader {
     position: fixed;
     left: 0;
     top: 0;
@@ -114,7 +114,7 @@
     height: 100%;
     z-index: 9999;
     background: url('../Images/loading.gif') 50% 20% no-repeat rgba(25, 25, 25, 0.7);
-}
+}*/
 
 /* Safari */
 @-webkit-keyframes spin {

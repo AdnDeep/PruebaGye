@@ -19,11 +19,6 @@ namespace eMAS.Api.TerrenosComodatos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "eMAS.Api.TerrenosComodatos", Version = "v1" });
-            });
-
             services.AddServicesTramitesExtensions();
             services.AddServicesBeneficiariosExtensions();
             services.AddServicesGenericExtensions();
@@ -33,19 +28,19 @@ namespace eMAS.Api.TerrenosComodatos
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment() || env.IsProduction())
+            if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseOpenApi();
-                app.UseSwaggerUi3(c =>
-                {
-                    c.OAuth2Client = new NSwag.AspNetCore.OAuth2ClientSettings
-                    {
-                        ClientId = "133bb649-674c-4162-ab2c-cfff03911482",
-                        AppName = "eMAS.Api.TerrenosComodatos"// Nombre
-                    };
-                });
+                app.UseDeveloperExceptionPage();                
             }
+            app.UseOpenApi();
+            app.UseSwaggerUi3(c =>
+            {
+                c.OAuth2Client = new NSwag.AspNetCore.OAuth2ClientSettings
+                {
+                    ClientId = "133bb649-674c-4162-ab2c-cfff03911482",
+                    AppName = "eMAS.Api.TerrenosComodatos"// Nombre
+                };
+            });
 
             app.UseHttpsRedirection();
 

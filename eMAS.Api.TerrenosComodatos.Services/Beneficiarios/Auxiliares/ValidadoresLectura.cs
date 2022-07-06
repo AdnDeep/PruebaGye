@@ -35,7 +35,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
 
                 salida.dataresult = new DataPagineada<BeneficiariosListViewModel>();
-                salida.mensaje = "Se produjo un error en la aplicación (2). Vuelva a intentar.";
+                salida.mensaje = "Se produjo un error en la aplicación [1]";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
@@ -63,7 +63,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
                 
                 salida.dataresult = new BeneficiarioEditViewModel();
-                salida.mensaje = "Se produjo un error en la aplicación (1). Vuelva a intentar.";
+                salida.mensaje = "Se produjo un error en la aplicación [1].";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }

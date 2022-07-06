@@ -54,7 +54,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     _logger.LogError($"Error {ex.Message}");
                 }
                 
-                resultadoVista.mensaje = "Se produjo un error en la aplicación [1]. Vuelva a intentar.";
+                resultadoVista.mensaje = "Se produjo un error en la aplicación [1].";
                 resultadoVista.tipo = "ADVERTENCIA";
                 return resultadoVista;
             }

@@ -11,12 +11,11 @@ using System.Threading.Tasks;
 
 namespace eMAS.TerrenosComodatos.Infrastructure
 {
-    public class ApiService
+    public class ApiService : IDisposable
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly ITokenAcquisition _tokenAcquisition;
         private readonly IConfiguration _configuration;
-
         public ApiService(IHttpClientFactory clientFactory,
             ITokenAcquisition tokenAcquisition,
             IConfiguration configuration)
@@ -25,44 +24,47 @@ namespace eMAS.TerrenosComodatos.Infrastructure
             _tokenAcquisition = tokenAcquisition;
             _configuration = configuration;
         }
-
-        public async Task<Tuple<HttpStatusCode, string>> GetApiDataAsync(string baseAddressConf, string scopeConf, string resource, string parameters)
+        public async Task<Tuple<int, string>> GetApiDataAsync(string baseAddressConf, string scopeConf, string urlResource)
         {
-            HttpStatusCode responseCode;
+            int responseCode;
             string responseContent = "";
             try
             {
-                var client = _clientFactory.CreateClient();
-
-                //baseAddressConf - ApiComodato:ApiBaseAddress
-
-                //var scope = _configuration["CallApi:ScopeForAccessToken"];
-                //var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
-
-                client.BaseAddress = new Uri(_configuration[baseAddressConf]);
-                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = await client.GetAsync($"{resource}/{parameters}");
-                if (response != null)
+                using (var client = _clientFactory.CreateClient())
                 {
-                    responseCode = response.StatusCode;
-                    if (response.Content != null)
+                    //baseAddressConf - ApiComodato:ApiBaseAddress
+
+                    //var scope = _configuration["CallApi:ScopeForAccessToken"];
+                    //var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
+
+                    client.BaseAddress = new Uri(baseAddressConf);
+                    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = await client.GetAsync(urlResource);
+                    if (response != null)
                     {
-                        responseContent = await response.Content.ReadAsStringAsync();
+                        responseCode = (int)response.StatusCode;
+                        if (response.Content != null)
+                        {
+                            responseContent = await response.Content.ReadAsStringAsync();
+                        }
                     }
-                }
-                else
-                {
-                    responseCode = HttpStatusCode.NoContent;
+                    else
+                    {
+                        responseCode = (int)HttpStatusCode.NoContent;
+                    }
                 }
             }
             catch (Exception e)
             {
-                responseCode = HttpStatusCode.NoContent;
+                responseCode = (int)HttpStatusCode.InternalServerError;
                 responseContent = $"Excepction {e}";
             }
-            return new Tuple<HttpStatusCode, string>(responseCode, responseContent);
+            return new Tuple<int, string>(responseCode, responseContent);
+        }
+        public void Dispose()
+        {
         }
     }
 }

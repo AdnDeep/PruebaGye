@@ -9,7 +9,11 @@ namespace eMAS.TerrenosComodatos.Domain.Interfaces
         ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model);
         ResultadoDTO<string> CrearBeneficiario(BeneficiarioEditViewModel model);
         ResultadoDTO<string> ActualizarBeneficiario(BeneficiarioEditViewModel model);
-        ResultadoDTO<Tuple<IList<BeneficiarioListViewModel>, int>> GetBeneficiarioTodosPaginado(BeneficiarioPanelFilterViewModel panelModel, int numeroPagina, int numeroFilas);
+        ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> GetBeneficiarioTodosPaginado(string panelFilter
+                    , string resultContainer, int numeroPagina, int numeroFila);
+
+        //ResultadoDTO<Tuple<IList<BeneficiarioListViewModel>, int>> GetBeneficiarioTodosPaginado(string panelFilter
+        //    , string resultContainer, int numeroPagina, int numeroFila);
         ResultadoDTO<Tuple<BeneficiarioEditViewModel, string, short>> GetBeneficiarioPorId(short id);
     }
 }

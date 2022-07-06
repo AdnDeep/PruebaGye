@@ -229,8 +229,13 @@ const SMC50001 = function () {
         
         $("#pagineoListadoBeneficiarios").empty();
         if (response == null || response == undefined) {
-            console.log("No hay datos Listado (0)");
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
+            //console.log("No hay datos Listado (0)");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {1}.");
+            return;
+        }
+        if (response.tipo !== "EXITO") {
+            //console.log("No hay datos Listado (0)");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
             return;
         }
         if (response.dataresult == null || response.dataresult == undefined) {
@@ -238,17 +243,16 @@ const SMC50001 = function () {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
             return;
         }
+
+        let DataInfoConsult = $("#" + response.dataresult.resultcontainer);
+        DataInfoConsult.bootstrapTable('destroy');
+        DataInfoConsult.bootstrapTable();
+        let data = [];
         if (response.dataresult.data == null || response.dataresult == undefined) {
             console.log("No hay datos Listado (2)");
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
             return;
         }
-        
-        let DataInfoConsult = $("#" + response.dataresult.resultcontainer);
-        DataInfoConsult.bootstrapTable('destroy');
-        DataInfoConsult.bootstrapTable();
-        let data = [];
-
         if (response.dataresult.data.length == 0) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
             return;
@@ -288,6 +292,7 @@ const SMC50001 = function () {
             resultContainer: "DataListadoBeneficiarios",
             numeroPagina: numeroPagina
         };
+        debugger;
         eMASReferencialJs.Ajax({
             type: "POST",
             data: djson,
@@ -295,8 +300,9 @@ const SMC50001 = function () {
             beforeSend: function (response) {
                 eMASReferencialJs.mostrarProgress();
             },
-            success: fnPagedDataFromControllerListBeneficiarios
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+            success: fnPagedDataFromControllerListBeneficiarios,
+            
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress );
     };
 
     const fnLimpiarFormularioPanel = function () {

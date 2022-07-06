@@ -209,26 +209,27 @@ const SMC50002 = function () {
     const fnPagedDataFromControllerListTramites = function (response) {
         $("#pagineoListadoTramites").empty();
         if (response == null || response == undefined) {
-            console.log("No hay datos Listado (0)");
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {1}.");
+            return;
+        }
+        if (response.tipo !== "EXITO") {
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
             return;
         }
         if (response.dataresult == null || response.dataresult == undefined) {
-            console.log("No hay datos Listado (1)");
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
             return;
         }
-        if (response.dataresult.data == null || response.dataresult == undefined) {
-            console.log("No hay datos Listado (2)");
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
-            return;
-        }
+        
 
         let DataInfoConsult = $("#" + response.dataresult.resultcontainer);
         DataInfoConsult.bootstrapTable('destroy');
         DataInfoConsult.bootstrapTable();
         let data = [];
-
+        if (response.dataresult.data == null || response.dataresult == undefined) {
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
+            return;
+        }
         if (response.dataresult.data.length == 0) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
             return;

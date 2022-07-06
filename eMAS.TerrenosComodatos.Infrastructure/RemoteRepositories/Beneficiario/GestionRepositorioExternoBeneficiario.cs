@@ -1,35 +1,25 @@
 ﻿using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
 namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 {
-    public class GestionRepositorioExternoBeneficiario : IGestionRepositorioExternoBeneficiario
+    public partial class GestionRepositorioExternoBeneficiario : IGestionRepositorioExternoBeneficiario
     {
-        public ResultadoDTO<string> ActualizarBeneficiario(BeneficiarioEditViewModel model)
+        private readonly string _baseAddress;
+        private readonly ILogger<GestionRepositorioExternoBeneficiario> _logger;
+        const string methodGetPaged = "api/GestionBeneficiario/ObtenerListadoPorPagina";
+        private readonly ApiService _clientHttpSvc;
+        public GestionRepositorioExternoBeneficiario(ApiService clientHttpSvc
+            , IConfiguration configuration
+            , ILogger<GestionRepositorioExternoBeneficiario> logger)
         {
-            throw new NotImplementedException();
-        }
-
-        public ResultadoDTO<string> CrearBeneficiario(BeneficiarioEditViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ResultadoDTO<Tuple<BeneficiarioEditViewModel, string, short>> GetBeneficiarioPorId(short id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ResultadoDTO<Tuple<IList<BeneficiarioListViewModel>, int>> GetBeneficiarioTodosPaginado(BeneficiarioPanelFilterViewModel panelModel, int numeroPagina, int numeroFilas)
-        {
-            throw new NotImplementedException();
+            _logger = logger;
+            _baseAddress = configuration["ApiComodato:ApiBaseAddress"];
+            _clientHttpSvc = clientHttpSvc;
         }
     }
 }

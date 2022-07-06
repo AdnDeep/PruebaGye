@@ -7,7 +7,23 @@ namespace eMAS.TerrenosComodatos.Domain.Application
     {
         public ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> LeerTodosPaginado(string dataPanel, string resultContainer, int numeroPagina, int numeroFila)
         {
-            throw new System.NotImplementedException();
+            ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> resultadoVista = new ResultadoDTO<DataPagineada<BeneficiarioListViewModel>>();
+
+            bool respValInputClient = _validadores.InputClientGetPagedData(dataPanel, resultContainer, numeroPagina, numeroFila, ref resultadoVista);
+
+            if (!respValInputClient)
+                return resultadoVista;
+
+            var respRepExterno =_repositorioExterno.GetBeneficiarioTodosPaginado(dataPanel, resultContainer, numeroPagina, numeroFila);
+
+            bool respValServ = _validadores.RespuestaServidorRemotoDataPaginada(ref respRepExterno, ref resultadoVista);
+
+            if (!respValServ)
+                return resultadoVista;
+
+            _mapeadores.RespuestaServidorDataPaginada(ref respRepExterno, ref resultadoVista);
+
+            return resultadoVista;
         }
     }
 }

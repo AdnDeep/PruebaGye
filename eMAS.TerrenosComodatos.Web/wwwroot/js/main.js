@@ -59,7 +59,7 @@ $(function() {
 				$('#toolbarRegresar').empty();
 				$("#pageContainer").html(response);
 			}
-		}, function () { eMASReferencialJs.ocultarProgress(); });
+		}, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
 
 		
 	});
