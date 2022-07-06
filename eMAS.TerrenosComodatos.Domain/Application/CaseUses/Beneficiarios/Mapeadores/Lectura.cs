@@ -13,7 +13,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         }
         public void GenerateEditViewModelEmpty(ref BeneficiarioEditViewModel model)
         {
-
+            model.id = 0;
         }
     }
 }

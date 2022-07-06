@@ -6,6 +6,7 @@ using eMAS.Api.TerrenosComodatos.Logic.Generic;
 using eMAS.Api.TerrenosComodatos.Repository;
 using eMAS.Api.TerrenosComodatos.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using System;
 
 namespace eMAS.Api.TerrenosComodatos
@@ -92,6 +93,25 @@ namespace eMAS.Api.TerrenosComodatos
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
+            });
+        }
+        public static void AddSwaggerConfiguration(this IServiceCollection services)
+        {
+            services.AddSwaggerDocument();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", 
+                    new OpenApiInfo
+                    { 
+                        Title = "eMAS.Api.TerrenosComodatos",
+                        Description = "Métodos da API para consumir Datos de Comodatos",
+                        Contact = new OpenApiContact 
+                        {
+                            Name = "MIMG Dirección Informática",
+                            Email = "vicman@gmail.com" 
+                        },
+                        Version = "v1" 
+                    });
             });
         }
     }

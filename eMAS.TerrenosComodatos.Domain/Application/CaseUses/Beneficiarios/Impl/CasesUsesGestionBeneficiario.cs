@@ -5,9 +5,12 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class CasesUsesGestionBeneficiario : ICasesUsesGestionBeneficiario
     {
+        private readonly MapeadoresBeneficiario _mapeadores;
         private readonly ILogger<CasesUsesGestionBeneficiario> _logger;
-        public CasesUsesGestionBeneficiario(ILogger<CasesUsesGestionBeneficiario> logger)
+        public CasesUsesGestionBeneficiario(ILogger<CasesUsesGestionBeneficiario> logger
+            , MapeadoresBeneficiario mapeadores)
         {
+            _mapeadores = mapeadores;
             _logger = logger;
         }
         public ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model, string usuario, string controlador, string pcclient)

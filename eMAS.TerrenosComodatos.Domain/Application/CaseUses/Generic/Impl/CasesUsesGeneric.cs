@@ -6,7 +6,8 @@ namespace eMAS.TerrenosComodatos.Domain.Application
     {
         public StructKeyValueSelect GetSingleDatasources(string key, string target)
         {
-            throw new System.NotImplementedException();
+            return new StructKeyValueSelect();
+            //throw new System.NotImplementedException();
         }
     }
 }

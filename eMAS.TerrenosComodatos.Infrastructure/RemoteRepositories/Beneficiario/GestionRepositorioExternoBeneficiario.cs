@@ -3,7 +3,7 @@ using eMAS.TerrenosComodatos.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace eMAS.TerrenosComodatos.Infrastructure.Repositories
+namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 {
     public class GestionRepositorioExternoBeneficiario : IGestionRepositorioExternoBeneficiario
     {

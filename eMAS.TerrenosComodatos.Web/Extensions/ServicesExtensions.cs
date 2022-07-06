@@ -1,7 +1,7 @@
 ﻿using eMAS.TerrenosComodatos.Domain.Application;
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Domain.Interfaces;
-using eMAS.TerrenosComodatos.Infrastructure.Repositories;
+using eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

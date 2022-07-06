@@ -12,7 +12,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             if (id == 0)
             {
                 modelo = new BeneficiarioEditViewModel();
-
+                _mapeadores.GenerateEditViewModelEmpty(ref modelo);
             }
             else if (id > 0)
             {
@@ -20,6 +20,9 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             else
             { 
             }
+            
+            resultadoVista.dataresult = modelo;
+
             return resultadoVista;
         }
     }
