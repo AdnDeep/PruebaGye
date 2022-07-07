@@ -6,14 +6,11 @@ namespace eMAS.TerrenosComodatos.Domain.Interfaces
 {
     public interface IGestionRepositorioExternoBeneficiario
     {
-        ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model);
-        ResultadoDTO<string> CrearBeneficiario(BeneficiarioEditViewModel model);
-        ResultadoDTO<string> ActualizarBeneficiario(BeneficiarioEditViewModel model);
+        ResultadoDTO<BeneficiarioEditViewModel> EliminarBeneficiario(short id, string usuario, string controlador, string pcclient);
+        ResultadoDTO<BeneficiarioEditViewModel> CrearBeneficiario(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient);
+        ResultadoDTO<BeneficiarioEditViewModel> ActualizarBeneficiario(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient);
         ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> GetBeneficiarioTodosPaginado(string panelFilter
                     , string resultContainer, int numeroPagina, int numeroFila);
-
-        //ResultadoDTO<Tuple<IList<BeneficiarioListViewModel>, int>> GetBeneficiarioTodosPaginado(string panelFilter
-        //    , string resultContainer, int numeroPagina, int numeroFila);
-        ResultadoDTO<Tuple<BeneficiarioEditViewModel, string, short>> GetBeneficiarioPorId(short id);
+        ResultadoDTO<BeneficiarioEditViewModel> GetBeneficiarioPorId(short id);
     }
 }

@@ -196,7 +196,7 @@ const SMC50001 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnSuccessEditAction
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, null, eMASReferencialJs.ocultarProgress);
     };
 
     const fnGetDataFilter = function () {

@@ -83,23 +83,23 @@ namespace eMAS.Api.TerrenosComodatos.Services
             return puedeContinuar;
         }
 
-        public bool ValidarDatosEliminacionClienteBeneficiario(ref BeneficiarioDeleteViewModel model
+        public bool ValidarDatosEliminacionClienteBeneficiario(short id
              , string usuario, string controlador, string pcclient
             , ref ResultadoDTO<string> salida)
         {
             bool puedeContinuar = false;
-            var parametros = $"ValidadoresBeneficiariosRequest Service Layer Try: Modelo {model}";
+            var parametros = $"ValidadoresBeneficiariosRequest Service Layer Try: Modelo {id}";
             var props = new Dictionary<string, object>(){
                             { "Metodo", "ValidarDatosEliminacionClienteBeneficiario" },
                             { "Sitio", "COMODATO-API" },
                             { "Parametros", parametros }
                     };
 
-            if (model == null)
+            if (id <= 0)
             {
                 using (_logger.BeginScope(props))
                 {
-                    _logger.LogError($"El objeto Respuesta desde el cliente para eliminar es Nulo. (1)");
+                    _logger.LogError($"El Id para eliminar es incorrecto");
                 }
                 
                 salida.mensaje = "No hay datos correctos para eliminar. (1)";

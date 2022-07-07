@@ -42,11 +42,11 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
                 Int16.TryParse(id, out sId);
                 var resultadoCasoUso = _casesUsesBeneficiario.LeerPorId(sId);
 
-                if (resultadoCasoUso.mensaje == "OK")
+                if (resultadoCasoUso.tipo == "EXITO")
                 {
                     editModel = resultadoCasoUso.dataresult;
                     partialEditViewHtml = await this.RenderViewAsync("_EditForm", editModel, true);
-                    response.SetResultadoViewJson(true, "OK", string.Empty, partialEditViewHtml);
+                    response.SetResultadoViewJson(true, "EXITO", string.Empty, partialEditViewHtml);
                 }
                 else
                 {

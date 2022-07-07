@@ -101,7 +101,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
                 lsMensajes.Add(new Mensaje
                 {
-                    codigo = "RESPREPTC",
+                    codigo = "RESPERRSERV",
                     descripcion = $"{entradaAValidar.Item2}",
                     tipo = "ADVERTENCIA"
                 });
@@ -120,7 +120,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 }
                 lsMensajes.Add(new Mensaje
                 {
-                    codigo = "RESPREPTC",
+                    codigo = "RESPERRSERV",
                     descripcion = $"{entradaAValidar.Item2}",
                     tipo = "ADVERTENCIA"
                 });

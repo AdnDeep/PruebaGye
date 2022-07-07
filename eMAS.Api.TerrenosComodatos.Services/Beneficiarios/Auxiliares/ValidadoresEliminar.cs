@@ -55,9 +55,9 @@ namespace eMAS.Api.TerrenosComodatos.Services
             puedeContinuar = true;
             return puedeContinuar;
         }
-        public bool ValidarDatosEliminacionClienteBeneficiario(ref BeneficiarioDeleteViewModel model, ref ResultadoDTO<string> salida)
+        public bool ValidarDatosEliminacionClienteBeneficiario(short id, ref ResultadoDTO<string> salida)
         {
-            var parametros = $"ValidadoresEliminar Service Layer Try: Modelo {model}";
+            var parametros = $"ValidadoresEliminar Service Layer Try: Modelo {id}";
             var props = new Dictionary<string, object>(){
                             { "Metodo", "ValidarDatosEliminacionClienteBeneficiario" },
                             { "Sitio", "COMODATO-API" },
@@ -65,7 +65,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     };
             bool puedeContinuar = false;
             List<Mensaje> lsMensajes = new List<Mensaje>();
-            if (model.id == 0)
+            if (id == 0)
             {
                 using (_logger.BeginScope(props))
                 {

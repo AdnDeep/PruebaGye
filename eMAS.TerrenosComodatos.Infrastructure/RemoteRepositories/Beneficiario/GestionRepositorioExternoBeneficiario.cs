@@ -12,6 +12,11 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
         private readonly string _baseAddress;
         private readonly ILogger<GestionRepositorioExternoBeneficiario> _logger;
         const string methodGetPaged = "api/GestionBeneficiario/ObtenerListadoPorPagina";
+        const string methodGetById = "api/GestionBeneficiario/ObtenerPorId";
+        const string methodPost = "api/GestionBeneficiario/Agregar";
+        const string methodPut = "api/GestionBeneficiario/Actualizar";
+        const string methodDelete = "api/GestionBeneficiario/Eliminar";
+
         private readonly ApiService _clientHttpSvc;
         public GestionRepositorioExternoBeneficiario(ApiService clientHttpSvc
             , IConfiguration configuration

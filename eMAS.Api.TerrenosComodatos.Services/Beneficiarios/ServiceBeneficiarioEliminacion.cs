@@ -25,20 +25,21 @@ namespace eMAS.Api.TerrenosComodatos.Services
             _logger = logger;
         }
 
-        public ResultadoDTO<string> Eliminar(BeneficiarioDeleteViewModel model, string usuario, string controlador, string pcclient)
+        public ResultadoDTO<string> Eliminar(short id, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<string> resultadoVista = new ResultadoDTO<string>();
 
             bool respuestaValidacionCliente = _validadoresEliminacionBeneficiarios
-                                                .ValidarDatosEliminacionClienteBeneficiario(ref model, ref resultadoVista);
+                                                .ValidarDatosEliminacionClienteBeneficiario(id, ref resultadoVista);
             
             if (!respuestaValidacionCliente)
                 return resultadoVista;
 
             SmcBeneficiario _beneficiarioEntidad = new SmcBeneficiario();
-            _mapeadoresEliminacionBeneficiario.MapearBeneficiarioDeleteModelABeneficiario(ref model, ref _beneficiarioEntidad, usuario, controlador, pcclient);
+            _mapeadoresEliminacionBeneficiario
+                .MapearBeneficiarioDeleteModelABeneficiario(id, ref _beneficiarioEntidad, usuario, controlador, pcclient);
 
-            var parametros = $"ServiceBeneficiarioEliminacion Service Layer Try: Modelo {model}";
+            var parametros = $"ServiceBeneficiarioEliminacion Service Layer Try: Modelo {id}";
             var props = new Dictionary<string, object>(){
                                 { "Metodo", "Eliminar" },
                                 { "Sitio", "COMODATO-API" },

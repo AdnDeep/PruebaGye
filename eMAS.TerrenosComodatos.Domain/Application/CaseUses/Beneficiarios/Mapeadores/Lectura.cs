@@ -1,6 +1,7 @@
 ﻿
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
@@ -14,6 +15,13 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         public void GenerateEditViewModelEmpty(ref BeneficiarioEditViewModel model)
         {
             model.id = 0;
+        }
+        public void GenerateEditViewModel(ref ResultadoDTO<BeneficiarioEditViewModel> model
+            , ref ResultadoDTO<BeneficiarioEditViewModel> salida)
+        {
+            salida.tipo = model.tipo;
+            salida.tipo = model.tipo;
+            salida.dataresult = model.dataresult;
         }
     }
 }

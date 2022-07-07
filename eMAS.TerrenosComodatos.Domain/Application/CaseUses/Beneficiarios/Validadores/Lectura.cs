@@ -14,8 +14,27 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         {
             _logger = logger;
         }
+        public bool InputClientGetById(short id, ref ResultadoDTO<BeneficiarioEditViewModel> salida) 
+        {
+            bool puedeContinuar = false;
+            var parametros = $"ValidadoresBeneficiario Service Layer";
+            var props = new Dictionary<string, object>(){
+                                { "Metodo", "InputClientGetById" },
+                                { "Sitio", "COMODATO-WEB" },
+                                { "Parametros", parametros }
+                        };
+            if (id < 0)
+            {
+                salida.mensaje = "La Identificacion del Beneficiario especificada es incorrecta.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+            puedeContinuar = true;
+            return puedeContinuar;
+        }
         public bool InputClientGetPagedData(string panelFilter
-            , string resultContainer, int numeroPagina, int numeroFila, ref ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> salida)
+            , string resultContainer, int numeroPagina, int numeroFila
+            , ref ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> salida)
         {
             bool puedeContinuar = false;
             var parametros = $"ValidadoresBeneficiario Service Layer";
@@ -28,7 +47,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             if (string.IsNullOrEmpty(panelFilter) || string.IsNullOrWhiteSpace(panelFilter))
             {
                 salida.mensaje = "Input Request Incorrecta, el objeto está vacío panelFilter";
-                salida.tipo = "ERROR";
+                salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
             try
@@ -52,8 +71,8 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"Input Request Incorrecta, el objeto está vacío resultContainer");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo (1).";
-                salida.tipo = "ERROR";
+                salida.mensaje = "Se produjo un error en el aplicativo (2).";
+                salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
 

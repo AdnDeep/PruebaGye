@@ -11,10 +11,10 @@ namespace eMAS.Api.TerrenosComodatos.Services
         public MapeadoresEliminacionBeneficiario()
         { 
         }
-        public void MapearBeneficiarioDeleteModelABeneficiario(ref BeneficiarioDeleteViewModel entrada, ref SmcBeneficiario salida
+        public void MapearBeneficiarioDeleteModelABeneficiario(short id, ref SmcBeneficiario salida
             , string usuario, string controlador, string pcclient)
         {
-            salida.IdBeneficiario = entrada.id;
+            salida.IdBeneficiario = id;
             salida.PdpEstado = false;
             salida.PdpUsuarioUltimaModificacion = usuario;
             salida.PdpFechaUltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));

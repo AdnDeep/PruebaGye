@@ -25,9 +25,5 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             throw new System.NotImplementedException();
         }
 
-        public ResultadoDTO<BeneficiarioEditViewModel> GrabarBeneficiario(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

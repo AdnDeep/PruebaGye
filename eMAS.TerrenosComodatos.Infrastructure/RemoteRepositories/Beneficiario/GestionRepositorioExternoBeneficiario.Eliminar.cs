@@ -8,18 +8,18 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 {
     public partial class GestionRepositorioExternoBeneficiario : IGestionRepositorioExternoBeneficiario
     {
-        public ResultadoDTO<BeneficiarioEditViewModel> GetBeneficiarioPorId(short id)
+        public ResultadoDTO<BeneficiarioEditViewModel> EliminarBeneficiario(short id, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<BeneficiarioEditViewModel> resultado = new ResultadoDTO<BeneficiarioEditViewModel>();
-            string parameters = string.Format("?id={0}", id);
+            string parameters = string.Format("?id={0}&usuario={1}&controlador={2}&pcclient={3}", id, usuario, controlador, pcclient);
 
-            string urlResource = string.Concat(methodGetById, parameters);
+            string urlResource = string.Concat(methodPost, parameters);
 
             // Consume Método de Api Service
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
-                                                    .GetAsync(_baseAddress, "", urlResource)).Result;
+                                                    .DeleteAsync(_baseAddress, "", urlResource)).Result;
             // Procesa Respuesta
-            ProcesaRespuestaServidorRemoto<BeneficiarioEditViewModel>(ref resultadoRepositorioExterno, "GetBeneficiarioPorId", ref resultado);
+            ProcesaRespuestaServidorRemoto<BeneficiarioEditViewModel>(ref resultadoRepositorioExterno, "EliminarBeneficiario", ref resultado);
 
             return resultado;
         }

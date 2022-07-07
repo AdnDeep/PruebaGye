@@ -76,14 +76,14 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
         [HttpDelete]
         [Route("Eliminar")]
-        public ActionResult<ResultadoDTO<BeneficiarioEditViewModel>> Eliminar(BeneficiarioDeleteViewModel model, string usuario, string controlador, string pcclient)
+        public ActionResult<ResultadoDTO<BeneficiarioEditViewModel>> Eliminar(short id, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<string> respuesta = new ResultadoDTO<string>();
 
-            if (!(_validadoresRequest.ValidarDatosEliminacionClienteBeneficiario(ref model, usuario, controlador, pcclient, ref respuesta)))
+            if (!(_validadoresRequest.ValidarDatosEliminacionClienteBeneficiario(id, usuario, controlador, pcclient, ref respuesta)))
                 return BadRequest(respuesta);
 
-            respuesta = _serviceBeneficiarioEliminacion.Eliminar(model, usuario, controlador, pcclient);
+            respuesta = _serviceBeneficiarioEliminacion.Eliminar(id, usuario, controlador, pcclient);
 
             return Ok(respuesta);
         }

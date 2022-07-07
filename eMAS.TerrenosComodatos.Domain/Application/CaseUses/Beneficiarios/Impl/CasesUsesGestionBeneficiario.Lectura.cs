@@ -9,19 +9,32 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         {
             BeneficiarioEditViewModel modelo = null;
             ResultadoDTO<BeneficiarioEditViewModel> resultadoVista = new ResultadoDTO<BeneficiarioEditViewModel>();
+
+            bool respValCli = _validadores.InputClientGetById(id, ref resultadoVista);
+
+            if (!respValCli)
+                return resultadoVista;
+
             if (id == 0)
             {
                 modelo = new BeneficiarioEditViewModel();
+
                 _mapeadores.GenerateEditViewModelEmpty(ref modelo);
+
+                resultadoVista.dataresult = modelo;
             }
             else if (id > 0)
             {
+                var respRepExterno = _repositorioExterno.GetBeneficiarioPorId(id);
+
+                bool respValServ = _validadores.RespuestaServidorRemotoById(ref respRepExterno, ref resultadoVista);
+
+                if (!respValServ)
+                    return resultadoVista;
+
+                _mapeadores.GenerateEditViewModel(ref respRepExterno, ref resultadoVista);
             }
-            else
-            { 
-            }
-            
-            resultadoVista.dataresult = modelo;
+
 
             return resultadoVista;
         }

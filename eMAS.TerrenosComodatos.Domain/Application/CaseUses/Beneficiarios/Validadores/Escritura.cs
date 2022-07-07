@@ -11,7 +11,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         public bool DataClienteEscritura(ref BeneficiarioEditViewModel entrada, ref ResultadoDTO<int> salida)
         {
             bool puedeContinuar = false;
-            salida.mensaje = "OK";
+            salida.tipo = "EXITO";
             salida.mensaje = "OK";
             if (entrada == null)
             {
