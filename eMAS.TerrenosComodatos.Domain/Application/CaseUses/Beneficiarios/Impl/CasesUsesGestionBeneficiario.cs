@@ -20,10 +20,6 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             _mapeadores = mapeadores;
             _logger = logger;
         }
-        public ResultadoDTO<string> EliminarBeneficiario(BeneficiarioDeleteViewModel model, string usuario, string controlador, string pcclient)
-        {
-            throw new System.NotImplementedException();
-        }
 
     }
 }

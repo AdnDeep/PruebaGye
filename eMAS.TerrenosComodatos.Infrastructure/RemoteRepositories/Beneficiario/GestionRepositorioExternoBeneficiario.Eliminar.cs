@@ -13,7 +13,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
             ResultadoDTO<BeneficiarioEditViewModel> resultado = new ResultadoDTO<BeneficiarioEditViewModel>();
             string parameters = string.Format("?id={0}&usuario={1}&controlador={2}&pcclient={3}", id, usuario, controlador, pcclient);
 
-            string urlResource = string.Concat(methodPost, parameters);
+            string urlResource = string.Concat(methodDelete, parameters);
 
             // Consume Método de Api Service
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc

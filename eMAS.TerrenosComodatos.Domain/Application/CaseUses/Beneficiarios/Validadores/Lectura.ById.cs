@@ -63,7 +63,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                     return puedeContinuar;
                 }
             }
-            if (entrada.dataresult == null)
+            if (entrada.dataresult == null && entrada.tipo != "EXITO")
             {
                 using (_logger.BeginScope(props))
                 {

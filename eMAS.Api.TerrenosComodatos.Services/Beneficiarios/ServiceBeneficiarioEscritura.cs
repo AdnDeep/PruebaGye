@@ -30,6 +30,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
         public ResultadoDTO<BeneficiarioEditViewModel> Agregar(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<BeneficiarioEditViewModel> resultadoVista = new ResultadoDTO<BeneficiarioEditViewModel>();
+
             // Validar datos de request
             bool respuestaValidacion = _validadoresEscrituraBeneficiarios
                 .ValidarDatosClienteBeneficiarioEditViewModel(ref model, ref resultadoVista);

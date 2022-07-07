@@ -13,6 +13,8 @@ namespace eMAS.Api.TerrenosComodatos.Services
         public ResultadoDTO<BeneficiarioEditViewModel> Actualizar(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<BeneficiarioEditViewModel> resultadoVista = new ResultadoDTO<BeneficiarioEditViewModel>();
+            BeneficiarioEditViewModel modelo = new BeneficiarioEditViewModel();
+            resultadoVista.dataresult = modelo;
             // Validar datos de request
             bool respuestaValidacion = _validadoresEscrituraBeneficiarios
                 .ValidarDatosClienteBeneficiarioEditViewModel(ref model, ref resultadoVista);

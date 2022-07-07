@@ -82,7 +82,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         [HttpPost]
         public IActionResult EditDelete(BeneficiarioDeleteViewModel modelEdit)
         {
-            ResultadoDTO<string> response = new ResultadoDTO<string>();
+            ResultadoDTO<BeneficiarioEditViewModel> response = new ResultadoDTO<BeneficiarioEditViewModel>();
             try
             {
                 response = _casesUsesBeneficiario.EliminarBeneficiario(modelEdit, "test", "SMC50001", "WEBCLIENT");

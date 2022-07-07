@@ -25,6 +25,7 @@ const SMC50001 = function () {
     };
 
     const fnRespuestaGuardarRegistro = function (response) {
+        debugger;
         if (response == null || response == undefined) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No se obtuvo una respuesta correcta del Aplicativo.");
             return;
@@ -35,29 +36,36 @@ const SMC50001 = function () {
         } else {            
             eMASReferencialJs.SetearMensajeDefaultExito("Se guardó el registro con éxito.");
             fnDestruirFormularioEdicion();
-            fnRespuestaGuardarRegistro2(response.mensajes);
+            fnRespuestaGuardarRegistro2("DataListadoBeneficiarios");
             eMASReferencialJs.FormSetVisibilityPanel(true);
             eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios");
             return;
         }
     };
     // Reconsulta en caso de Actualizaciones o datos
-    const fnRespuestaGuardarRegistro2 = function (responseMensajes) {
-        if (responseMensajes == null || responseMensajes == undefined) {
-            console.log("No hay mensajes en la respuesta.");
-            return;
-        }
-        let objIdClave = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo : "CLAVEID" });
-        if (objIdClave == undefined || objIdClave == null) {
-            console.log("No se encontró la clave interna CLAVEID.");
-            return;
-        }
-        if (!(objIdClave.descripcion == null || objIdClave.descripcion == undefined)) {
-            let idclave = parseInt(objIdClave.descripcion);
-            if (idclave > 0) {
-                fnBtnConsultar(1);
+    const fnRespuestaGuardarRegistro2 = function (tableName) {
+        let dataConsulta = $("#" + tableName).bootstrapTable('getOptions');
+        if (!(dataConsulta == null && dataConsulta == undefined)) {
+            if (dataConsulta.totalRows != undefined) {
+                if (dataConsulta.totalRows > 0) 
+                    fnBtnConsultar(1);
             }
         }
+        //if (responseMensajes == null || responseMensajes == undefined) {
+        //    console.log("No hay mensajes en la respuesta.");
+        //    return;
+        //}
+        //let objIdClave = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo : "CLAVEID" });
+        //if (objIdClave == undefined || objIdClave == null) {
+        //    console.log("No se encontró la clave interna CLAVEID.");
+        //    return;
+        //}
+        //if (!(objIdClave.descripcion == null || objIdClave.descripcion == undefined)) {
+        //    let idclave = parseInt(objIdClave.descripcion);
+        //    if (idclave > 0) {
+        //        fnBtnConsultar(1);
+        //    }
+        //}
             
     };
 
@@ -94,7 +102,7 @@ const SMC50001 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnRespuestaGuardarRegistro
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     };
 
     const fnEliminarRegistro = function () {
@@ -119,7 +127,7 @@ const SMC50001 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnRespuestaEliminarRegistro
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     };
 
     const EvtCancelarFormulario = function () {
@@ -196,7 +204,7 @@ const SMC50001 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnSuccessEditAction
-        }, function () { eMASReferencialJs.ocultarProgress(); }, null, eMASReferencialJs.ocultarProgress);
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     };
 
     const fnGetDataFilter = function () {
@@ -342,7 +350,7 @@ const SMC50001 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnSuccessEditAction
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     }
 
     const inicializacionPanel = function () {
