@@ -277,7 +277,7 @@ const SMC50002 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnPagedDataFromControllerListTramites
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     };
 
     const EvtBtnConsultar = function () {
@@ -350,6 +350,7 @@ const SMC50002 = function () {
 
     const cargaDatosCombosPanel = function () {
         let arr = [];
+
         arr.push({ key: dsrBeneficiarios, ctrl: "nombre-beneficiario", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"});
         arr.push({ key: dsrEstados, ctrl: "estado", ruta: "Comodatos/SMC50002/GetDataDsrGeneric" });
         eMASReferencialJs.CargarCombosGenerico(arr);

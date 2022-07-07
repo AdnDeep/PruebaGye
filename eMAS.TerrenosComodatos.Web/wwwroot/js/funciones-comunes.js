@@ -891,6 +891,10 @@ eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
         console.log("Respuesta incorrecta del servidor CargarCombosGenerico (2)");
         return;
     }
+    if (data.key == "ERROR") {
+        console.log(data.target);
+        return;
+    }
     if (!(data.datasource == null || data.datasource == undefined)) {
         let itemCtrlSelect = document.querySelector(`#${data.target}`);
         if (!(itemCtrlSelect == undefined || itemCtrlSelect == null)) {

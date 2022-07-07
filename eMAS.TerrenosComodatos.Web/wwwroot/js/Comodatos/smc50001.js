@@ -51,22 +51,6 @@ const SMC50001 = function () {
                     fnBtnConsultar(1);
             }
         }
-        //if (responseMensajes == null || responseMensajes == undefined) {
-        //    console.log("No hay mensajes en la respuesta.");
-        //    return;
-        //}
-        //let objIdClave = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo : "CLAVEID" });
-        //if (objIdClave == undefined || objIdClave == null) {
-        //    console.log("No se encontró la clave interna CLAVEID.");
-        //    return;
-        //}
-        //if (!(objIdClave.descripcion == null || objIdClave.descripcion == undefined)) {
-        //    let idclave = parseInt(objIdClave.descripcion);
-        //    if (idclave > 0) {
-        //        fnBtnConsultar(1);
-        //    }
-        //}
-            
     };
 
     const fnGuardarRegistro = function () {

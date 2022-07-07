@@ -36,7 +36,7 @@ $(function() {
 		let rutaBase = _appConfig.RutaBase;
 		rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
 		let url = rutaBase + _area + "/" + _controlador + "/Index";
-
+		
 		let title = this.title;
 
 		var appInsights = function (a) {

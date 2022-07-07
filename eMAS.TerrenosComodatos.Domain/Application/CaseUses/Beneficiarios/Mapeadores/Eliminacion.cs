@@ -11,7 +11,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             , ref ResultadoDTO<BeneficiarioEditViewModel> salida)
         {
             salida.tipo = model.tipo;
-            salida.tipo = model.tipo;
+            salida.mensaje = model.mensaje;
             salida.dataresult = model.dataresult;
         }
     }

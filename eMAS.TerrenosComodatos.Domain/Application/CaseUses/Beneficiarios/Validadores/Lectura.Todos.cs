@@ -31,16 +31,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            if (entrada.dataresult == null)
-            {
-                using (_logger.BeginScope(props))
-                {
-                    _logger.LogError($"La respuesta desde el servidor es un objeto nulo [2].");
-                }
-                salida.mensaje = "Se produjo un error en el aplicativo [2].";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
+            
             if (string.IsNullOrEmpty(entrada.tipo) || string.IsNullOrWhiteSpace(entrada.tipo))
             {
                 using (_logger.BeginScope(props))
@@ -48,6 +39,17 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                     _logger.LogError($"El tipo de respuesta desde el servidor es de tipo incorrecto.");
                 }
                 salida.mensaje = "Se produjo un error en el aplicativo [3].";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+
+            if (entrada.dataresult == null && entrada.tipo != "EXITO")
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"El resultado del objeto respuesta desde el servidor es un objeto nulo [4].");
+                }
+                salida.mensaje = "Se produjo un error en el aplicativo [4].";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }

@@ -6,6 +6,6 @@ namespace eMAS.TerrenosComodatos.Domain.Interfaces
 {
     public interface IGestionRepositorioExternoGenerico
     {
-        ResultadoDTO<Tuple<List<KeyValueSelect>, string>> ObtenerListadoGenerico(string keyparam);
+        ResultadoDTO<StructKeyValueSelect> ObtenerListadoGenerico(string keyparam, string target);
     }
 }
