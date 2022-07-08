@@ -35,7 +35,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             , int numeroPagina = 1
             , int tamanioPagina = 5)
         {
-            ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> resultadoVista = new ResultadoDTO<DataPagineada<BeneficiarioListViewModel>>();
+            ResultadoDTO<DataPagineada<TramiteListViewModel>> resultadoVista = new ResultadoDTO<DataPagineada<TramiteListViewModel>>();
 
             resultadoVista = _casesUsesTramite.LeerTodosPaginado(data, resultContainer, numeroPagina, tamanioPagina);
 

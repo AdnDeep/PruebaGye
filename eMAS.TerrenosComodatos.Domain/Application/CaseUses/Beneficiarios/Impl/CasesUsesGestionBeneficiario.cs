@@ -20,6 +20,5 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             _mapeadores = mapeadores;
             _logger = logger;
         }
-
     }
 }

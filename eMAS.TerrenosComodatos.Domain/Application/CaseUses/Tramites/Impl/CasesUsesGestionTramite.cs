@@ -1,17 +1,24 @@
 ﻿using eMAS.TerrenosComodatos.Domain.DTOs;
+using eMAS.TerrenosComodatos.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
-    public class CasesUsesGestionTramite : ICasesUsesGestionTramite
+    public partial class CasesUsesGestionTramite : ICasesUsesGestionTramite
     {
-        public ResultadoDTO<BeneficiarioEditViewModel> LeerPorId(short id)
+        private readonly IGestionRepositorioExternoTramite _repositorioExterno;
+        private readonly ValidadoresTramite _validadores;
+        private readonly MapeadoresTramite _mapeadores;
+        private readonly ILogger<CasesUsesGestionTramite> _logger;
+        public CasesUsesGestionTramite(ILogger<CasesUsesGestionTramite> logger
+            , MapeadoresTramite mapeadores
+            , ValidadoresTramite validadores
+            , IGestionRepositorioExternoTramite repositorioExterno)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> LeerTodosPaginado(string dataPanel, string resultContainer, int numeroPagina, int numeroFila)
-        {
-            throw new System.NotImplementedException();
+            _repositorioExterno = repositorioExterno;
+            _validadores = validadores;
+            _mapeadores = mapeadores;
+            _logger = logger;
         }
     }
 }

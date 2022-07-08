@@ -1,20 +1,29 @@
 ﻿using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Domain.Interfaces;
-using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 {
-    public class GestionRepositorioExternoTramite : IGestionRepositorioExternoTramite
+    public partial class GestionRepositorioExternoTramite : IGestionRepositorioExternoTramite
     {
-        public ResultadoDTO<Tuple<TramiteEditViewModel, string, short>> GetTramitePorId(short id)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly string _baseAddress;
+        private readonly ILogger<GestionRepositorioExternoTramite> _logger;
+        const string methodGetPaged = "api/GestionTramite/ObtenerListadoPorPagina";
+        const string methodGetById = "api/GestionTramite/ObtenerPorId";
+        const string methodPost = "api/GestionTramite/Agregar";
+        const string methodPut = "api/GestionTramite/Actualizar";
+        const string methodDelete = "api/GestionTramite/Eliminar";
 
-        public ResultadoDTO<Tuple<List<TramiteListViewModel>, int>> GetTramitesVistaTodosPaginado(TramitePanelFilterViewModel panelModel, int numeroPagina, int numeroFilas)
+        private readonly ApiService _clientHttpSvc;
+        public GestionRepositorioExternoTramite(ApiService clientHttpSvc
+            , IConfiguration configuration
+            , ILogger<GestionRepositorioExternoTramite> logger)
         {
-            throw new NotImplementedException();
+            _logger = logger;
+            _baseAddress = configuration["ApiComodato:ApiBaseAddress"];
+            _clientHttpSvc = clientHttpSvc;
         }
     }
 }

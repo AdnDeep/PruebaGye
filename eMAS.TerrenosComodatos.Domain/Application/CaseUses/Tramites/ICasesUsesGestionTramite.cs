@@ -4,8 +4,8 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public interface ICasesUsesGestionTramite
     {
-        ResultadoDTO<DataPagineada<BeneficiarioListViewModel>> LeerTodosPaginado(string dataPanel, string resultContainer, int numeroPagina, int numeroFila);
+        ResultadoDTO<DataPagineada<TramiteListViewModel>> LeerTodosPaginado(string dataPanel, string resultContainer, int numeroPagina, int numeroFila);
 
-        ResultadoDTO<BeneficiarioEditViewModel> LeerPorId(short id);
+        ResultadoDTO<TramiteEditViewModel> LeerPorId(short id);
     }
 }
