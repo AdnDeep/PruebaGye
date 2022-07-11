@@ -32,9 +32,11 @@ namespace eMAS.TerrenosComodatos.Web
             // Mapeadores
             services.AddTransient<MapeadoresBeneficiario>();
             services.AddTransient<MapeadoresGenerico>();
+            services.AddTransient<MapeadoresTramite>();
             // Validadores
             services.AddTransient<ValidadoresBeneficiario>();
             services.AddTransient<ValidadoresGenerico>();
+            services.AddTransient<ValidadoresTramite>();
             // Repositorios
             services.AddTransient<IGestionRepositorioExternoTramite, GestionRepositorioExternoTramite>();
             services.AddTransient<IGestionRepositorioExternoGenerico, GestionRepositorioExternoGenerico>();

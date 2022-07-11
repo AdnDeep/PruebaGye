@@ -1,4 +1,16 @@
-﻿a.navbar-brand {
+﻿/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -85,6 +97,14 @@ select.ctrl-select {
     padding: 0;
 }
 
+table button.btn {
+    border-radius: 8px;
+}
+
+.btn.btn-primary {
+    background-color: #3d80ba;
+}
+
 button.commands > * {
     margin: 0 0.5em;
 }
@@ -93,6 +113,10 @@ button.commands > * {
     max-width: 60em;
     margin: 0 auto;
 }
+.consult-ls .row {
+    margin:0;
+}
+
 .container-form > * {
     padding-bottom: 1em;
 }
@@ -110,6 +134,26 @@ button.commands > * {
         margin: 0.3em 0;
         width: 100%;
     }
+
+
+#TramiteTabContainer {
+    margin: 10px;
+    height: 28rem;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+.nav-tabs {
+    margin: 0;
+}
+
+.tab-content {
+    height: 100%;
+    padding:1rem;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
 
 /*Inicio Panel de Filtros*/
 .wrapper-panel {

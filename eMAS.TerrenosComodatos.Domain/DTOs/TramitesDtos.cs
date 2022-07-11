@@ -5,17 +5,17 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
     public class TramitePanelFilterViewModel
     {
-        public short anioexp { get; set; }
+        public short? anioexp { get; set; } = 0;
         public string secexp { get; set; }
-        public short idbeneficiario { get; set; }
-        public short sector { get; set; }
-        public short manzana { get; set; }
-        public short lote { get; set; }
-        public short division { get; set; }
-        public short phv { get; set; }
-        public short phh { get; set; }
-        public short numero { get; set; }
-        public short idestado { get; set; }
+        public short? idbeneficiario { get; set; } = 0;
+        public short? sector { get; set; } = 0;
+        public short? manzana { get; set; } = 0;
+        public short? lote { get; set; } = 0;
+        public short? division { get; set; } = 0;
+        public short? phv { get; set; } = 0;
+        public short? phh { get; set; } = 0;
+        public short? numero { get; set; } = 0;
+        public short? idestado { get; set; } = 0;
     }
     public class TramiteListViewModel
     {

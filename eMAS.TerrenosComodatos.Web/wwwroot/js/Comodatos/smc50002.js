@@ -124,15 +124,13 @@ const SMC50002 = function () {
         }, function () { eMASReferencialJs.ocultarProgress(); });
     };
 
+
+
+
+    */
     const EvtCancelarFormulario = function () {
         eMASReferencialJs.FormSetVisibilityPanel(true);
-        eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios")
-        fnDestruirFormularioEdicion();
-    };
-
-    const EvtRegresarFormulario = function () {
-        eMASReferencialJs.FormSetVisibilityPanel(true, "DataListadoBeneficiarios");
-        eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios")
+        eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoTramites")
         fnDestruirFormularioEdicion();
     };
 
@@ -143,14 +141,15 @@ const SMC50002 = function () {
     const EvtEliminarFormularo = function () {
         fnEliminarRegistro();
     };
-
-    
-
+    const EvtRegresarFormulario = function () {
+        eMASReferencialJs.FormSetVisibilityPanel(true, "DataListadoTramites");
+        eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoTramites")
+        fnDestruirFormularioEdicion();
+    };
     const fnDestruirFormularioEdicion = function () {
         let frmEdit = document.querySelector('.form-edit-container')
         while (frmEdit.firstChild) frmEdit.removeChild(frmEdit.firstChild);
     };
-
     const fnEditarElemento = function (id) {
         if (id == null || id == undefined) {
             console.log("No hay ningún código de Registro");
@@ -172,36 +171,46 @@ const SMC50002 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnSuccessEditAction
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
+    };
+
+    const EvtClickEditarElemento = function (id) {
+        let codigoB = id;
+        fnEditarElemento(codigoB);
     };
 
     const fnGetDataFilter = function () {
-        let _name = document.getElementById("name").value;
-        let _representativeName = document.getElementById("representative-name").value;
-        let _ruc = document.getElementById("ruc").value;
-        let _contacto = document.getElementById("contacto").value;
+        let _expAnio = document.getElementById("exp-anio").value ?? 0;
+        let _expSecuencial = document.getElementById("exp-secuencial").value ?? 0;
+        let _nombreBeneficiario = document.getElementById("nombre-beneficiario").value ?? 0;
+
+        let _sector = document.getElementById("sector").value ?? 0;
+        let _manzana = document.getElementById("manzana").value ?? 0;
+        let _lote = document.getElementById("lote").value ?? 0;
+        let _division = document.getElementById("division").value ?? 0;
+        let _phv = document.getElementById("phv").value ?? 0;
+        let _phh = document.getElementById("phh").value ?? 0;
+        let _numero = document.getElementById("numero").value ?? 0;
+        let _estado = document.getElementById("estado").value ?? 0;
 
         let dataFilter = {
-            nombre: _name,
-            representante: _representativeName,
-            ruc: _ruc,
-            contacto: _contacto
+            anioexp: _expAnio,
+            secexp: _expSecuencial,
+            idbeneficiario: _nombreBeneficiario,
+            sector: _sector,
+            manzana: _manzana,
+            lote: _lote,
+            division: _division,
+            phv: _phv,
+            phh: _phh,
+            numero: _numero,
+            idestado: _estado
         };
         let sData = JSON.stringify(dataFilter);
 
         return sData;
     };
 
-    const EvtClickEditarElemento = function (e, row, $element) {
-        let codigoB = row['id'];
-        fnEditarElemento(codigoB);
-    };
-
-    const SetearEventosDataGridListado = function () {
-        $('#DataListadoBeneficiarios').off('click-row.bs.table').on('click-row.bs.table', EvtClickEditarElemento);
-    };
-
-    */
     const fnSetearEvtFormulario = function () {
         eMASReferencialJs.SetearEvtFormularioGenerico(EvtRegresarFormulario, EvtCancelarFormulario, EvtGuardarFormulario, EvtEliminarFormularo);
     };
@@ -224,7 +233,6 @@ const SMC50002 = function () {
 
         let DataInfoConsult = $("#" + response.dataresult.resultcontainer);
         DataInfoConsult.bootstrapTable('destroy');
-        DataInfoConsult.bootstrapTable();
         let data = [];
         if (response.dataresult.data == null || response.dataresult == undefined) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No hay datos para la consulta seleccionada.");
@@ -237,15 +245,28 @@ const SMC50002 = function () {
 
         for (let i = 0; i < response.dataresult.data.length; i++) {
             data.push({
-                nombre: response.dataresult.data[i].nombre,
+                anioexp: response.dataresult.data[i].anioexp,
+                secexp: response.dataresult.data[i].secexp,
+                beneficiario: response.dataresult.data[i].beneficiario,
                 ruc: response.dataresult.data[i].ruc,
-                representante: response.dataresult.data[i].representante,
-                contacto: response.dataresult.data[i].contacto,
+                codigoCatastral: response.dataresult.data[i].codigoCatastral,
                 id: response.dataresult.data[i].id
             });
         }
-        DataInfoConsult.bootstrapTable("load", data);
-        SetearEventosDataGridListado();
+
+        DataInfoConsult.bootstrapTable({
+            data: data,
+            columns: [{
+                field: 'actions',
+                title: 'Acciones',
+                align: 'center',
+                valign: 'middle',
+                clickToSelect: false,
+                formatter: function (value, row, index) {
+                    return '<button type="button" onclick="objSMC50002.BtnEditRowItem(' + row.id + ');" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button> ';
+                }
+            }, {}, {}, {}, {}, {}, {}]
+        });
 
         eMASReferencialJs.SetearPlantillaPagineo("objSMC50002.BtnConsultar", "pagineoListadoTramites", response.dataresult.totalpaginas, response.dataresult.paginaactual);
 
@@ -345,7 +366,7 @@ const SMC50002 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnSuccessEditAction
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     }
 
     const cargaDatosCombosPanel = function () {
@@ -357,7 +378,7 @@ const SMC50002 = function () {
     };
 
     const inicializacionPanel = function () {
-        eMASReferencialJs.InicializarPanelGenerico("panelFilterTramites", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar);
+        eMASReferencialJs.InicializarPanelGenerico("panelFilterTramite", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar, "DataListadoTramites");
         // Carga Datos Comboboxes
         cargaDatosCombosPanel();
     };
@@ -368,6 +389,9 @@ const SMC50002 = function () {
         },
         BtnConsultar: function (numeroPagina) {
             fnBtnConsultar(numeroPagina);
+        },
+        BtnEditRowItem: function (id) {
+            EvtClickEditarElemento(id);
         }
     };
 }

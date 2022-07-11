@@ -9,4 +9,8 @@
     <ProjectReference Include="..\eMAS.TerrenosComodatos.Infrastructure\eMAS.TerrenosComodatos.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Comodatos\Views\SMC50002\TabPanel\" />
+  </ItemGroup>
+
 </Project>

@@ -15,7 +15,7 @@ const SMC50001 = function () {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
             return;
         } else {
-            eMASReferencialJs.SetearMensajeDefaultExito("Se eliminó el registro con éxito.");
+            eMASReferencialJs.SetearMensajeDefaultExito("Se elimin&oacute; el registro con &eacute;xito.");
             fnDestruirFormularioEdicion();
             fnBtnConsultar(1);
             eMASReferencialJs.FormSetVisibilityPanel(true);
@@ -34,7 +34,7 @@ const SMC50001 = function () {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
             return;
         } else {            
-            eMASReferencialJs.SetearMensajeDefaultExito("Se guardó el registro con éxito.");
+            eMASReferencialJs.SetearMensajeDefaultExito("Se guard&oacute; el registro con &eacute;xito.");
             fnDestruirFormularioEdicion();
             fnRespuestaGuardarRegistro2("DataListadoBeneficiarios");
             eMASReferencialJs.FormSetVisibilityPanel(true);
@@ -208,14 +208,18 @@ const SMC50001 = function () {
         return sData;
     };
 
-    const EvtClickEditarElemento = function (e, row, $element) {
-        let codigoB = row['id'];
+    //const EvtClickEditarElemento = function (e, row, $element) {
+    //    let codigoB = row['id'];
+    //    fnEditarElemento(codigoB);
+    //};
+    const EvtClickEditarElemento = function (id) {
+        let codigoB = id;
         fnEditarElemento(codigoB);
     };
 
-    const SetearEventosDataGridListado = function () {
-        $('#DataListadoBeneficiarios').off('click-row.bs.table').on('click-row.bs.table', EvtClickEditarElemento);
-    };
+    //const SetearEventosDataGridListado = function () {
+    //    //$('#DataListadoBeneficiarios').off('click-row.bs.table').on('click-row.bs.table', EvtClickEditarElemento);
+    //};
 
     const fnPagedDataFromControllerListBeneficiarios = function (response) {
         
@@ -238,7 +242,7 @@ const SMC50001 = function () {
 
         let DataInfoConsult = $("#" + response.dataresult.resultcontainer);
         DataInfoConsult.bootstrapTable('destroy');
-        DataInfoConsult.bootstrapTable();
+        //DataInfoConsult.bootstrapTable();
         let data = [];
         if (response.dataresult.data == null || response.dataresult == undefined) {
             console.log("No hay datos Listado (2)");
@@ -259,8 +263,21 @@ const SMC50001 = function () {
                 id: response.dataresult.data[i].id
             });
         }
-        DataInfoConsult.bootstrapTable("load", data);
-        SetearEventosDataGridListado();
+        DataInfoConsult.bootstrapTable({
+            data: data,
+            columns: [{
+                field: 'actions',
+                title: 'Acciones',
+                align: 'center',
+                valign: 'middle',
+                clickToSelect: false,
+                formatter: function (value, row, index) {
+                    return '<button type="button" onclick="objSMC50001.BtnEditRowItem(' + row.id +');" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button> ';
+                }
+            }, {}, {}, {}, {}, {}]
+        });
+
+        //SetearEventosDataGridListado();
             
         eMASReferencialJs.SetearPlantillaPagineo("objSMC50001.BtnConsultar", "pagineoListadoBeneficiarios", response.dataresult.totalpaginas, response.dataresult.paginaactual);
 
@@ -338,7 +355,7 @@ const SMC50001 = function () {
     }
 
     const inicializacionPanel = function () {
-        eMASReferencialJs.InicializarPanelGenerico("panelFilterBeneficiario", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar);
+        eMASReferencialJs.InicializarPanelGenerico("panelFilterBeneficiario", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar, "DataListadoBeneficiarios");
     };
 
     return {
@@ -347,6 +364,9 @@ const SMC50001 = function () {
         },
         BtnConsultar: function (numeroPagina) {
             fnBtnConsultar(numeroPagina);
+        },
+        BtnEditRowItem: function (id) {
+            EvtClickEditarElemento(id);
         }
     };
 }

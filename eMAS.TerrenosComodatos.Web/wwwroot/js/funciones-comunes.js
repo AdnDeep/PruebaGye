@@ -22,9 +22,9 @@ eMASReferencialJs.Exito = {
 };
 
 eMASReferencialJs.Error = {
-    ErrorGeneral: 'Se presento un error en la aplicación, por favor comuniquese con la Dirección de Informática.',
-    ErrorPlanificacionCargo: 'No podra actualizar el registro porque existe al menos un empleado asignado en la planificación.',
-    ErrorFaltaIdentificacion: 'Debe escribir un número de identificación para buscar.',
+    ErrorGeneral: 'Se presento un error en la aplicaci&oacute;n, por favor comun&iacute;quese con la Direcci&oacute;n de Inform&aacute;tica.',
+    ErrorPlanificacionCargo: 'No podra actualizar el registro porque existe al menos un empleado asignado en la planificaci&oacute;n.',
+    ErrorFaltaIdentificacion: 'Debe escribir un número de identificaci&oacute;n para buscar.',
     ErrorPerderCambios: 'Se perderan todos los cambios realizados </br> ¿Desea continuar?'
 };
 
@@ -517,7 +517,7 @@ eMASReferencialJs.Ajax = function (request, failFunction, typeMessage, alwaysFun
 		var texto = '';
 		if (response.status === 403 || response.status === 401) {
 			eMASReferencialJs.ocultarProgress();
-			texto = "<span>Su sesión ha caducado, para volver a iniciar presione </span><a href='" + eMASReferencialJs.serverPath + "'><b>Aquí</b></a>";
+            texto = "<span>Su sesi&oacute;n ha caducado, para volver a iniciar presione </span><a href='" + eMASReferencialJs.serverPath + "'><b>Aqu&iacute;</b></a>";
             eMASReferencialJs.mostrarMensajes("Sesión", eMASReferencialJs.tipoMensaje.Advertencia, [{ Description: texto }], []);
 		}
 		else {
@@ -550,13 +550,25 @@ eMASReferencialJs.Ajax = function (request, failFunction, typeMessage, alwaysFun
 
 // General Formularios Configuración
 
-eMASReferencialJs.SetearEventosPanel = function () {
+eMASReferencialJs.SetearEventosPanel = function (dataLsTable) {
     $('.panel-collapse').on('show.bs.collapse', function () {
         $(this).siblings('.panel-heading').addClass('active');
+        let dataToggle = document.querySelector(".consult-ls");
+        if (dataToggle != undefined)
+            dataToggle.style.display = "none";
     });
 
     $('.panel-collapse').on('hide.bs.collapse', function () {
         $(this).siblings('.panel-heading').removeClass('active');
+        let dataToggle = document.querySelector(".consult-ls");
+        if (dataToggle != undefined) {
+            let dataConsulta = $("#" + dataLsTable).bootstrapTable('getOptions');
+            if (!(dataConsulta == null && dataConsulta == undefined)) {
+                if (dataConsulta.totalRows > 0) {
+                    dataToggle.style.display = "block";
+                }
+            }
+        }
     });
 };
 
@@ -697,15 +709,16 @@ eMASReferencialJs.SetearEvtFormularioGenerico = function (fnRegresar, fnCancelar
     _EliminarCtrl.addEventListener('click', fnEliminar);
 };
 
-eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar) {
+eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar, dataLsTable) {
     let _panelFilter = document.querySelector("#" + nombrePanel + " .panel-body");
     let _consultLs = document.querySelector(".consult-ls");
     let _btnConsultar = document.querySelector(".consultar");
     let _btnLimpiar = document.querySelector(".limpiar");
-    let _btnNuevo = document.querySelector(".nuevo");
+    let _btnNuevoLs = document.querySelectorAll(".nuevo");
+    //let _btnNuevo = document.querySelector(".nuevo");
 
     if (_panelFilter != undefined)
-        eMASReferencialJs.SetearEventosPanel();
+        eMASReferencialJs.SetearEventosPanel(dataLsTable);
 
     if (_consultLs != undefined)
         _consultLs.style.display = "none";
@@ -716,8 +729,11 @@ eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnL
     if (_btnLimpiar != undefined) {
         _btnLimpiar.addEventListener('click', fnLimpiar);
     }
-    if (_btnNuevo != undefined) {
-        _btnNuevo.addEventListener('click', fnNuevo);
+    if (_btnNuevoLs != undefined) {
+        _btnNuevoLs.forEach(function (btnNuevo) {
+            btnNuevo.addEventListener('click', fnNuevo);
+        });
+
     }
     eMASReferencialJs.FormSetVisibilityConsult(false);
 }
@@ -818,3 +834,23 @@ eMASReferencialJs.FadeOutEffect = function (selector, timeInterval, callback) {
         }
     }, timeInterval);
 }
+
+//eMASReferencialJs.SetearEventoCollapse = function (target, containerToggle, tableName) {
+//    $(target).on('hide.bs.collapse', function () {
+//        let dataToggle = document.querySelector(containerToggle);
+//        if (dataToggle != undefined) {
+//            let dataConsulta = $("#" + tableName).bootstrapTable('getOptions');
+
+//            if (!(dataConsulta == null && dataConsulta == undefined)) {
+//                if (dataConsulta.totalRows > 0) {
+//                    dataToggle.style.display = "block";
+//                }
+//            }
+//        }
+//    });
+//    $(target).on('show.bs.collapse', function () {
+//        let dataToggle = document.querySelector(containerToggle);
+//        if (dataToggle != undefined)
+//            dataToggle.style.display = "none";
+//    });
+//}

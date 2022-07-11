@@ -27,7 +27,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
 
             try
             {
-                var panelModel = JsonConvert.DeserializeObject<TramitesListViewModel>(panelFilter);
+                var panelModel = JsonConvert.DeserializeObject<TramitesPanelFilterModel>(panelFilter);
             }
             catch (Exception ex)
             {

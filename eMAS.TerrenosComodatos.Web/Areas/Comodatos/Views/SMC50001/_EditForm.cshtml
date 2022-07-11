@@ -3,17 +3,8 @@
 <div class="form-content-edit">
     <h3>Formulario Edici&oacute;n</h3>
     <div class="container-form">
-        <input id="IdBeneficiario" class="idelemento" type="hidden" value="@Model.id"/>
-        <div class="command-btn-top row">
-            <button type="button" class="regresar-edit btn btn-secondary commands">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                Regresar
-            </button>
-            <button type="button" class="exportar-edit btn btn-secondary commands">
-                <i class="fa fa-file-pdf-o"></i>
-                Exportar
-            </button>
-        </div>
+        <input id="IdBeneficiario" class="idelemento" type="hidden" value="@Model.id" />
+        @await Html.PartialAsync("_CommandTop")
         <div class="form-group row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                 <label for="name-edit">Nombre</label>
@@ -35,19 +26,6 @@
                 <input type="text" class="form-control" id="contacto-edit" value="@Model.contacto">
             </div>
         </div>
-        <div class="command-btn-bottom row col-12 col-sm-12 col-md-12 col-lg-2 offset-lg-10">
-            <button type="button" class="guardar-edit btn btn-primary commands">
-                <i class="fa fa-save"></i>
-                Guardar
-            </button>
-            <button type="button" class="eliminar-edit btn btn-danger commands">
-                <i class="fa fa-trash"></i>
-                Eliminar
-            </button>
-            <button type="button" class="cancelar-edit btn btn-secondary commands">
-                <i class="fa fa-times"></i>
-                Cerrar
-            </button>
-        </div>
+        @await Html.PartialAsync("_CommandBottom")
     </div>
 </div>
