@@ -6,6 +6,6 @@ namespace eMAS.Api.TerrenosComodatos.IRepository
 {
     public interface IGenericRepository
     {
-        Tuple<List<KeyValueSelect>, string> GetSingleSelect(string keyparam);
+        Tuple<List<KeyValueSelect>, string> GetSingleSelect(string keyparam, string keyentity);
     }
 }

@@ -117,7 +117,7 @@ button.commands > * {
     margin:0;
 }
 
-.container-form > * {
+.container-form > *, .tab-content-form > *{
     padding-bottom: 1em;
 }
 
@@ -135,11 +135,12 @@ button.commands > * {
         width: 100%;
     }
 
-
 #TramiteTabContainer {
     margin: 10px;
-    height: 28rem;
-    overflow: hidden;
+}
+#tramiteTabContent {
+    min-height: 28rem;
+    overflow: visible;
     border-bottom: 1px solid #ccc;
 }
 

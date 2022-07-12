@@ -25,7 +25,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             _mapeadoresGeneric = mapeadoresGeneric;
             _logicDataProviderGeneric = logicDataProviderGeneric;
         }
-        public ResultadoDTO<StructKeyValueSelect> GetDataSrc(string key1, string target)
+        public ResultadoDTO<StructKeyValueSelect> GetDataSrc(string key1, string keyEntity, string target)
         {
             ResultadoDTO<StructKeyValueSelect> resultadoVista = new ResultadoDTO<StructKeyValueSelect>();
             Tuple<List<KeyValueSelect>, string> respuestaLogic = null;
@@ -37,7 +37,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     };
             try
             {
-                respuestaLogic = _logicDataProviderGeneric.ObtenerDataByParam(key1);
+                respuestaLogic = _logicDataProviderGeneric.ObtenerDataByParam(key1, keyEntity);
             }
             catch (Exception ex)
             {

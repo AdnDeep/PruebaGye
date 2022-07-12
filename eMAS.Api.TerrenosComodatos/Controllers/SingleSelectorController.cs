@@ -19,14 +19,14 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
         }
         [HttpGet]
         [Route("GetDataDsr")]
-        public ActionResult<ResultadoDTO<StructKeyValueSelect>> GetDataDsr(string key1, string target)
+        public ActionResult<ResultadoDTO<StructKeyValueSelect>> GetDataDsr(string key1, string keyEntity, string target)
         {
             ResultadoDTO<StructKeyValueSelect> respuesta = new ResultadoDTO<StructKeyValueSelect>();
 
             if (!(_validadoresGeneric.ValidaConsultaDataDsr(key1, target, ref respuesta)))
                 return BadRequest(respuesta);
 
-            respuesta = _serviceDataProviderGeneric.GetDataSrc(key1, target);
+            respuesta = _serviceDataProviderGeneric.GetDataSrc(key1, keyEntity, target);
 
             return Ok(respuesta);
         }

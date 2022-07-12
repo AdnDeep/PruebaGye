@@ -17,6 +17,7 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
         public short numero { get; set; }
         public short idbeneficiario { get; set; }
         public string nombrebeneficiario { get; set; }
+        public string representantelegal { get; set; }
         public short idtipocontrato { get; set; }
         public string tipocontrato { get; set; }
         public decimal? areasolar { get; set; }

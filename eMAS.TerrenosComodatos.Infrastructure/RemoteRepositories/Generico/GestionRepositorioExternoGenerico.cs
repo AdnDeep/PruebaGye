@@ -22,10 +22,10 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
             _baseAddress = configuration["ApiComodato:ApiBaseAddress"];
             _clientHttpSvc = clientHttpSvc;
         }
-        public ResultadoDTO<StructKeyValueSelect> ObtenerListadoGenerico(string keyparam, string target)
+        public ResultadoDTO<StructKeyValueSelect> ObtenerListadoGenerico(string keyparam, string keyentity, string target)
         {
             ResultadoDTO<StructKeyValueSelect> resultado = new ResultadoDTO<StructKeyValueSelect>();
-            string parameters = string.Format("?key1={0}&target={1}", keyparam, target);
+            string parameters = string.Format("?key1={0}&keyEntity={1}&target={2}", keyparam, keyentity, target);
 
             string urlResource = string.Concat(methodGetDataDsr, parameters);
 

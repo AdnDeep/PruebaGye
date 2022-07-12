@@ -22,6 +22,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
     public class KeyValueParam
     {
         public string key1 { get; set; }
+        public string keyentity { get; set; }
         public string target { get; set; }
     }
     public class KeyValueSelect : GenericKeyValueSelect

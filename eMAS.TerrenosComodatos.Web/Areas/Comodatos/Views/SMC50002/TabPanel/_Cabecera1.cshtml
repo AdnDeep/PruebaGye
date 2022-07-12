@@ -1,0 +1,86 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TramiteEditViewModel
+@{ 
+    string fechaInspeccion = "";
+    if (Model != null && Model.fechainsregprop != null)
+        fechaInspeccion = Model.fechainsregprop.Value.ToString("dd/MM/yyyy");
+}
+
+<div class="tramite-cabecera-1 tab-content-form">
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="anio-edit">A&ntilde;o</label>
+            <input type="text" readonly class="form-control" id="anio-edit" value="@Model.anio">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="representative-name-edit">Secuencia</label>
+            <input type="text" readonly class="form-control" id="secuencia-edit" value="@Model.secuencia">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row ctrl-codigo-catastral">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                    <label class="mx-1">Sector</label>
+                    <input type="number" min="0" class="form-control mx-1" id="sector-edit" value="@Model.idsector">
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                    <label class="mx-1">Manzana</label>
+                    <input type="number" min="0" class="form-control mx-1" id="manzana-edit" value="@Model.manzana">
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                    <label class="mx-1">Solar</label>
+                    <input type="number" min="0" class="form-control mx-1" id="lote-edit" value="@Model.lote">
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                    <label class="mx-1">Divisi&oacute;n</label>
+                    <input type="number" min="0" class="form-control mx-1" id="division-edit" value="@Model.division">
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+                    <label class="mx-1">Phv</label>
+                    <input type="number" min="0" class="form-control mx-1" id="phv-edit" value="@Model.phv">
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+                    <label class="mx-1">Phh</label>
+                    <input type="number" min="0" class="form-control mx-1" id="phh-edit" value="@Model.phh">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-2">
+                    <label class="mx-1">N&uacute;mero</label>
+                    <input type="number" min="0" class="form-control mx-1" id="numero-edit" value="@Model.numero">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <label for="beneficiario-edit">Nombre Beneficiario</label>
+            <select id="beneficiario-edit" class="form-control ctrl-select">
+            </select>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="representante-legal-edit">Representante Legal</label>
+            <input type="text" readonly class="form-control" id="representante-legal-edit">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="oficio-ag-edit">Oficio Ag</label>
+            <input type="text" class="form-control" id="oficio-ag-edit">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="oficio-dase-edit">Oficio Dase</label>
+            <input type="text" class="form-control" id="oficio-dase-edit">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="solar-edit">&Aacute;rea</label>
+            <input type="text" class="form-control" id="solar-edit" value="@Model.areasolar">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6" id="fecha-inspeccion-container">
+            <label for="fecha-inspeccion-edit">Fecha Inspecci&oacute;n</label>
+            <input id="fecha-inspeccion-edit" 
+                   data-date-container='#fecha-inspeccion-container'
+                   class="form-control" value="@fechaInspeccion" />
+        </div>
+    </div>
+</div>

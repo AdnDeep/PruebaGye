@@ -20,7 +20,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             _mapeadores = mapeadores;
             _logger = logger;
         }
-        public StructKeyValueSelect GetSingleDatasources(string key, string target)
+        public StructKeyValueSelect GetSingleDatasources(string key, string keyentity, string target)
         {
             StructKeyValueSelect resultadoClte = new StructKeyValueSelect();
             bool respValClte = _validadores.InputClientGetDsrByKey(key, target, ref resultadoClte);
@@ -28,7 +28,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             if (!respValClte)
                 return resultadoClte;
 
-            var respServ = _repositorioExterno.ObtenerListadoGenerico(key, target);
+            var respServ = _repositorioExterno.ObtenerListadoGenerico(key, keyentity, target);
 
             bool respValRespServ = _validadores.RespuestaServidorGetDsrByKey(ref respServ, ref resultadoClte);
 

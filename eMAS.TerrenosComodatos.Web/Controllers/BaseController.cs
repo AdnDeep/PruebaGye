@@ -20,7 +20,7 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         [HttpPost]
         public JsonResult GetDataDsrGeneric([FromBody] KeyValueParam paramKey)
         {
-            var ls = _casesUsesGeneric.GetSingleDatasources(paramKey?.key1, paramKey?.target);
+            var ls = _casesUsesGeneric.GetSingleDatasources(paramKey?.key1, paramKey?.keyentity, paramKey?.target);
 
             return Json(ls);
         }

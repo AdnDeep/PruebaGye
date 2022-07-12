@@ -741,7 +741,8 @@ eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnL
 eMASReferencialJs.CargarCombosGenerico = function (data) {    
     data.forEach(function (_dataItem) {
         let dataBody = { key1: _dataItem.key, target: _dataItem.ctrl };
-        eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta);
+        let parameter1Callback2 = _dataItem.parameter1 == undefined ? "": _dataItem.parameter1
+        eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta, _dataItem.fnCallback2, parameter1Callback2);
     });
 };
 
@@ -795,7 +796,10 @@ eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
     }
 };
 
-eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback) {
+eMASReferencialJs.FnGeneralVacia = function () {
+};
+
+eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback, fnCallback2, parameter1Callback2) {
     let _appConfig = eMASReferencialJs.ObtenerAppConfig();
     let rutaBase = _appConfig.RutaBase;
     rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
@@ -807,6 +811,7 @@ eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback) {
         body: JSON.stringify(dataBody)
     }).then(res => res.json())
         .then(fnSuccessCallback)
+        .then(fnCallback2.bind(null, parameter1Callback2))
         .catch(function (error) {
             console.log('Fetchpost Generic Error', error);
         });
@@ -835,6 +840,24 @@ eMASReferencialJs.FadeOutEffect = function (selector, timeInterval, callback) {
     }, timeInterval);
 }
 
+eMASReferencialJs.SetearFechaBootstrap = function (selectorElement) {
+    $(selectorElement).datepicker({
+        uiLibrary: 'bootstrap4',
+        locale: 'es-es',
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    });
+}
+
+eMASReferencialJs.SelectItemByValue = function(element, value) {
+
+    for (var i = 0; i < element.options.length; i++) {
+        if (element.options[i].value === value) {
+            element.selectedIndex = i;
+            break;
+        }
+    }
+}
 //eMASReferencialJs.SetearEventoCollapse = function (target, containerToggle, tableName) {
 //    $(target).on('hide.bs.collapse', function () {
 //        let dataToggle = document.querySelector(containerToggle);

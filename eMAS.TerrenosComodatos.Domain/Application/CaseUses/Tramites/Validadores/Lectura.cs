@@ -24,7 +24,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                                 { "Parametros", parametros }
                         };
             salida.dataresult = new TramiteEditViewModel();
-            if (id <= 0)
+            if (id < 0)
             {
                 salida.mensaje = "Input Request Incorrecta, el objeto está vacío Id";
                 salida.tipo = "ADVERTENCIA";

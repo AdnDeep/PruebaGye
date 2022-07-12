@@ -24,7 +24,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short secexp { get; set; }
         public string beneficiario { get; set; }
         public string ruc { get; set; }
-        public string codigoCatastral { get; set; }
+        public string codigocatastral { get; set; }
     }
     public class TramiteEditViewModel
     {
@@ -40,6 +40,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short numero { get; set; }
         public short idbeneficiario { get; set; }
         public string nombrebeneficiario { get; set; }
+        public string representantelegal { get; set; }
         public short idtipocontrato { get; set; }
         public string tipocontrato { get; set; }
         public decimal? areasolar { get; set; }

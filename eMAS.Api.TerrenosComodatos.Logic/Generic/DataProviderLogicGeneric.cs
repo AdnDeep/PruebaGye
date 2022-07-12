@@ -13,9 +13,9 @@ namespace eMAS.Api.TerrenosComodatos.Logic.Generic
         {
             _genericRepository = genericRepository;
         }
-        public Tuple<List<KeyValueSelect>, string> ObtenerDataByParam(string keyParam)
+        public Tuple<List<KeyValueSelect>, string> ObtenerDataByParam(string keyParam, string keyEntity)
         {
-            var resultadoBD = _genericRepository.GetSingleSelect(keyParam);
+            var resultadoBD = _genericRepository.GetSingleSelect(keyParam, keyEntity);
             return resultadoBD;
         }
     }

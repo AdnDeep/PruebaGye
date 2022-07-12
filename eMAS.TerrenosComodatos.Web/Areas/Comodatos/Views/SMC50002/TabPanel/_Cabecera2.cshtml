@@ -1,0 +1,26 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TramiteEditViewModel
+@{ 
+    string fechaAprobacion = "";
+    if (Model != null && Model.fechaaprobconcejomun != null)
+        fechaAprobacion = Model.fechaaprobconcejomun.Value.ToString("dd/MM/yyyy");
+}
+
+<div class="tramite-cabecera-2 tab-content-form">
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="oficio-aprobacion-edit">Oficio de Aprobaci&oacute;n</label>
+            <input type="text" readonly class="form-control" id="oficio-aprobacion-edit" value="@Model.aprobacionconcejomun">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="fecha-aprobacion-edit">Fecha de Aprobaci&oacute;n</label>
+            <input type="text" readonly class="form-control" id="fecha-aprobacion-edit" value="@fechaAprobacion">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <label for="tipo-contrato-edit">Tipo de Contratoo</label>
+            <select id="tipo-contrato-edit" class="form-control ctrl-select">
+            </select>
+        </div>
+    </div>
+</div>

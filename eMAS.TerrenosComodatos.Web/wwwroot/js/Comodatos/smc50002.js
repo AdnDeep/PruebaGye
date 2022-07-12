@@ -1,5 +1,6 @@
+
 const SMC50002 = function () {
-    const nameConsult1 = "beneficiarios";
+    const nameConsult1 = "tramites";
     const nameEditAction = "EditView";
     const nameSaveAction = "EditSave";
     const nameDeleteAction = "EditDelete";
@@ -211,8 +212,92 @@ const SMC50002 = function () {
         return sData;
     };
 
+    const fnInicializarInformacionRelacionada = function () {
+        InicializarCamposFecha();
+        ObtenerRepresentanteLegal();
+    };
+
+    const InicializarCamposFecha = function () {
+        let fechaInspecion = document.querySelector("#fecha-inspeccion-edit");
+        if(fechaInspecion != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fecha-inspeccion-edit");
+
+        let fechaAprobacion = document.querySelector("#fecha-aprobacion-edit");
+        if (fechaAprobacion != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fecha-aprobacion-edit");
+    };
+
+    const LlenaNombreRepresentante = function (data) {
+        if (data == null || data == undefined) {
+            console.log("Respuesta incorrecta del servidor Data Entidad (1)");
+            return;
+        }
+        if (data.key == null || data.key == undefined || data.key == ""
+            || data.target == null || data.target == undefined || data.target == "") {
+            console.log("Respuesta incorrecta del servidor Data Entidad (2)");
+            return;
+        }
+        if (data.key == "ERROR") {
+            console.log(data.target);
+            return;
+        }
+        if (!(data.datasource == null || data.datasource == undefined)) {
+            let elementFound = data.datasource.find(element => element.key === "NOMBREREPRESENTANTE");
+            if (!(elementFound == null || elementFound == undefined)) {
+                let _representanteLegalEdit = document.querySelector("#representante-legal-edit");
+                if (_representanteLegalEdit != undefined)
+                    _representanteLegalEdit.value = elementFound.value;
+            }
+        }
+    }
+
+    const ConsultPosLlenarCombo = function (parameter1) {
+        debugger;
+        if (parameter1 == "beneficiario-edit") {
+            let _beneficiarioEditCtrl = document.querySelector("#beneficiario-edit");
+            let _idBeneficiario = document.querySelector("#IdBeneficiario");
+
+            if (_beneficiarioEditCtrl != undefined && _idBeneficiario != undefined) {
+                eMASReferencialJs.SelectItemByValue(_beneficiarioEditCtrl, _idBeneficiario.value);
+                let dataBody = { key1: "ENTIDADBENEFICIARIO", keyentity: _idBeneficiario.value, target: "representante-legal-edit" };
+                eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetDataDsrGeneric", dataBody, LlenaNombreRepresentante, eMASReferencialJs.FnGeneralVacia, "");
+            }
+        }
+    };
+
+    const ObtenerRepresentanteLegal = function () {
+        let _idBeneficiario = document.getElementById("IdBeneficiario");
+        if (_idBeneficiario <= 0) {
+            console.log("No hay datos de beneficiario para recuperar");
+        }
+        let arr = [];
+        arr.push({
+            key: dsrBeneficiarios, ctrl: "beneficiario-edit", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"
+            , fnCallback2: ConsultPosLlenarCombo
+            , parameter1:"beneficiario-edit"
+        });
+        eMASReferencialJs.CargarCombosGenerico(arr);
+    };
+
+    const EvtCambioBeneficiario = function (event) {
+        let valSelected = event.target.value;
+        if (!(valSelected == null || valSelected == undefined || valSelected == "")) {
+            let dataBody = { key1: "ENTIDADBENEFICIARIO", keyentity: valSelected, target: "representante-legal-edit" };
+            eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetDataDsrGeneric", dataBody, LlenaNombreRepresentante, eMASReferencialJs.FnGeneralVacia, "");
+        }
+
+    };
+
+    const fnSetearEvtCustomizado = function () {
+        let _beneficiarioEditCtrl = document.querySelector("#beneficiario-edit");
+        if (_beneficiarioEditCtrl != undefined) {
+            _beneficiarioEditCtrl.addEventListener('change', EvtCambioBeneficiario);
+        }
+    };
+
     const fnSetearEvtFormulario = function () {
         eMASReferencialJs.SetearEvtFormularioGenerico(EvtRegresarFormulario, EvtCancelarFormulario, EvtGuardarFormulario, EvtEliminarFormularo);
+        fnSetearEvtCustomizado();
     };
 
     const fnPagedDataFromControllerListTramites = function (response) {
@@ -249,7 +334,7 @@ const SMC50002 = function () {
                 secexp: response.dataresult.data[i].secexp,
                 beneficiario: response.dataresult.data[i].beneficiario,
                 ruc: response.dataresult.data[i].ruc,
-                codigoCatastral: response.dataresult.data[i].codigoCatastral,
+                codigocatastral: response.dataresult.data[i].codigocatastral,
                 id: response.dataresult.data[i].id
             });
         }
@@ -318,6 +403,8 @@ const SMC50002 = function () {
             eMASReferencialJs.FormSetVisibilityConsult(false);
             _formContent.appendChild(eMASReferencialJs.htmlToElement(response.content));
 
+            fnInicializarInformacionRelacionada();
+
             fnSetearEvtFormulario();
         }
         else {
@@ -372,8 +459,8 @@ const SMC50002 = function () {
     const cargaDatosCombosPanel = function () {
         let arr = [];
 
-        arr.push({ key: dsrBeneficiarios, ctrl: "nombre-beneficiario", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"});
-        arr.push({ key: dsrEstados, ctrl: "estado", ruta: "Comodatos/SMC50002/GetDataDsrGeneric" });
+        arr.push({ key: dsrBeneficiarios, ctrl: "nombre-beneficiario", ruta: "Comodatos/SMC50002/GetDataDsrGeneric", fnCallback2: eMASReferencialJs.FnGeneralVacia});
+        arr.push({ key: dsrEstados, ctrl: "estado", ruta: "Comodatos/SMC50002/GetDataDsrGeneric", fnCallback2: eMASReferencialJs.FnGeneralVacia});
         eMASReferencialJs.CargarCombosGenerico(arr);
     };
 

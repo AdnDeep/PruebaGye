@@ -19,14 +19,15 @@ namespace eMAS.Api.TerrenosComodatos.Repository
         {
             _serviceProvider = serviceProvider;
         }
-        public Tuple<List<KeyValueSelect>, string> GetSingleSelect(string keyparam)
+        public Tuple<List<KeyValueSelect>, string> GetSingleSelect(string keyparam, string keyentity)
         {
             Tuple<List<KeyValueSelect>, string> data = null;
             string strParamKey = "";
             // Arma Datos de Cabecera
             var paramKeyParameter = new
             {
-                key1 = keyparam
+                key1 = keyparam,
+                keyEntity = keyentity
             };
             string sMensaje = "";
             List<KeyValueSelect> lsKeyValue = new List<KeyValueSelect>();
