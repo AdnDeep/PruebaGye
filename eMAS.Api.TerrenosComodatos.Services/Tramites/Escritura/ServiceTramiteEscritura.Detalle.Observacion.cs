@@ -82,6 +82,11 @@ namespace eMAS.Api.TerrenosComodatos.Services
             bool respuestaGestionGrabar = _validadores
                                                 .ValidarRespuestaServidorTramiteObservacionAccionAgregar(ref respuestaLogicDB, ref resultadoVista);
 
+            if (!respuestaGestionGrabar)
+                return resultadoVista;
+
+            resultadoVista.dataresult = respuestaLogicDB.Item1;
+
             return resultadoVista;
         }
         public ResultadoDTO<int> ActualizarObservacion(ObservacionTramiteEditViewModel model, string usuario, string controlador, string pcclient)
@@ -152,6 +157,11 @@ namespace eMAS.Api.TerrenosComodatos.Services
 
             bool respuestaGestionGrabar = _validadores
                                                 .ValidarRespuestaServidorTramiteObservacionAccionActualizar(ref respuestaLogicDB, ref resultadoVista);
+
+            if (!respuestaGestionGrabar)
+                return resultadoVista;
+
+            resultadoVista.dataresult = respuestaLogicDB.Item1;
 
             return resultadoVista;
         }

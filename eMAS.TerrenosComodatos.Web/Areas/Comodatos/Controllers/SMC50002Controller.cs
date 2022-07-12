@@ -61,6 +61,26 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
 
             return Json(response);
         }
+
+        [HttpPost]
+        public IActionResult EditSave(TramiteEditViewModel modelEdit)
+        {
+            string partialEditViewHtml = string.Empty;
+            ResultadoDTO<int> response = new ResultadoDTO<int>();
+            try
+            {
+                response = _casesUsesTramite.GrabarTramite(modelEdit, "test", "SMC50002", "WEBCLIENT");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                response.mensaje = "Se produjo un error en el aplicativo.";
+                response.tipo = "ADVERTENCIA";
+            }
+
+            return Json(response);
+        }
+
         [HttpPost]
         public ActionResult GetPagedData(string data
             , string typeSearch

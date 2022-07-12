@@ -25,7 +25,7 @@ const SMC50001 = function () {
     };
 
     const fnRespuestaGuardarRegistro = function (response) {
-        debugger;
+        
         if (response == null || response == undefined) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No se obtuvo una respuesta correcta del Aplicativo.");
             return;
@@ -301,7 +301,7 @@ const SMC50001 = function () {
             resultContainer: "DataListadoBeneficiarios",
             numeroPagina: numeroPagina
         };
-        debugger;
+        
         eMASReferencialJs.Ajax({
             type: "POST",
             data: djson,

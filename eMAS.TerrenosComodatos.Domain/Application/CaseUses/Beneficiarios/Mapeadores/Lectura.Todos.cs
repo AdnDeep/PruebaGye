@@ -1,6 +1,5 @@
 ﻿
 using eMAS.TerrenosComodatos.Domain.DTOs;
-using Microsoft.Extensions.Logging;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {

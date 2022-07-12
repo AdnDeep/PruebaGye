@@ -82,6 +82,11 @@ namespace eMAS.Api.TerrenosComodatos.Services
             bool respuestaGestionGrabar = _validadores
                                                 .ValidarRespuestaServidorTramiteTopografiaAccionAgregar(ref respuestaLogicDB, ref resultadoVista);
 
+            if (!respuestaGestionGrabar)
+                return resultadoVista;
+
+            resultadoVista.dataresult = respuestaLogicDB.Item1;
+
             return resultadoVista;
         }
         public ResultadoDTO<int> ActualizarTopografia(TopografiaTerrenoEditViewMoel model, string usuario, string controlador, string pcclient)
@@ -152,6 +157,11 @@ namespace eMAS.Api.TerrenosComodatos.Services
 
             bool respuestaGestionGrabar = _validadores
                                                 .ValidarRespuestaServidorTramiteTopografiaAccionActualizar(ref respuestaLogicDB, ref resultadoVista);
+
+            if (!respuestaGestionGrabar)
+                return resultadoVista;
+
+            resultadoVista.dataresult = respuestaLogicDB.Item1;
 
             return resultadoVista;
         }

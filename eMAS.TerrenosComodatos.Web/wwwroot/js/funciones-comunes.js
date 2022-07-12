@@ -45,7 +45,10 @@ eMASReferencialJs.mostrarProgress = function () {
 };
 
 eMASReferencialJs.ocultarProgress = function () {
-    eMASReferencialJs.FadeOutEffect("#loaderGif", 500, function () { document.querySelector('#loaderGif').remove(); })
+    eMASReferencialJs.FadeOutEffect("#loaderGif", 500, function () {
+        if (!(document.querySelector('#loaderGif') == null || document.querySelector('#loaderGif') == undefined))
+            document.querySelector('#loaderGif').remove();
+    });
 };
 
 eMASReferencialJs.mostrarPopup = function (titulo, url, funcionCargar, funcionCerrar) {
@@ -577,7 +580,8 @@ eMASReferencialJs.ObtenerAppConfig = function () {
 
 
     let _appConfig = {
-        "RutaBase": _rutaBase
+        "RutaBase": _rutaBase,
+        "FormatoFechaCliente":"dd/MM/yyyy"
     }
 
     return _appConfig;
@@ -741,8 +745,10 @@ eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnL
 eMASReferencialJs.CargarCombosGenerico = function (data) {    
     data.forEach(function (_dataItem) {
         let dataBody = { key1: _dataItem.key, target: _dataItem.ctrl };
-        let parameter1Callback2 = _dataItem.parameter1 == undefined ? "": _dataItem.parameter1
-        eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta, _dataItem.fnCallback2, parameter1Callback2);
+        let parameter1Callback2 = _dataItem.parameter1 == undefined ? "" : _dataItem.parameter1;
+        let parameter2Callback2 = _dataItem.parameter2 == undefined ? "" : _dataItem.parameter2;
+        eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta
+            , _dataItem.fnCallback2, parameter1Callback2, parameter2Callback2);
     });
 };
 
@@ -769,7 +775,6 @@ eMASReferencialJs.LimpiarControlesHtml = function (panelName) {
 };
 
 eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
-    debugger;
     if (data == null || data == undefined) {
         console.log("Respuesta incorrecta del servidor CargarCombosGenerico (1)");
         return;
@@ -799,7 +804,7 @@ eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
 eMASReferencialJs.FnGeneralVacia = function () {
 };
 
-eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback, fnCallback2, parameter1Callback2) {
+eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback, fnCallback2, parameter1Callback2, parameter2Callback2) {
     let _appConfig = eMASReferencialJs.ObtenerAppConfig();
     let rutaBase = _appConfig.RutaBase;
     rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
@@ -811,7 +816,7 @@ eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback, fnCal
         body: JSON.stringify(dataBody)
     }).then(res => res.json())
         .then(fnSuccessCallback)
-        .then(fnCallback2.bind(null, parameter1Callback2))
+        .then(fnCallback2.bind(null, parameter1Callback2, parameter2Callback2))
         .catch(function (error) {
             console.log('Fetchpost Generic Error', error);
         });
@@ -850,7 +855,6 @@ eMASReferencialJs.SetearFechaBootstrap = function (selectorElement) {
 }
 
 eMASReferencialJs.SelectItemByValue = function(element, value) {
-
     for (var i = 0; i < element.options.length; i++) {
         if (element.options[i].value === value) {
             element.selectedIndex = i;
@@ -858,6 +862,19 @@ eMASReferencialJs.SelectItemByValue = function(element, value) {
         }
     }
 }
+
+eMASReferencialJs.FormatearFecha = function (valFecha) {
+    if (valFecha == null || valFecha == undefined || valFecha == "")
+        return null;
+    let fechaConvertida = "";
+    let dateTmp = valFecha.split("/");
+
+    if(dateTmp.length== 3)
+        fechaConvertida = date[2] + "-" + date[1] + "-" + date[0];
+
+    return fechaConvertida;
+}
+
 //eMASReferencialJs.SetearEventoCollapse = function (target, containerToggle, tableName) {
 //    $(target).on('hide.bs.collapse', function () {
 //        let dataToggle = document.querySelector(containerToggle);

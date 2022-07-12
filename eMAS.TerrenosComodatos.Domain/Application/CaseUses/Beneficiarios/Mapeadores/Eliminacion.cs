@@ -1,7 +1,4 @@
-﻿
-using eMAS.TerrenosComodatos.Domain.DTOs;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using eMAS.TerrenosComodatos.Domain.DTOs;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {

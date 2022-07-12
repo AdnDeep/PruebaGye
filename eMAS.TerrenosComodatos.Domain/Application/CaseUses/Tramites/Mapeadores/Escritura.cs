@@ -2,7 +2,7 @@
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
-    public partial class MapeadoresBeneficiario
+    public partial class MapeadoresTramite
     {
         public void GenerateEditViewModelAfterSave(ref ResultadoDTO<BeneficiarioEditViewModel> model
             , ref ResultadoDTO<BeneficiarioEditViewModel> salida)
