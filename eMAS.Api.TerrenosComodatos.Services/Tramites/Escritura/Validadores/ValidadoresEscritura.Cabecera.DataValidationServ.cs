@@ -115,6 +115,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
+            /*
 
             var existeDireccionTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTEDIRECCION");
             if (existeDireccionTmp == null)
@@ -167,31 +168,37 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            var existeTipoContratoTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETIPOCONTRATO");
-            if (existeTipoContratoTmp == null)
+
+            */
+            if (idTramite > 0)
             {
-                using (_logger.BeginScope(props))
+                var existeTipoContratoTmp = lsValidacion.FirstOrDefault(fod => fod.CLAVE == "EXISTETIPOCONTRATO");
+                if (existeTipoContratoTmp == null)
                 {
-                    _logger.LogError($"La clave EXISTETIPOCONTRATO no se encuentra en la BD.");
+                    using (_logger.BeginScope(props))
+                    {
+                        _logger.LogError($"La clave EXISTETIPOCONTRATO no se encuentra en la BD.");
+                    }
+                    salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
+                    salida.tipo = "ADVERTENCIA";
+                    return puedeContinuar;
                 }
-                salida.mensaje = "Se produjo un error Interno en la aplicación. (7)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
+
+                if (!existeTipoContratoTmp.VALORBOOLEANO)
+                {
+                    lsMensajes.Add(new Mensaje
+                    {
+                        codigo = "VLNVALSERV",
+                        descripcion = "El Tipo de Contrato indicado en el trámite no existe.",
+                        tipo = "ADVERTENCIA"
+                    });
+                    salida.mensajes = lsMensajes;
+                    salida.mensaje = "El Tipo de Contrato indicado en el trámite no existe.";
+                    salida.tipo = "ADVERTENCIA";
+                    return puedeContinuar;
+                }
             }
 
-            if (!existeTipoContratoTmp.VALORBOOLEANO)
-            {
-                lsMensajes.Add(new Mensaje
-                {
-                    codigo = "VLNVALSERV",
-                    descripcion = "El Tipo de Contrato indicado en el trámite no existe.",
-                    tipo = "ADVERTENCIA"
-                });
-                salida.mensajes = lsMensajes;
-                salida.mensaje = "El Tipo de Contrato indicado en el trámite no existe.";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
             puedeContinuar = true;
             return puedeContinuar;
         }

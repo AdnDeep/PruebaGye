@@ -16,6 +16,14 @@ namespace eMAS.TerrenosComodatos.Web
             AppSettings appSettings = new AppSettings();
             services.Configure<AppSettings>(
                     Configuration.GetSection(AppSettings.Titulo));
+
+            System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            SystemSettings systemSettings = new SystemSettings();
+            systemSettings.CurrentDecimalSeparator = cultureInfo.NumberFormat.CurrencyDecimalSeparator;
+
+            cultureInfo = null;
+
+            services.AddSingleton<SystemSettings>(systemSettings);
         }
 
         public static void AddServicesExtensions(this IServiceCollection services)

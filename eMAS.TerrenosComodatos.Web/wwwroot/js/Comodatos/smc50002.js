@@ -9,8 +9,10 @@ const SMC50002 = function () {
     const dsrTipoContrato = "DSRTIPOCONTRATO";
     const dsrBeneficiarios = "DSRBENEFICIARIOS";
     const dsrEstados = "DSRESTADOSTRAMITES";
-    /*
+
     const fnRespuestaEliminarRegistro = function (response) {
+        //eMASReferencialJs.ocultarProgress();
+        
         if (response == null || response == undefined) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No se obtuvo una respuesta correcta del Aplicativo.");
             return;
@@ -19,17 +21,30 @@ const SMC50002 = function () {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
             return;
         } else {
-            eMASReferencialJs.SetearMensajeDefaultExito("Se eliminó el registro con éxito.");
+            eMASReferencialJs.SetearMensajeDefaultExito("Se elimin&oacute el registro con &eacute;xito.");
             fnDestruirFormularioEdicion();
-            fnBtnConsultar(1);
+
+            let dataConsulta = $("#DataListadoTramites").bootstrapTable('getOptions');
+
+            if (!(dataConsulta == null && dataConsulta == undefined)) {
+                if (dataConsulta.totalRows > 0) 
+                    fnBtnConsultar(1);
+            }
+
             eMASReferencialJs.FormSetVisibilityPanel(true);
-            eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios");
+            eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoTramites");
             return;
         }
     };
 
+    const fnEliminarRegistroConsult = function () {
+        let strAccionSi = "objSMC50002.EliminarTramite();"
+        let mensaje = "&#191;Est&aacute; Seguro que desea eliminar el tr&aacute;mite?";
+        eMASReferencialJs.EmisionPromptWarning(mensaje, strAccionSi);
+    };
+
     const fnEliminarRegistro = function () {
-        let _id = document.getElementById("IdBeneficiario");
+        let _id = document.getElementById("IdTramite");
 
         // Envio Datos al servidor
         let _appConfig = eMASReferencialJs.ObtenerAppConfig();
@@ -50,9 +65,9 @@ const SMC50002 = function () {
                 eMASReferencialJs.mostrarProgress();
             },
             success: fnRespuestaEliminarRegistro
-        }, function () { eMASReferencialJs.ocultarProgress(); });
+        }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     };
-    */
+
     const fnRespuestaGuardarRegistro = function (response) {
         if (response == null || response == undefined) {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("No se obtuvo una respuesta correcta del Aplicativo.");
@@ -62,53 +77,71 @@ const SMC50002 = function () {
             eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
             return;
         } else {
-            eMASReferencialJs.SetearMensajeDefaultExito("Se guardó el registro con éxito.");
+            eMASReferencialJs.SetearMensajeDefaultExito("Se guard&oacute; el registro con &eacute;xito.");
             //fnDestruirFormularioEdicion();
-            fnRespuestaGuardarRegistro2(response.mensajes);
+            fnRespuestaGuardarRegistro2(response);
             //eMASReferencialJs.FormSetVisibilityPanel(true);
             //eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios");
             return;
         }
     };
     // Reconsulta en caso de Actualizaciones o datos
-    const fnRespuestaGuardarRegistro2 = function (responseMensajes) {
-        if (responseMensajes == null || responseMensajes == undefined) {
-            console.log("No hay mensajes en la respuesta.");
-            return;
-        }
-        let objIdClave = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo: "CLAVEID" });
-        if (objIdClave == undefined || objIdClave == null) {
-            console.log("No se encontró la clave interna CLAVEID.");
-            return;
-        }
-        if (!(objIdClave.descripcion == null || objIdClave.descripcion == undefined)) {
-            let idclave = parseInt(objIdClave.descripcion);
-            if (idclave > 0) {
-                fnBtnConsultar(1);
+    const fnRespuestaGuardarRegistro2 = function (response) {
+        let responseMensajes = response.mensajes;
+        let objInsertado = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo: "INSERTADO" });
+
+        if (objInsertado == undefined || objInsertado == null) {
+            let idTransactionUpdated = document.getElementById("IdTramite");
+            if (idTransactionUpdated != undefined) {
+                fnDestruirFormularioEdicion();
+                fnEditarElemento(idTransactionUpdated.value);
             }
-        }
+        } else if (!(objInsertado.descripcion == null || objInsertado.descripcion == undefined)) {
+            let idTransaction = parseInt(objInsertado.descripcion);
+            if (idTransaction > 0) {
+                fnDestruirFormularioEdicion();
+                fnEditarElemento(idTransaction);
+            }
+        }        
+        //if (responseMensajes == null || responseMensajes == undefined) {
+        //    console.log("No hay mensajes en la respuesta.");
+        //    return;
+        //}
+        //let objIdClave = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo: "CLAVEID" });
+        //if (objIdClave == undefined || objIdClave == null) {
+        //    console.log("No se encontró la clave interna CLAVEID.");
+        //    return;
+        //}
+        //if (!(objIdClave.descripcion == null || objIdClave.descripcion == undefined)) {
+        //    let idclave = parseInt(objIdClave.descripcion);
+        //    if (idclave > 0) {
+        //        fnBtnConsultar(1);
+        //    }
+        //}
 
     };
 
-    const fnObtieneValidaDataCliente = function (dataRegistroJson) {
+    const fnObtieneValidaDataCliente = function () {
         let objRespuesta = { isValid: true, mensaje: "OK" };
         let arrCtrls = ["IdTramite", "anioEdit", "secuenciaEdit", "sectorEdit", "manzanaEdit"
             , "loteEdit", "divisionEdit", "phvEdit", "phhEdit", "numeroEdit", "beneficiarioEdit"
-            , "oficioAgEdit", "oficioDaseEdit", "solarEdit", "fechaInspeccionEdit"];
+            , "oficioAgEdit", "oficioDaseEdit", "solarEdit", "fechaInspeccionEdit"
+            , "oficioAprobacionEdit", "fechaAprobacionEdit", "tipoContratoEdit", "aniosPlazoEdit",
+            , "fechaEscrituraEdit", "oficioRevocatoriaEdit"];
         let objTramite = new Tramite(arrCtrls);
-
-        objTramite.ValidateDataAndGetObjWithValues(dataRegistroJson, objRespuesta);
         
-        return objRespuesta;
+        let dataRegistroJson = objTramite.ValidateDataAndGetObjWithValues( objRespuesta);
+        
+        return [objRespuesta, dataRegistroJson];
     };
 
-    const fnGuardarRegistro = function () {
-        let dataRegistroJson = {};
-
+    const fnGuardarRegistro = function () {        
         // Captura y Valida Data
-        let respValidacion = fnObtieneValidaDataCliente(dataRegistroJson);
-        if (!respValidacion.isValid) {
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia(respValidacion.mensaje);
+        let respValidacionArr = fnObtieneValidaDataCliente();
+        let valRespuesta = respValidacionArr[0];
+        let dataRegistroJson = respValidacionArr[1];
+        if (!valRespuesta.isValid) {
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia(valRespuesta.mensaje);
             return;
         }
 
@@ -141,7 +174,7 @@ const SMC50002 = function () {
     };
 
     const EvtEliminarFormularo = function () {
-        fnEliminarRegistro();
+        fnEliminarRegistroConsult();
     };
 
     const EvtRegresarFormulario = function () {
@@ -154,6 +187,7 @@ const SMC50002 = function () {
         let frmEdit = document.querySelector('.form-edit-container')
         while (frmEdit.firstChild) frmEdit.removeChild(frmEdit.firstChild);
     };
+
     const fnEditarElemento = function (id) {
         if (id == null || id == undefined) {
             console.log("No hay ningún código de Registro");
@@ -229,6 +263,10 @@ const SMC50002 = function () {
         let fechaAprobacion = document.querySelector("#fechaAprobacionEdit");
         if (fechaAprobacion != undefined)
             eMASReferencialJs.SetearFechaBootstrap("#fechaAprobacionEdit");
+
+        let fechaEscritura = document.querySelector("#fechaEscrituraEdit");
+        if (fechaEscritura != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fechaEscrituraEdit");
     };
 
     const LlenaNombreRepresentante = function (data) {
@@ -311,16 +349,35 @@ const SMC50002 = function () {
         }
     };
 
+    const EvtKeyPressSolar = function (event) {
+        return eMASReferencialJs.EsDecimalConPunto(event);
+    };
+
     const fnSetearEvtCustomizado = function () {
         let _beneficiarioEditCtrl = document.querySelector("#beneficiarioEdit");
         if (_beneficiarioEditCtrl != undefined) {
             _beneficiarioEditCtrl.addEventListener('change', EvtCambioBeneficiario);
         }
+        
+        let _solarEditEditCtrl = document.querySelector("#solarEdit");
+        if (_solarEditEditCtrl != undefined) {
+            _solarEditEditCtrl.addEventListener('keypress', EvtKeyPressSolar);
+        }
+    };
+
+    const fnGetDetails = function () {
+        debugger;
+        let idTramite = document.getElementById("IdTramite").value;
+        let objAnexoDetail = new GenericDetail(idTramite,"Anexo");
+        objAnexoDetail.GetListAll();
+        let objObservacionDetail = new GenericDetail(idTramite, "Observacion");
+        objObservacionDetail.GetListAll();
     };
 
     const fnSetearEvtFormulario = function () {
         eMASReferencialJs.SetearEvtFormularioGenerico(EvtRegresarFormulario, EvtCancelarFormulario, EvtGuardarFormulario, EvtEliminarFormularo);
         fnSetearEvtCustomizado();
+        fnGetDetails();
     };
 
     const fnPagedDataFromControllerListTramites = function (response) {
@@ -417,7 +474,7 @@ const SMC50002 = function () {
             console.error("Se produjo error consumiendo ajax.");
             return;
         }
-        debugger;
+        
         let _formContent = document.querySelector(".form-edit-container");
 
         if (response.cancontinue) {
@@ -499,6 +556,9 @@ const SMC50002 = function () {
         },
         BtnEditRowItem: function (id) {
             EvtClickEditarElemento(id);
+        },
+        EliminarTramite: function () {
+            fnEliminarRegistro();
         }
     };
 }

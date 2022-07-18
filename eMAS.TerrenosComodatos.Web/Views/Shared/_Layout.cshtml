@@ -51,8 +51,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap-table.min.js"></script>
     <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="~/js/main.js"></script>
-    <script src="~/js/Comodatos/classDefinition.js"></script>
-
     <environment include="Development">
         <script src="~/js/funciones-comunes.js"></script>
         <script src="~/js/Comodatos/smc50001.js"></script>
@@ -66,7 +64,7 @@
 <body>
     <partial name="_VariablesGlobales" />
 
-    <partial name="_Menu"/>
+    <partial name="_Menu" />
     <!-- Left Panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
@@ -82,7 +80,9 @@
         <partial name="_Mensajes" />
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
-    
+
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/Comodatos/tramiteDefinition.js"></script>
+    <script src="~/js/Comodatos/genericDetail.js"></script>
 </body>
 </html>

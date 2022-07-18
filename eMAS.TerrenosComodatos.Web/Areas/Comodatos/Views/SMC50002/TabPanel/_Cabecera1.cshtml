@@ -1,9 +1,4 @@
 ﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TramiteEditViewModel
-@{ 
-    string fechaInscripcionRegProp = "";
-    if (Model != null && Model.fechainsregprop != null)
-        fechaInscripcionRegProp = Model.fechainsregprop.Value.ToString("dd/MM/yyyy");
-}
 
 <div class="tramite-cabecera-1 tab-content-form">
     <div class="form-group row">
@@ -62,26 +57,20 @@
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <label for="oficioAgEdit">Oficio Ag</label>
-            <input type="text" class="form-control" id="oficioAgEdit">
-        </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <label for="oficioDaseEdit">Oficio Dase</label>
-            <input type="text" class="form-control" id="oficioDaseEdit">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <label for="tipoContratoEdit">Tipo de Contrato</label>
+            <select id="tipoContratoEdit" class="form-control ctrl-select">
+            </select>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <label for="solar-edit">&Aacute;rea</label>
-            <input type="text" class="form-control" id="solar-edit" value="@Model.areasolar">
+            <label for="oficioAgEdit">Oficio Ag</label>
+            <input type="text" class="form-control" id="oficioAgEdit" value="@Model.oficioag">
         </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6" id="fecha-inspeccion-container">
-            <label for="fecha-inspeccion-edit">Fecha Inscripci&oacute;n Reg. Propiedad</label>
-            <input id="fecha-inspeccion-edit"
-                   data-date-container='#fecha-inspeccion-container'
-                   class="form-control" value="@fechaInscripcionRegProp" />
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="oficioDaseEdit">Oficio Dase</label>
+            <input type="text" class="form-control" id="oficioDaseEdit" value="@Model.oficiodase">
         </div>
     </div>
-    
 </div>

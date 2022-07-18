@@ -7,24 +7,26 @@
     string fechaEscritura = "";
     if (Model != null && Model.fechaescritura != null)
         fechaEscritura = Model.fechaescritura.Value.ToString("dd/MM/yyyy");
+
+    string fechaInscripcionRegProp = "";
+    if (Model != null && Model.fechainsregprop != null)
+        fechaInscripcionRegProp = Model.fechainsregprop.Value.ToString("dd/MM/yyyy");
+
+    string strAreaSolar = "";
+    if (Model != null && Model.areasolar != null)
+        strAreaSolar = Model.areasolar.Value.ToString().Replace(",",".");
+
 }
 
 <div class="tramite-cabecera-2 tab-content-form">
     <div class="form-group row">
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
             <label for="oficioAprobacionEdit">Oficio de Aprobaci&oacute;n</label>
-            <input type="text" readonly class="form-control" id="oficioAprobacionEdit" value="@Model.aprobacionconcejomun">
+            <input type="text" class="form-control" id="oficioAprobacionEdit" value="@Model.aprobacionconcejomun">
         </div>
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
             <label for="fechaAprobacionEdit">Fecha de Aprobaci&oacute;n</label>
-            <input type="text" readonly class="form-control" id="fechaAprobacionEdit" value="@fechaAprobacion">
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <label for="tipoContratoEdit">Tipo de Contrato</label>
-            <select id="tipoContratoEdit" class="form-control ctrl-select">
-            </select>
+            <input type="text" class="form-control" id="fechaAprobacionEdit" value="@fechaAprobacion">
         </div>
     </div>
     <div class="form-group row">
@@ -44,5 +46,28 @@
             <label for="oficioRevocatoriaEdit">Oficio Revocatoria Modificaci&oacute;n</label>
             <input type="text" class="form-control" id="oficioRevocatoriaEdit" value="@Model.oficiorevocatoriamod">
         </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6" id="fecha-inspeccion-container">
+            <label for="fecha-inspeccion-edit">Fecha Inscripci&oacute;n Reg. Propiedad</label>
+            <input id="fechaInspeccionEdit"
+                   data-date-container='#fecha-inspeccion-container'
+                   class="form-control" value="@fechaInscripcionRegProp" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="solarEdit">&Aacute;rea</label>
+            <input class="form-control"
+                   type="text"
+                   name="areasolar"
+                   id="solarEdit"
+                   value="@strAreaSolar" />
+            @*<input class="form-control"
+        type="number"
+        name="areasolar"
+        pattern="[0-9]+([\.][0-9]+)?"
+        id="solarEdit"
+        value="@strAreaSolar" />*@
+        </div>
     </div>
 </div>
+

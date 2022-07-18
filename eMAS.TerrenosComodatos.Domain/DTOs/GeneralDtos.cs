@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public class SystemSettings
+    {
+        public string CurrentDecimalSeparator { get; set; }
+    }
     public abstract class EntidadMunicipalAud
     {
         public bool PdpEstado { get; set; }

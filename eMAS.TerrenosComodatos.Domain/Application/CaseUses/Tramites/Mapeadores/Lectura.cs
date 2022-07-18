@@ -7,9 +7,12 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class MapeadoresTramite
     {
+        private readonly SystemSettings _systemSettings;
         private readonly ILogger<MapeadoresTramite> _logger;
-        public MapeadoresTramite(ILogger<MapeadoresTramite> logger)
+        public MapeadoresTramite(ILogger<MapeadoresTramite> logger
+            , SystemSettings systemSettings)
         {
+            _systemSettings = systemSettings;
             _logger = logger;
         }
         public void GenerateEditViewModelEmpty(ref TramiteEditViewModel model)

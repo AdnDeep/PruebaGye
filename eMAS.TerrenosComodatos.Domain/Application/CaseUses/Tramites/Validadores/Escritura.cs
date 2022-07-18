@@ -70,16 +70,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            if (entrada.dataresult <= 0 )
-            {
-                using (_logger.BeginScope(props))
-                {
-                    _logger.LogError($"El resultado del objeto respuesta desde el servidor es un objeto nulo [4].");
-                }
-                salida.mensaje = "Se produjo un error en el aplicativo [3].";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
+            
 
             puedeContinuar = true;
             return puedeContinuar;

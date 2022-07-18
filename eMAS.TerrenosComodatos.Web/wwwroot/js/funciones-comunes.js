@@ -870,10 +870,56 @@ eMASReferencialJs.FormatearFecha = function (valFecha) {
     let dateTmp = valFecha.split("/");
 
     if(dateTmp.length== 3)
-        fechaConvertida = date[2] + "-" + date[1] + "-" + date[0];
+        fechaConvertida = dateTmp[2] + "-" + dateTmp[1] + "-" + dateTmp[0];
 
     return fechaConvertida;
 }
+
+eMASReferencialJs.EsDecimalConPunto = function (evt) {
+    debugger;
+    
+    let valorTexto = evt.target.value;
+    let codigoCaracter = (evt.which) ? evt.which : evt.keyCode;
+    if (codigoCaracter == 46) {
+        if (valorTexto.indexOf('.') === -1) {
+            return true;
+        } else {
+            evt.preventDefault();
+            return false;
+        }
+    } else {
+        if (codigoCaracter > 31 &&
+            (codigoCaracter < 48 || codigoCaracter > 57))
+            evt.preventDefault();
+            return false;
+    }
+    return true;
+}
+
+eMASReferencialJs.EmisionPromptWarning = function (mensaje, accionSi, accionNo) {
+    const accionCierre = "$(this).parents('.modal-dialog').parent().modal('hide');";
+    let accionNoTmp = accionNo;
+
+    if (accionNoTmp == undefined)
+        accionNoTmp = accionCierre;
+
+    let accionSiTmp = accionSi;
+        //+ accionCierre;
+    eMASReferencialJs.mostrarMensajes(eMASReferencialJs.Advertencia.Titulo
+        , eMASReferencialJs.tipoMensaje.Prompt
+        , [{ Description: mensaje }]
+        , [
+            {
+                Nombre: "Si",
+                Accion: accionSiTmp
+            },
+            {
+                Nombre: "No",
+                Accion: accionNoTmp
+            }
+        ]
+    );
+};
 
 //eMASReferencialJs.SetearEventoCollapse = function (target, containerToggle, tableName) {
 //    $(target).on('hide.bs.collapse', function () {

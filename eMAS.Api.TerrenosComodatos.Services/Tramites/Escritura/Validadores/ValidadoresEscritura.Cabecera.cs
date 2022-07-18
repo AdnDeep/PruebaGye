@@ -74,7 +74,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 {
                     _logger.LogError($"La respuesta de  Escritura Servidor de datos desde el servidor es vacía (2).");
                 }
-                salida.mensaje = "Se produjo en error en el aplicativo (1).";
+                salida.mensaje = "Se produjo en error en el aplicativo (1_).";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
@@ -84,7 +84,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 {
                     _logger.LogError($"La respuesta de  Escritura Servidor de datos es incorrecta {entrada.Item2}");
                 }
-                salida.mensaje = "Se produjo en error en el aplicativo (1).";
+                salida.mensaje = "Se produjo en error en el aplicativo (1=).";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }

@@ -1,0 +1,23 @@
+﻿@model eMAS.TerrenosComodatos.Web.Models.DetailViewModel
+
+<div class="detail-container">
+    <h3 class="title"></h3>
+    <div class="row">
+        <button class="nuevo btn btn-outline-primary"><i class="fa fa-plus"></i></button>
+        <button class="refresh btn btn-outline-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+    </div>
+    <div class="tramite-detail">
+        <table class="tramite-detail-table">
+            <thead>
+                <tr>
+                    @{
+                        foreach (var det in Model.lsColumns)
+                        {
+                            <th data-field="@det.id">@det.name</th>
+                        }
+                    }
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

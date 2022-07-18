@@ -3,6 +3,11 @@ using System;
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public class TramitesListRequestViewModel
+    {
+        public short idtramite { get; set; }
+        public string entidad { get; set; }
+    }
     public class TramitePanelFilterViewModel
     {
         public short? anioexp { get; set; } = 0;
@@ -44,6 +49,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short idtipocontrato { get; set; }
         public string tipocontrato { get; set; }
         public decimal? areasolar { get; set; }
+        public string strareasolar { get; set; }
         public string aniosplazo { get; set; }
         public short idestado { get; set; }
         public string estado { get; set; }

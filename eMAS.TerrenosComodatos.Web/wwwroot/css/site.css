@@ -113,11 +113,24 @@ button.commands > * {
     max-width: 60em;
     margin: 0 auto;
 }
-.consult-ls .row {
-    margin:0;
+.consult-ls .row,
+.detail-container .row{
+    margin: 0;
 }
 
-.container-form > *, .tab-content-form > *{
+.detail-container {
+    width: 90%;
+    margin: auto;
+}
+    .detail-container table th:nth-child(1) {
+        width:10%;
+    }
+
+.container-observacion-detail table th:nth-child(2) {
+    width:10%
+}
+
+.container-form > *, .tab-content-form > * {
     padding-bottom: 1em;
 }
 

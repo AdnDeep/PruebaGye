@@ -15,6 +15,9 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             if (!respValCli)
                 return resultadoVista;
             ResultadoDTO<int> respServRemoto = new ResultadoDTO<int>();
+
+            _mapeadores.MapearDataEscritura(ref model);
+                
             if (model.idtramite == 0)
             {
                 respServRemoto= _repositorioExterno.Crear(model, usuario, controlador, pcclient);
@@ -29,7 +32,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             if (!valRespServ)
                 return resultadoVista;
 
-            _mapeadores.GenerateEditViewModelAfterSave(ref respServRemoto, ref resultadoVista);
+            _mapeadores.GenerateEditViewModelAfterSave(ref respServRemoto, ref resultadoVista, model.idtramite == 0);
 
             return resultadoVista;
         }
