@@ -1,0 +1,15 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.AnexoTramiteEditViewModel
+
+<div class="form-detail-content-edit">
+    <div class="container-detail-form">
+        <input id="IdAnexoTramite" class="idelemento" type="hidden" value="@Model.idanexotramite" />
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="enlace-detail-edit">Enlace</label>
+                <input type="text" class="form-control" id="enlace-detail-edit" value="@Model.link">
+                <div class="invalid-feedback">Campo Obligatorio.</div>
+            </div>
+        </div>
+        @await Html.PartialAsync("_CommandBottomDetail")
+    </div>
+</div>

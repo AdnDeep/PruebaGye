@@ -1,4 +1,5 @@
 ﻿using eMAS.TerrenosComodatos.Domain.Application;
+using eMAS.TerrenosComodatos.Domain.Constantes;
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Web.Controllers;
 using eMAS.TerrenosComodatos.Web.Extensions;
@@ -120,6 +121,115 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             resultadoVista = _casesUsesTramite.LeerDetalleListaTodos(request?.idtramite ?? 0, request?.entidad);
 
             return Json(resultadoVista);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditDetailView([FromBody] TramitesDetailRequestViewModel request)
+        {
+            string partialEditViewHtml = string.Empty;
+            var response = new ResultadoViewJson();
+            ITramitesDetailEditViewModel editModel = null;
+            try
+            {
+                string sEntidad = request?.entidad;
+                short sId = 0;
+                Int16.TryParse(request?.id, out sId);
+                if (sEntidad == AppConst.EntidadAnexo)
+                {
+                    var resultadoCasoUso = _casesUsesTramite.LeerDetalleAnexoPorId(sId);
+
+                    if (resultadoCasoUso.tipo == "EXITO")
+                    {
+                        editModel = resultadoCasoUso.dataresult;
+                        partialEditViewHtml = await this.RenderViewAsync("TabPanel/_AnexoForm", editModel, true);
+                        response.SetResultadoViewJson(true, "EXITO", string.Empty, partialEditViewHtml);
+                    }
+                    else
+                        response.SetResultadoViewJson(false, resultadoCasoUso.tipo, resultadoCasoUso.mensaje);
+                }
+                else if (sEntidad == AppConst.EntidadObservacion)
+                {
+                    var resultadoCasoUso = _casesUsesTramite.LeerDetalleObservacionPorId(sId);
+
+                    if (resultadoCasoUso.tipo == "EXITO")
+                    {
+                        editModel = resultadoCasoUso.dataresult;
+                        partialEditViewHtml = await this.RenderViewAsync("TabPanel/_ObservacionForm", editModel, true);
+                        response.SetResultadoViewJson(true, "EXITO", string.Empty, partialEditViewHtml);
+                    }
+                    else
+                        response.SetResultadoViewJson(false, resultadoCasoUso.tipo, resultadoCasoUso.mensaje);
+                }
+                else if (sEntidad == AppConst.EntidadOficio)
+                {
+                    var resultadoCasoUso = _casesUsesTramite.LeerDetalleOficioPorId(sId);
+
+                    if (resultadoCasoUso.tipo == "EXITO")
+                    {
+                        editModel = resultadoCasoUso.dataresult;
+                        partialEditViewHtml = await this.RenderViewAsync("TabPanel/_OficioForm", editModel, true);
+                        response.SetResultadoViewJson(true, "EXITO", string.Empty, partialEditViewHtml);
+                    }
+                    else
+                        response.SetResultadoViewJson(false, resultadoCasoUso.tipo, resultadoCasoUso.mensaje);
+                }
+                else if (sEntidad == AppConst.EntidadTopografia)
+                {
+                    var resultadoCasoUso = _casesUsesTramite.LeerDetalleTopografiaPorId(sId);
+
+                    if (resultadoCasoUso.tipo == "EXITO")
+                    {
+                        editModel = resultadoCasoUso.dataresult;
+                        partialEditViewHtml = await this.RenderViewAsync("TabPanel/_TopografiaForm", editModel, true);
+                        response.SetResultadoViewJson(true, "EXITO", string.Empty, partialEditViewHtml);
+                    }
+                    else
+                        response.SetResultadoViewJson(false, resultadoCasoUso.tipo, resultadoCasoUso.mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                response.SetResultadoViewJson(false, "ADVERTENCIA", "Se produjo un error al generar el formulario de Edición.");
+            }
+
+            return Json(response);
+        }
+        [HttpPost]
+        public IActionResult EditDetailSave([FromBody] TramitesDetailRequestEditViewModel modelEdit)
+        {
+            object response = new object();
+            try
+            {
+                response = _casesUsesTramite.GrabarDetalle(modelEdit?.model, "test", "SMC50002", "WEBCLIENT", modelEdit?.entidad);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ResultadoDTO<int> response2 = new ResultadoDTO<int>();
+                response2.mensaje = "Se produjo un error en el aplicativo.";
+                response2.tipo = "ADVERTENCIA";
+                return Json(response2);
+            }
+            return Json(response);
+        }
+        [HttpPost]
+        public IActionResult EditDetailDelete([FromBody] TramitesDetailRequestDeleteViewModel modelDelete)
+        {
+            object response = new object();
+            try
+            {
+                response = _casesUsesTramite.EliminarDetalle(modelDelete?.id, "test", "SMC50002", "WEBCLIENT", modelDelete.entidad);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ResultadoDTO<int> response2 = new ResultadoDTO<int>();
+                response2.mensaje = "Se produjo un error en el aplicativo.";
+                response2.tipo = "ADVERTENCIA";
+                return Json(response2);
+            }
+
+            return Json(response);
         }
         #endregion
     }

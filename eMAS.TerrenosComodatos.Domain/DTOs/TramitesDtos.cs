@@ -3,6 +3,21 @@ using System;
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public class TramitesDetailRequestDeleteViewModel
+    {
+        public string id { get; set; }
+        public string entidad { get; set; }
+    }
+    public class TramitesDetailRequestEditViewModel
+    {
+        public string model { get; set; }
+        public string entidad { get; set; }
+    }
+    public class TramitesDetailRequestViewModel
+    {
+        public string id { get; set; }
+        public string entidad { get; set; }
+    }
     public class TramitesListRequestViewModel
     {
         public short idtramite { get; set; }
@@ -72,7 +87,10 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short idtramite { get; set; }
         public string link { get; set; }
     }
-    public class AnexoTramiteEditViewModel
+    public interface ITramitesDetailEditViewModel
+    { 
+    }
+    public class AnexoTramiteEditViewModel : ITramitesDetailEditViewModel
     {
         public short idanexotramite { get; set; }
         public short idtramite { get; set; }
@@ -85,14 +103,14 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public DateTime fecha { get; set; }
         public string observacion { get; set; }
     }
-    public class ObservacionTramiteEditViewModel
+    public class ObservacionTramiteEditViewModel : ITramitesDetailEditViewModel
     {
         public short idtramitedesc { get; set; }
         public short idtramite { get; set; }
         public DateTime fecha { get; set; }
         public string observacion { get; set; }
     }
-    public class OficioTramiteEditViewModel
+    public class OficioTramiteEditViewModel : ITramitesDetailEditViewModel
     {
         public short idoficiootrasdirecciones { get; set; }
         public short idtramite { get; set; }
@@ -115,7 +133,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public DateTime? fecharespuesta { get; set; }
     }
 
-    public class TopografiaTerrenoEditViewMoel
+    public class TopografiaTerrenoEditViewMoel : ITramitesDetailEditViewModel
     {
         public short idtopografiaterreno { get; set; }
         public short idtipotopografiaterreno { get; set; }

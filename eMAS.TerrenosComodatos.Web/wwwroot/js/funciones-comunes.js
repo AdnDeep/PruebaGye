@@ -75,6 +75,47 @@ eMASReferencialJs.mostrarPopup = function (titulo, url, funcionCargar, funcionCe
     });
 };
 
+eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCargar, funcionCerrar) {
+    var popup = $("#popup-detail");
+    popup.find('.modal-title').html(titulo);
+    popup.find('.modal-content').css('border', '1px solid #4f6d81');
+    popup.find('.modal-header').css('background', '#fff url("../Referencial/Images/prompt_header.gif") repeat-x');
+    popup.find('.modal-header').css('background-size', 'cover');
+    popup.find('.modal-header').css('color', '#355468');
+    popup.find('.modal-footer').empty();
+    popup.find('.modal-footer').css('background', 'none');
+    popup.find('.modal-footer').css('border', 'none');
+
+    function RetreiveDataFromServer(data) {
+        if (data == null || data == undefined) {
+            console.error("Se ha producido una respuesta vacia desde el servidor");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {1}.");
+            return;
+        }
+        if (data.messagetype != "EXITO" ) {
+            console.error(data.message);
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {2}.");
+            return;
+        }
+        popup.find('.modal-body').html(data.content);
+        popup.modal('show');
+        funcionCargar();
+    }
+
+    eMASReferencialJs.FetchPost(url
+        , dataBody
+        , RetreiveDataFromServer
+        , eMASReferencialJs.FnGeneralVacia, "");
+
+    
+
+    popup.off('hidden.bs.modal', "**");
+    popup.on('hidden.bs.modal', function () {
+        //funcionCerrar();
+        popup.find('.modal-body').html("");
+    });
+};
+
 eMASReferencialJs.generarBoton = function (nombre, accion) {
     var boton = new Object();
     boton.Nombre = nombre;
@@ -160,8 +201,6 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
         popup.find('.modal-footer').html('');
     });
 };
-
-
 
 eMASReferencialJs.mostrarPanelMensajes = function (tipoMensaje, mensajes) {
     var popup = $('#DocumentoTramiteSolicitud').parents('.modal-dialog').parent().find('.modal-footer');

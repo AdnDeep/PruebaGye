@@ -1,6 +1,5 @@
-﻿using eMAS.TerrenosComodatos.Domain.DTOs;
-using eMAS.TerrenosComodatos.Domain.Interfaces;
-using Microsoft.Extensions.Logging;
+﻿using eMAS.TerrenosComodatos.Domain.Constantes;
+using eMAS.TerrenosComodatos.Domain.DTOs;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
@@ -19,25 +18,21 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         public object LeerDetalleListaTodos(short idtramite, string entidad)
         {
             object respuesta = null;
-            if (entidad == EntidadAnexo)
+            if (entidad == AppConst.EntidadAnexo)
             {
                 respuesta = LeerAnexoTodos(idtramite);
-            } else if (entidad == EntidadObservacion)
+            } else if (entidad == AppConst.EntidadObservacion)
             {
                 respuesta = LeerObservacionTodos(idtramite);
             }
-            else if (entidad == EntidadOficio)
+            else if (entidad == AppConst.EntidadOficio)
             {
             }
-            else if (entidad == EntidadTopografia)
+            else if (entidad == AppConst.EntidadTopografia)
             {
             }
             return respuesta;
         }
-
-        public object LeerDetallePorId(short identidad, string entidad)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

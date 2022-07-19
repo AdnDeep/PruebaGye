@@ -55,7 +55,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
             this.cancontinue = false;
             this.messagetype = "ADVERTENCIA";
             this.message = string.Empty;
-            this.message = string.Empty;
+            this.content = string.Empty;
         }
         public ResultadoViewJson(bool _cancontinue, string _messagetype, string _message, string _content)
         {

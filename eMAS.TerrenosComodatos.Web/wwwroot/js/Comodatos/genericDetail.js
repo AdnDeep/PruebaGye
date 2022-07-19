@@ -5,7 +5,26 @@ class Anexo {
         this.name = "Anexo";
     }
     ExecuteValidation() {
-        //console.log("me ejecutaron anexo " + this._anexo);
+    }
+    BindearEventosFormulario() {
+    }
+    FnCallbackBtnNuevoSuccess(data) {
+        //Bindear Eventos de formulario
+        console.log("ya regres&oacute; al cliente");
+    }
+    FnCallbackBtnNuevo(evt) {
+        let dataBody = {
+            id: this.id.toString(),
+            entidad: this.name
+        };
+        console.table(dataBody);
+        eMASReferencialJs.mostrarPopupDetail("Agregar Anexo", "Comodatos/SMC50002/EditDetailView", dataBody, this.FnCallbackBtnNuevoSuccess);
+    }
+    BindearEventosCabecera() {
+        let btnNuevo = document.querySelector(".container-anexo-detail button.nuevo-detail");
+        if (btnNuevo != undefined) {
+            btnNuevo.addEventListener("click", this.FnCallbackBtnNuevo.bind(this), false);
+        }
     }
     fillDataResponse(response) {
         let DataDetail = $(".container-anexo-detail table");
@@ -81,6 +100,15 @@ class Observacion {
     ExecuteValidation() {
         console.log("me ejecutaron observacion");
     }
+    BindearEventosCabecera() {
+        let btnNuevo = document.querySelector(".container-observacion-detail button.nuevo-detail");
+        if (btnNuevo != undefined) {
+            btnNuevo.addEventListener("click", function (e) {
+                console.log("quieren que agregue una nueva observacion");
+                eMASReferencialJs.mostrarPopupDetail("Agregar Anexo", "", "", "");
+            })
+        }
+    }
     fillDataResponse(response) {
         let DataDetail = $(".container-observacion-detail table");
         DataDetail.bootstrapTable('destroy');
@@ -149,7 +177,8 @@ class Observacion {
     }
 }
 class GenericDetail {    
-    constructor(idParentEntiy, entityName) {
+    constructor(idParentEntiy, id, entityName) {
+        this.id = id;
         this.entityName = entityName;
         this.idParentEntiy = idParentEntiy;
         this.EntityDetailFactory = {
@@ -167,6 +196,9 @@ class GenericDetail {
     BindEventsModalForm() {
     }
     BindEventsTable() {
+        let objEntityDetail = new this.EntityDetailFactory[this.entityName](this.idParentEntiy, this.id);
+
+        objEntityDetail.BindearEventosCabecera();
     }
     GetListAll() {
         let objEntityDetail = new this.EntityDetailFactory[this.entityName](this.idParentEntiy, 0);
@@ -177,8 +209,7 @@ class GenericDetail {
         };
         // Consultar
         eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetListDetail", dataBody, objEntityDetail.fillDataResponse, eMASReferencialJs.FnGeneralVacia, "");
-        // LlenarTabla
-        this.BindEventsTable();
+        
     }
     GetById() {
         // Consultar

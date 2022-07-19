@@ -19,6 +19,10 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         {
             model.idtramite = 0;
         }
+        public void GenerateEditViewModelEmptyAnexo(ref AnexoTramiteEditViewModel model) => model.idanexotramite = 0;
+        public void GenerateEditViewModelEmptyObservacion(ref ObservacionTramiteEditViewModel model) => model.idtramitedesc = 0;
+        public void GenerateEditViewModelEmptyOficio(ref OficioTramiteEditViewModel model) => model.idoficiootrasdirecciones = 0;
+        public void GenerateEditViewModelEmptyTopografia(ref TopografiaTerrenoEditViewMoel model) => model.idtopografiaterreno = 0;
         public void GenerateEditViewModel(ref ResultadoDTO<TramiteEditViewModel> model
             , ref ResultadoDTO<TramiteEditViewModel> salida)
         {

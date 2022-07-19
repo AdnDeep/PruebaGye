@@ -10,8 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\CaseUses\Tramites\Impl\Topografia\" />
-    <Folder Include="Application\CaseUses\Tramites\Impl\Oficio\" />
     <Folder Include="Application\CaseUses\Tramites\Validadores\Topografia\" />
     <Folder Include="Application\CaseUses\Tramites\Validadores\Oficio\" />
     <Folder Include="Application\CaseUses\Tramites\Validadores\Observacion\" />

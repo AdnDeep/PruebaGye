@@ -9,7 +9,10 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         ResultadoDTO<int> GrabarTramite(TramiteEditViewModel model, string usuario, string controlador, string pcclient);
         ResultadoDTO<int> EliminarTramite(short id, string usuario, string controlador, string pcclient);
         object LeerDetalleListaTodos(short idtramite, string entidad);
-        object LeerDetallePorId(short identidad, string entidad);
+        ResultadoDTO<AnexoTramiteEditViewModel> LeerDetalleAnexoPorId(short identidad);
+        ResultadoDTO<ObservacionTramiteEditViewModel> LeerDetalleObservacionPorId(short identidad);
+        ResultadoDTO<OficioTramiteEditViewModel> LeerDetalleOficioPorId(short identidad);
+        ResultadoDTO<TopografiaTerrenoEditViewMoel> LeerDetalleTopografiaPorId(short identidad);
         object GrabarDetalle(string model, string usuario, string controlador, string pcclient, string entidad);
         object EliminarDetalle(string model, string usuario, string controlador, string pcclient, string entidad);
     }

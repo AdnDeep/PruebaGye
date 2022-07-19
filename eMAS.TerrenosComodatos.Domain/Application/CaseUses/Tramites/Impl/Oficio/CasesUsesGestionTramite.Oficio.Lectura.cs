@@ -6,10 +6,10 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class CasesUsesGestionTramite : ICasesUsesGestionTramite
     {
-        public ResultadoDTO<AnexoTramiteEditViewModel> LeerDetalleAnexoPorId(short identidad)        
+        public ResultadoDTO<OficioTramiteEditViewModel> LeerDetalleOficioPorId(short identidad)        
         {
-            AnexoTramiteEditViewModel modelo = null;
-            ResultadoDTO<AnexoTramiteEditViewModel> resultadoVista = new ResultadoDTO<AnexoTramiteEditViewModel>();
+            OficioTramiteEditViewModel modelo = null;
+            ResultadoDTO<OficioTramiteEditViewModel> resultadoVista = new ResultadoDTO<OficioTramiteEditViewModel>();
             /*
             bool respValCli = _validadores.InputClienteGetDetailPorId(identidad, ref resultadoVista);
 
@@ -18,15 +18,15 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             */
             if (identidad == 0)
             {
-                modelo = new AnexoTramiteEditViewModel();
+                modelo = new OficioTramiteEditViewModel();
 
-                _mapeadores.GenerateEditViewModelEmptyAnexo(ref modelo);
+                _mapeadores.GenerateEditViewModelEmptyOficio(ref modelo);
 
                 resultadoVista.dataresult = modelo;
             }
             else if (identidad > 0)
             {
-                var respRepExterno = _repositorioExterno.GetAnexoPorId(identidad);
+                var respRepExterno = _repositorioExterno.GetOficioPorId(identidad);
 
                 bool respValServ = _validadores.RespuestaServidorRemotoDetailById(ref respRepExterno, ref resultadoVista);
 

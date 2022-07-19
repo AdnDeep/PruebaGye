@@ -368,10 +368,12 @@ const SMC50002 = function () {
     const fnGetDetails = function () {
         debugger;
         let idTramite = document.getElementById("IdTramite").value;
-        let objAnexoDetail = new GenericDetail(idTramite,"Anexo");
+        let objAnexoDetail = new GenericDetail(idTramite, 0,"Anexo");
         objAnexoDetail.GetListAll();
-        let objObservacionDetail = new GenericDetail(idTramite, "Observacion");
+        objAnexoDetail.BindEventsTable();
+        let objObservacionDetail = new GenericDetail(idTramite, 0, "Observacion");
         objObservacionDetail.GetListAll();
+        objObservacionDetail.BindEventsTable();
     };
 
     const fnSetearEvtFormulario = function () {

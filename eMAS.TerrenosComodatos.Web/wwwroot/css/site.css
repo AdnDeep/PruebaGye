@@ -139,6 +139,12 @@ button.commands > * {
     justify-content: space-between;
 }
 
+.command-btn-bottom-detail {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3em;
+}
+
 .command-btn-bottom {
     display: flex;
     justify-content: center;
