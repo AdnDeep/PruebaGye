@@ -9,7 +9,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class ValidadoresTramite
     {
-        public bool DataClienteEscrituraDetalle<T>(string entrada, ref ResultadoDTO<int> salida)
+        public bool DataClienteEscrituraDetalle<T>(string entrada, ref ResultadoDTO<int> salida, ref T modelo)
         {
             bool puedeContinuar = false;
             salida.tipo = "EXITO";
@@ -28,7 +28,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             }
             try
             {
-                var dataModel = JsonConvert.DeserializeObject<TramitePanelFilterViewModel>(entrada);
+                modelo = JsonConvert.DeserializeObject<T>(entrada);
             }
             catch (Exception ex)
             {

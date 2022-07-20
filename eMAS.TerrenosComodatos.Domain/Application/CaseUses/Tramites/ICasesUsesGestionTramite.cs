@@ -14,6 +14,6 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         ResultadoDTO<OficioTramiteEditViewModel> LeerDetalleOficioPorId(short identidad);
         ResultadoDTO<TopografiaTerrenoEditViewMoel> LeerDetalleTopografiaPorId(short identidad);
         object GrabarDetalle(string model, string usuario, string controlador, string pcclient, string entidad);
-        object EliminarDetalle(string model, string usuario, string controlador, string pcclient, string entidad);
+        object EliminarDetalle(short id, string usuario, string controlador, string pcclient, string entidad);
     }
 }

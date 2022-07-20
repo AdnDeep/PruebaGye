@@ -2,13 +2,15 @@
 
 @{ 
     eMAS.TerrenosComodatos.Web.Models.DetailViewModel anexoDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
-    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones" });
-    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "enlace", name = "Enlace" });
+    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible=true });
+    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "enlace", name = "Enlace", visible = true });
+    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
 
     eMAS.TerrenosComodatos.Web.Models.DetailViewModel observacionDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
-    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones" });
-    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "fecha", name = "Fecha" });
-    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "observacion", name = "observacion" });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "fecha", name = "Fecha", visible = true });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "observacion", name = "observacion", visible = true });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
 }
 <div class="form-content-edit">
     <div class="container-form">

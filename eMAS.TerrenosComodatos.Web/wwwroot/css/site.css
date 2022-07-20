@@ -1,4 +1,41 @@
 ﻿/* Chrome, Safari, Edge, Opera */
+
+.hidden {
+    display:none;
+}
+
+.error-label {
+    width: 80%;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    margin: 10px auto;
+    font-size: 16px;
+}
+
+.peligro {
+    border-left-color: #d9534f;
+    background-color: rgba(217, 83, 79, 0.1);
+}
+
+    .peligro strong {
+        color: #d9534f;
+    }
+
+label.error-label {
+    width:100%;
+}
+
+textarea {
+    resize:none;
+}
+
+    textarea.form-control {
+        max-height: 80em;
+    }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -123,11 +160,15 @@ button.commands > * {
     margin: auto;
 }
     .detail-container table th:nth-child(1) {
-        width:10%;
+        width: 15%;
+    }
+    .detail-container table td:nth-child(1) {
+        display: flex;
+        justify-content: space-around;
     }
 
 .container-observacion-detail table th:nth-child(2) {
-    width:10%
+    width:15%
 }
 
 .container-form > *, .tab-content-form > * {
@@ -174,7 +215,21 @@ button.commands > * {
     border-right: 1px solid #ccc;
 }
 
-
+.detail-container .list-container {
+    height: 20rem;
+    overflow: auto;
+}
+/*
+thead tr:nth-child(1) th {
+    position: sticky;
+    top: 0px;
+    z-index: 99999;
+}*/
+/*    .detail-container .list-container thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }*/
 /*Inicio Panel de Filtros*/
 .wrapper-panel {
     width: 100%;

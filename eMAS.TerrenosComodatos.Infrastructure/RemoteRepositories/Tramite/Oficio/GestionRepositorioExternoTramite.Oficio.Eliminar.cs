@@ -9,7 +9,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
         public ResultadoDTO<int> EliminarOficio(short id, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<int> resultado = new ResultadoDTO<int>();
-            string parameters = string.Format("?id={0}&usuario={1}&controlador={2}&pcclient={3}", id, usuario, controlador, pcclient);
+            string parameters = string.Format("?idOficioTramite={0}&usuario={1}&controlador={2}&pcclient={3}", id, usuario, controlador, pcclient);
 
             string urlResource = string.Concat(methodOficioDelete, parameters);
 

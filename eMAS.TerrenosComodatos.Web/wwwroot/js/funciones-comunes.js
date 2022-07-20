@@ -75,8 +75,20 @@ eMASReferencialJs.mostrarPopup = function (titulo, url, funcionCargar, funcionCe
     });
 };
 
+eMASReferencialJs.cerrarPopupDetail = function () {
+    let popup = $("#popup-detail");
+    if (popup != undefined)
+        popup.modal('hide');
+};
+
+eMASReferencialJs.ocultarMensajes = function () {
+    var popup = $("#VentanaMensajes");
+    if (popup != undefined)
+        popup.modal('hide');
+};
+
 eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCargar, funcionCerrar) {
-    var popup = $("#popup-detail");
+    let popup = $("#popup-detail");
     popup.find('.modal-title').html(titulo);
     popup.find('.modal-content').css('border', '1px solid #4f6d81');
     popup.find('.modal-header').css('background', '#fff url("../Referencial/Images/prompt_header.gif") repeat-x');
@@ -98,16 +110,24 @@ eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCa
             return;
         }
         popup.find('.modal-body').html(data.content);
-        popup.modal('show');
-        funcionCargar();
+        popup.modal({
+            "backdrop": "static",
+            "keyboard": false,
+            "show": true
+        });
+        //popup.modal('show');
+        //funcionCargar();
     }
 
     eMASReferencialJs.FetchPost(url
         , dataBody
         , RetreiveDataFromServer
-        , eMASReferencialJs.FnGeneralVacia, "");
+        , funcionCargar, "");
 
-    
+    //popup.off('shown.bs.modal', "**");
+    //popup.on('shown.bs.modal', function () {
+    //    funcionCargar();
+    //});
 
     popup.off('hidden.bs.modal', "**");
     popup.on('hidden.bs.modal', function () {
@@ -194,8 +214,8 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
         "show": true
     });
 
-    popup.on('hidden.bs.modal', function () {
-        funcionCerrar();
+    popup.on('hidden.bs.modal', function (e) {
+        //funcionCerrar();
         popup.find('.modal-header').html('');
         popup.find('.modal-body').html('');
         popup.find('.modal-footer').html('');
@@ -739,17 +759,20 @@ eMASReferencialJs.SetearEvtFormularioGenerico = function (fnRegresar, fnCancelar
     let _GuardarCtrl = document.querySelector(".guardar-edit");
     let _EliminarCtrl = document.querySelector(".eliminar-edit");
 
+    //_RegresarCtrl.replaceWith(_RegresarCtrl.cloneNode(true));
     _RegresarCtrl.removeEventListener('click', fnRegresar);
-    _RegresarCtrl.addEventListener('click', fnRegresar);
+    _RegresarCtrl.addEventListener('click', fnRegresar, { once: true });
 
     _CancelarCtrl.removeEventListener('click', fnCancelar);
-    _CancelarCtrl.addEventListener('click', fnCancelar);
+    _CancelarCtrl.addEventListener('click', fnCancelar, { once: true });
 
+    //_GuardarCtrl.replaceWith(_GuardarCtrl.cloneNode(true));
     _GuardarCtrl.removeEventListener('click', fnGuardar);
-    _GuardarCtrl.addEventListener('click', fnGuardar);
+    _GuardarCtrl.addEventListener('click', fnGuardar, { once: true });
 
+    //_EliminarCtrl.replaceWith(_EliminarCtrl.cloneNode(true));
     _EliminarCtrl.removeEventListener('click', fnEliminar);
-    _EliminarCtrl.addEventListener('click', fnEliminar);
+    _EliminarCtrl.addEventListener('click', fnEliminar, { once: true });
 };
 
 eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar, dataLsTable) {
@@ -934,6 +957,23 @@ eMASReferencialJs.EsDecimalConPunto = function (evt) {
     }
     return true;
 }
+
+eMASReferencialJs.SetearLabelError = function (mostrar, elementName, mensaje) {
+    let elementCtrl = document.querySelector(elementName);
+    if (elementCtrl == undefined || elementCtrl == null) {
+        console.error("El elemento No Existe");
+        return;
+    }
+    if (!mostrar) {
+        elementCtrl.classList.remove("hidden");
+        elementCtrl.classList.add("hidden");
+        elementCtrl.innerHTML = "";
+    } else {
+        let mensajeCompleto = `<strong>Error</strong> - ${mensaje}`;
+        elementCtrl.classList.remove("hidden");
+        elementCtrl.innerHTML = mensajeCompleto;
+    }
+};
 
 eMASReferencialJs.EmisionPromptWarning = function (mensaje, accionSi, accionNo) {
     const accionCierre = "$(this).parents('.modal-dialog').parent().modal('hide');";

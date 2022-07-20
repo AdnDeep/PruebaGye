@@ -25,6 +25,9 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 
             _mapeadores.RespuestaServidorDetailList(ref respRepExterno, ref resultadoVista);
 
+            // Procesamiento 2 se traducen fechas a formato string
+            _mapeadores.MapearDataLecturaTodosObservacion(ref resultadoVista);
+
             return resultadoVista;
         }
     }

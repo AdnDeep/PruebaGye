@@ -1,10 +1,10 @@
-class Anexo {
+class Oficio {
     constructor(_idTramite, _id) {
         this.idTramite = _idTramite;
         this.id = _id;
-        this.name = "Anexo";
-        this.mensajeGuardadoExito = "Se ha guardado el Anexo.";
-        this.mensajeEliminadoExito = "Se ha eliminado el Anexo.";
+        this.name = "Oficio";
+        this.mensajeGuardadoExito = "Se ha guardado el Oficio.";
+        this.mensajeEliminadoExito = "Se ha eliminado el Oficio.";
         this.contenedorErrorDefault = "#popup-detail .container-detail-form label.error-label";
     }
     GetDataCrls() {
@@ -85,12 +85,12 @@ class Anexo {
         let btnCancelarDetail = document.querySelector("#popup-detail button.cancelar-edit-detail");
         if (btnCancelarDetail != undefined) {
             btnCancelarDetail.removeEventListener("click", this.FnCallbackDetailCancelar.bind(this));
-            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this), { once: true });
+            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this));
         }
         
         if (btnGuardarDetail != undefined) {
             btnGuardarDetail.removeEventListener("click", this.FnCallbackDetailGuardar.bind(this));
-            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this), { once: true });
+            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this));
         }
     }
     FnCallbackBtnNuevo(evt) {
@@ -183,8 +183,8 @@ class Anexo {
                 valign: 'middle',
                 clickToSelect: false,
                 formatter: function (value, row, index) {
-                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Anexo\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
-                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Anexo\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
+                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Oficio\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
+                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Oficio\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }
             },
@@ -192,10 +192,10 @@ class Anexo {
         });
     }
     nameEntity() {
-        return "Anexo";
+        return "Oficio";
     }
 }
-class Observacion {
+class Topografia {
     constructor(_idTramite, _id) {
         this.idTramite = _idTramite;
         this.id = _id;
@@ -291,12 +291,12 @@ class Observacion {
         if (btnCancelarDetail != undefined) {
             //btnCancelarDetail.replaceWith(btnCancelarDetail.cloneNode(true));
             btnCancelarDetail.removeEventListener("click", this.FnCallbackDetailCancelar.bind(this));
-            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this), { once:true});
+            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this));
         }
         if (btnGuardarDetail != undefined) {
             //btnGuardarDetail.replaceWith(btnGuardarDetail.cloneNode(true));
             btnGuardarDetail.removeEventListener("click", this.FnCallbackDetailGuardar.bind(this));
-            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this), { once: true });
+            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this));
         }
         
         let fechaObservacion = document.querySelector("#fechaObervacionDetail");
@@ -394,8 +394,8 @@ class Observacion {
                 valign: 'middle',
                 clickToSelect: false,
                 formatter: function (value, row, index) {
-                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Observacion\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
-                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Observacion\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
+                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Topografia\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
+                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Topografia\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }
             },
@@ -403,58 +403,6 @@ class Observacion {
         });
     }
     nameEntity() {
-        return "Observacion";
-    }
-}
-class GenericDetail {    
-    constructor(idParentEntiy, id, entityName) {
-        this.id = id;
-        this.entityName = entityName;
-        this.idParentEntiy = idParentEntiy;
-        this.EntityDetailFactory = {
-            Anexo,
-            Observacion,
-            Oficio,
-            Topografia
-        }
-    }
-    ValidateSaveData() {
-        let objEntityDetail = new this.EntityDetailFactory[entityName](idParentEntiy, 0);
-
-        objEntityDetail.ExecuteValidation();
-    }
-    GetCustomDataForm() {
-    }
-    BindEventsModalForm() {
-    }
-    BindEventsTable() {
-        let objEntityDetail = new this.EntityDetailFactory[this.entityName](this.idParentEntiy, this.id);
-
-        objEntityDetail.BindearEventosCabecera();
-    }
-    GetListAll() {
-        let objEntityDetail = new this.EntityDetailFactory[this.entityName](this.idParentEntiy, 0);
-        objEntityDetail.FnListarAll();
-        /*
-        let dataBody = {
-            idtramite: this.idParentEntiy,
-            entidad: objEntityDetail.nameEntity()
-        };
-        // Consultar
-        eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetListDetail", dataBody, objEntityDetail.fillDataResponse, eMASReferencialJs.FnGeneralVacia, "");
-        */
-    }
-    GetById() {
-        let objEntityDetail = new this.EntityDetailFactory[this.entityName](this.idParentEntiy, this.id);
-        objEntityDetail.FnEditarElemento();
-    }
-    DeleteById() {
-        let objEntityDetail = new this.EntityDetailFactory[this.entityName](this.idParentEntiy, this.id);
-        objEntityDetail.FnEliminarElemento();
-    }
-    Save() {
-        this.ValidateSaveData();
-    }
-    Delete() {
+        return "Topografia";
     }
 }

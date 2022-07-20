@@ -218,7 +218,9 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             object response = new object();
             try
             {
-                response = _casesUsesTramite.EliminarDetalle(modelDelete?.id, "test", "SMC50002", "WEBCLIENT", modelDelete.entidad);
+                short sId = 0;
+                Int16.TryParse(modelDelete?.id, out sId);
+                response = _casesUsesTramite.EliminarDetalle(sId, "test", "SMC50002", "WEBCLIENT", modelDelete.entidad);
             }
             catch (Exception ex)
             {

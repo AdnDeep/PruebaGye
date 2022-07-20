@@ -10,6 +10,37 @@ const SMC50002 = function () {
     const dsrBeneficiarios = "DSRBENEFICIARIOS";
     const dsrEstados = "DSRESTADOSTRAMITES";
 
+    const fnEliminarDetalleExito = function (entidad, mensaje) {
+        if (entidad == "" || entidad == null || entidad == undefined) {
+            console.error("La entidad eliminada es incorrecta");
+            return;
+        }
+        let idTramite = document.getElementById("IdTramite").value;
+        if (idTramite == 0)
+            return;
+        let objDetail = new GenericDetail(idTramite, 0, entidad);
+        objDetail.GetListAll();
+        setTimeout(() => {
+            eMASReferencialJs.SetearMensajeDefaultExito(mensaje);
+        }, 200);
+    }
+
+    const fnGuardaDetalleExito = function (entidad, mensaje) {
+        if (entidad == "" || entidad == null || entidad == undefined) {
+            console.error("La entidad actualizada es incorrecta");
+            return;
+        }
+        let idTramite = document.getElementById("IdTramite").value;
+        if (idTramite == 0)
+            return;
+        let objDetail = new GenericDetail(idTramite, 0, entidad);
+        objDetail.GetListAll();
+        setTimeout(() => {
+            eMASReferencialJs.SetearMensajeDefaultExito(mensaje);
+        }, 200);
+        
+    };
+
     const fnRespuestaEliminarRegistro = function (response) {
         //eMASReferencialJs.ocultarProgress();
         
@@ -38,7 +69,11 @@ const SMC50002 = function () {
     };
 
     const fnEliminarRegistroConsult = function () {
-        let strAccionSi = "objSMC50002.EliminarTramite();"
+        let strAccionSi = "";
+        //strAccionSi += "eMASReferencialJs.ocultarMensajes();";
+        //strAccionSi += "$(this).parents('.modal-dialog').parent().modal('hide');";
+        strAccionSi += "objSMC50002.EliminarTramite();"
+        
         let mensaje = "&#191;Est&aacute; Seguro que desea eliminar el tr&aacute;mite?";
         eMASReferencialJs.EmisionPromptWarning(mensaje, strAccionSi);
     };
@@ -66,6 +101,14 @@ const SMC50002 = function () {
             },
             success: fnRespuestaEliminarRegistro
         }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
+    };
+
+    const fnEliminarRegistroDetail = function (id, entidad) {
+        let idTramite = document.getElementById("IdTramite").value;
+        if (idTramite == 0)
+            return;
+        let objDetail = new GenericDetail(idTramite, id, entidad);
+        objDetail.DeleteById();
     };
 
     const fnRespuestaGuardarRegistro = function (response) {
@@ -211,6 +254,31 @@ const SMC50002 = function () {
             success: fnSuccessEditAction
         }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
     };
+
+    const EvtClickEditarElementDetail = function (id, entidad) {
+        let idTramite = document.getElementById("IdTramite").value;
+        if (idTramite <= 0) {
+            console.error("Se produjo un error dado que el tramite no existe.");
+            return;
+        }
+        let objAnexoDetail = new GenericDetail(idTramite, id, entidad);
+        objAnexoDetail.GetById();
+    };
+
+    const EvtClickDeleteElementDetail = function (id, entidad) {
+        let idTramite = document.getElementById("IdTramite").value;
+        if (idTramite <= 0) {
+            console.error("Se produjo un error dado que el tramite no existe.");
+            return;
+        }
+        let strAccionSi = "";
+        //strAccionSi += "eMASReferencialJs.ocultarMensajes();";
+        //strAccionSi += "$(this).parents('.modal-dialog').parent().modal('hide');";
+        strAccionSi += "objSMC50002.EliminarTramiteDetail(" +id +",'"+entidad+"');";
+        
+        let mensaje = "&#191;Est&aacute; Seguro que desea eliminar el registro?";
+        eMASReferencialJs.EmisionPromptWarning(mensaje, strAccionSi);
+    }
 
     const EvtClickEditarElemento = function (id) {
         let codigoB = id;
@@ -366,8 +434,9 @@ const SMC50002 = function () {
     };
 
     const fnGetDetails = function () {
-        debugger;
         let idTramite = document.getElementById("IdTramite").value;
+        if (idTramite == 0)
+            return;
         let objAnexoDetail = new GenericDetail(idTramite, 0,"Anexo");
         objAnexoDetail.GetListAll();
         objAnexoDetail.BindEventsTable();
@@ -559,8 +628,23 @@ const SMC50002 = function () {
         BtnEditRowItem: function (id) {
             EvtClickEditarElemento(id);
         },
+        BtnEditRowItemDetail: function (id, entidad) {
+            EvtClickEditarElementDetail(id, entidad);
+        },
+        BtnDeleteRowItemDetail: function (id, entidad) {
+            EvtClickDeleteElementDetail(id, entidad);
+        },
         EliminarTramite: function () {
             fnEliminarRegistro();
+        },
+        EliminarTramiteDetail: function (id, entidad) {
+            fnEliminarRegistroDetail(id, entidad);
+        },
+        CallbackPosGuardarDetalleExito: function (entidad, mensaje) {
+            fnGuardaDetalleExito(entidad, mensaje);
+        },
+        CallbackPosEliminarDetalleExito: function (entidad, mensaje) {
+            fnEliminarDetalleExito(entidad, mensaje);
         }
     };
 }

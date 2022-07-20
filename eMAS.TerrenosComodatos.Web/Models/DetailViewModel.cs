@@ -7,6 +7,7 @@ namespace eMAS.TerrenosComodatos.Web.Models
     {
         public string id { get; set; }
         public string name { get; set; }
+        public bool visible { get; set; }
     }
     public class DetailViewModel
     {

@@ -101,6 +101,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short idtramitedesc { get; set; }
         public short idtramite { get; set; }
         public DateTime fecha { get; set; }
+        public string strfecha { get; set; }
         public string observacion { get; set; }
     }
     public class ObservacionTramiteEditViewModel : ITramitesDetailEditViewModel
