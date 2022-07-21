@@ -11,6 +11,21 @@
     observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "fecha", name = "Fecha", visible = true });
     observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "observacion", name = "observacion", visible = true });
     observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+
+    eMAS.TerrenosComodatos.Web.Models.DetailViewModel oficioDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "direccion", name = "Dirección", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "secuencia", name = "Sec.", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficio", name = "Oficio", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+
+    eMAS.TerrenosComodatos.Web.Models.DetailViewModel topografiaDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "tipo", name = "Tipo", visible = true });
+    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficio", name = "Oficio", visible = true });
+    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
+    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
 }
 <div class="form-content-edit">
     <div class="container-form">
@@ -31,6 +46,9 @@
                         <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Seguimientos</a>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="topografia-tab" data-toggle="tab" href="#topografia" role="tab" aria-controls="topografia" aria-selected="false">Topograf&iacute;a</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
                         <a class="nav-link" id="cabecera-2-tab" data-toggle="tab" href="#cabecera-2" role="tab" aria-controls="cabecera-2" aria-selected="false">Datos</a>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -48,9 +66,14 @@
                 @if (Model.idtramite > 0)
                 {
                     <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
-                        <p>
-                            Placeholder content for the tab panel. This one relates to the profile tab. You got the finest architecture. Passport stamps, she's cosmopolitan. Fine, fresh, fierce, we got it on lock. Never planned that one day I'd be losing you. She eats your heart out. Your kiss is cosmic, every move is magic. I mean the ones, I mean like she's the one. Greetings loved ones let's take a journey. Just own the night like the 4th of July! But you'd rather get wasted.
-                        </p>
+                        <div class="container-oficio-detail">
+                            @await Html.PartialAsync("TabPanel/_Detail", oficioDetailViewModel)
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="topografia" role="tabpanel" aria-labelledby="topografia-tab">
+                        <div class="container-topografia-detail">
+                            @await Html.PartialAsync("TabPanel/_Detail", topografiaDetailViewModel)
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="cabecera-2" role="tabpanel" aria-labelledby="cabecera-2-tab">
                         @await Html.PartialAsync("TabPanel/_Cabecera2", Model)

@@ -5,18 +5,18 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 {
     public partial class CasesUsesGestionTramite : ICasesUsesGestionTramite
     {
-        private ResultadoDTO<List<ObservacionTramiteListViewModel>> LeerObservacionTodos(short idtramite)
+        private ResultadoDTO<List<OficioTramiteListViewModel>> LeerOficioTodos(short idtramite)
         {
-            ResultadoDTO<List<ObservacionTramiteListViewModel>> resultadoVista = new ResultadoDTO<List<ObservacionTramiteListViewModel>>();
+            ResultadoDTO<List<OficioTramiteListViewModel>> resultadoVista = new ResultadoDTO<List<OficioTramiteListViewModel>>();
 
             bool respValInputClient = _validadores.InputClientGetDetailListPorIdTramite(idtramite, ref resultadoVista);
 
             if (!respValInputClient)
                 return resultadoVista;
 
-            var respRepExterno = _repositorioExterno.GetObservacionsPorIdTramite(idtramite);
+            var respRepExterno = _repositorioExterno.GetOficiosPorIdTramite(idtramite);
 
-            bool respValServ = _validadores.RespuestaServidorRemotoDetalleListaTodos(ref respRepExterno, ref resultadoVista);
+            bool respValServ = _validadores.RespuestaServidorRemotoDetalleListaTodos<List<OficioTramiteListViewModel>>(ref respRepExterno, ref resultadoVista);
 
             if (!respValServ)
                 return resultadoVista;
@@ -24,7 +24,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             _mapeadores.RespuestaServidorDetailList(ref respRepExterno, ref resultadoVista);
 
             // Procesamiento 2 se traducen fechas a formato string
-            _mapeadores.DataLecturaTodosObservacion(ref resultadoVista);
+            _mapeadores.DataLecturaTodosOficio(ref resultadoVista);
 
             return resultadoVista;
         }

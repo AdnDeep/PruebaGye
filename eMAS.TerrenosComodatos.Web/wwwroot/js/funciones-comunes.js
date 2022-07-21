@@ -1000,6 +1000,12 @@ eMASReferencialJs.EmisionPromptWarning = function (mensaje, accionSi, accionNo) 
     );
 };
 
+eMASReferencialJs.ConsultPosLlenarComboGeneric = function (parameter1, parameter2) {    
+    let _ctrl = document.querySelector(`#${parameter1}`);
+    let _idEntity = document.querySelector(`#${parameter2}`);
+    if (_ctrl != undefined && _idEntity != undefined)
+        eMASReferencialJs.SelectItemByValue(_ctrl, _idEntity.value);
+};
 //eMASReferencialJs.SetearEventoCollapse = function (target, containerToggle, tableName) {
 //    $(target).on('hide.bs.collapse', function () {
 //        let dataToggle = document.querySelector(containerToggle);

@@ -11,6 +11,7 @@ namespace eMAS.Api.TerrenosComodatos.Entities
         public short IdTramite { get; set; }
         public short Secuencia { get; set; }
         public short IdDireccion { get; set; }
+        public string Direccion { get; set; }
         public string Oficio { get; set; }
         public DateTime? FechaEnvio { get; set; }
         public string OficioRespuesta { get; set; }

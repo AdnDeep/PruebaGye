@@ -109,6 +109,7 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short idtramitedesc { get; set; }
         public short idtramite { get; set; }
         public DateTime fecha { get; set; }
+        public string strfecha { get; set; }
         public string observacion { get; set; }
     }
     public class OficioTramiteEditViewModel : ITramitesDetailEditViewModel
@@ -119,8 +120,10 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short iddireccion { get; set; }
         public string oficio { get; set; }
         public DateTime? fechaenvio { get; set; }
+        public string strfechaenvio { get; set; }
         public string oficiorespuesta { get; set; }
         public DateTime? fecharespuesta { get; set; }
+        public string strfecharespuesta { get; set; }
     }
     public class OficioTramiteListViewModel
     {
@@ -128,21 +131,27 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short idtramite { get; set; }
         public short secuencia { get; set; }
         public short iddireccion { get; set; }
+        public string direccion { get; set; }
         public string oficio { get; set; }
         public DateTime? fechaenvio { get; set; }
+        public string strfechaenvio { get; set; }
         public string oficiorespuesta { get; set; }
         public DateTime? fecharespuesta { get; set; }
+        public string strfecharespuesta { get; set; }
     }
 
     public class TopografiaTerrenoEditViewMoel : ITramitesDetailEditViewModel
     {
         public short idtopografiaterreno { get; set; }
         public short idtipotopografiaterreno { get; set; }
+        public string tipotopografiaterreno { get; set; }
         public short idtramite { get; set; }
         public string oficio { get; set; }
         public DateTime? fechaenvio { get; set; }
+        public string strfechaenvio { get; set; }
         public string oficiorespuesta { get; set; }
         public DateTime? fecharespuesta { get; set; }
+        public string strfecharespuesta { get; set; }
     }
     public class TopografiaTerrenoListViewMoel
     {
@@ -152,7 +161,9 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public short idtramite { get; set; }
         public string oficio { get; set; }
         public DateTime? fechaenvio { get; set; }
+        public string strfechaenvio { get; set; }
         public string oficiorespuesta { get; set; }
         public DateTime? fecharespuesta { get; set; }
+        public string strfecharespuesta { get; set; }
     }
 }

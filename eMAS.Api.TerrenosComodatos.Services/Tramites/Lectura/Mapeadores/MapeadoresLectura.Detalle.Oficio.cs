@@ -36,6 +36,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                     idtramite = det.IdTramite,
                     secuencia = det.Secuencia,
                     iddireccion = det.IdDireccion,
+                    direccion = det.Direccion,
                     oficio = det.Oficio,
                     fechaenvio = det.FechaEnvio,
                     oficiorespuesta = det.OficioRespuesta,

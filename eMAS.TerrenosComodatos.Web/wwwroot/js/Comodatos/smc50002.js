@@ -443,6 +443,13 @@ const SMC50002 = function () {
         let objObservacionDetail = new GenericDetail(idTramite, 0, "Observacion");
         objObservacionDetail.GetListAll();
         objObservacionDetail.BindEventsTable();
+        let objOficioDetail = new GenericDetail(idTramite, 0, "Oficio");
+        objOficioDetail.GetListAll();
+        objOficioDetail.BindEventsTable();
+        let objTopografiaDetail = new GenericDetail(idTramite, 0, "Topografia");
+        objTopografiaDetail.GetListAll();
+        objTopografiaDetail.BindEventsTable();
+
     };
 
     const fnSetearEvtFormulario = function () {

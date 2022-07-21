@@ -33,6 +33,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 {
                     idtopografiaterreno = det.IdTopografiaTerreno,
                     idtipoTopografiaterreno = det.IdTipoTopografiaTerreno,
+                    tipotopografiaterreno = det.TipoTopografiaTerreno,
                     idtramite = det.IdTramite,
                     oficio = det.Oficio,
                     fechaenvio = det.FechaEnvio,

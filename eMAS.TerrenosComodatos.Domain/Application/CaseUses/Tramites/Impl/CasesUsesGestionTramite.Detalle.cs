@@ -1,5 +1,4 @@
 ﻿using eMAS.TerrenosComodatos.Domain.Constantes;
-using eMAS.TerrenosComodatos.Domain.DTOs;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
@@ -18,9 +17,11 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             }
             else if (entidad == AppConst.EntidadOficio)
             {
+                respuesta = EliminarOficio(id, usuario, controlador, pcclient);
             }
             else if (entidad == AppConst.EntidadTopografia)
             {
+                respuesta = EliminarTopografia(id, usuario, controlador, pcclient);
             }
             return respuesta;
         }
@@ -32,9 +33,17 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             {
                 respuesta = GrabarAnexo(model, usuario, controlador, pcclient);
             }
-            if (entidad == AppConst.EntidadObservacion)
+            else if (entidad == AppConst.EntidadObservacion)
             {
                 respuesta = GrabarObservacion(model, usuario, controlador, pcclient);
+            }
+            else if (entidad == AppConst.EntidadOficio)
+            {
+                respuesta = GrabarOficio(model, usuario, controlador, pcclient);
+            }
+            else if (entidad == AppConst.EntidadTopografia)
+            {
+                respuesta = GrabarTopografia(model, usuario, controlador, pcclient);
             }
             return respuesta;
         }
@@ -51,9 +60,11 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             }
             else if (entidad == AppConst.EntidadOficio)
             {
+                respuesta = LeerOficioTodos(idtramite);
             }
             else if (entidad == AppConst.EntidadTopografia)
             {
+                respuesta = LeerTopografiaTodos(idtramite);
             }
             return respuesta;
         }

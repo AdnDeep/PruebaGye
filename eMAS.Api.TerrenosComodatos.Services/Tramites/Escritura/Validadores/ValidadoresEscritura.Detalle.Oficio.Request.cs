@@ -97,7 +97,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            if (entrada.iddireccion != 0)
+            if (entrada.iddireccion <= 0)
             {
                 salida.mensaje = "El parámetro de Entrada Id Dirección debe ser igual a 0";
                 salida.tipo = "ADVERTENCIA";

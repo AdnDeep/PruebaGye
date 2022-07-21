@@ -3,32 +3,70 @@ class Oficio {
         this.idTramite = _idTramite;
         this.id = _id;
         this.name = "Oficio";
+        this.dsrDireccion = "DSRDIRECCION";
         this.mensajeGuardadoExito = "Se ha guardado el Oficio.";
         this.mensajeEliminadoExito = "Se ha eliminado el Oficio.";
         this.contenedorErrorDefault = "#popup-detail .container-detail-form label.error-label";
     }
-    GetDataCrls() {
+    GetDataCrls() {        
         let idTramiteCtrl = document.querySelector(".form-edit-container #IdTramite");
-        let idAnexoTramiteCtrl = document.querySelector("#popup-detail #IdAnexoTramite");
-        let linkCtrl = document.querySelector("#popup-detail #enlaceDetailEdit");
+        let idOficioTramiteCtrl = document.querySelector("#popup-detail #IdOficioTramite");
+        let direccionCtrl = document.querySelector("#popup-detail #direcciondetail");
+        let oficioCtrl = document.querySelector("#popup-detail #oficioDetail");
+        let fechaEnvioCtrl = document.querySelector("#popup-detail #fechaEnvioDetail");
+        let oficioRespuestaCtrl = document.querySelector("#popup-detail #oficioRespuestaDetail");
+        let fechaRespuestaCtrl = document.querySelector("#popup-detail #fechaRespuestaDetail");
+
         let data = {};
 
         if (idTramiteCtrl != undefined)
             data["idtramite"] = idTramiteCtrl.value;
-        if (idAnexoTramiteCtrl != undefined)
-            data["idanexotramite"] = idAnexoTramiteCtrl.value;
-        if (linkCtrl != undefined)
-            data["link"] = linkCtrl.value;
+        if (idOficioTramiteCtrl != undefined)
+            data["idoficiootrasdirecciones"] = idOficioTramiteCtrl.value;
+        data["secuencia"] = 0;
+        if (direccionCtrl != undefined)
+            data["iddireccion"] = direccionCtrl.value;
+
+        if (oficioCtrl != undefined)
+            data["oficio"] = oficioCtrl.value;
+        let _fechaEnvio = "";
+        if (fechaEnvioCtrl != undefined)
+            _fechaEnvio = eMASReferencialJs.FormatearFecha(fechaEnvioCtrl.value);            
+        data["fechaenvio"] = _fechaEnvio;
+
+        if (oficioRespuestaCtrl != undefined)
+            data["oficiorespuesta"] = oficioRespuestaCtrl.value;
+        let _fechaRespuesta = "";
+        if (fechaRespuestaCtrl != undefined)
+            _fechaRespuesta = eMASReferencialJs.FormatearFecha(fechaRespuestaCtrl.value);
+        data["fecharespuesta"] = _fechaRespuesta;
 
         return data;
     }
     ExecuteValidation(data) {
         let objRespuesta = { isvalid: true, mensaje: "" };
 
-        if (data.link == null || data.link == undefined || data.link == "") {
+        if (data.iddireccion == null || data.iddireccion == undefined || data.iddireccion == "") {
+            objRespuesta.mensaje = "La Direcci&oacute;n es un campo obligatorio.";
+            objRespuesta.isvalid = false;
+            return objRespuesta;
+        }
+        if (data.oficio == null || data.oficio == undefined || data.oficio == "") {
             objRespuesta.mensaje = "El enlace es un campo obligatorio.";
             objRespuesta.isvalid = false;
             return objRespuesta;
+        }
+        if (data.fechaenvio == null || data.fechaenvio == undefined || data.fechaenvio == "") {
+            objRespuesta.mensaje = "La fecha Envio es un campo obligatorio.";
+            objRespuesta.isvalid = false;
+            return objRespuesta;
+        }
+        if (!(data.oficiorespuesta == null || data.oficiorespuesta == undefined || data.oficiorespuesta == "")) {
+            if (data.fecharespuesta == null || data.fecharespuesta == undefined || data.fecharespuesta == "") {
+                objRespuesta.mensaje = "La fecha Respuesta es un campo obligatorio.";
+                objRespuesta.isvalid = false;
+                return objRespuesta;
+            }
         }
 
         return objRespuesta;
@@ -92,9 +130,26 @@ class Oficio {
             btnGuardarDetail.removeEventListener("click", this.FnCallbackDetailGuardar.bind(this));
             btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this));
         }
+
+        let fechaEnvio = document.querySelector("#fechaEnvioDetail");
+        if (fechaEnvio != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fechaEnvioDetail");
+
+        let fechaRespuesta = document.querySelector("#fechaRespuestaDetail");
+        if (fechaRespuesta != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fechaRespuestaDetail");
+
+        let arr = [];
+        arr.push({
+            key: this.dsrDireccion, ctrl: "direcciondetail", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"
+            , fnCallback2: eMASReferencialJs.ConsultPosLlenarComboGeneric
+            , parameter1: "direcciondetail"
+            , parameter2: "IdDireccionDetail"
+        });
+        eMASReferencialJs.CargarCombosGenerico(arr);
     }
     FnCallbackBtnNuevo(evt) {
-        this.FnEditarElemento("Agregar Anexo");
+        this.FnEditarElemento("Agregar Oficio");
     }
     FnEliminarElemento() {
         let dataBody = {
@@ -112,11 +167,12 @@ class Oficio {
         };
         let strTitulo = "";
         if (titulo == undefined)
-            strTitulo = "Actualizar Anexo";
+            strTitulo = "Actualizar Oficio";
         else
             strTitulo = titulo;
 
-        eMASReferencialJs.mostrarPopupDetail(strTitulo, "Comodatos/SMC50002/EditDetailView", dataBody, this.FnCallbackBtnNuevoSuccess.bind(this));
+        eMASReferencialJs.mostrarPopupDetail(strTitulo, "Comodatos/SMC50002/EditDetailView"
+            , dataBody, this.FnCallbackBtnNuevoSuccess.bind(this));
     }
     FnListarAll() {
         let dataBody = {
@@ -124,20 +180,21 @@ class Oficio {
             entidad: this.name
         };
         // Consultar
-        eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetListDetail", dataBody, this.fillDataResponse.bind(this), eMASReferencialJs.FnGeneralVacia, "");
+        eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetListDetail"
+            , dataBody, this.fillDataResponse.bind(this), eMASReferencialJs.FnGeneralVacia, "");
     }
     BindearEventosCabecera() {
-        let btnNuevo = document.querySelector(".container-anexo-detail button.nuevo-detail");
+        let btnNuevo = document.querySelector(".container-oficio-detail button.nuevo-detail");
         if (btnNuevo != undefined) {
             btnNuevo.addEventListener("click", this.FnCallbackBtnNuevo.bind(this), false);
         }
-        let btnRefresh = document.querySelector(".container-anexo-detail button.refresh-detail");
+        let btnRefresh = document.querySelector(".container-oficio-detail button.refresh-detail");
         if (btnRefresh != undefined) {
             btnRefresh.addEventListener("click", this.FnListarAll.bind(this), false);
         }
     }
     fillDataResponse(response) {
-        let DataDetail = $(".container-anexo-detail table");
+        let DataDetail = $(".container-oficio-detail table");
         DataDetail.bootstrapTable('destroy');
         let resultadoIncorrecto = false;
         let sinDatos = false;
@@ -161,7 +218,7 @@ class Oficio {
         if (resultadoIncorrecto || sinDatos) {
             DataDetail.bootstrapTable(
                 {
-                    columns: [{},{}, {}]
+                    columns: [{}, {}, {}, {}, {}, {}]
             });
             return;
         }
@@ -169,8 +226,11 @@ class Oficio {
         
         for (let i = 0; i < response.dataresult.length; i++) {
             data.push({
-                enlace: response.dataresult[i].link,
-                id: response.dataresult[i].idanexotramite
+                direccion: response.dataresult[i].direccion,
+                secuencia: response.dataresult[i].secuencia,
+                oficio: response.dataresult[i].oficio,
+                oficiorespuesta: response.dataresult[i].oficiorespuesta,
+                id: response.dataresult[i].idoficiootrasdirecciones
             });
         }
 
@@ -199,41 +259,71 @@ class Topografia {
     constructor(_idTramite, _id) {
         this.idTramite = _idTramite;
         this.id = _id;
-        this.name = "Observacion";
+        this.name = "Topografia";
+        this.dsrTipoTopografia = "DSRTIPOTOPOGRAFIA";
         this.mensajeGuardadoExito = "Se ha guardado el registro.";
         this.mensajeEliminadoExito = "Se ha eliminado el registro.";
         this.contenedorErrorDefault = "#popup-detail .container-detail-form label.error-label";
     }
     GetDataCrls() {
-        
         let idTramiteCtrl = document.querySelector(".form-edit-container #IdTramite");
-        let idObservacionTramiteCtrl = document.querySelector("#popup-detail #IdObservacionTramite");
-        let observacionCtrl = document.querySelector("#popup-detail #observacionDetail");
-        let fechaObservacionCtrl = document.querySelector("#popup-detail #fechaObervacionDetail");
+        let idTopografiaTramiteCtrl = document.querySelector("#popup-detail #IdTopografiaTramite");
+        let tipoTopografiaCtrl = document.querySelector("#popup-detail #tipoTopografiaDetail");
+        let oficioCtrl = document.querySelector("#popup-detail #oficioDetail");
+        let fechaEnvioCtrl = document.querySelector("#popup-detail #fechaEnvioDetail");
+        let oficioRespuestaCtrl = document.querySelector("#popup-detail #oficioRespuestaDetail");
+        let fechaRespuestaCtrl = document.querySelector("#popup-detail #fechaRespuestaDetail");
+
         let data = {};
 
         if (idTramiteCtrl != undefined)
             data["idtramite"] = idTramiteCtrl.value;
-        if (idObservacionTramiteCtrl != undefined)
-            data["idtramitedesc"] = idObservacionTramiteCtrl.value;
-        if (observacionCtrl != undefined)
-            data["observacion"] = observacionCtrl.value;
+        if (idTopografiaTramiteCtrl != undefined)
+            data["idtopografiaterreno"] = idTopografiaTramiteCtrl.value;
+        data["secuencia"] = 0;
+        if (tipoTopografiaCtrl != undefined)
+            data["idtipotopografiaterreno"] = tipoTopografiaCtrl.value;
 
-        let _fechaObservacion = "";
-        if (fechaObservacionCtrl != undefined) {
-            _fechaObservacion = eMASReferencialJs.FormatearFecha(fechaObservacionCtrl.value);
-            data["fecha"] = _fechaObservacion;
-        }
+        if (oficioCtrl != undefined)
+            data["oficio"] = oficioCtrl.value;
+        let _fechaEnvio = "";
+        if (fechaEnvioCtrl != undefined)
+            _fechaEnvio = eMASReferencialJs.FormatearFecha(fechaEnvioCtrl.value);
+        data["fechaenvio"] = _fechaEnvio;
+
+        if (oficioRespuestaCtrl != undefined)
+            data["oficiorespuesta"] = oficioRespuestaCtrl.value;
+        let _fechaRespuesta = "";
+        if (fechaRespuestaCtrl != undefined)
+            _fechaRespuesta = eMASReferencialJs.FormatearFecha(fechaRespuestaCtrl.value);
+        data["fecharespuesta"] = _fechaRespuesta;
 
         return data;
     }
     ExecuteValidation(data) {
         let objRespuesta = { isvalid: true, mensaje: "" };
 
-        if (data.observacion == null || data.observacion == undefined || data.observacion == "") {
-            objRespuesta.mensaje = "La Observaci&oacute; es un campo obligatorio.";
+        if (data.idtipotopografiaterreno == null || data.idtipotopografiaterreno == undefined || data.idtipotopografiaterreno == "") {
+            objRespuesta.mensaje = "El tipo de Topograf&iacute;a es un campo obligatorio.";
             objRespuesta.isvalid = false;
             return objRespuesta;
+        }
+        if (data.oficio == null || data.oficio == undefined || data.oficio == "") {
+            objRespuesta.mensaje = "El enlace es un campo obligatorio.";
+            objRespuesta.isvalid = false;
+            return objRespuesta;
+        }
+        if (data.fechaenvio == null || data.fechaenvio == undefined || data.fechaenvio == "") {
+            objRespuesta.mensaje = "La fecha Envio es un campo obligatorio.";
+            objRespuesta.isvalid = false;
+            return objRespuesta;
+        }
+        if (!(data.oficiorespuesta == null || data.oficiorespuesta == undefined || data.oficiorespuesta == "")) {
+            if (data.fecharespuesta == null || data.fecharespuesta == undefined || data.fecharespuesta == "") {
+                objRespuesta.mensaje = "La fecha Respuesta es un campo obligatorio.";
+                objRespuesta.isvalid = false;
+                return objRespuesta;
+            }
         }
 
         return objRespuesta;
@@ -298,13 +388,26 @@ class Topografia {
             btnGuardarDetail.removeEventListener("click", this.FnCallbackDetailGuardar.bind(this));
             btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this));
         }
-        
-        let fechaObservacion = document.querySelector("#fechaObervacionDetail");
-        if (fechaObservacion != undefined)
-            eMASReferencialJs.SetearFechaBootstrap("#fechaObervacionDetail");
+
+        let fechaEnvio = document.querySelector("#fechaEnvioDetail");
+        if (fechaEnvio != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fechaEnvioDetail");
+
+        let fechaRespuesta = document.querySelector("#fechaRespuestaDetail");
+        if (fechaRespuesta != undefined)
+            eMASReferencialJs.SetearFechaBootstrap("#fechaRespuestaDetail");
+
+        let arr = [];
+        arr.push({
+            key: this.dsrTipoTopografia, ctrl: "tipoTopografiaDetail", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"
+            , fnCallback2: eMASReferencialJs.ConsultPosLlenarComboGeneric
+            , parameter1: "tipoTopografiaDetail"
+            , parameter2: "IdTipoTipografiaDetail"
+        });
+        eMASReferencialJs.CargarCombosGenerico(arr);
     }
     FnCallbackBtnNuevo(evt) {
-        this.FnEditarElemento("Agregar Observaci&oacute;n");
+        this.FnEditarElemento("Agregar Registro");
     }
     FnEliminarElemento() {
         let dataBody = {
@@ -322,11 +425,12 @@ class Topografia {
         };
         let strTitulo = "";
         if (titulo == undefined)
-            strTitulo = "Actualizar Observaci&oacute;n";
+            strTitulo = "Actualizar Registro";
         else
             strTitulo = titulo;
 
-        eMASReferencialJs.mostrarPopupDetail(strTitulo, "Comodatos/SMC50002/EditDetailView", dataBody, this.FnCallbackBtnNuevoSuccess.bind(this));
+        eMASReferencialJs.mostrarPopupDetail(strTitulo, "Comodatos/SMC50002/EditDetailView"
+            , dataBody, this.FnCallbackBtnNuevoSuccess.bind(this));
     }
     FnListarAll() {
         let dataBody = {
@@ -334,20 +438,21 @@ class Topografia {
             entidad: this.name
         };
         // Consultar
-        eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetListDetail", dataBody, this.fillDataResponse.bind(this), eMASReferencialJs.FnGeneralVacia, "");
+        eMASReferencialJs.FetchPost("Comodatos/SMC50002/GetListDetail"
+            , dataBody, this.fillDataResponse.bind(this), eMASReferencialJs.FnGeneralVacia, "");
     }
     BindearEventosCabecera() {
-        let btnNuevo = document.querySelector(".container-observacion-detail button.nuevo-detail");
+        let btnNuevo = document.querySelector(".container-topografia-detail button.nuevo-detail");
         if (btnNuevo != undefined) {
             btnNuevo.addEventListener("click", this.FnCallbackBtnNuevo.bind(this), false);
         }
-        let btnRefresh = document.querySelector(".container-observacion-detail button.refresh-detail");
+        let btnRefresh = document.querySelector(".container-topografia-detail button.refresh-detail");
         if (btnRefresh != undefined) {
             btnRefresh.addEventListener("click", this.FnListarAll.bind(this), false);
         }
     }
     fillDataResponse(response) {
-        let DataDetail = $(".container-observacion-detail table");
+        let DataDetail = $(".container-topografia-detail table");
         DataDetail.bootstrapTable('destroy');
         let resultadoIncorrecto = false;
         let sinDatos = false;
@@ -371,7 +476,7 @@ class Topografia {
         if (resultadoIncorrecto || sinDatos) {
             DataDetail.bootstrapTable(
                 {
-                    columns: [{}, {}, {}, {}]
+                    columns: [{}, {}, {}, {}, {}]
                 });
             return;
         }
@@ -379,9 +484,10 @@ class Topografia {
 
         for (let i = 0; i < response.dataresult.length; i++) {
             data.push({
-                fecha: response.dataresult[i].strfecha,
-                observacion: response.dataresult[i].observacion,
-                id: response.dataresult[i].idtramitedesc
+                tipo: response.dataresult[i].tipotopografiaterreno,
+                oficio: response.dataresult[i].oficio,
+                oficiorespuesta: response.dataresult[i].oficiorespuesta,
+                id: response.dataresult[i].idtopografiaterreno
             });
         }
 

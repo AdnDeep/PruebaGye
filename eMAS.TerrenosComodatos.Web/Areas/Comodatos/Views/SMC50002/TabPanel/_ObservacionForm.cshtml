@@ -1,34 +1,20 @@
 ﻿@model eMAS.TerrenosComodatos.Domain.DTOs.ObservacionTramiteEditViewModel
 
-@{ 
-    string strFechaObservacion = "";
-    if (Model != null)
-    {
-        DateTime fechaMinimo = new DateTime(2005, 1, 1);
-        if (Model.fecha < fechaMinimo)
-            strFechaObservacion = DateTime.Now.ToString("dd/MM/yyyy");
-        else
-            strFechaObservacion = Model.fecha.ToString("dd/MM/yyyy");
-    }
-    string textoObservacion = Model != null && !string.IsNullOrEmpty(Model.observacion) ? Model.observacion.Trim() : string.Empty;
-
-}
-
 <div class="form-detail-content-edit">
     <div class="container-detail-form">
         <input id="IdObservacionTramite" class="idelemento" type="hidden" value="@Model.idtramitedesc" />
         <div class="form-group row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="fecha-observacion-container">
-                <label for="fechaObervacionDetail">Fecha Obseraci&oacute;n</label>
+                <label for="fechaObervacionDetail">Fecha Observaci&oacute;n</label>
                 <input id="fechaObervacionDetail"
                        data-date-container='#fecha-observacion-container'
-                       class="form-control" value="@strFechaObservacion" />
+                       class="form-control" value="@Model.strfecha" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <label for="observacionDetail">Observaci&oacute;n</label>
-                <textarea id="observacionDetail" class="form-control" name="observacionDetail" rows="4">@textoObservacion</textarea>
+                <textarea id="observacionDetail" class="form-control" name="observacionDetail" rows="4">@Model.observacion</textarea>
             </div>
         </div>
         <div class="form-group row">

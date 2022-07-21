@@ -9,6 +9,7 @@ namespace eMAS.Api.TerrenosComodatos.Entities
     {
         public short IdTopografiaTerreno { get; set; }
         public short IdTipoTopografiaTerreno { get; set; }
+        public string TipoTopografiaTerreno { get; set; }
         public short IdTramite { get; set; }
         public string Oficio { get; set; }
         public DateTime? FechaEnvio { get; set; }

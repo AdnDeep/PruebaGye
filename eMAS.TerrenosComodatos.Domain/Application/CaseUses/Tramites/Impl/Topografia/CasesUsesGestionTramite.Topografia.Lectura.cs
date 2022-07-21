@@ -1,6 +1,4 @@
 ﻿using eMAS.TerrenosComodatos.Domain.DTOs;
-using eMAS.TerrenosComodatos.Domain.Interfaces;
-using Microsoft.Extensions.Logging;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
@@ -34,6 +32,8 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                     return resultadoVista;
 
                 _mapeadores.GenerateEditViewModelDetail(ref respRepExterno, ref resultadoVista);
+
+                _mapeadores.DataLecturaTopografia(ref resultadoVista);
             }
             return resultadoVista;
         }

@@ -41,6 +41,7 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
         public short idtramite { get; set; }
         public short secuencia { get; set; }
         public short iddireccion { get; set; }
+        public string direccion { get; set; }
         public string oficio { get; set; }
         public DateTime? fechaenvio { get; set; }
         public string oficiorespuesta { get; set; }

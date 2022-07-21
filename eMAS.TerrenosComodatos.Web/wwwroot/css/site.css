@@ -132,6 +132,7 @@ h1, h2, h3 {
 select.ctrl-select {
     font-size: 0.8em;
     padding: 0;
+    margin-bottom: 1em;
 }
 
 table button.btn {

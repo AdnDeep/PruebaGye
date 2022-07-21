@@ -1,0 +1,48 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TopografiaTerrenoEditViewMoel
+
+<div class="form-detail-content-edit">
+    <div class="container-detail-form">
+        <input id="IdTopografiaTramite" class="idelemento" type="hidden" value="@Model.idtopografiaterreno" />
+        <input id="IdTipoTipografiaDetail" class="idelemento" type="hidden" value="@Model.idtipotopografiaterreno" />
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="tipoTopografiaDetail">Tipo Topograf&iacute;a Terreno</label>
+                <select id="tipoTopografiaDetail" class="form-control ctrl-select"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="oficioDetail">Oficio</label>
+                <textarea id="oficioDetail" class="form-control" name="oficioDetail" rows="2">@Model.oficio</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="fecha-envio-container">
+                <label for="fechaEnvioDetail">Fecha Env&iacute;o</label>
+                <input id="fechaEnvioDetail"
+                       data-date-container='#fecha-envio-container'
+                       class="form-control" value="@Model.strfechaenvio" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="oficioRespuestaDetail">Oficio Respuesta</label>
+                <textarea id="oficioRespuestaDetail" class="form-control" name="oficioRespuestaDetail" rows="2">@Model.oficiorespuesta</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="fecha-respuesta-container">
+                <label for="fechaRespuestaDetail">Fecha Respuesta</label>
+                <input id="fechaRespuestaDetail"
+                       data-date-container='#fecha-respuesta-container'
+                       class="form-control" value="@Model.strfecharespuesta" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label class="error-label peligro hidden"></label>
+            </div>
+        </div>
+        @await Html.PartialAsync("_CommandBottomDetail")
+    </div>
+</div>
