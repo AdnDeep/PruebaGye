@@ -35,6 +35,8 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                     return resultadoVista;
 
                 _mapeadores.GenerateEditViewModel(ref respRepExterno, ref resultadoVista);
+
+                _mapeadores.DataLectura(ref resultadoVista);
             }
 
 

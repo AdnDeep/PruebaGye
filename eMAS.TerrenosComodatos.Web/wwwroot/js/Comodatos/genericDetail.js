@@ -85,13 +85,14 @@ class Anexo {
         let btnCancelarDetail = document.querySelector("#popup-detail button.cancelar-edit-detail");
         if (btnCancelarDetail != undefined) {
             btnCancelarDetail.removeEventListener("click", this.FnCallbackDetailCancelar.bind(this));
-            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this), { once: true });
+            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this));
         }
         
         if (btnGuardarDetail != undefined) {
             btnGuardarDetail.removeEventListener("click", this.FnCallbackDetailGuardar.bind(this));
-            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this), { once: true });
+            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this));
         }
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general textarea.text-control");
     }
     FnCallbackBtnNuevo(evt) {
         this.FnEditarElemento("Agregar Anexo");
@@ -184,7 +185,7 @@ class Anexo {
                 clickToSelect: false,
                 formatter: function (value, row, index) {
                     let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Anexo\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
-                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Anexo\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
+                    //strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Anexo\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }
             },
@@ -289,19 +290,19 @@ class Observacion {
         let btnGuardarDetail = document.querySelector("#popup-detail button.guardar-edit-detail");
         let btnCancelarDetail = document.querySelector("#popup-detail button.cancelar-edit-detail");
         if (btnCancelarDetail != undefined) {
-            //btnCancelarDetail.replaceWith(btnCancelarDetail.cloneNode(true));
             btnCancelarDetail.removeEventListener("click", this.FnCallbackDetailCancelar.bind(this));
-            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this), { once:true});
+            btnCancelarDetail.addEventListener("click", this.FnCallbackDetailCancelar.bind(this));
         }
         if (btnGuardarDetail != undefined) {
-            //btnGuardarDetail.replaceWith(btnGuardarDetail.cloneNode(true));
             btnGuardarDetail.removeEventListener("click", this.FnCallbackDetailGuardar.bind(this));
-            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this), { once: true });
+            btnGuardarDetail.addEventListener("click", this.FnCallbackDetailGuardar.bind(this));
         }
         
         let fechaObservacion = document.querySelector("#fechaObervacionDetail");
         if (fechaObservacion != undefined)
             eMASReferencialJs.SetearFechaBootstrap("#fechaObervacionDetail");
+
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general textarea.text-control");
     }
     FnCallbackBtnNuevo(evt) {
         this.FnEditarElemento("Agregar Observaci&oacute;n");
@@ -395,7 +396,7 @@ class Observacion {
                 clickToSelect: false,
                 formatter: function (value, row, index) {
                     let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Observacion\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
-                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Observacion\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
+                    //strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Observacion\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }
             },

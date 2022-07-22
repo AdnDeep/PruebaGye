@@ -20,18 +20,19 @@
     oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
     oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
 
-    eMAS.TerrenosComodatos.Web.Models.DetailViewModel topografiaDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
-    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
-    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "tipo", name = "Tipo", visible = true });
-    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficio", name = "Oficio", visible = true });
-    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
-    topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+    //eMAS.TerrenosComodatos.Web.Models.DetailViewModel topografiaDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "tipo", name = "Tipo", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficio", name = "Oficio", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
 }
 <div class="form-content-edit">
     <div class="container-form">
         <input id="IdTramite" class="idelemento" type="hidden" value="@Model.idtramite" />
         <input id="IdBeneficiario" class="idelemento" type="hidden" value="@Model.idbeneficiario" />
         <input id="IdTipoContrato" class="idelemento" type="hidden" value="@Model.idtipocontrato" />
+        <input id="IdEstadoContrato" class="idelemento" type="hidden" value="@Model.idestado" />
         @await Html.PartialAsync("_CommandTop")
 
 
@@ -43,11 +44,11 @@
                 @if (Model.idtramite > 0)
                 {
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Seguimientos</a>
+                        <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Control de Oficios</a>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    @*<li class="nav-item" role="presentation">
                         <a class="nav-link" id="topografia-tab" data-toggle="tab" href="#topografia" role="tab" aria-controls="topografia" aria-selected="false">Topograf&iacute;a</a>
-                    </li>
+                    </li>*@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="cabecera-2-tab" data-toggle="tab" href="#cabecera-2" role="tab" aria-controls="cabecera-2" aria-selected="false">Datos</a>
                     </li>
@@ -70,11 +71,11 @@
                             @await Html.PartialAsync("TabPanel/_Detail", oficioDetailViewModel)
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="topografia" role="tabpanel" aria-labelledby="topografia-tab">
+                    @*<div class="tab-pane fade" id="topografia" role="tabpanel" aria-labelledby="topografia-tab">
                         <div class="container-topografia-detail">
                             @await Html.PartialAsync("TabPanel/_Detail", topografiaDetailViewModel)
                         </div>
-                    </div>
+                    </div>*@
                     <div class="tab-pane fade" id="cabecera-2" role="tabpanel" aria-labelledby="cabecera-2-tab">
                         @await Html.PartialAsync("TabPanel/_Cabecera2", Model)
                     </div>

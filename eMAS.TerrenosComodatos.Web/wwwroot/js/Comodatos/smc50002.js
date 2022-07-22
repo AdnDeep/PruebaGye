@@ -121,10 +121,8 @@ const SMC50002 = function () {
             return;
         } else {
             eMASReferencialJs.SetearMensajeDefaultExito("Se guard&oacute; el registro con &eacute;xito.");
-            //fnDestruirFormularioEdicion();
+            
             fnRespuestaGuardarRegistro2(response);
-            //eMASReferencialJs.FormSetVisibilityPanel(true);
-            //eMASReferencialJs.FormSetVisibilityConsult(true, "DataListadoBeneficiarios");
             return;
         }
     };
@@ -145,23 +143,7 @@ const SMC50002 = function () {
                 fnDestruirFormularioEdicion();
                 fnEditarElemento(idTransaction);
             }
-        }        
-        //if (responseMensajes == null || responseMensajes == undefined) {
-        //    console.log("No hay mensajes en la respuesta.");
-        //    return;
-        //}
-        //let objIdClave = responseMensajes.find(eMASReferencialJs.EncontrarMensaje, { codigo: "CLAVEID" });
-        //if (objIdClave == undefined || objIdClave == null) {
-        //    console.log("No se encontró la clave interna CLAVEID.");
-        //    return;
-        //}
-        //if (!(objIdClave.descripcion == null || objIdClave.descripcion == undefined)) {
-        //    let idclave = parseInt(objIdClave.descripcion);
-        //    if (idclave > 0) {
-        //        fnBtnConsultar(1);
-        //    }
-        //}
-
+        }
     };
 
     const fnObtieneValidaDataCliente = function () {
@@ -170,7 +152,7 @@ const SMC50002 = function () {
             , "loteEdit", "divisionEdit", "phvEdit", "phhEdit", "numeroEdit", "beneficiarioEdit"
             , "oficioAgEdit", "oficioDaseEdit", "solarEdit", "fechaInspeccionEdit"
             , "oficioAprobacionEdit", "fechaAprobacionEdit", "tipoContratoEdit", "aniosPlazoEdit",
-            , "fechaEscrituraEdit", "oficioRevocatoriaEdit"];
+            , "fechaEscrituraEdit", "oficioRevocatoriaEdit", "estadoEdit"];
         let objTramite = new Tramite(arrCtrls);
         
         let dataRegistroJson = objTramite.ValidateDataAndGetObjWithValues( objRespuesta);
@@ -321,6 +303,7 @@ const SMC50002 = function () {
         InicializarCamposFecha();
         ObtenerInfoBeneficiarioLegal();
         ObtenerInfoTipoContrato();
+        ObtenerInfoEstado();
     };
 
     const InicializarCamposFecha = function () {
@@ -379,6 +362,21 @@ const SMC50002 = function () {
         }
     };
 
+    const ObtenerInfoEstado = function () {
+        let _idEstado = document.getElementById("IdEstadoContrato");
+        if (_idEstado <= 0) {
+            console.log("No hay datos de Estado para recuperar");
+        }
+        let arr = [];
+        arr.push({
+            key: dsrEstados, ctrl: "estadoEdit", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"
+            , fnCallback2: ConsultPosLlenarCombo
+            , parameter1: "estadoEdit"
+            , parameter2: "IdEstadoContrato"
+        });
+        eMASReferencialJs.CargarCombosGenerico(arr);
+    };
+
     const ObtenerInfoTipoContrato = function () {
         let _idTipoContrato = document.getElementById("IdTipoContrato");
         if (_idTipoContrato <= 0) {
@@ -431,6 +429,7 @@ const SMC50002 = function () {
         if (_solarEditEditCtrl != undefined) {
             _solarEditEditCtrl.addEventListener('keypress', EvtKeyPressSolar);
         }
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general input.text-control");
     };
 
     const fnGetDetails = function () {
@@ -446,10 +445,6 @@ const SMC50002 = function () {
         let objOficioDetail = new GenericDetail(idTramite, 0, "Oficio");
         objOficioDetail.GetListAll();
         objOficioDetail.BindEventsTable();
-        let objTopografiaDetail = new GenericDetail(idTramite, 0, "Topografia");
-        objTopografiaDetail.GetListAll();
-        objTopografiaDetail.BindEventsTable();
-
     };
 
     const fnSetearEvtFormulario = function () {

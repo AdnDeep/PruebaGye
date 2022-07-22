@@ -1,7 +1,7 @@
 ﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TopografiaTerrenoEditViewMoel
 
 <div class="form-detail-content-edit">
-    <div class="container-detail-form">
+    <div class="container-detail-form form-general">
         <input id="IdTopografiaTramite" class="idelemento" type="hidden" value="@Model.idtopografiaterreno" />
         <input id="IdTipoTipografiaDetail" class="idelemento" type="hidden" value="@Model.idtipotopografiaterreno" />
         <div class="form-group row">
@@ -13,7 +13,9 @@
         <div class="form-group row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <label for="oficioDetail">Oficio</label>
-                <textarea id="oficioDetail" class="form-control" name="oficioDetail" rows="2">@Model.oficio</textarea>
+                <textarea id="oficioDetail" class="form-control text-control" 
+                          maxlength="4000"
+                          name="oficioDetail" rows="3">@Model.oficio</textarea>
             </div>
         </div>
         <div class="form-group row">
@@ -27,7 +29,9 @@
         <div class="form-group row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <label for="oficioRespuestaDetail">Oficio Respuesta</label>
-                <textarea id="oficioRespuestaDetail" class="form-control" name="oficioRespuestaDetail" rows="2">@Model.oficiorespuesta</textarea>
+                <textarea id="oficioRespuestaDetail" class="form-control text-control" 
+                          maxlength="4000"
+                          name="oficioRespuestaDetail" rows="3">@Model.oficiorespuesta</textarea>
             </div>
         </div>
         <div class="form-group row">

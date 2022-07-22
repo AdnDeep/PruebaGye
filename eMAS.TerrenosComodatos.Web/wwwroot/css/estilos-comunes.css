@@ -1,4 +1,19 @@
-﻿.eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > td,
+﻿.detail-container .list-container::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+}
+
+.detail-container .list-container::-webkit-scrollbar-track {
+    background: #FFF; /* color of the tracking area */
+}
+
+.detail-container .list-container::-webkit-scrollbar-thumb {
+    background-color: #3d80ba; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid #FFF; /* creates padding around scroll thumb */
+}
+
+
+.eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > td,
 .eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #DFE7FF;
 }

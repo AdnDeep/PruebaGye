@@ -4,13 +4,14 @@
     string textoEnlace = Model != null && !string.IsNullOrEmpty(Model.link) ? Model.link.Trim() : string.Empty;
  }
 
-<div class="form-detail-content-edit">
+<div class="form-detail-content-edit form-general">
     <div class="container-detail-form">
         <input id="IdAnexoTramite" class="idelemento" type="hidden" value="@Model.idanexotramite" />
         <div class="form-group row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <label for="enlace-detail-edit">Enlace</label>
-                <textarea id="enlaceDetailEdit" class="form-control" name="enlaceDetailEdit" rows="4">@textoEnlace</textarea>
+                <textarea id="enlaceDetailEdit" class="form-control text-control" 
+                          name="enlaceDetailEdit" maxlength="4000" rows="4">@textoEnlace</textarea>
             </div>
         </div>
         <div class="form-group row">

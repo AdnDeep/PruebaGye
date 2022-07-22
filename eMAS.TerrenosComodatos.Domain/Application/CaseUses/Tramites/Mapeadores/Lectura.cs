@@ -1,4 +1,5 @@
 ﻿
+using eMAS.TerrenosComodatos.Domain.Constantes;
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using Microsoft.Extensions.Logging;
 using System;
@@ -29,6 +30,15 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             salida.tipo = model.tipo;
             salida.mensaje = model.mensaje;
             salida.dataresult = model.dataresult;
+        }
+        public void DataLectura(ref ResultadoDTO<TramiteEditViewModel> entrada)
+        {
+            TramiteEditViewModel tmp = entrada.dataresult;
+            tmp.strareasolar = tmp.areasolar != null ? tmp.areasolar.Value.ToString().Replace(",", ".") :"";
+            tmp.strfechaaprobconcejomun = tmp.fechaaprobconcejomun != null ? tmp.fechaaprobconcejomun.Value.ToString(AppConst.formatoFechaDefecto) : "";
+            tmp.strfechaescritura = tmp.fechaescritura != null ? tmp.fechaescritura.Value.ToString(AppConst.formatoFechaDefecto) : "";
+            tmp.strfechainsregprop = tmp.fechainsregprop != null ? tmp.fechainsregprop.Value.ToString(AppConst.formatoFechaDefecto) : "";
+            tmp.strfechainsrevocatoria = tmp.fechainsrevocatoria != null ? tmp.fechainsrevocatoria.Value.ToString(AppConst.formatoFechaDefecto) : "";
         }
     }
 }

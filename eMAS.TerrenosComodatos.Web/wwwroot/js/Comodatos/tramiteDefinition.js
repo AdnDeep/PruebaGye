@@ -51,6 +51,12 @@ class Tramite {
             objRespuesta.mensaje = "Indicar el Tipo de Contrato es Obligatorio.";
             return;
         }
+        if (objCtrlWithValues.estadoEdit == undefined || objCtrlWithValues.estadoEdit == null
+            || objCtrlWithValues.estadoEdit == 0) {
+            objRespuesta.isValid = false;
+            objRespuesta.mensaje = "Indicar el Tipo de Contrato es Obligatorio.";
+            return;
+        }
         let _fechaInspeccion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaInspeccionEdit);
         let _fechaAprobacion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaAprobacionEdit);
         let _fechaEscritura = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaEscrituraEdit);
@@ -75,6 +81,7 @@ class Tramite {
         dataJsonClServer["aniosplazo"] = objCtrlWithValues.aniosPlazoEdit;
         dataJsonClServer["fechaescritura"] = _fechaEscritura;
         dataJsonClServer["oficiorevocatoriamod"] = objCtrlWithValues.oficioRevocatoriaEdit;
+        dataJsonClServer["idestado"] = objCtrlWithValues.estadoEdit;
 
         return dataJsonClServer;
     }

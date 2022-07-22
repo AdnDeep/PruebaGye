@@ -139,6 +139,8 @@ class Oficio {
         if (fechaRespuesta != undefined)
             eMASReferencialJs.SetearFechaBootstrap("#fechaRespuestaDetail");
 
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general input.text-control");
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general textarea.text-control");
         let arr = [];
         arr.push({
             key: this.dsrDireccion, ctrl: "direcciondetail", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"
@@ -244,7 +246,7 @@ class Oficio {
                 clickToSelect: false,
                 formatter: function (value, row, index) {
                     let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Oficio\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
-                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Oficio\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
+                    //strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Oficio\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }
             },
@@ -397,6 +399,9 @@ class Topografia {
         if (fechaRespuesta != undefined)
             eMASReferencialJs.SetearFechaBootstrap("#fechaRespuestaDetail");
 
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general input.text-control");
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general textarea.text-control");
+
         let arr = [];
         arr.push({
             key: this.dsrTipoTopografia, ctrl: "tipoTopografiaDetail", ruta: "Comodatos/SMC50002/GetDataDsrGeneric"
@@ -501,7 +506,7 @@ class Topografia {
                 clickToSelect: false,
                 formatter: function (value, row, index) {
                     let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Topografia\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
-                    strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Topografia\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
+                    //strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Topografia\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }
             },

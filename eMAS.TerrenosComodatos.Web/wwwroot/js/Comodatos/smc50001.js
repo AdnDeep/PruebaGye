@@ -136,6 +136,7 @@ const SMC50001 = function () {
 
     const fnSetearEvtFormulario = function () {
         eMASReferencialJs.SetearEvtFormularioGenerico(EvtRegresarFormulario, EvtCancelarFormulario, EvtGuardarFormulario, EvtEliminarFormularo);
+        eMASReferencialJs.setearInputsEventsEnFormulario(".form-general input.text-control");
     };
 
     const fnDestruirFormularioEdicion = function () {

@@ -129,7 +129,7 @@ eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCa
     //    funcionCargar();
     //});
 
-    popup.off('hidden.bs.modal', "**");
+    //popup.off('hidden.bs.modal', "**");
     popup.on('hidden.bs.modal', function () {
         //funcionCerrar();
         popup.find('.modal-body').html("");
@@ -146,6 +146,7 @@ eMASReferencialJs.generarBoton = function (nombre, accion) {
 
 eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, botones) {
     var popup = $("#VentanaMensajes");
+        //.clone().appendTo("#Popups");
 
     popup.find('.modal-header').html(titulo).css('fontWeight', 'bold');
 
@@ -171,14 +172,14 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
         popup.find('.modal-content').css('border', '1px solid #60a174');
 		popup.find('.modal-header').css('background', '#e6f1e9 url("' + eMASReferencialJs.serverPath + 'Referencial/Images/success50.png") no-repeat right center');
         for (var itemS in botones) {
-			contenidoBotones.append('<a class="btn btn-sm btnSuccess" href="#" onclick="' + botones[itemS].Accion + '">' + botones[itemS].Nombre + '</a>');
+			contenidoBotones.append('<a class="btn btn-sm btnSuccess" onclick="' + botones[itemS].Accion + '">' + botones[itemS].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Error) {
         popup.find('.modal-content').css('border', '1px solid #924949');
 		popup.find('.modal-header').css('background', '#f2e4e4 url("' + eMASReferencialJs.serverPath + 'Referencial/Images/error50.png") no-repeat right center');
         for (var itemE in botones) {
-            contenidoBotones.append('<a class="btn btn-sm btnError" href="#" onclick="' + botones[itemE].Accion + '">' + botones[itemE].Nombre + '</a>');
+            contenidoBotones.append('<a class="btn btn-sm btnError" onclick="' + botones[itemE].Accion + '">' + botones[itemE].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Advertencia) {
@@ -186,7 +187,7 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
 		popup.find('.modal-header').css('background', '#fffcd9 url("' + eMASReferencialJs.serverPath + 'Referencial/Images/warning50.png") no-repeat right center');
 
         for (var itemA in botones) {
-			contenidoBotones.append('<a class="btn btn-sm btnWarning" href="#" onclick="' + botones[itemA].Accion + '">' + botones[itemA].Nombre + '</a>');
+			contenidoBotones.append('<a class="btn btn-sm btnWarning" onclick="' + botones[itemA].Accion + '">' + botones[itemA].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Prompt) {
@@ -194,9 +195,9 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
 		popup.find('.modal-header').css('background', '#d5d8da url("' + eMASReferencialJs.serverPath + 'Referencial/Images/prompt50.png") no-repeat right center');
 		for (var itemP in botones) {
 			if (botones[itemP].Nombre === 'Si')
-				contenidoBotones.append('<a class="btn btn-sm btnSi" href="#" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
+				contenidoBotones.append('<a class="btn btn-sm btnSi" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
 			else if (botones[itemP].Nombre === 'No')
-				contenidoBotones.append('<a class="btn btn-sm btnNo" href="#" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
+				contenidoBotones.append('<a class="btn btn-sm btnNo" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
 			else
 				contenidoBotones.append('<a class="btn btn-sm" style="background:#fff url(' + eMASReferencialJs.serverPath + 'Referencial/Images/prompt_header.gif) repeat-x; color: #6C6767; border:1px solid #5b4f4f; padding: 0rem 0.5rem;" href="#" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
         }
@@ -204,7 +205,7 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
 	else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Contrato) {
 		popup.find('.modal-header').css('background', '#93d9e4');
         for (var itemC in botones) {
-            contenidoBotones.append('<a class="' + botones[item].Clase + '" href="#" onclick="' + botones[itemC].Accion + '">' + botones[itemC].Nombre + '</a>');
+            contenidoBotones.append('<a class="' + botones[item].Clase + '" onclick="' + botones[itemC].Accion + '">' + botones[itemC].Nombre + '</a>');
         }
     }    
 
@@ -215,7 +216,7 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
     });
 
     popup.on('hidden.bs.modal', function (e) {
-        //funcionCerrar();
+        //funcionCerrar();        
         popup.find('.modal-header').html('');
         popup.find('.modal-body').html('');
         popup.find('.modal-footer').html('');
@@ -761,18 +762,18 @@ eMASReferencialJs.SetearEvtFormularioGenerico = function (fnRegresar, fnCancelar
 
     //_RegresarCtrl.replaceWith(_RegresarCtrl.cloneNode(true));
     _RegresarCtrl.removeEventListener('click', fnRegresar);
-    _RegresarCtrl.addEventListener('click', fnRegresar, { once: true });
+    _RegresarCtrl.addEventListener('click', fnRegresar);
 
     _CancelarCtrl.removeEventListener('click', fnCancelar);
-    _CancelarCtrl.addEventListener('click', fnCancelar, { once: true });
+    _CancelarCtrl.addEventListener('click', fnCancelar);
 
     //_GuardarCtrl.replaceWith(_GuardarCtrl.cloneNode(true));
     _GuardarCtrl.removeEventListener('click', fnGuardar);
-    _GuardarCtrl.addEventListener('click', fnGuardar, { once: true });
+    _GuardarCtrl.addEventListener('click', fnGuardar);
 
     //_EliminarCtrl.replaceWith(_EliminarCtrl.cloneNode(true));
     _EliminarCtrl.removeEventListener('click', fnEliminar);
-    _EliminarCtrl.addEventListener('click', fnEliminar, { once: true });
+    _EliminarCtrl.addEventListener('click', fnEliminar);
 };
 
 eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar, dataLsTable) {
@@ -937,9 +938,7 @@ eMASReferencialJs.FormatearFecha = function (valFecha) {
     return fechaConvertida;
 }
 
-eMASReferencialJs.EsDecimalConPunto = function (evt) {
-    debugger;
-    
+eMASReferencialJs.EsDecimalConPunto = function (evt) {    
     let valorTexto = evt.target.value;
     let codigoCaracter = (evt.which) ? evt.which : evt.keyCode;
     if (codigoCaracter == 46) {
@@ -1006,22 +1005,26 @@ eMASReferencialJs.ConsultPosLlenarComboGeneric = function (parameter1, parameter
     if (_ctrl != undefined && _idEntity != undefined)
         eMASReferencialJs.SelectItemByValue(_ctrl, _idEntity.value);
 };
-//eMASReferencialJs.SetearEventoCollapse = function (target, containerToggle, tableName) {
-//    $(target).on('hide.bs.collapse', function () {
-//        let dataToggle = document.querySelector(containerToggle);
-//        if (dataToggle != undefined) {
-//            let dataConsulta = $("#" + tableName).bootstrapTable('getOptions');
 
-//            if (!(dataConsulta == null && dataConsulta == undefined)) {
-//                if (dataConsulta.totalRows > 0) {
-//                    dataToggle.style.display = "block";
-//                }
-//            }
-//        }
-//    });
-//    $(target).on('show.bs.collapse', function () {
-//        let dataToggle = document.querySelector(containerToggle);
-//        if (dataToggle != undefined)
-//            dataToggle.style.display = "none";
-//    });
-//}
+eMASReferencialJs.setearInputEnMayuscula = function (e) {
+    var start = e.target.selectionStart;
+    var end = e.target.selectionEnd;
+    e.target.value = e.target.value.toUpperCase();
+    e.target.setSelectionRange(start, end);
+}
+
+eMASReferencialJs.setearInputsEventsEnFormulario = function (selectorFormInputs) {
+    let inputsEnFormulario = document.querySelectorAll(selectorFormInputs);
+
+    if (inputsEnFormulario == null || inputsEnFormulario == undefined)
+        return;
+
+    let arrInputsEnFormulario = Array.from(inputsEnFormulario);
+
+    let lenArr1 = arrInputsEnFormulario.length;
+
+    for (let i = 0; i < lenArr1; i++) {
+        arrInputsEnFormulario[i].addEventListener("keyup", eMASReferencialJs.setearInputEnMayuscula, false);
+        arrInputsEnFormulario[i].autocomplete = 'off';
+    }
+}

@@ -72,10 +72,14 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
         public string direccion { get; set; }
         public string aprobacionconcejomun { get; set; }
         public DateTime? fechaaprobconcejomun { get; set; }
+        public string strfechaaprobconcejomun { get; set; }
         public DateTime? fechaescritura { get; set; }
+        public string strfechaescritura { get; set; }
         public DateTime? fechainsregprop { get; set; }
+        public string strfechainsregprop { get; set; }
         public string oficiorevocatoriamod { get; set; }
         public DateTime? fechainsrevocatoria { get; set; }
+        public string strfechainsrevocatoria { get; set; }
         public string observacionjuridico { get; set; }
         public string baseorigen { get; set; }
         public string oficioag { get; set; }
