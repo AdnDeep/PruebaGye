@@ -1,11 +1,13 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.ViewModel
 {
     public class TramiteEditViewModel
     {
         public short idtramite { get; set; }
+        public string srcimage { get; set; }
         public short anio { get; set; }
         public short secuencia { get; set; }
         public short idsector { get; set; }
@@ -36,6 +38,12 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
         public string baseorigen { get; set; }
         public string oficioag { get; set; }
         public string oficiodase { get; set; }
+        public List<OficioTramiteListViewModel> lsOficios { get; set; }
+        public TramiteEditViewModel()
+        {
+            lsOficios = new List<OficioTramiteListViewModel>();
+        }
+
     }
     public class TramitesPanelFilterModel
     {

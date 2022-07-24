@@ -3,6 +3,18 @@ using System;
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public class TramiteReportClientViewModel
+    {
+        public bool canContinue { get; set; }
+        public string mensaje { get; set; }
+        public string fileName { get; set; }
+        public string contentReport { get; set; }
+    }
+    public class TramiteReportServerViewModel
+    {
+        public string fileName { get; set; }
+        public string contentReport { get; set; }
+    }
     public class TramitesDetailRequestDeleteViewModel
     {
         public string id { get; set; }

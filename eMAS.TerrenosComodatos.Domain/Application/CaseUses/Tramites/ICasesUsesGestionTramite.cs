@@ -6,6 +6,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
     {
         ResultadoDTO<DataPagineada<TramiteListViewModel>> LeerTodosPaginado(string dataPanel, string resultContainer, int numeroPagina, int numeroFila);
         ResultadoDTO<TramiteEditViewModel> LeerPorId(short id);
+        TramiteReportClientViewModel ReporteGeneral(short id);
         ResultadoDTO<int> GrabarTramite(TramiteEditViewModel model, string usuario, string controlador, string pcclient);
         ResultadoDTO<int> EliminarTramite(short id, string usuario, string controlador, string pcclient);
         object LeerDetalleListaTodos(short idtramite, string entidad);

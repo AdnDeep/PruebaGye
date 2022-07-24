@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace eMAS.Api.TerrenosComodatos
 {
@@ -24,6 +23,7 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddServicesGenericExtensions();
             services.AddSessionServicesExtensions();
             services.AddSwaggerConfiguration();
+            services.AddHelperExtensions();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

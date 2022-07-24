@@ -1,4 +1,5 @@
 ﻿using eMAS.Api.TerrenosComodatos.Data;
+using eMAS.Api.TerrenosComodatos.Extensions;
 using eMAS.Api.TerrenosComodatos.IRepository;
 using eMAS.Api.TerrenosComodatos.IServices;
 using eMAS.Api.TerrenosComodatos.Logic;
@@ -113,6 +114,11 @@ namespace eMAS.Api.TerrenosComodatos
                         Version = "v1" 
                     });
             });
+        }
+        public static void AddHelperExtensions(this IServiceCollection services)
+        {
+            services.AddTransient<RenderViewService>();
+            services.AddTransient<ServiceConvertirHtmlAPdf>();
         }
     }
 }

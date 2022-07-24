@@ -6,6 +6,7 @@ namespace eMAS.TerrenosComodatos.Domain.Interfaces
 {
     public interface IGestionRepositorioExternoTramite
     {
+        ResultadoDTO<TramiteReportServerViewModel> ObtenerReportePdfTramite(short id);
         ResultadoDTO<int> Eliminar(short id, string usuario, string controlador, string pcclient);
         ResultadoDTO<int> Crear(TramiteEditViewModel model, string usuario, string controlador, string pcclient);
         ResultadoDTO<int> Actualizar(TramiteEditViewModel model, string usuario, string controlador, string pcclient);

@@ -13,6 +13,46 @@ namespace eMAS.TerrenosComodatos.Domain.Application
         {
             _logger = logger;
         }
+        public bool InputClientReportGetPorId(short id
+            , ref TramiteReportClientViewModel salida)
+        {
+            bool puedeContinuar = false;
+            var parametros = $"ValidadoresTramite Service Layer";
+            var props = new Dictionary<string, object>(){
+                                { "Metodo", "InputClientReportGetPorId" },
+                                { "Sitio", "COMODATO-WEB" },
+                                { "Parametros", parametros }
+                        };
+            if (id <= 0)
+            {
+                salida.mensaje = "Input Request Incorrecta, el objeto está vacío Id";
+                salida.canContinue = false;
+                return puedeContinuar;
+            }
+
+            puedeContinuar = true;
+            return puedeContinuar;
+        }
+        public bool InputClientGetPorIdGeneric<T>(short id
+            , ref ResultadoDTO<T> salida)
+        {
+            bool puedeContinuar = false;
+            var parametros = $"ValidadoresTramite Service Layer";
+            var props = new Dictionary<string, object>(){
+                                { "Metodo", "InputClientGetPorIdGeneric" },
+                                { "Sitio", "COMODATO-WEB" },
+                                { "Parametros", parametros }
+                        };
+            if (id < 0)
+            {
+                salida.mensaje = "Input Request Incorrecta, el objeto está vacío Id";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+
+            puedeContinuar = true;
+            return puedeContinuar;
+        }
         public bool InputClientGetPorId(short id
             , ref ResultadoDTO<TramiteEditViewModel> salida)
         {

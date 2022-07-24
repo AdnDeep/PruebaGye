@@ -31,6 +31,16 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             salida.mensaje = model.mensaje;
             salida.dataresult = model.dataresult;
         }
+        public void GenerateReportViewModel(ref ResultadoDTO<TramiteReportServerViewModel> model
+            , ref TramiteReportClientViewModel salida)
+        {
+            salida.canContinue = true;
+            salida.contentReport = model.dataresult.contentReport;
+            
+            string fileName = $"{model.dataresult.fileName}_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss")}.pdf";
+            salida.fileName = fileName;
+            salida.mensaje = "OK";
+        }
         public void DataLectura(ref ResultadoDTO<TramiteEditViewModel> entrada)
         {
             TramiteEditViewModel tmp = entrada.dataresult;

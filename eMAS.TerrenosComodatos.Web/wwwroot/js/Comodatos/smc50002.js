@@ -424,7 +424,25 @@ const SMC50002 = function () {
         if (_beneficiarioEditCtrl != undefined) {
             _beneficiarioEditCtrl.addEventListener('change', EvtCambioBeneficiario);
         }
-        
+        let idTramite = document.querySelector("#IdTramite").value;
+
+        if (idTramite > 0) {
+            let _btnImprimirReporteCtrl = document.querySelector(".form-content-edit .exportar-edit")
+            if (_btnImprimirReporteCtrl != undefined) {
+                _btnImprimirReporteCtrl.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+                    let rutaBase = _appConfig.RutaBase;
+                    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+                    let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneral?id='+idTramite;
+
+                    window.open(url, "_blank");
+
+                });
+            }
+        }        
+
         let _solarEditEditCtrl = document.querySelector("#solarEdit");
         if (_solarEditEditCtrl != undefined) {
             _solarEditEditCtrl.addEventListener('keypress', EvtKeyPressSolar);

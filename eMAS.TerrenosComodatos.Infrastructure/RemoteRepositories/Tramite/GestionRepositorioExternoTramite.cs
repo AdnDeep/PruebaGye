@@ -15,6 +15,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
         const string methodPost = "api/GestionTramite/Agregar";
         const string methodPut = "api/GestionTramite/Actualizar";
         const string methodDelete = "api/GestionTramite/Eliminar";
+        const string methodReporteGeneralPdf = "api/PrintPdf/GetSingleTramiteDsr";
 
         private readonly ApiService _clientHttpSvc;
         public GestionRepositorioExternoTramite(ApiService clientHttpSvc

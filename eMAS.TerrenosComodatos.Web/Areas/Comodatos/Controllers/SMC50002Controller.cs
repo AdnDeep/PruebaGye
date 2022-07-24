@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -233,6 +234,27 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
 
             return Json(response);
         }
+        #endregion
+
+        #region Reporte
+        [HttpGet]
+        public ActionResult GetReportGeneral(short id) 
+        {
+            var respuestaServidor = _casesUsesTramite.ReporteGeneral(id);
+
+            if (respuestaServidor.canContinue)
+            {
+                var bytPdf = Convert.FromBase64String(respuestaServidor.contentReport);
+
+                return File(new MemoryStream(bytPdf), "application/octet-stream", respuestaServidor.fileName);
+            }
+            else
+            {
+                ViewData["ErrorMessage"] = respuestaServidor.mensaje;
+                return View("Error");
+            }
+        }
+        
         #endregion
     }
 }

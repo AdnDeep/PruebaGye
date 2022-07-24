@@ -16,5 +16,6 @@ namespace eMAS.Api.TerrenosComodatos.IServices
         ResultadoDTO<TopografiaTerrenoEditViewMoel> ConsultarTopografiaPorId(short id);
         ResultadoDTO<List<OficioTramiteListViewModel>> ConsultarOficiosPorIdTramite(short idTramite);
         ResultadoDTO<OficioTramiteEditViewModel> ConsultarOficioPorId(short id);
+        ResultadoDTO<TramiteEditViewModel> ObtenerDataInformeGeneral(short id);
     }
 }

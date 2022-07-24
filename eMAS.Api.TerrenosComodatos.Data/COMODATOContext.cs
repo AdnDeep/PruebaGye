@@ -411,11 +411,9 @@ namespace eMAS.Api.TerrenosComodatos.Data
                 entity.Property(e => e.FechaRespuesta).HasColumnType("datetime");
 
                 entity.Property(e => e.Oficio)
-                    .HasMaxLength(40)
                     .IsUnicode(false);
 
                 entity.Property(e => e.OficioRespuesta)
-                    .HasMaxLength(40)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PdpFechaCreacion).HasColumnType("datetime");
@@ -530,11 +528,11 @@ namespace eMAS.Api.TerrenosComodatos.Data
                 entity.Property(e => e.FechaRespuesta).HasColumnType("datetime");
 
                 entity.Property(e => e.Oficio)
-                    .HasMaxLength(40)
+                    .HasMaxLength(4000)
                     .IsUnicode(false);
 
                 entity.Property(e => e.OficioRespuesta)
-                    .HasMaxLength(40)
+                    .HasMaxLength(4000)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PdpFechaCreacion).HasColumnType("datetime");
@@ -601,9 +599,9 @@ namespace eMAS.Api.TerrenosComodatos.Data
 
                 entity.Property(e => e.ObservacionJuridico).IsUnicode(false);
 
-                entity.Property(e => e.OficioAg).HasMaxLength(40);
+                entity.Property(e => e.OficioAg).HasMaxLength(100);
 
-                entity.Property(e => e.OficioDase).HasMaxLength(40);
+                entity.Property(e => e.OficioDase).HasMaxLength(100);
 
                 entity.Property(e => e.OficioRevocatoriaMod)
                     .HasMaxLength(150)
