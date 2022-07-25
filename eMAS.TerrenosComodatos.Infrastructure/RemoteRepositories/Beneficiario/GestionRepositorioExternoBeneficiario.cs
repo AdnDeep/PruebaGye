@@ -9,6 +9,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 {
     public partial class GestionRepositorioExternoBeneficiario : IGestionRepositorioExternoBeneficiario
     {
+        const string resourceComodato = "AzureAdLogin:ResourceComodato";
         private readonly string _baseAddress;
         private readonly ILogger<GestionRepositorioExternoBeneficiario> _logger;
         const string methodGetPaged = "api/GestionBeneficiario/ObtenerListadoPorPagina";

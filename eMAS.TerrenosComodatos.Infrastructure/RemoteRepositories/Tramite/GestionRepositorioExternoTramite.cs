@@ -10,6 +10,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
     {
         private readonly string _baseAddress;
         private readonly ILogger<GestionRepositorioExternoTramite> _logger;
+        const string resourceComodato = "AzureAdLogin:ResourceComodato";
         const string methodGetPaged = "api/GestionTramite/ObtenerListadoPorPagina";
         const string methodGetById = "api/GestionTramite/ObtenerPorId";
         const string methodPost = "api/GestionTramite/Agregar";

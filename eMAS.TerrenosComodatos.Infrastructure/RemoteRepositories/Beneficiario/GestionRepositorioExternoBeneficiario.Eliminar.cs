@@ -17,7 +17,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 
             // Consume Método de Api Service
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
-                                                    .DeleteAsync(_baseAddress, "", urlResource)).Result;
+                                                    .DeleteAsync(_baseAddress, resourceComodato, urlResource)).Result;
             // Procesa Respuesta
             ProcesaRespuestaServidorRemoto<BeneficiarioEditViewModel>(ref resultadoRepositorioExterno, "EliminarBeneficiario", ref resultado);
 

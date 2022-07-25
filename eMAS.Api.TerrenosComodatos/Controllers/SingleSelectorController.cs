@@ -1,10 +1,12 @@
 ﻿using eMAS.Api.TerrenosComodatos.IServices;
 using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SingleSelectorController : ControllerBase

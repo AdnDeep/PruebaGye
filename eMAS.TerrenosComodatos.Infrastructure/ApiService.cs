@@ -33,13 +33,11 @@ namespace eMAS.TerrenosComodatos.Infrastructure
             {
                 using (var client = _clientFactory.CreateClient())
                 {
-                    //baseAddressConf - ApiComodato:ApiBaseAddress
-
-                    //var scope = _configuration["CallApi:ScopeForAccessToken"];
-                    //var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
+                    var scope = _configuration[scopeConf];
+                    var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
 
                     client.BaseAddress = new Uri(baseAddressConf);
-                    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     var response = await client.GetAsync(urlResource);
@@ -72,7 +70,10 @@ namespace eMAS.TerrenosComodatos.Infrastructure
             {
                 using (var client = _clientFactory.CreateClient())
                 {
+                    var scope = _configuration[scopeConf];
+                    var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
                     client.BaseAddress = new Uri(baseAddressConf);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     var contentBody = GetStringContent(body);
                     var response = await client.PostAsync(urlResource, contentBody);
@@ -105,7 +106,10 @@ namespace eMAS.TerrenosComodatos.Infrastructure
             {
                 using (var client = _clientFactory.CreateClient())
                 {
+                    var scope = _configuration[scopeConf];
+                    var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
                     client.BaseAddress = new Uri(baseAddressConf);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     var contentBody = GetStringContent(body);
                     var response = await client.PutAsync(urlResource, contentBody);
@@ -138,7 +142,11 @@ namespace eMAS.TerrenosComodatos.Infrastructure
             {
                 using (var client = _clientFactory.CreateClient())
                 {
+                    var scope = _configuration[scopeConf];
+                    var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
+
                     client.BaseAddress = new Uri(baseAddressConf);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     var response = await client.DeleteAsync(urlResource);
                     if (response != null)

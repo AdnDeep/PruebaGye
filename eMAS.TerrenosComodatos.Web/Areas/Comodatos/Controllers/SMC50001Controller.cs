@@ -2,6 +2,7 @@
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Web.Controllers;
 using eMAS.TerrenosComodatos.Web.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
 {
+    [Authorize]
     [Area("Comodatos")]
     public class SMC50001Controller : BaseController
     {

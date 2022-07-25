@@ -33,5 +33,11 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult SeguridadError()
+        {
+            ViewBag.Nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
+            ViewData["ErrorMessage"] = "Estimado usuarios, no tiene permiso para ingresar a este controlador";
+            return View("Error");
+        }
     }
 }

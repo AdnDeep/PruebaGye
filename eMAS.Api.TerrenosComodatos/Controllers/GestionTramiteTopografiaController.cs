@@ -1,11 +1,13 @@
 ﻿using eMAS.Api.TerrenosComodatos.IServices;
 using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GestionTramiteTopografiaController : ControllerBase

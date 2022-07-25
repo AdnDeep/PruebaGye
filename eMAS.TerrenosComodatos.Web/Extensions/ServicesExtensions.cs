@@ -3,14 +3,26 @@ using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Domain.Interfaces;
 using eMAS.TerrenosComodatos.Infrastructure;
 using eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+using System.Threading.Tasks;
 
 namespace eMAS.TerrenosComodatos.Web
 {
     public static class ServicesExtensions
     {
+        public static void AddHttpServices(this IServiceCollection services)
+        {
+            services.AddHttpContextAccessor();
+        }
         public static void AddSettingsApp(this IServiceCollection services, IConfiguration Configuration)
         {
             AppSettings appSettings = new AppSettings();
@@ -53,9 +65,41 @@ namespace eMAS.TerrenosComodatos.Web
 
         public static void AddServicesAuthentication(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
-                    .EnableTokenAcquisitionToCallDownstreamApi()
-                    .AddInMemoryTokenCaches();
+            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApp(options =>
+                {
+                    Configuration.Bind("AzureAdLogin", options);
+                    options.Events ??= new OpenIdConnectEvents();
+                    options.Events.OnTicketReceived = OnTicketReceivedFunc;
+                })
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddInMemoryTokenCaches();
+            services.AddRazorPages()
+                    .AddMicrosoftIdentityUI();
+            services.AddControllersWithViews(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                    .RequireAuthenticatedUser()
+                                    .Build();
+
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+        }
+
+        public static void AddServicesTelemetry(this IServiceCollection services)
+        {
+            ApplicationInsightsServiceOptions aiOptions = new ApplicationInsightsServiceOptions();
+
+            aiOptions.RequestCollectionOptions.TrackExceptions = true;
+            services.AddApplicationInsightsTelemetry(aiOptions);
+
+            services.AddSingleton<ITelemetryInitializer, TelemetryUser>();
+
+        }
+
+        public static async Task OnTicketReceivedFunc(TicketReceivedContext context)
+        {
+            await Task.CompletedTask.ConfigureAwait(true);
         }
     }
 }

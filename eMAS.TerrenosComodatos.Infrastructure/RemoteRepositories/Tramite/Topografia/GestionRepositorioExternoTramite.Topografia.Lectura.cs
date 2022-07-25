@@ -15,7 +15,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 
             // Consume Método de Api Service
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
-                                                    .GetAsync(_baseAddress, "", urlResource)).Result;
+                                                    .GetAsync(_baseAddress, resourceComodato, urlResource)).Result;
             // Procesa Respuesta
             ProcesaRespuestaServidorRemoto<TopografiaTerrenoEditViewMoel>(ref resultadoRepositorioExterno, "GetTopografiaPorId", ref resultado);
 

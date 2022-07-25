@@ -1,22 +1,18 @@
 ﻿using eMAS.Api.TerrenosComodatos.Extensions;
 using eMAS.Api.TerrenosComodatos.IServices;
-using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PrintPdfController : ControllerBase

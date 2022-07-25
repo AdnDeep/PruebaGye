@@ -29,11 +29,13 @@ namespace eMAS.TerrenosComodatos.Web
                 options.Filters.Add(typeof(TempDataActionFilter));
             });
 
+            services.AddHttpServices();
             services.AddControllersWithViews();
             services.AddSettingsApp(Configuration);
 
             services.AddServicesExtensions();
             services.AddServicesAuthentication(Configuration);
+            services.AddServicesTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +56,9 @@ namespace eMAS.TerrenosComodatos.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

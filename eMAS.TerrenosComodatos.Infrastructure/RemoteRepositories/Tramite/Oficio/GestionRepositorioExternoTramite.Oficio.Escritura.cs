@@ -15,7 +15,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 
             // Consume Método de Api Service
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
-                                                    .PostAsync(_baseAddress, "", urlResource, model)).Result;
+                                                    .PostAsync(_baseAddress, resourceComodato, urlResource, model)).Result;
             // Procesa Respuesta
             ProcesaRespuestaServidorRemoto<int>(ref resultadoRepositorioExterno, "CrearOficio", ref resultado);
 
@@ -31,7 +31,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 
             // Consume Método de Api Service
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
-                                                    .PutAsync(_baseAddress, "", urlResource, model)).Result;
+                                                    .PutAsync(_baseAddress, resourceComodato, urlResource, model)).Result;
             // Procesa Respuesta
             ProcesaRespuestaServidorRemoto<int>(ref resultadoRepositorioExterno, "ActualizarOficio", ref resultado);
 

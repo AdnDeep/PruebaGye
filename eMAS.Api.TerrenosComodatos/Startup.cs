@@ -18,12 +18,15 @@ namespace eMAS.Api.TerrenosComodatos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHttpServices();
             services.AddServicesTramitesExtensions();
             services.AddServicesBeneficiariosExtensions();
             services.AddServicesGenericExtensions();
             services.AddSessionServicesExtensions();
             services.AddSwaggerConfiguration();
             services.AddHelperExtensions();
+            services.AddAuthenticatinServices(Configuration);
+            services.AddServicesTelemetry();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

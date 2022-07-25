@@ -4,6 +4,56 @@ using System.Collections.Generic;
 
 namespace eMAS.TerrenosComodatos.Domain.DTOs
 {
+    public class Enumerados
+    {
+        public static Aplicacion DefaultAplication;
+
+        public Enumerados() 
+        {
+        }
+
+        public enum Boton
+        {
+            Aceptar = 0,
+            Cancelar = 1
+        }
+        public enum TipoMensaje
+        {
+            Exito = 0,
+            Error = 1,
+            Advertencia = 2
+        }
+        public enum Aplicacion
+        {
+            APP = 0,
+            STH = 1,
+            CAT = 2,
+            MGC = 3,
+            SM1 = 4,
+            SAM = 5,
+            SPM = 6
+        }
+        public enum Capa
+        {
+            Controller = 0,
+            ServiceAgent = 1,
+            Logic = 2,
+            Service = 3
+        }
+    }
+    public class ResultadoViewModel
+    {
+        public ResultadoViewModel() 
+        {
+        }
+
+        public bool Ok { get; set; }
+        public string Titulo { get; set; }
+        public Enumerados.TipoMensaje TipoMensaje { get; set; }
+        public List<string> Mensajes { get; set; }
+        public bool ErrorValidacion { get; set; }
+        public int StatusCode { get; set; }
+    }
     public class SystemSettings
     {
         public string CurrentDecimalSeparator { get; set; }

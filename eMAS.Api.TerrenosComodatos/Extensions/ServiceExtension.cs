@@ -6,7 +6,13 @@ using eMAS.Api.TerrenosComodatos.Logic;
 using eMAS.Api.TerrenosComodatos.Logic.Generic;
 using eMAS.Api.TerrenosComodatos.Repository;
 using eMAS.Api.TerrenosComodatos.Services;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using System;
 
@@ -14,6 +20,11 @@ namespace eMAS.Api.TerrenosComodatos
 {
     public static class ServiceExtension
     {
+        public static void AddHttpServices(this IServiceCollection services)
+        {
+            services.AddHttpContextAccessor();
+        }
+
         public static void AddServicesTramitesExtensions(this IServiceCollection services)
         {
             // Repositorios
@@ -91,7 +102,7 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -119,6 +130,55 @@ namespace eMAS.Api.TerrenosComodatos
         {
             services.AddTransient<RenderViewService>();
             services.AddTransient<ServiceConvertirHtmlAPdf>();
+        }
+        public static void AddServicesTelemetry(this IServiceCollection services)
+        {
+            ApplicationInsightsServiceOptions aiOptions = new ApplicationInsightsServiceOptions();
+
+            aiOptions.RequestCollectionOptions.TrackExceptions = true;
+            services.AddApplicationInsightsTelemetry(aiOptions);
+
+            services.AddSingleton<ITelemetryInitializer, TelemetryUser>();
+
+        }
+        public static void AddAuthenticatinServices(this IServiceCollection services, IConfiguration Configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                
+                /****Configuración para que esta API Reciba llamadas desde otra API o APLICACIÓN AAD con el flujo CLIENT CREDENTIALS****/
+                .AddJwtBearer("ApiConfigureCC-AAD", options =>
+                {
+                    options.Audience = Configuration["ApiComodatoServer-AAD:ApplicationUri"];
+                    options.Authority = Configuration["ApiComodatoServer-AAD:UrlAuthority"];
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidAudience = Configuration["ApiComodatoServer-AAD:ApplicationUri"],
+                        ValidIssuer = $"{Configuration["ApiComodatoServer-AAD:UrlAuthority"]}/v2.0"
+                    };
+                })
+
+
+                /****Configuración para que la llamada sea mediante B2C con llamada Implícita (con un usuario Iniciado Sesión en B2C, más usado para trámites en línea donde un ciudadano debe iniciar sesión)****/
+                .AddMicrosoftIdentityWebApi(options =>
+                {
+                    Configuration.Bind("AzureAdB2C", options);
+                    options.TokenValidationParameters.NameClaimType = "name";
+                }, options => { Configuration.Bind("AzureAdB2C", options); });
+
+            services.AddAuthorization(options =>
+            {
+                // Create policy to check for the scope 'read'
+                options.AddPolicy("ReadScope",
+                policy => policy.Requirements.Add(new ScopesRequirement("user_impersonation")));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(
+                                JwtBearerDefaults.AuthenticationScheme, "ApiConfigureCC-AAD");
+                defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+                options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
+            });
         }
     }
 }
