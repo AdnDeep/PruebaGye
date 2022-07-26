@@ -49,6 +49,7 @@ namespace eMAS.Api.TerrenosComodatos
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

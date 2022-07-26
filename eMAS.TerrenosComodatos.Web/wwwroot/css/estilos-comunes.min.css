@@ -1,1 +1,366 @@
-.eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > td, .eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > th {background-color: #DFE7FF;}.eMASReferencialCss\:table-striped > tbody > tr:nth-child(even) > td, .eMASReferencialCss\:table-striped > tbody > tr:nth-child(even) > th {background-color: #FFF;}.eMASReferencialCss-btn-file {position: relative;overflow: hidden;}.eMASReferencialCss-btn-file input[type=file] {position: absolute;top: 0;right: 0;min-width: 100%;min-height: 100%;font-size: 100px;text-align: right;filter: alpha(opacity=0);opacity: 0;outline: none;background: white;cursor: inherit;display: block;}.eMASReferencialCss\:parrafo {font-family: 'Roboto', sans-serif;font-size: 13px;vertical-align: top;text-align: justify;color: #000;}@font-face {font-family: 'Glyphicons Halflings';src: url('../../fonts/glyphicons-halflings-regular.eot');src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.eMASReferencialCss\:glyphicon {position: relative;top: 1px;display: inline-block;font-family: 'Glyphicons Halflings';-webkit-font-smoothing: antialiased;font-style: normal;font-weight: normal;line-height: 1;}@media (min-width: 1700px) {.container {max-width: 1600px;}}.eMASReferencialCss\:glyphicon-download-alt:before {content: "\e025";}.eMASReferencialCss\:glyphicon-upload:before {content: "\e027";}.eMASReferencialCss\:glyphicon-folder-open:before {content: "\e118";}.eMASReferencialCss\:glyphicon-saved:before {content: "\e168";}.eMASReferencialCss-header {height: 42px;position: relative;width: 100%;}.eMASReferencialCss-headerLogo {background-repeat: no-repeat;position: absolute;top: 4px;left: 20px;width: 34px;height: 34px;}.loader {position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: 9999;background: url('../Images/loading.gif') 50% 20% no-repeat rgba(25, 25, 25, 0.7);}@-webkit-keyframes spin {0% {-webkit-transform: rotate(0deg);}100% {-webkit-transform: rotate(360deg);}}@keyframes spin {0% {transform: rotate(0deg);}100% {transform: rotate(360deg);}}.chosen-container-single .chosen-single {border-radius: 0.25rem;border: 1px solid #ced4da;height: 30px;}.form-control {max-height: 30px;height: 100%;}.textarea {max-height: 95px;}.form-group {margin-bottom: 0px;padding: 1px;}a {color: #464646;}.panel.panel-default {padding-bottom: 5px;}.panel-heading {border-radius: 0.25rem;}.panel-body {border: solid 1px #ced4da;border-top: none;padding: 10px;}.panel-heading {border: solid 1px #ced4da;padding-left: 10px;}.theadTable {background: #3d80ba;color: white;}.btnDateTimeEdit {width: 30px;height: 30px;padding-left: 7px;padding-top: 4px;background: #3d80ba;color: white !important;border-radius: 0 .25rem .25rem 0;position: relative;overflow: hidden;display: inline-block;}.btnDateTimeEdit:hover {background: #00548a;color: white !important;}.btnConsultar {background: #3d80ba;color: white;border-radius: 2px;margin: 5px 0 0 5px;width: 100%;max-width: 100px;}.btnConsultar:hover {background: #00548a;}.btnConsultar:active {background: #00548a;}.btnRegresar {background: #6c757d;color: white;border-radius: 2px;margin: 5px 0 0 5px;width: 100%;max-width: 100px;}.btnRegresar:hover {background: #4a4f54;text-decoration: underline;}.btnNo {color: #fff;border: 1px solid #000;padding: 0rem 0.5rem;background: #6c757d;border-radius: 2px;font-weight: bold;}.btnNo:hover {background: #4a4f54;text-decoration: underline;}.btnSi {color: #fff;border: 1px solid #000;padding: 0rem 0.7rem;background: #3d80ba;border-radius: 2px;font-weight: bold;}.btnSi:hover {background: #00548a;text-decoration: underline;}.btnWarning {color: #fff;border: 1px solid #c5a524;padding: 0rem 0.5rem;background: #ffe270;border-radius: 2px;font-weight: bold;}.btnWarning:hover {background: #fffcd9;text-decoration: underline;}.btnError {color: #fff;border: 1px solid #924949;padding: 0rem 0.5rem;background: #d2abab;border-radius: 2px;font-weight: bold;}.btnError:hover {background: #f2e4e4;text-decoration: underline;}.btnSuccess {color: #fff;border: 1px solid #60a174;padding: 0rem 0.5rem;background: #a8d5b7;border-radius: 2px;font-weight: bold;}.btnSuccess:hover {background: #e6f1e9;text-decoration: underline;}.btnBuscar {width: 30px;height: 30px;padding-left: 7px;padding-top: 2px;background: #3d80ba;color: white;border: 1px solid rgba(0, 0, 0, 0.15);border-radius: .25rem;position: relative;overflow: hidden;display: inline-block;}.btnBuscar:hover {background: #00548a;}.btnBuscar:active {background: #00548a;}.image-logo {border: #3d80ba solid;max-width: 150px;max-height: 150px;width: 100%;}.page-item.active .page-link {background-color: #3d80ba;border-color: #3d80ba;}.page-link {color: #3d80ba;}.page-link:active {color: #3d80ba;}.page-link:hover {color: #3d80ba;}.dropdown-item.active {background-color: #3d80ba;}.dropdown-menu.show {top: 38px !important;}.inputBuscar {display: block;width: 100%;padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;color: #495057;background-color: #fff;background-clip: padding-box;border: 1px solid #ced4da;border-radius: 0.25rem;transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;margin-top: 4px;}.inputBuscar:focus {color: #495057;background-color: #fff;border-color: #80bdff;outline: 0;box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);}.fileButton {position: absolute;padding-left: -5px;top: 0;right: 0;margin: 0;height: 30px;width: 30px;opacity: 0;direction: ltr;cursor: pointer;}.card {margin-top: 0.5rem;}#DivPersonaData {padding: 0 !important;}.form-title {background: #c8e1f7;color: black;}.textColorMenu {color: #2a3f54 !important;}
+.btnError:hover, .btnSi:hover, .btnSuccess:hover, .btnWarning:hover {
+    text-decoration: underline
+}
+
+.detail-container .list-container::-webkit-scrollbar {
+    width: 12px
+}
+
+.detail-container .list-container::-webkit-scrollbar-track {
+    background: #fff
+}
+
+.detail-container .list-container::-webkit-scrollbar-thumb {
+    background-color: #3d80ba;
+    border-radius: 20px;
+    border: 3px solid #fff
+}
+
+.eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > td, .eMASReferencialCss\:table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #dfe7ff
+}
+
+.eMASReferencialCss\:table-striped > tbody > tr:nth-child(2n) > td, .eMASReferencialCss\:table-striped > tbody > tr:nth-child(2n) > th {
+    background-color: #fff
+}
+
+.eMASReferencialCss-btn-file {
+    position: relative;
+    overflow: hidden
+}
+
+    .eMASReferencialCss-btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        opacity: 0;
+        outline: 0;
+        background: #fff;
+        cursor: inherit;
+        display: block
+    }
+
+.eMASReferencialCss\:parrafo {
+    font-family: Roboto,sans-serif;
+    font-size: 13px;
+    vertical-align: top;
+    text-align: justify;
+    color: #000
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../../fonts/glyphicons-halflings-regular.eot');
+    src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('../../fonts/glyphicons-halflings-regular.woff') format('woff'),url('../../fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('../../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')
+}
+
+.eMASReferencialCss\:glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1
+}
+
+@media (min-width:1700px) {
+    .container {
+        max-width: 1600px
+    }
+}
+
+.eMASReferencialCss\:glyphicon-download-alt:before {
+    content: "\e025"
+}
+
+.eMASReferencialCss\:glyphicon-upload:before {
+    content: "\e027"
+}
+
+.eMASReferencialCss\:glyphicon-folder-open:before {
+    content: "\e118"
+}
+
+.eMASReferencialCss\:glyphicon-saved:before {
+    content: "\e168"
+}
+
+.eMASReferencialCss-header {
+    height: 42px;
+    position: relative;
+    width: 100%
+}
+
+.eMASReferencialCss-headerLogo {
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 4px;
+    left: 20px;
+    width: 34px;
+    height: 34px
+}
+
+.btnBuscar, .btnDateTimeEdit {
+    position: relative;
+    overflow: hidden;
+    display: inline-block
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0)
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.chosen-container-single .chosen-single {
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+    height: 30px
+}
+
+.form-control {
+    max-height: 30px;
+    height: 100%
+}
+
+.textarea {
+    max-height: 95px
+}
+
+.form-group {
+    margin-bottom: 0;
+    padding: 1px
+}
+
+a {
+    color: #464646
+}
+
+.panel.panel-default {
+    padding-bottom: 5px
+}
+
+.panel-heading {
+    border-radius: .25rem
+}
+
+.panel-body {
+    border: 1px solid #ced4da;
+    border-top: none;
+    padding: 10px
+}
+
+.panel-heading {
+    border: 1px solid #ced4da;
+    padding-left: 10px
+}
+
+.theadTable {
+    background: #3d80ba;
+    color: #fff
+}
+
+.btnDateTimeEdit {
+    width: 30px;
+    height: 30px;
+    padding-left: 7px;
+    padding-top: 4px;
+    background: #3d80ba;
+    color: #fff !important;
+    border-radius: 0 .25rem .25rem 0
+}
+
+.btnConsultar, .btnRegresar {
+    border-radius: 2px;
+    margin: 5px 0 0 5px;
+    width: 100%;
+    max-width: 100px
+}
+
+.btnDateTimeEdit:hover {
+    background: #00548a;
+    color: #fff !important
+}
+
+.btnConsultar {
+    background: #3d80ba;
+    color: #fff
+}
+
+.btnNo, .btnRegresar {
+    background: #6c757d;
+    color: #fff
+}
+
+.btnBuscar:active, .btnBuscar:hover, .btnConsultar:active, .btnConsultar:hover {
+    background: #00548a
+}
+
+.btnNo:hover, .btnRegresar:hover {
+    background: #4a4f54;
+    text-decoration: underline
+}
+
+.btnNo {
+    border: 1px solid #000;
+    padding: 0 .5rem;
+    border-radius: 2px;
+    font-weight: 700
+}
+
+.btnSi {
+    color: #fff;
+    border: 1px solid #000;
+    padding: 0 .7rem;
+    background: #3d80ba;
+    border-radius: 2px;
+    font-weight: 700
+}
+
+.btnError, .btnSuccess, .btnWarning {
+    padding: 0 .5rem;
+    font-weight: 700;
+    color: #fff
+}
+
+.btnSi:hover {
+    background: #00548a
+}
+
+.btnWarning {
+    border: 1px solid #c5a524;
+    background: #ffe270;
+    border-radius: 2px
+}
+
+    .btnWarning:hover {
+        background: #fffcd9
+    }
+
+.btnError {
+    border: 1px solid #924949;
+    background: #d2abab;
+    border-radius: 2px
+}
+
+    .btnError:hover {
+        background: #f2e4e4
+    }
+
+.btnSuccess {
+    border: 1px solid #60a174;
+    background: #a8d5b7;
+    border-radius: 2px
+}
+
+    .btnSuccess:hover {
+        background: #e6f1e9
+    }
+
+.btnBuscar {
+    width: 30px;
+    height: 30px;
+    padding-left: 7px;
+    padding-top: 2px;
+    background: #3d80ba;
+    color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem
+}
+
+.image-logo {
+    border: solid #3d80ba;
+    max-width: 150px;
+    max-height: 150px;
+    width: 100%
+}
+
+.page-item.active .page-link {
+    background-color: #3d80ba;
+    border-color: #3d80ba
+}
+
+.page-link, .page-link:active, .page-link:hover {
+    color: #3d80ba
+}
+
+.dropdown-item.active {
+    background-color: #3d80ba
+}
+
+.inputBuscar, .inputBuscar:focus {
+    color: #495057;
+    background-color: #fff
+}
+
+.dropdown-menu.show {
+    top: 38px !important
+}
+
+.inputBuscar {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 4px
+}
+
+    .inputBuscar:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 .2rem rgba(0,123,255,.25)
+    }
+
+.fileButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    opacity: 0;
+    direction: ltr;
+    cursor: pointer
+}
+
+.card {
+    margin-top: .5rem
+}
+
+#DivPersonaData {
+    padding: 0 !important
+}
+
+.form-title {
+    background: #c8e1f7;
+    color: #000
+}
+
+.textColorMenu {
+    color: #2a3f54 !important
+}
