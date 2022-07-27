@@ -3,3 +3,16 @@
 ################################################################################
 
 /.vs
+/eMAS.Api.TerrenosComodatos
+/eMAS.Api.TerrenosComodatos.Comun
+/eMAS.Api.TerrenosComodatos.Data
+/eMAS.Api.TerrenosComodatos.IRepository
+/eMAS.Api.TerrenosComodatos.IServices
+/eMAS.Api.TerrenosComodatos.Entities
+/eMAS.Api.TerrenosComodatos.Logic
+/eMAS.Api.TerrenosComodatos.Repository
+/eMAS.Api.TerrenosComodatos.Services
+/eMAS.Api.TerrenosComodatos.ViewModel
+/eMAS.TerrenosComodatos.Domain
+/eMAS.TerrenosComodatos.Infrastructure
+/eMAS.TerrenosComodatos.Web
