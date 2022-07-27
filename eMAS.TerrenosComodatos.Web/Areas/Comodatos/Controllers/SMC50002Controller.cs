@@ -71,9 +71,11 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         {
             string partialEditViewHtml = string.Empty;
             ResultadoDTO<int> response = new ResultadoDTO<int>();
+            string user = "";
             try
             {
-                response = _casesUsesTramite.GrabarTramite(modelEdit, "test", "SMC50002", "WEBCLIENT");
+                user = GetUserFromContext();
+                response = _casesUsesTramite.GrabarTramite(modelEdit, user, "SMC50002", "WEBCLIENT");
             }
             catch (Exception ex)
             {
@@ -88,9 +90,11 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         public IActionResult EditDelete(short id)
         {
             ResultadoDTO<int> response = new ResultadoDTO<int>();
+            string user = "";
             try
             {
-                response = _casesUsesTramite.EliminarTramite(id, "test", "SMC50002", "WEBCLIENT");
+                user = GetUserFromContext();
+                response = _casesUsesTramite.EliminarTramite(id, user, "SMC50002", "WEBCLIENT");
             }
             catch (Exception ex)
             {
@@ -201,9 +205,11 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         public IActionResult EditDetailSave([FromBody] TramitesDetailRequestEditViewModel modelEdit)
         {
             object response = new object();
+            string user = "";
             try
             {
-                response = _casesUsesTramite.GrabarDetalle(modelEdit?.model, "test", "SMC50002", "WEBCLIENT", modelEdit?.entidad);
+                user = GetUserFromContext();
+                response = _casesUsesTramite.GrabarDetalle(modelEdit?.model, user, "SMC50002", "WEBCLIENT", modelEdit?.entidad);
             }
             catch (Exception ex)
             {
@@ -219,11 +225,13 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         public IActionResult EditDetailDelete([FromBody] TramitesDetailRequestDeleteViewModel modelDelete)
         {
             object response = new object();
+            string user = "";
             try
             {
+                user = GetUserFromContext();
                 short sId = 0;
                 Int16.TryParse(modelDelete?.id, out sId);
-                response = _casesUsesTramite.EliminarDetalle(sId, "test", "SMC50002", "WEBCLIENT", modelDelete.entidad);
+                response = _casesUsesTramite.EliminarDetalle(sId, user, "SMC50002", "WEBCLIENT", modelDelete.entidad);
             }
             catch (Exception ex)
             {

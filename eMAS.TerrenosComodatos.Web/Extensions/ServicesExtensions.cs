@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using System;
 using System.Threading.Tasks;
 
 namespace eMAS.TerrenosComodatos.Web
@@ -45,6 +46,7 @@ namespace eMAS.TerrenosComodatos.Web
             services.AddHttpClient();
 
             // Casos de Uso
+            services.AddTransient<ICasesUsesGestionSeguridad, CasesUsesGestionSeguridad>();
             services.AddTransient<ICasesUsesGestionBeneficiario, CasesUsesGestionBeneficiario>();
             services.AddTransient<ICasesUsesGestionTramite, CasesUsesGestionTramite>();
             services.AddTransient<ICasesUsesGeneric, CasesUsesGeneric>();
@@ -53,27 +55,25 @@ namespace eMAS.TerrenosComodatos.Web
             services.AddTransient<MapeadoresBeneficiario>();
             services.AddTransient<MapeadoresGenerico>();
             services.AddTransient<MapeadoresTramite>();
+            services.AddTransient<MapeadoresSeguridad>();
             // Validadores
             services.AddTransient<ValidadoresBeneficiario>();
             services.AddTransient<ValidadoresGenerico>();
             services.AddTransient<ValidadoresTramite>();
+            services.AddTransient<ValidadoresSeguridad>();
             // Repositorios
             services.AddTransient<IGestionRepositorioExternoTramite, GestionRepositorioExternoTramite>();
             services.AddTransient<IGestionRepositorioExternoGenerico, GestionRepositorioExternoGenerico>();
             services.AddTransient<IGestionRepositorioExternoBeneficiario, GestionRepositorioExternoBeneficiario>();
+            services.AddTransient<IGestionRepositorioExternoSeguridad, GestionRepositorioExternoSeguridad>();
         }
 
-        public static void AddServicesAuthentication(this IServiceCollection services, IConfiguration Configuration)
+        public static void AddServicesAuthenticationAuthorization(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApp(options =>
-                {
-                    Configuration.Bind("AzureAdLogin", options);
-                    options.Events ??= new OpenIdConnectEvents();
-                    options.Events.OnTicketReceived = OnTicketReceivedFunc;
-                })
-                .EnableTokenAcquisitionToCallDownstreamApi()
-                .AddInMemoryTokenCaches();
+            services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureAdLogin")
+                    .EnableTokenAcquisitionToCallDownstreamApi()
+                    .AddInMemoryTokenCaches();
+
             services.AddRazorPages()
                     .AddMicrosoftIdentityUI();
             services.AddControllersWithViews(options =>
@@ -84,8 +84,19 @@ namespace eMAS.TerrenosComodatos.Web
 
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
+            services.AddOptions();
+            services.Configure<OpenIdConnectOptions>(Configuration.GetSection("AzureAdLogin"));
         }
-
+        public static void AddSessionServicesExtensions(this IServiceCollection services)
+        {
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+        }
         public static void AddServicesTelemetry(this IServiceCollection services)
         {
             ApplicationInsightsServiceOptions aiOptions = new ApplicationInsightsServiceOptions();

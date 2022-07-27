@@ -2,6 +2,8 @@
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace eMAS.TerrenosComodatos.Web.Controllers
@@ -25,6 +27,29 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
 
             return Json(ls);
         }
-
+        protected string GetUserFromContext()
+        {
+            var parametros = $"BaseController Service Layer";
+            var props = new Dictionary<string, object>(){
+                                { "Metodo", "GetUserFromContext" },
+                                { "Sitio", "COMODATO-WEB" },
+                                { "Parametros", parametros }
+                        };
+            string userName = string.Empty;
+            string userNameComplete = HttpContext?.User?.Claims?.FirstOrDefault(w => w.Type == "preferred_username")?.Value;
+            try
+            {
+                userName = userNameComplete.Split("@")[0];                
+            }
+            catch (Exception ex)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"Se produjo una excepción al consultar el usuario {ex}");
+                }
+                userName = "";
+            }
+            return userName;
+        }
     }
 }

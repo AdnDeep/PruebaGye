@@ -32,16 +32,18 @@ namespace eMAS.TerrenosComodatos.Web.Extensions
 
                 if (string.IsNullOrEmpty(permiso) || string.IsNullOrWhiteSpace(permiso))
                 {
+                    //permiso = "S";
                     permiso = _casesUsesSeguridad.ObtenerPermisosPorUsuario(userName, nameController);
                     context.HttpContext.Session.SetObject(nameController, permiso);
                 }
                 if (permiso != "S")
                 {
-                    context.Result = new RedirectToRouteResult(new RouteValueDictionary
-                    {
-                        { "controller", "Home" },
-                        { "action", "SeguridadError" }
-                    });
+                    string rutaBase = _appSettings.RutaBase;
+                    rutaBase = rutaBase == "/" ? "/" : rutaBase + "/";
+
+                    context.HttpContext.Session.Clear();
+
+                    context.HttpContext.Response.Redirect($"{rutaBase}Home/SeguridadError");                    
                 }
             }
         }

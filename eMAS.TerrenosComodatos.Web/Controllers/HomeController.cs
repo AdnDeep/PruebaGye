@@ -1,6 +1,11 @@
-﻿using eMAS.TerrenosComodatos.Web.Models;
+﻿using eMAS.TerrenosComodatos.Domain.DTOs;
+using eMAS.TerrenosComodatos.Web.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,10 +16,13 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private AppSettings _appSettings;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger
+            , IOptions<AppSettings> appSettings)
         {
+            _appSettings = appSettings.Value;
             _logger = logger;
         }
 
@@ -27,7 +35,26 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         {
             return View();
         }
+        public IActionResult LogIn()
+        {
+            return RedirectToAction("SignIn", "Account", new { Area = "MicrosoftIdentity" });
 
+        }
+        public IActionResult LogOut()
+        {
+            //var callbackUrl = Url.Action("Index", "SMC50001", new { Area = "Comodatos" });
+
+            string rutaBase = _appSettings.RutaBase;
+            rutaBase = rutaBase == "/" ? "/" : rutaBase + "/";
+            return SignOut
+            (
+                new AuthenticationProperties { RedirectUri = $"{rutaBase}" },
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                OpenIdConnectDefaults.AuthenticationScheme
+            );
+            //return RedirectToAction("SignOut", "Account", new { Area = "MicrosoftIdentity" });
+
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -35,9 +62,9 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         }
         public IActionResult SeguridadError()
         {
-            ViewBag.Nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
-            ViewData["ErrorMessage"] = "Estimado usuarios, no tiene permiso para ingresar a este controlador";
-            return View("Error");
+            string _nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
+            ViewData["ErrorMessage"] = $"Estimado usuario {_nombre}, no tiene permiso para ingresar a este controlador";
+            return PartialView("Error");
         }
     }
 }

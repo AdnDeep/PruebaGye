@@ -25,6 +25,7 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddSessionServicesExtensions();
             services.AddSwaggerConfiguration();
             services.AddHelperExtensions();
+            //services.AddAuthenticationServices(Configuration);
             services.AddAuthenticatinServices(Configuration);
             services.AddServicesTelemetry();
         }
@@ -44,7 +45,7 @@ namespace eMAS.Api.TerrenosComodatos
                     AppName = "eMAS.Api.TerrenosComodatos"// Nombre
                 };
             });
-
+            app.UseSession();
             app.UseHttpsRedirection();
 
             app.UseRouting();

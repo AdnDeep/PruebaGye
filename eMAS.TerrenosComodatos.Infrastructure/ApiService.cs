@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure
         }
         public async Task<Tuple<int, string>> GetAsync(string baseAddressConf, string scopeConf, string urlResource)
         {
-            int responseCode;
+            int responseCode = 0;
             string responseContent = "";
             try
             {
@@ -35,6 +36,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure
                 {
                     var scope = _configuration[scopeConf];
                     var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
+                    //var accessToken = await _tokenAcquisition.GetAccessTokenForAppAsync( scope );
 
                     client.BaseAddress = new Uri(baseAddressConf);
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
@@ -58,7 +60,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure
             catch (Exception e)
             {
                 responseCode = (int)HttpStatusCode.InternalServerError;
-                responseContent = $"Excepction {e}";
+                responseContent = $"Exception {e}";
             }
             return new Tuple<int, string>(responseCode, responseContent);
         }
@@ -71,7 +73,9 @@ namespace eMAS.TerrenosComodatos.Infrastructure
                 using (var client = _clientFactory.CreateClient())
                 {
                     var scope = _configuration[scopeConf];
+
                     var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { scope });
+
                     client.BaseAddress = new Uri(baseAddressConf);
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

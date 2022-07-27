@@ -1,7 +1,10 @@
+using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Web.Extensions;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,13 +32,17 @@ namespace eMAS.TerrenosComodatos.Web
                 options.Filters.Add(typeof(TempDataActionFilter));
             });
 
+            //services.AddSessionServicesExtensions();
             services.AddHttpServices();
             services.AddControllersWithViews();
             services.AddSettingsApp(Configuration);
 
             services.AddServicesExtensions();
-            services.AddServicesAuthentication(Configuration);
+            services.AddSessionServicesExtensions();
+            services.AddServicesAuthenticationAuthorization(Configuration);
             services.AddServicesTelemetry();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +58,16 @@ namespace eMAS.TerrenosComodatos.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -58,7 +75,6 @@ namespace eMAS.TerrenosComodatos.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {

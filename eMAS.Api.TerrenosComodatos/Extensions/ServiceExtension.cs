@@ -141,6 +141,19 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddSingleton<ITelemetryInitializer, TelemetryUser>();
 
         }
+        public static void AddAuthenticationServices(this IServiceCollection services, IConfiguration Configuration)
+        {
+            services.AddMicrosoftIdentityWebApiAuthentication(Configuration, "AzureAdB2C", "AADB2C", false);
+
+            services
+                    .AddAuthorization(options =>
+                    {
+                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                            .RequireAuthenticatedUser()
+                            .AddAuthenticationSchemes("AADB2C")
+                            .Build();
+                    });
+        }
         public static void AddAuthenticatinServices(this IServiceCollection services, IConfiguration Configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -164,13 +177,6 @@ namespace eMAS.Api.TerrenosComodatos
                     Configuration.Bind("AzureAdB2C", options);
                     options.TokenValidationParameters.NameClaimType = "name";
                 }, options => { Configuration.Bind("AzureAdB2C", options); });
-
-            services.AddAuthorization(options =>
-            {
-                // Create policy to check for the scope 'read'
-                options.AddPolicy("ReadScope",
-                policy => policy.Requirements.Add(new ScopesRequirement("user_impersonation")));
-            });
 
             services.AddAuthorization(options =>
             {

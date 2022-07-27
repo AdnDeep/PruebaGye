@@ -67,10 +67,12 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         public IActionResult EditSave(BeneficiarioEditViewModel modelEdit)
         {
             string partialEditViewHtml = string.Empty;
-            ResultadoDTO<BeneficiarioEditViewModel> response = new ResultadoDTO<BeneficiarioEditViewModel>();            
+            ResultadoDTO<BeneficiarioEditViewModel> response = new ResultadoDTO<BeneficiarioEditViewModel>();
+            string user = "";
             try
             {
-                response = _casesUsesBeneficiario.GrabarBeneficiario(modelEdit, "test", "SMC50001", "WEBCLIENT");
+                user = GetUserFromContext();
+                response = _casesUsesBeneficiario.GrabarBeneficiario(modelEdit, user, "SMC50001", "WEBCLIENT");
             }
             catch (Exception ex)
             {
@@ -85,9 +87,11 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         public IActionResult EditDelete(BeneficiarioDeleteViewModel modelEdit)
         {
             ResultadoDTO<BeneficiarioEditViewModel> response = new ResultadoDTO<BeneficiarioEditViewModel>();
+            string user = "";
             try
             {
-                response = _casesUsesBeneficiario.EliminarBeneficiario(modelEdit, "test", "SMC50001", "WEBCLIENT");
+                user = GetUserFromContext();
+                response = _casesUsesBeneficiario.EliminarBeneficiario(modelEdit, user, "SMC50001", "WEBCLIENT");
             }
             catch (Exception ex)
             {
