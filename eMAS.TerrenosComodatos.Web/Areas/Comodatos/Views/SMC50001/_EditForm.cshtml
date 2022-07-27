@@ -1,0 +1,30 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.BeneficiarioEditViewModel
+
+<div class="form-content-edit">
+    <div class="container-form form-general">
+        <input id="IdBeneficiario" class="idelemento" type="hidden" value="@Model.id" />
+        @await Html.PartialAsync("_CommandTop")
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <label for="name-edit">Nombre</label>
+                <input type="text" class="form-control text-control" id="name-edit" value="@Model.nombre" maxlength="200">
+                <div class="invalid-feedback">Campo Obligatorio.</div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <label for="representative-name-edit">Nombre Representante</label>
+                <input type="text" class="form-control text-control" id="representative-name-edit" value="@Model.representante" maxlength="200">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <label for="ruc-edit">Ruc</label>
+                <input type="text" class="form-control text-control" id="ruc-edit" value="@Model.ruc" maxlength="20">
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <label for="contacto-edit">Contacto</label>
+                <input type="text" class="form-control text-control" id="contacto-edit" value="@Model.contacto" maxlength="200">
+            </div>
+        </div>
+        @await Html.PartialAsync("_CommandBottom")
+    </div>
+</div>

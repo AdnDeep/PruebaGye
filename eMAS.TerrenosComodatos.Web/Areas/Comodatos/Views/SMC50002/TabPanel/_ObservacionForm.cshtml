@@ -1,0 +1,31 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.ObservacionTramiteEditViewModel
+
+<div class="form-detail-content-edit">
+    <div class="container-detail-form form-general">
+        <input id="IdObservacionTramite" class="idelemento" type="hidden" value="@Model.idtramitedesc" />
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="fecha-observacion-container">
+                <label for="fechaObervacionDetail">Fecha Observaci&oacute;n</label>
+                <input id="fechaObervacionDetail"
+                       data-date-container='#fecha-observacion-container'
+                       class="form-control"                       
+                       value="@Model.strfecha" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="observacionDetail">Observaci&oacute;n</label>
+                <textarea id="observacionDetail" 
+                          class="form-control text-control" 
+                          maxlength="4000"
+                          name="observacionDetail" rows="4">@Model.observacion</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <label class="error-label peligro hidden"></label>
+            </div>
+        </div>
+        @await Html.PartialAsync("_CommandBottomDetail")
+    </div>
+</div>

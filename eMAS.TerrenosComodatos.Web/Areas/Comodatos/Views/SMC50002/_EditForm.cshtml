@@ -1,0 +1,97 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TramiteEditViewModel
+
+@{ 
+    eMAS.TerrenosComodatos.Web.Models.DetailViewModel anexoDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible=true });
+    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "enlace", name = "Enlace", visible = true });
+    anexoDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+
+    eMAS.TerrenosComodatos.Web.Models.DetailViewModel observacionDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "fecha", name = "Fecha", visible = true });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "observacion", name = "observacion", visible = true });
+    observacionDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+
+    eMAS.TerrenosComodatos.Web.Models.DetailViewModel oficioDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "direccion", name = "Dirección", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "secuencia", name = "Sec.", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficio", name = "Oficio", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
+    oficioDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+
+    //eMAS.TerrenosComodatos.Web.Models.DetailViewModel topografiaDetailViewModel = new eMAS.TerrenosComodatos.Web.Models.DetailViewModel();
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "acciones", name = "Acciones", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "tipo", name = "Tipo", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficio", name = "Oficio", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "oficiorespuesta", name = "Oficio Respuesta", visible = true });
+    //topografiaDetailViewModel.addColumnInfo(new eMAS.TerrenosComodatos.Web.Models.ColumnViewModel { id = "id", name = "id", visible = false });
+}
+<div class="form-content-edit">
+    <div class="container-form">
+        <input id="IdTramite" class="idelemento" type="hidden" value="@Model.idtramite" />
+        <input id="IdBeneficiario" class="idelemento" type="hidden" value="@Model.idbeneficiario" />
+        <input id="IdTipoContrato" class="idelemento" type="hidden" value="@Model.idtipocontrato" />
+        <input id="IdEstadoContrato" class="idelemento" type="hidden" value="@Model.idestado" />
+        @await Html.PartialAsync("_CommandTop")
+
+
+        <div id="TramiteTabContainer">
+            <ul class="nav nav-tabs" id="tramiteTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="cabecera-1-tab" data-toggle="tab" href="#cabecera-1" role="tab" aria-controls="cabecera-1" aria-selected="true">General</a>
+                </li>
+                @if (Model.idtramite > 0)
+                {
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Control de Oficios</a>
+                    </li>
+                    @*<li class="nav-item" role="presentation">
+                        <a class="nav-link" id="topografia-tab" data-toggle="tab" href="#topografia" role="tab" aria-controls="topografia" aria-selected="false">Topograf&iacute;a</a>
+                    </li>*@
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="cabecera-2-tab" data-toggle="tab" href="#cabecera-2" role="tab" aria-controls="cabecera-2" aria-selected="false">Datos</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="anexo-tab" data-toggle="tab" href="#anexo" role="tab" aria-controls="anexo" aria-selected="false">Anexos</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="observacion-tab" data-toggle="tab" href="#observacion" role="tab" aria-controls="observacion" aria-selected="false">Observaciones</a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content" id="tramiteTabContent">
+                <div class="tab-pane fade show active" id="cabecera-1" role="tabpanel" aria-labelledby="cabecera-1-tab">
+                    @await Html.PartialAsync("TabPanel/_Cabecera1", Model)
+                </div>
+                @if (Model.idtramite > 0)
+                {
+                    <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
+                        <div class="container-oficio-detail">
+                            @await Html.PartialAsync("TabPanel/_Detail", oficioDetailViewModel)
+                        </div>
+                    </div>
+                    @*<div class="tab-pane fade" id="topografia" role="tabpanel" aria-labelledby="topografia-tab">
+                        <div class="container-topografia-detail">
+                            @await Html.PartialAsync("TabPanel/_Detail", topografiaDetailViewModel)
+                        </div>
+                    </div>*@
+                    <div class="tab-pane fade" id="cabecera-2" role="tabpanel" aria-labelledby="cabecera-2-tab">
+                        @await Html.PartialAsync("TabPanel/_Cabecera2", Model)
+                    </div>
+                    <div class="tab-pane fade" id="anexo" role="tabpanel" aria-labelledby="anexo-tab">
+                        <div class="container-anexo-detail">
+                            @await Html.PartialAsync("TabPanel/_Detail", anexoDetailViewModel)
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="observacion" role="tabpanel" aria-labelledby="observacion-tab">
+                        <div class="container-observacion-detail">
+                            @await Html.PartialAsync("TabPanel/_Detail", observacionDetailViewModel)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @await Html.PartialAsync("_CommandBottom")
+    </div>
+</div>

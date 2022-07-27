@@ -1,0 +1,103 @@
+﻿
+<div class="panel-filter wrapper-panel center-block">
+    <div class="panel-group" id="accordion-filter" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading active" role="tab" id="headingPanelFilterTramite">
+                <h4 class="panel-title">
+                    <a href="#panelFilterTramite"
+                       role="button"
+                       data-toggle="collapse" data-parent="#accordion-filter" 
+                       aria-expanded="true" 
+                       aria-controls="panelFilterTramite">
+                        Panel de Filtros
+                    </a>
+                </h4>
+            </div>
+            <div id="panelFilterTramite" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingPanelFilterTramite">
+                <div class="panel-body">
+                    <div class="container py-5" >
+                        <div class="row">
+                            <div class="panelFilterForm ctrl-panelFilterForm col-12 col-sm-12 col-md-12 col-lg-10 mx-auto">
+                                <div class="form-group row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                        <div class="row">
+                                            <label for="exp-anio" class="col-md-12 mx-1">N&uacute;mero Expediente</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-lg-4 row-two-controls">
+                                                <input type="number" min="0" class="form-control mx-1" id="exp-anio" placeholder="Año">
+                                            </div>
+                                            <div class="col-md-7 offset-md-1 col-lg-7 offset-lg-1 row-two-controls">
+                                                <input type="number" min="0" class="form-control mx-1" id="exp-secuencial" placeholder="Secuencial">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                        <label for="nombre-beneficiario">Nombre Beneficiario</label>
+                                        <select id="nombre-beneficiario" class="form-control ctrl-select">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="row ctrl-codigo-catastral">
+                                            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                                                <label class="mx-1">Sector</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="sector">
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                                                <label class="mx-1">Manzana</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="manzana">
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                                                <label class="mx-1">Lote</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="lote">
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+                                                <label class="mx-1">Divisi&oacute;n</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="division">
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+                                                <label class="mx-1">Phv</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="phv">
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+                                                <label class="mx-1">Phh</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="phh">
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-2">
+                                                <label class="mx-1">N&uacute;mero</label>
+                                                <input type="number" min="0" class="form-control mx-1" id="numero">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 mx-1">
+                                        <label for="estado">Estado</label>
+                                        <select id="estado" class="form-control ctrl-select">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panelFilterForm col-12 col-sm-12 col-md-12 col-lg-2 mx-auto">
+                                <button type="button" class="consultar btn btn-outline-primary commands"><i class="fa fa-search"></i>Consulta</button>
+                                <button type="button" class="limpiar btn btn-outline-primary commands"><i class="fa fa-trash"></i>Limpiar</button>
+                                <div class="btn-group panel-print-btn-grp">
+                                    <button type="button" class="btn btn-outline-primary print-btn"><i class="fa fa-file-excel-o"></i>Exportar</button>
+                                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                                    </button>
+                                    <div class="dropdown-menu print-options">
+                                        <a class="dropdown-item">Todos</a>
+                                        <a class="dropdown-item">Seleccionados</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="nuevo btn btn-primary commands"><i class="fa fa-plus"></i>Nuevo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

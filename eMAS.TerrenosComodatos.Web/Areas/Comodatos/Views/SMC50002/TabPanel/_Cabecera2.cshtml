@@ -1,0 +1,54 @@
+﻿@model eMAS.TerrenosComodatos.Domain.DTOs.TramiteEditViewModel
+
+<div class="tramite-cabecera-2 tab-content-form form-general">
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="oficioAprobacionEdit">Oficio de Aprobaci&oacute;n</label>
+            <input type="text" class="form-control text-control" maxlength="150" id="oficioAprobacionEdit" value="@Model.aprobacionconcejomun">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="fechaAprobacionEdit">Fecha de Aprobaci&oacute;n</label>
+            <input type="text" class="form-control" id="fechaAprobacionEdit" value="@Model.strfechaaprobconcejomun">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="aniosPlazoEdit">A&ntilde;os Plazo</label>
+            <input type="text" class="form-control text-control" maxlength="150" id="aniosPlazoEdit" value="@Model.aniosplazo">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6" id="fecha-escritura-container">
+            <label for="fechaEscrituraEdit">Fecha Escritura</label>
+            <input id="fechaEscrituraEdit"
+                   data-date-container='#fecha-escritura-container'
+                   class="form-control" value="@Model.strfechaescritura" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="oficioRevocatoriaEdit">Oficio Revocatoria Modificaci&oacute;n</label>
+            <input type="text" class="form-control text-control" maxlength="150" id="oficioRevocatoriaEdit" value="@Model.oficiorevocatoriamod">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6" id="fecha-inspeccion-container">
+            <label for="fechaInspeccionEdit">Fecha Inscripci&oacute;n Reg. Propiedad</label>
+            <input id="fechaInspeccionEdit"
+                   data-date-container='#fecha-inspeccion-container'
+                   class="form-control" value="@Model.strfechainsregprop" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="solarEdit">&Aacute;rea</label>
+            <input class="form-control"
+                   type="text"
+                   name="areasolar"
+                   id="solarEdit"
+                   value="@Model.strareasolar" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="estadoEdit">Estado</label>
+            <select id="estadoEdit" class="form-control ctrl-select">
+            </select>
+        </div>
+    </div>
+</div>
+

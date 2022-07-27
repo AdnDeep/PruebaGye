@@ -1,0 +1,453 @@
+﻿@using eMAS.Api.TerrenosComodatos.ViewModel
+
+@model TramiteEditViewModel
+
+@{
+    string txtoficiodase = string.IsNullOrEmpty(@Model.oficiodase) || string.IsNullOrWhiteSpace(@Model.oficiodase) ? "-" : @Model.oficiodase;
+    string txtareasolar = Model.areasolar == null ? "-" : @Model.areasolar.Value.ToString().Replace(",", ".");
+    string txtoficiorevocatoria = string.IsNullOrEmpty(@Model.oficiorevocatoriamod) || string.IsNullOrWhiteSpace(@Model.oficiorevocatoriamod) ? "-" : @Model.oficiorevocatoriamod;
+    string txtoficioag = string.IsNullOrEmpty(@Model.oficioag) || string.IsNullOrWhiteSpace(@Model.oficioag) ? "-" : @Model.oficioag;
+    string strfechaaprobconcejomun = @Model.fechaaprobconcejomun == null ? "-" : @Model.fechaaprobconcejomun.Value.ToString("dd/MM/yyyy");
+    string strfechaescritura = @Model.fechaescritura == null ? "-" : @Model.fechaescritura.Value.ToString("dd/MM/yyyy");
+    string strfechainsregpropiedad = @Model.fechainsregprop == null ? "-" : @Model.fechainsregprop.Value.ToString("dd/MM/yyyy");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
+        }
+
+        .container {
+            width: 90%;
+            margin-left: 15px;
+        }
+
+        .etiqueta {
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            margin:0;
+            padding:0;
+        }
+            table tr,
+            table td {
+                margin-left:0;
+            }
+
+            /*table td {
+                margin-bottom: 1em;
+            }
+
+                table td label {
+                    margin-bottom: 0.8em;
+                }
+*/
+            table.tabla-detalle-oficio {
+                border-collapse: collapse;
+            }
+
+                table.tabla-detalle-oficio td, table.tabla-detalle-oficio th {
+                    border: 1px solid #ddd;
+                    padding: 4px;
+                }
+
+                table.tabla-detalle-oficio tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+
+
+                table.tabla-detalle-oficio th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: left;
+                    background-color: #2BB5FA;
+                    color: white;
+                }
+        td {
+            page-break-inside: avoid;
+        }
+        table {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div style="break-after:page" class="container">
+        <table style="width:100%;"class="tabla-principal">
+            <tr class="titulo">
+                <td style="width:100%;">
+                    <table class="tabla-titulo">
+                        <tr>
+                            <td style="width:20%">
+                                <img style="width:110%" src="@Model.srcimage" />
+                            </td>
+                            <td style="width:60%;text-align:center"><h2>TRAMITE @Model.anio - @Model.secuencia</h2></td>
+                            <td style="width:20%"><b>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</b></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="cabecera">
+                <td style="width:100%;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:100%">
+                                <label style="width:100%" class="etiqueta">
+                                    C&oacute;digo Catastral
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:100%">
+                                <label style="width:100%">
+                                    @Model.idsector - @Model.manzana - @Model.lote - @Model.division - @Model.phv - @Model.phh - @Model.numero
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:100%">
+                                <label style="width:100%" class="etiqueta">Beneficiario</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:100%">
+                                <label style="width:100%">@Model.nombrebeneficiario</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="width:50%">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="width:100%">
+                                                        <label class="etiqueta">Tipo de Contrato</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100%">
+                                                        <label>@Model.tipocontrato</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="width:50%">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="width:100%">
+                                                        <label class="etiqueta">Oficio Ag</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100%">
+                                                        <label>@txtoficioag</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                        <tr style="margin-left: 0;">
+                            <td style="margin-left: 0;">
+                                <table style="margin-left:0; width:100%">
+                                    <tr style="margin-left: 0;">
+                                        <td style="margin-left: 0;width:50%">
+                                            <table style="width:100%">
+                                                <tr style="margin-left: 0;">
+                                                    <td style=" margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Oficio Dase</label>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-left: 0;">
+                                                    <td style="margin-left:0; width:100%">
+                                                        <label>@txtoficiodase</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="margin-left: 0; width: 50%">
+                                            <table style="margin-left: 0; width: 100%">
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Estado</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label>@Model.estado</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="margin-left: 0;">
+                            <td style="margin-left: 0;">
+                                <table style="margin-left:0; width:100%">
+                                    <tr style="margin-left: 0;">
+                                        <td style="margin-left: 0;width:50%">
+                                            <table style="width:100%">
+                                                <tr style="margin-left: 0;">
+                                                    <td style=" margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Aprobaci&oacute;n Concejo Municipal</label>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-left: 0;">
+                                                    <td style="margin-left:0; width:100%">
+                                                        <label>@Model.aprobacionconcejomun</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="margin-left: 0; width: 50%">
+                                            <table style="margin-left: 0; width: 100%">
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Fecha de Aprobaci&oacute;n</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label>@strfechaaprobconcejomun</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="margin-left: 0;">
+                            <td style="margin-left: 0;">
+                                <table style="margin-left:0; width:100%">
+                                    <tr style="margin-left: 0;">
+                                        <td style="margin-left: 0;width:50%">
+                                            <table style="width:100%">
+                                                <tr style="margin-left: 0;">
+                                                    <td style=" margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">A&ntilde;os Plazo</label>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-left: 0;">
+                                                    <td style="margin-left:0; width:100%">
+                                                        <label>@Model.aniosplazo</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="margin-left: 0; width: 50%">
+                                            <table style="margin-left: 0; width: 100%">
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Fecha de Escritura</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label>@strfechaescritura</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="margin-left: 0;">
+                            <td style="margin-left: 0;">
+                                <table style="margin-left:0; width:100%">
+                                    <tr style="margin-left: 0;">
+                                        <td style="margin-left: 0;width:50%">
+                                            <table style="width:100%">
+                                                <tr style="margin-left: 0;">
+                                                    <td style=" margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Oficio Revocatoria Modificaci&oacute;n</label>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-left: 0;">
+                                                    <td style="margin-left:0; width:100%">
+                                                        <label>@txtoficiorevocatoria</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="margin-left: 0; width: 50%">
+                                            <table style="margin-left: 0; width: 100%">
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">Fecha Inscripci&oacute;n Registro Propiedad</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="margin-left: 0; width: 100%">
+                                                        <label>@strfechainsregpropiedad</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="margin-left: 0;">
+                            <td style="margin-left: 0;">
+                                <table style="margin-left:0; width:100%">
+                                    <tr style="margin-left: 0;">
+                                        <td style="margin-left: 0;width:50%">
+                                            <table style="width:100%">
+                                                <tr style="margin-left: 0;">
+                                                    <td style=" margin-left: 0; width: 100%">
+                                                        <label class="etiqueta">&Aacute;rea Solar</label>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-left: 0;">
+                                                    <td style="margin-left:0; width:100%">
+                                                        <label>@txtareasolar</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>    
+                </td>
+            </tr>
+            <tr style="width:100%;">
+                <td style="width:100%;">
+                    <table  style="width:100%;break-after:page;" >
+                        <tr>
+                            <td style="text-align:center;">
+                                <h3>Detalle Control de Oficios</h3>
+                            </td>
+                        </tr>
+                            @{
+                                if (Model.lsOficios != null & Model.lsOficios.Count > 0)
+                                {
+                                    foreach (var det in Model.lsOficios.OrderBy(o=> o.direccion).ThenBy(t=> t.secuencia))
+                                    {
+                                        string txtTmpFechaEnvio = det.fechaenvio == null ? "-" : det.fechaenvio.Value.ToString("dd/MM/yyyy");
+                                        string txtTmpFechaRespuesta = det.fecharespuesta == null ? "-" : det.fecharespuesta.Value.ToString("dd/MM/yyyy");
+                                        <tr>
+
+                                            <td>
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <td>
+                                                            <table style="width:100%" class="tabla-detalle-oficio">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width:80%" class="etiqueta">Direcci&oacute;n</th>
+                                                                        <th style="width:20%" class="etiqueta">Secuencia</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>@det.direccion</td>
+                                                                        <td>@det.secuencia</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label class="etiqueta">
+                                                                                            Oficio
+                                                                                        </label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @det.oficio
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label class="etiqueta">
+                                                                                            Fecha de Env&iacute;o
+                                                                                        </label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @txtTmpFechaEnvio
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label class="etiqueta">
+                                                                                            Oficio Respuesta
+                                                                                        </label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @det.oficiorespuesta
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label class="etiqueta">
+                                                                                            Fecha de Oficio Respuesta
+                                                                                        </label>                                                                                        
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @txtTmpFechaRespuesta
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            <table style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="etiqueta">Datos Detalle</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:100%;text-align:center">No hay Registros</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>  
+                                }
+                            }
+                        
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
