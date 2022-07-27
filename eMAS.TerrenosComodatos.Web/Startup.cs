@@ -41,8 +41,6 @@ namespace eMAS.TerrenosComodatos.Web
             services.AddSessionServicesExtensions();
             services.AddServicesAuthenticationAuthorization(Configuration);
             services.AddServicesTelemetry();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

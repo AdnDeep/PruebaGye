@@ -42,17 +42,15 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         }
         public IActionResult LogOut()
         {
-            //var callbackUrl = Url.Action("Index", "SMC50001", new { Area = "Comodatos" });
-
             string rutaBase = _appSettings.RutaBase;
             rutaBase = rutaBase == "/" ? "/" : rutaBase + "/";
+            HttpContext.Session.Clear();
             return SignOut
             (
                 new AuthenticationProperties { RedirectUri = $"{rutaBase}" },
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 OpenIdConnectDefaults.AuthenticationScheme
             );
-            //return RedirectToAction("SignOut", "Account", new { Area = "MicrosoftIdentity" });
 
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
