@@ -21,30 +21,30 @@ class Tramite {
             objRespuesta.mensaje = "Seleccionar el Beneficiario es Obligatorio.";
             return;
         }
-        if (objCtrlWithValues.sectorEdit == undefined || objCtrlWithValues.sectorEdit == null
-            || objCtrlWithValues.sectorEdit == 0) {
-            objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Indicar el sector es Obligatorio.";
-            return;
-        }
-        if (objCtrlWithValues.manzanaEdit == undefined || objCtrlWithValues.manzanaEdit == null
-            || objCtrlWithValues.manzanaEdit == 0) {
-            objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Indicar la manzana es Obligatorio.";
-            return;
-        }
-        if (objCtrlWithValues.loteEdit == undefined || objCtrlWithValues.loteEdit == null
-            || objCtrlWithValues.loteEdit == 0) {
-            objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Indicar el Lote es Obligatorio.";
-            return;
-        }
-        if (objCtrlWithValues.divisionEdit == undefined || objCtrlWithValues.divisionEdit == null
-            || objCtrlWithValues.divisionEdit == 0) {
-            objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Indicar la divisi&oacute;n es Obligatorio.";
-            return;
-        }
+        //if (objCtrlWithValues.sectorEdit == undefined || objCtrlWithValues.sectorEdit == null
+        //    || objCtrlWithValues.sectorEdit == 0) {
+        //    objRespuesta.isValid = false;
+        //    objRespuesta.mensaje = "Indicar el sector es Obligatorio.";
+        //    return;
+        //}
+        //if (objCtrlWithValues.manzanaEdit == undefined || objCtrlWithValues.manzanaEdit == null
+        //    || objCtrlWithValues.manzanaEdit == 0) {
+        //    objRespuesta.isValid = false;
+        //    objRespuesta.mensaje = "Indicar la manzana es Obligatorio.";
+        //    return;
+        //}
+        //if (objCtrlWithValues.loteEdit == undefined || objCtrlWithValues.loteEdit == null
+        //    || objCtrlWithValues.loteEdit == 0) {
+        //    objRespuesta.isValid = false;
+        //    objRespuesta.mensaje = "Indicar el Lote es Obligatorio.";
+        //    return;
+        //}
+        //if (objCtrlWithValues.divisionEdit == undefined || objCtrlWithValues.divisionEdit == null
+        //    || objCtrlWithValues.divisionEdit == 0) {
+        //    objRespuesta.isValid = false;
+        //    objRespuesta.mensaje = "Indicar la divisi&oacute;n es Obligatorio.";
+        //    return;
+        //}
         if (objCtrlWithValues.tipoContratoEdit == undefined || objCtrlWithValues.tipoContratoEdit == null
             || objCtrlWithValues.tipoContratoEdit == 0) {
             objRespuesta.isValid = false;

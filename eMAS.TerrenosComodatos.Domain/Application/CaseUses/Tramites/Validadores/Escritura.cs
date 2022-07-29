@@ -92,30 +92,30 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            if (entrada.idsector <= 0)
-            {
-                salida.mensaje = "Indicar el Sector es obligatorio. (3)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
-            if (entrada.manzana <= 0)
-            {
-                salida.mensaje = "Indicar la manzana es obligatorio. (3)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
-            if (entrada.lote <= 0)
-            {
-                salida.mensaje = "Indicar el lote es obligatorio. (3)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
-            if (entrada.division <= 0)
-            {
-                salida.mensaje = "Indicar la división es obligatorio. (3)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
+            //if (entrada.idsector <= 0)
+            //{
+            //    salida.mensaje = "Indicar el Sector es obligatorio. (3)";
+            //    salida.tipo = "ADVERTENCIA";
+            //    return puedeContinuar;
+            //}
+            //if (entrada.manzana <= 0)
+            //{
+            //    salida.mensaje = "Indicar la manzana es obligatorio. (3)";
+            //    salida.tipo = "ADVERTENCIA";
+            //    return puedeContinuar;
+            //}
+            //if (entrada.lote <= 0)
+            //{
+            //    salida.mensaje = "Indicar el lote es obligatorio. (3)";
+            //    salida.tipo = "ADVERTENCIA";
+            //    return puedeContinuar;
+            //}
+            //if (entrada.division <= 0)
+            //{
+            //    salida.mensaje = "Indicar la división es obligatorio. (3)";
+            //    salida.tipo = "ADVERTENCIA";
+            //    return puedeContinuar;
+            //}
            
             puedeContinuar = true;
             return puedeContinuar;

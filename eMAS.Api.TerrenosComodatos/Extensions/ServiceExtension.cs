@@ -102,7 +102,7 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
