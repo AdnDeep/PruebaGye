@@ -36,6 +36,7 @@ namespace eMAS.TerrenosComodatos.Web
 
             cultureInfo = null;
 
+            services.AddSingleton<AppSettings>(appSettings);
             services.AddSingleton<SystemSettings>(systemSettings);
         }
 
