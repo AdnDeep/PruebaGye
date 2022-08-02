@@ -166,12 +166,12 @@ namespace eMAS.Api.TerrenosComodatos
                         ValidAudience = Configuration["ApiComodatoServer-AAD:ApplicationUri"],
                         ValidIssuer = $"{Configuration["ApiComodatoServer-AAD:UrlAuthority"]}/v2.0"
                     };
-                });
-                //.AddMicrosoftIdentityWebApi(options =>
-                //{
-                //    Configuration.Bind("AzureAdB2C", options);
-                //    options.TokenValidationParameters.NameClaimType = "name";
-                //}, options => { Configuration.Bind("AzureAdB2C", options); });
+                })
+                .AddMicrosoftIdentityWebApi(options =>
+                {
+                    Configuration.Bind("AzureAdB2C", options);
+                    options.TokenValidationParameters.NameClaimType = "name";
+                }, options => { Configuration.Bind("AzureAdB2C", options); });
 
             services.AddAuthorization(options =>
             {
