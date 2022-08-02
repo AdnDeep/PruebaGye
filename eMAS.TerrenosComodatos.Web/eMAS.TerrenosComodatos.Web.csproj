@@ -13,5 +13,8 @@
     <ProjectReference Include="..\eMAS.TerrenosComodatos.Domain\eMAS.TerrenosComodatos.Domain.csproj" />
     <ProjectReference Include="..\eMAS.TerrenosComodatos.Infrastructure\eMAS.TerrenosComodatos.Infrastructure.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+    <None Include="appsettings.Development.json" />
+  </ItemGroup>
 </Project>
