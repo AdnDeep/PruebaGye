@@ -43,7 +43,7 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         public IActionResult LogOut()
         {
             string rutaBase = _appSettings.RutaBase;
-            rutaBase = rutaBase == "/" ? "/" : rutaBase + "/";
+            rutaBase = rutaBase == "/" ? "/" : rutaBase;
             HttpContext.Session.Clear();
             return SignOut
             (
