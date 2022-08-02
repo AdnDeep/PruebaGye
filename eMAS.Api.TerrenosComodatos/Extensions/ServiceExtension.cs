@@ -169,9 +169,9 @@ namespace eMAS.Api.TerrenosComodatos
                 })
                 .AddMicrosoftIdentityWebApi(options =>
                 {
-                    Configuration.Bind("AzureAdB2C", options);
+                    Configuration.Bind("AzureAad", options);
                     options.TokenValidationParameters.NameClaimType = "name";
-                }, options => { Configuration.Bind("AzureAdB2C", options); });
+                }, options => { Configuration.Bind("AzureAad", options); });
 
             services.AddAuthorization(options =>
             {
