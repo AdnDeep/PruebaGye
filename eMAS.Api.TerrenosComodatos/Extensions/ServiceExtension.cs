@@ -157,8 +157,6 @@ namespace eMAS.Api.TerrenosComodatos
         public static void AddAuthenticatinServices(this IServiceCollection services, IConfiguration Configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                
-                /****Configuración para que esta API Reciba llamadas desde otra API o APLICACIÓN AAD con el flujo CLIENT CREDENTIALS****/
                 .AddJwtBearer("ApiConfigureCC-AAD", options =>
                 {
                     options.Audience = Configuration["ApiComodatoServer-AAD:ApplicationUri"];
@@ -168,15 +166,12 @@ namespace eMAS.Api.TerrenosComodatos
                         ValidAudience = Configuration["ApiComodatoServer-AAD:ApplicationUri"],
                         ValidIssuer = $"{Configuration["ApiComodatoServer-AAD:UrlAuthority"]}/v2.0"
                     };
-                })
-
-
-                /****Configuración para que la llamada sea mediante B2C con llamada Implícita (con un usuario Iniciado Sesión en B2C, más usado para trámites en línea donde un ciudadano debe iniciar sesión)****/
-                .AddMicrosoftIdentityWebApi(options =>
-                {
-                    Configuration.Bind("AzureAdB2C", options);
-                    options.TokenValidationParameters.NameClaimType = "name";
-                }, options => { Configuration.Bind("AzureAdB2C", options); });
+                });
+                //.AddMicrosoftIdentityWebApi(options =>
+                //{
+                //    Configuration.Bind("AzureAdB2C", options);
+                //    options.TokenValidationParameters.NameClaimType = "name";
+                //}, options => { Configuration.Bind("AzureAdB2C", options); });
 
             services.AddAuthorization(options =>
             {
