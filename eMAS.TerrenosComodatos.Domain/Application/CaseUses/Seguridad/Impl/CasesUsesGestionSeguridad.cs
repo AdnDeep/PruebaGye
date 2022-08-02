@@ -25,8 +25,9 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             return true;
         }
 
-        public string ObtenerPermisosPorUsuario(string user, string controlador)
+        public string ObtenerPermisosPorUsuario(string user, string controlador, ref string mensajeError)
         {
+            mensajeError = "OK";
             string respuesta = "N";
             string _userTmp = "";
             try
@@ -44,7 +45,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
 
             var resServ = _repositorioExterno.ObtenerPermisoPorUsuario(_userTmp, controlador);
 
-            var resSerVal = _validadores.RespuestaServidor(ref resServ);
+            var resSerVal = _validadores.RespuestaServidor(ref resServ, ref mensajeError);
             
             if (!resSerVal)
                 return respuesta;

@@ -11,6 +11,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
     {
         public ResultadoViewModel ObtenerPermisoPorUsuario(string user, string controlador)
         {
+            string mensaje = "";
             ResultadoViewModel resultado = new ResultadoViewModel();
             string parameters = $"/{user}/{controlador}";
 
@@ -20,7 +21,13 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
             var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
                                                     .GetAsync(_baseAddress, resourceSeguridad, urlResource)).Result;
             // Procesa Respuesta
-            ProcesaRespuestaServidorRemoto<ResultadoViewModel>(ref resultadoRepositorioExterno, "ObtenerPermisoPorUsuario", ref resultado);
+            ProcesaRespuestaServidorRemoto<ResultadoViewModel>(ref resultadoRepositorioExterno, "ObtenerPermisoPorUsuario", ref resultado, ref mensaje);
+
+            if (mensaje != "OK")
+            {
+                resultado.TipoMensaje = Enumerados.TipoMensaje.Advertencia;
+                resultado.Mensajes.Add(mensaje);
+            }
 
             return resultado;
         }

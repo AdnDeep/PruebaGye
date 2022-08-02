@@ -29,15 +29,20 @@ namespace eMAS.TerrenosComodatos.Web.Extensions
             if (nameController == "SMC50001" || nameController == "SMC50002")
             {
                 string permiso = context.HttpContext.Session.GetObject<string>(nameController);
-
+                string mensajeError = "";
                 if (string.IsNullOrEmpty(permiso) || string.IsNullOrWhiteSpace(permiso))
                 {
                     //permiso = "S";
-                    permiso = _casesUsesSeguridad.ObtenerPermisosPorUsuario(userName, nameController);
+                    permiso = _casesUsesSeguridad.ObtenerPermisosPorUsuario(userName, nameController, ref mensajeError);
                     context.HttpContext.Session.SetObject(nameController, permiso);
                 }
                 if (permiso != "S")
                 {
+                    if (!(string.IsNullOrEmpty(mensajeError) || string.IsNullOrWhiteSpace(mensajeError)) && mensajeError != "OK")
+                    {
+                        controller.TempData["ERROR_API_SEGURIDAD"] = mensajeError;
+                        controller.TempData.Keep();
+                    }
                     string rutaBase = _appSettings.RutaBase;
                     rutaBase = rutaBase == "/" ? "/" : rutaBase + "/";
 

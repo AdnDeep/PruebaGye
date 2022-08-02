@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
@@ -43,7 +44,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             return puedeContinuar;
         }
 
-        public bool RespuestaServidor(ref ResultadoViewModel entrada)
+        public bool RespuestaServidor(ref ResultadoViewModel entrada, ref string mensajeError)
         {
             bool puedeContinuar = false;
             var parametros = $"ValidadoresBeneficiario Service Layer";
@@ -59,6 +60,12 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"El objeto es nulo.");
                 }
+                mensajeError = "La respuesta desde el Servidor es vacía {1}.";
+                return puedeContinuar;
+            }
+            if (entrada.TipoMensaje == Enumerados.TipoMensaje.Advertencia)
+            {
+                mensajeError =  entrada.Mensajes?.FirstOrDefault();
                 return puedeContinuar;
             }
             

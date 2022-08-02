@@ -60,8 +60,14 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
         }
         public IActionResult SeguridadError()
         {
+            string mensajeErrApiSeguridad = "";
+            if (TempData["ERROR_API_SEGURIDAD"] != null)
+            {
+                mensajeErrApiSeguridad = TempData["ERROR_API_SEGURIDAD"] as string;
+                TempData.Remove("ERROR_API_SEGURIDAD");
+            }
             string _nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
-            ViewData["ErrorMessage"] = $"Estimado usuario {_nombre}, no tiene permiso para ingresar a este controlador";
+            ViewData["ErrorMessage"] = $"Estimado usuario {_nombre}, no tiene permiso para ingresar a este controlador. {mensajeErrApiSeguridad}";
             return PartialView("Error");
         }
     }

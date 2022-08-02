@@ -45,6 +45,8 @@ namespace eMAS.TerrenosComodatos.Domain.DTOs
     {
         public ResultadoViewModel() 
         {
+            TipoMensaje = Enumerados.TipoMensaje.Exito;
+            Mensajes = new List<string>();
         }
 
         public bool Ok { get; set; }
