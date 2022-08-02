@@ -159,19 +159,19 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer("ApiConfigureCC-AAD", options =>
                 {
-                    options.Audience = Configuration["ApiComodatoServer-AAD:ApplicationUri"];
-                    options.Authority = Configuration["ApiComodatoServer-AAD:UrlAuthority"];
+                    options.Audience = Configuration["ApiComodatoClientCredentialServer-AAD:ApplicationUri"];
+                    options.Authority = Configuration["ApiComodatoClientCredentialServer-AAD:UrlAuthority"];
                     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                        ValidAudience = Configuration["ApiComodatoServer-AAD:ApplicationUri"],
-                        ValidIssuer = $"{Configuration["ApiComodatoServer-AAD:UrlAuthority"]}/v2.0"
+                        ValidAudience = Configuration["ApiComodatoClientCredentialServer-AAD:ApplicationUri"],
+                        ValidIssuer = $"{Configuration["ApiComodatoClientCredentialServer-AAD:UrlAuthority"]}/v2.0"
                     };
                 })
                 .AddMicrosoftIdentityWebApi(options =>
                 {
-                    Configuration.Bind("AzureAad", options);
+                    Configuration.Bind("AzureAd", options);
                     options.TokenValidationParameters.NameClaimType = "name";
-                }, options => { Configuration.Bind("AzureAad", options); });
+                }, options => { Configuration.Bind("AzureAd", options); });
 
             services.AddAuthorization(options =>
             {
