@@ -50,6 +50,28 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
                 respuestaRemota.mensaje = "Se produjo un error en el aplicativo [3].";
                 return;
             }
+            if (entrada.Item1 == 404)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"Error procesando el método: {metodo}. El recurso solicitado no existe.");
+                }
+                respuestaRemota.dataresult = default(T);
+                respuestaRemota.tipo = "ADVERTENCIA";
+                respuestaRemota.mensaje = "Se produjo un error en el aplicativo [4]. El recurso solicitado no existe.";
+                return;
+            }
+            if (entrada.Item1 == 401)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"Error procesando el método: {metodo}. El recurso solicitado no existe.");
+                }
+                respuestaRemota.dataresult = default(T);
+                respuestaRemota.tipo = "ADVERTENCIA";
+                respuestaRemota.mensaje = "Se produjo un error en el aplicativo [4]. No está facultado para consumir este recurso.";
+                return;
+            }
             if (string.IsNullOrEmpty(entrada.Item2) || string.IsNullOrWhiteSpace(entrada.Item2))
             {
                 using (_logger.BeginScope(props))

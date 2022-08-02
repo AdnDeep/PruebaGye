@@ -62,7 +62,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
             {
                 using (_logger.BeginScope(props))
                 {
-                    _logger.LogError($"Error procesando el método: {metodo}. El recurso consumido no está encontrado.");
+                    _logger.LogError($"Error procesando el método: {metodo}. El recurso consumido no se encuentra.");
                     mensaje = "El recurso solicitado no se encuentra.";
                 }
                 return;
