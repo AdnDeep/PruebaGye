@@ -57,14 +57,6 @@ namespace eMAS.TerrenosComodatos.Web
                 app.UseHsts();
             }
             app.UseSession();
-            // Shows UseCors with CorsPolicyBuilder.
-            app.UseCors(builder =>
-            {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            });
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
