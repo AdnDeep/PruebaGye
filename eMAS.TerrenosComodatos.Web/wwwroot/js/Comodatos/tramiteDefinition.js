@@ -51,12 +51,15 @@ class Tramite {
             objRespuesta.mensaje = "Indicar el Tipo de Contrato es Obligatorio.";
             return;
         }
-        if (objCtrlWithValues.estadoEdit == undefined || objCtrlWithValues.estadoEdit == null
-            || objCtrlWithValues.estadoEdit == 0) {
-            objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Indicar el Tipo de Contrato es Obligatorio.";
-            return;
+        if (objCtrlWithValues.IdTramite > 0) {
+            if (objCtrlWithValues.estadoEdit == undefined || objCtrlWithValues.estadoEdit == null
+                || objCtrlWithValues.estadoEdit == 0) {
+                objRespuesta.isValid = false;
+                objRespuesta.mensaje = "Indicar el Estado es Obligatorio.";
+                return;
+            }
         }
+
         let _fechaInspeccion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaInspeccionEdit);
         let _fechaAprobacion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaAprobacionEdit);
         let _fechaEscritura = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaEscrituraEdit);
