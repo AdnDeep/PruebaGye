@@ -758,22 +758,16 @@ eMASReferencialJs.SetearEvtFormularioGenerico = function (fnRegresar, fnCancelar
     let _RegresarCtrl = document.querySelector(".regresar-edit");
     let _CancelarCtrl = document.querySelector(".cancelar-edit");
     let _GuardarCtrl = document.querySelector(".guardar-edit");
-    let _EliminarCtrl = document.querySelector(".eliminar-edit");
 
-    //_RegresarCtrl.replaceWith(_RegresarCtrl.cloneNode(true));
     _RegresarCtrl.removeEventListener('click', fnRegresar);
     _RegresarCtrl.addEventListener('click', fnRegresar);
 
     _CancelarCtrl.removeEventListener('click', fnCancelar);
     _CancelarCtrl.addEventListener('click', fnCancelar);
 
-    //_GuardarCtrl.replaceWith(_GuardarCtrl.cloneNode(true));
     _GuardarCtrl.removeEventListener('click', fnGuardar);
     _GuardarCtrl.addEventListener('click', fnGuardar);
 
-    //_EliminarCtrl.replaceWith(_EliminarCtrl.cloneNode(true));
-    _EliminarCtrl.removeEventListener('click', fnEliminar);
-    _EliminarCtrl.addEventListener('click', fnEliminar);
 };
 
 eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar, dataLsTable) {
