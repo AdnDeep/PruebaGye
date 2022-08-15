@@ -268,8 +268,8 @@ const SMC50002 = function () {
     };
 
     const fnGetDataFilter = function () {
-        let _expAnio = document.getElementById("exp-anio").value ?? 0;
-        let _expSecuencial = document.getElementById("exp-secuencial").value ?? 0;
+        let _expAnio = document.getElementById("exp-anio").value ?? -1;
+        let _expSecuencial = document.getElementById("exp-secuencial").value ?? -1;
         let _nombreBeneficiario = document.getElementById("nombre-beneficiario").value ?? 0;
 
         let _sector = document.getElementById("sector").value ?? 0;
@@ -280,6 +280,12 @@ const SMC50002 = function () {
         let _phh = document.getElementById("phh").value ?? 0;
         let _numero = document.getElementById("numero").value ?? 0;
         let _estado = document.getElementById("estado").value ?? 0;
+
+        if (_expAnio == "" || _expAnio == null)
+            _expAnio = -1;
+
+        if (_expSecuencial == "" || _expSecuencial == null)
+            _expSecuencial = -1;
 
         let dataFilter = {
             anioexp: _expAnio,
