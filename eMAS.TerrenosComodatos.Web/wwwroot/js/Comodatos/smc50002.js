@@ -582,6 +582,7 @@ const SMC50002 = function () {
             fnInicializarInformacionRelacionada();
 
             fnSetearEvtFormulario();
+            CustomControlsForm();
         }
         else {
             eMASReferencialJs.FormSetVisibilityPanel(true);
@@ -639,9 +640,35 @@ const SMC50002 = function () {
         eMASReferencialJs.CargarCombosGenerico(arr);
     };
 
+    const CustomControlsForm = function () {
+        let arrControlsCodigoCatastral = ["sectorEdit", "manzanaEdit", "loteEdit", "divisionEdit", "phvEdit", "phhEdit", "numeroEdit"];
+
+        arrControlsCodigoCatastral.forEach((val) => {
+            let ctrlTmp = document.querySelector("#" + val);
+            if (!(ctrlTmp == null || ctrlTmp == undefined)) {
+                ctrlTmp.removeEventListener("keydown", eMASReferencialJs.keyDownOnlyPositiveNumbersValidation);
+                ctrlTmp.addEventListener("keydown", eMASReferencialJs.keyDownOnlyPositiveNumbersValidation);
+            }
+        });
+    };
+
+    const CustomControlsPanel = function () {
+        let arrControlsCodigoCatastral = ["sector", "manzana", "lote", "division", "phv", "phh", "numero"];
+
+        arrControlsCodigoCatastral.forEach( (val) => {
+            let ctrlTmp = document.querySelector("#"+ val);
+            if (!(ctrlTmp == null || ctrlTmp == undefined)) {
+                ctrlTmp.removeEventListener("keydown", eMASReferencialJs.keyDownOnlyPositiveNumbersValidation);
+                ctrlTmp.addEventListener("keydown", eMASReferencialJs.keyDownOnlyPositiveNumbersValidation);
+            }
+        });        
+    };
+
     const inicializacionPanel = function () {
         eMASReferencialJs.InicializarPanelGenerico("panelFilterTramite", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar, "DataListadoTramites");
         cargaDatosCombosPanel();
+        // Customizar Controles
+        CustomControlsPanel();
     };
 
     return {

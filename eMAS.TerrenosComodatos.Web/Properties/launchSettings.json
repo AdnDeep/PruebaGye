@@ -30,6 +30,7 @@
     },
     "iislocal": {
       "commandName": "IIS",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
