@@ -39,7 +39,9 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
             string userNameComplete = HttpContext?.User?.Claims?.FirstOrDefault(w => w.Type == "preferred_username")?.Value;
             try
             {
-                userName = userNameComplete.Split("@")[0];                
+                userName = userNameComplete.Split("@")[0];
+                if (!string.IsNullOrEmpty(userName))
+                    userName = userName.ToUpper();
             }
             catch (Exception ex)
             {
