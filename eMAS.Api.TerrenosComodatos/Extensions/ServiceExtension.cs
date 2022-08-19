@@ -150,7 +150,7 @@ namespace eMAS.Api.TerrenosComodatos
             NSwag.OpenApiSecurityScheme nswagOpenApiSecurityScheme = new NSwag.OpenApiSecurityScheme
             {
                 Type = OpenApiSecuritySchemeType.OAuth2,
-                Description = "B2C authentication",
+                Description = "AAD authentication",
                 Flow = OpenApiOAuth2Flow.Implicit,
                 Flows = new NSwag.OpenApiOAuthFlows()
                 {
@@ -158,10 +158,10 @@ namespace eMAS.Api.TerrenosComodatos
                     {
                         Scopes = new Dictionary<string, string>
                             {
-                                { "https://test1.gye.gob.ec/d8411907-3309-4ae5-8e20-2962d40411b8/user_impersonation", "Access the api as the signed-in user" }
+                                { "https://dsr.gye.gob.ec/ad2a916e-a713-4794-a76b-33faa0bbc799/user_impersonation", "Access the api as the signed-in user" }
                             },
-                        AuthorizationUrl = "https://testgye.b2clogin.com/testgye.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LoginMobile",
-                        TokenUrl = "https://testgye.b2clogin.com/testgye.onmicrosoft.com/oauth2/v2.0/token?pB2C_1_LoginMobile"
+                        AuthorizationUrl = "https://login.microsoftonline.com/bdd39aa4-2839-4a10-b4ef-1a4f36194716/oauth2/v2.0/authorize",
+                        TokenUrl = "https://login.microsoftonline.com/bdd39aa4-2839-4a10-b4ef-1a4f36194716/oauth2/v2.0/token"
                     },
                 }
             };
@@ -173,12 +173,21 @@ namespace eMAS.Api.TerrenosComodatos
             //    document.AddSecurity("bearer", Enumerable.Empty<string>(), nswagOpenApiSecurityScheme);
             //    document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
             //});
+            services.AddOpenApiDocument(document =>
+            {
+                document.Title = "TerrenosComodatos-SMC-B2C-CC";
+                document.Version = "v1-ClientCredentialsB2C-SMC";
+                document.DocumentName = "v1-ClientCredentialsB2C-SMC";
+                document.ApiGroupNames = OAuthFlow.ClientCredentialsB2C.GetGroupNames();
+                document.AddSecurity("bearer", Enumerable.Empty<string>(), nswagOpenApiSecurityScheme);
+                document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
+            });
 
             services.AddOpenApiDocument(document =>
             {
-                document.Title = "TerrenosComodatos-SRC-AAD-AuthCode";
-                document.Version = "v1-AuthCodeAAD-SRC";
-                document.DocumentName = "v1-AuthCodeAAD-SRC";
+                document.Title = "TerrenosComodatos-SMC-AAD-AuthCode";
+                document.Version = "v1-AuthCodeAAD-SMC";
+                document.DocumentName = "v1-AuthCodeAAD-SMC";
                 document.ApiGroupNames = OAuthFlow.AuthCodeAAD.GetGroupNames();
                 document.AddSecurity("bearer", Enumerable.Empty<string>(), nswagOpenApiSecurityScheme);
                 document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
@@ -201,19 +210,6 @@ namespace eMAS.Api.TerrenosComodatos
 
         }
         public static void AddAuthenticationServices(this IServiceCollection services, IConfiguration Configuration)
-        {
-            services.AddMicrosoftIdentityWebApiAuthentication(Configuration, "AzureAdB2C", "AADB2C", false);
-
-            services
-                    .AddAuthorization(options =>
-                    {
-                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                            .RequireAuthenticatedUser()
-                            .AddAuthenticationSchemes("AADB2C")
-                            .Build();
-                    });
-        }
-        public static void AddAuthenticatinServices(this IServiceCollection services, IConfiguration Configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer("ApiConfigureCC-AAD", options =>
