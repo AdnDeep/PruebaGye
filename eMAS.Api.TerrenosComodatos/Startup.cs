@@ -24,6 +24,7 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddServicesGenericExtensions();
             services.AddSessionServicesExtensions();
             services.AddSwaggerConfiguration();
+            services.AddOpenApiDocumentation();
             services.AddHelperExtensions();
             //services.AddAuthenticationServices(Configuration);
             services.AddAuthenticatinServices(Configuration);

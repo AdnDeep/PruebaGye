@@ -1,4 +1,5 @@
-﻿using eMAS.Api.TerrenosComodatos.Data;
+﻿using eMAS.Api.Comun.Lib;
+using eMAS.Api.TerrenosComodatos.Data;
 using eMAS.Api.TerrenosComodatos.Extensions;
 using eMAS.Api.TerrenosComodatos.IRepository;
 using eMAS.Api.TerrenosComodatos.IServices;
@@ -14,7 +15,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using OpenApiInfo = Microsoft.OpenApi.Models.OpenApiInfo;
 
 namespace eMAS.Api.TerrenosComodatos
 {
@@ -117,14 +123,67 @@ namespace eMAS.Api.TerrenosComodatos
                     { 
                         Title = "eMAS.Api.TerrenosComodatos",
                         Description = "Métodos da API para consumir Datos de Comodatos",
-                        Contact = new OpenApiContact 
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
                             Name = "MIMG Dirección Informática",
                             Email = "vicman@gmail.com" 
                         },
                         Version = "v1" 
                     });
+
+                c.SwaggerDoc("vAuthorizationCode",
+                    new OpenApiInfo
+                    {
+                        Title = "eMAS.Api.TerrenosComodatos",
+                        Description = "Métodos da API para consumir Datos de Comodatos",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                        {
+                            Name = "MIMG Dirección Informática",
+                            Email = "vicman@gmail.com"
+                        },
+                        Version = "AuthCode"
+                    });
             });
+        }
+        public static void AddOpenApiDocumentation(this IServiceCollection services)
+        {
+            NSwag.OpenApiSecurityScheme nswagOpenApiSecurityScheme = new NSwag.OpenApiSecurityScheme
+            {
+                Type = OpenApiSecuritySchemeType.OAuth2,
+                Description = "B2C authentication",
+                Flow = OpenApiOAuth2Flow.Implicit,
+                Flows = new NSwag.OpenApiOAuthFlows()
+                {
+                    Implicit = new NSwag.OpenApiOAuthFlow()
+                    {
+                        Scopes = new Dictionary<string, string>
+                            {
+                                { "https://test1.gye.gob.ec/d8411907-3309-4ae5-8e20-2962d40411b8/user_impersonation", "Access the api as the signed-in user" }
+                            },
+                        AuthorizationUrl = "https://testgye.b2clogin.com/testgye.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LoginMobile",
+                        TokenUrl = "https://testgye.b2clogin.com/testgye.onmicrosoft.com/oauth2/v2.0/token?pB2C_1_LoginMobile"
+                    },
+                }
+            };
+            //services.AddOpenApiDocument(document =>
+            //{
+            //    document.Title = "eMAS.Api.TerrenosComodatos";
+            //    document.Version = "v1";
+            //    document.DocumentName = "v1";
+            //    document.AddSecurity("bearer", Enumerable.Empty<string>(), nswagOpenApiSecurityScheme);
+            //    document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
+            //});
+
+            services.AddOpenApiDocument(document =>
+            {
+                document.Title = "TerrenosComodatos-SRC-AAD-AuthCode";
+                document.Version = "v1-AuthCodeAAD-SRC";
+                document.DocumentName = "v1-AuthCodeAAD-SRC";
+                document.ApiGroupNames = OAuthFlow.AuthCodeAAD.GetGroupNames();
+                document.AddSecurity("bearer", Enumerable.Empty<string>(), nswagOpenApiSecurityScheme);
+                document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
+            });
+
         }
         public static void AddHelperExtensions(this IServiceCollection services)
         {

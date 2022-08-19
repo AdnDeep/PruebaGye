@@ -3,6 +3,7 @@ using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ComunLib = eMAS.Api.Comun.Lib;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
 {
@@ -31,8 +32,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
             _serviceTramiteEscritura = serviceTramiteEscritura;
             _serviceTramiteEliminacion = serviceTramiteEliminacion;
         }
+        /// <remarks>
+        /// 
+        ///     Se obtiene listado por pagina
+        /// </remarks>
+        /// <param name="panelFilter"></param>
+        /// <param name="resultContainer"></param>
+        /// <param name="numeroPagina"></param>
+        /// <param name="numeroFila"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("ObtenerListadoPorPagina")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<DataPagineada<TramitesListViewModel>>> ObtenerListadoPorPagina(string panelFilter
             , string resultContainer, int numeroPagina, int numeroFila)
         {
@@ -45,9 +56,16 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se obtiene un registro por id
+        /// </remarks>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("ObtenerPorId")]
-        public ActionResult<ResultadoDTO<TramiteEditViewModel>> ObteneroPorId(short id)
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
+        public ActionResult<ResultadoDTO<TramiteEditViewModel>> ObtenerPorId(short id)
         {
             ResultadoDTO<TramiteEditViewModel> respuesta = new ResultadoDTO<TramiteEditViewModel>();
 
@@ -55,8 +73,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se utiliza para agregar
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <param name="usuario"></param>
+        /// <param name="controlador"></param>
+        /// <param name="pcclient"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Agregar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<int>> Agregar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
@@ -68,8 +96,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se utiliza para actualizar
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <param name="usuario"></param>
+        /// <param name="controlador"></param>
+        /// <param name="pcclient"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Actualizar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<int>> Actualizar(TramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
@@ -81,8 +119,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se utiliza para eliminar
+        /// </remarks>
+        /// <param name="idTramite"></param>
+        /// <param name="usuario"></param>
+        /// <param name="controlador"></param>
+        /// <param name="pcclient"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Eliminar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<int>> Eliminar(short idTramite, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<int> respuesta = new ResultadoDTO<int>();

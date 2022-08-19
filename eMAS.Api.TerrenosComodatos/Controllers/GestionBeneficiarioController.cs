@@ -3,6 +3,7 @@ using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ComunLib = eMAS.Api.Comun.Lib;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
 {
@@ -25,8 +26,19 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
             _serviceBeneficiarioEscritura = serviceBeneficiarioEscritura;
             _serviceBeneficiarioEliminacion = serviceBeneficiarioEliminacion;
         }
+        /// <remarks>
+        /// 
+        ///     Se obtiene listado por pagina
+        /// </remarks>
+        /// <param name="panelFilter"></param>
+        /// <param name="resultContainer"></param>
+        /// <param name="numeroPagina"></param>
+        /// <param name="numeroFila"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("ObtenerListadoPorPagina")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
+
         public ActionResult<ResultadoDTO<DataPagineada<BeneficiariosListViewModel>>> ObtenerListadoPorPagina(string panelFilter
             , string resultContainer, int numeroPagina, int numeroFila)
         {
@@ -39,8 +51,15 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se obtiene un registro por id
+        /// </remarks>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("ObtenerPorId")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<BeneficiarioEditViewModel>> ObteneroPorId(short id)
         {
             ResultadoDTO<BeneficiarioEditViewModel> respuesta = new ResultadoDTO<BeneficiarioEditViewModel>();
@@ -49,8 +68,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se utiliza para agregar
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <param name="usuario"></param>
+        /// <param name="controlador"></param>
+        /// <param name="pcclient"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Agregar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<BeneficiarioEditViewModel>> Agregar(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<BeneficiarioEditViewModel> respuesta = new ResultadoDTO<BeneficiarioEditViewModel>();
@@ -62,8 +91,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
+        /// <remarks>
+        /// 
+        ///     Se utiliza para actualizar 
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <param name="usuario"></param>
+        /// <param name="controlador"></param>
+        /// <param name="pcclient"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Actualizar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<BeneficiarioEditViewModel>> Actualizar(BeneficiarioEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<BeneficiarioEditViewModel> respuesta = new ResultadoDTO<BeneficiarioEditViewModel>();
@@ -75,9 +114,18 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
 
             return Ok(respuesta);
         }
-
+        /// <remarks>
+        /// 
+        ///     Se utiliza para eliminar.
+        /// </remarks>
+        /// <param name="id"></param>
+        /// <param name="usuario"></param>
+        /// <param name="controlador"></param>
+        /// <param name="pcclient"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Eliminar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<BeneficiarioEditViewModel>> Eliminar(short id, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<string> respuesta = new ResultadoDTO<string>();

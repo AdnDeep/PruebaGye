@@ -42,6 +42,8 @@ namespace eMAS.TerrenosComodatos.Infrastructure
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["APIM:SubscriptionKey.MIMGApis"]);
+
                     var response = await client.GetAsync(urlResource);
                     if (response != null)
                     {
@@ -79,6 +81,9 @@ namespace eMAS.TerrenosComodatos.Infrastructure
                     client.BaseAddress = new Uri(baseAddressConf);
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["APIM:SubscriptionKey.MIMGApis"]);
+
                     var contentBody = GetStringContent(body);
                     var response = await client.PostAsync(urlResource, contentBody);
                     if (response != null)
@@ -115,6 +120,9 @@ namespace eMAS.TerrenosComodatos.Infrastructure
                     client.BaseAddress = new Uri(baseAddressConf);
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["APIM:SubscriptionKey.MIMGApis"]);
+
                     var contentBody = GetStringContent(body);
                     var response = await client.PutAsync(urlResource, contentBody);
                     if (response != null)
@@ -152,6 +160,9 @@ namespace eMAS.TerrenosComodatos.Infrastructure
                     client.BaseAddress = new Uri(baseAddressConf);
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["APIM:SubscriptionKey.MIMGApis"]);
+
                     var response = await client.DeleteAsync(urlResource);
                     if (response != null)
                     {

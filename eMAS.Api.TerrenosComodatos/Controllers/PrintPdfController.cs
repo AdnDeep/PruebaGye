@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using ComunLib = eMAS.Api.Comun.Lib;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
 {
@@ -34,8 +35,15 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
             _razorViewService = razorViewService;
             _logger = logger;
         }
+        /// <remarks>
+        /// 
+        ///     Se utiliza para imprimir un pdf de un tramite consultado por Id
+        /// </remarks>
+        /// <param name="idEntity"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetSingleTramiteDsr")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public async Task<IActionResult> GetSingleTramiteDsr(short idEntity)
         {
             var parametros = $"PrintPdfController Service Layer Try: id {idEntity}";
