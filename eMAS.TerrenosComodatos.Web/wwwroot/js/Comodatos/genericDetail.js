@@ -229,9 +229,13 @@ class Observacion {
     }
     ExecuteValidation(data) {
         let objRespuesta = { isvalid: true, mensaje: "" };
-
+        if (data.fecha == null || data.fecha == undefined || data.fecha == "") {
+            objRespuesta.mensaje = "La Fecha es un campo obligatorio.";
+            objRespuesta.isvalid = false;
+            return objRespuesta;
+        }
         if (data.observacion == null || data.observacion == undefined || data.observacion == "") {
-            objRespuesta.mensaje = "La Observaci&oacute; es un campo obligatorio.";
+            objRespuesta.mensaje = "La Observaci&oacute;n es un campo obligatorio.";
             objRespuesta.isvalid = false;
             return objRespuesta;
         }
