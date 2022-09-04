@@ -10,7 +10,7 @@ namespace eMAS.TerrenosComodatos.Web.Services
         public static string GenerateRandom()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[8];
+            var stringChars = new char[12];
             var random = new Random();
 
             for (int i = 0; i < stringChars.Length; i++)

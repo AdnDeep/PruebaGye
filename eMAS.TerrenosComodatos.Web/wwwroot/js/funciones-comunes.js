@@ -889,6 +889,7 @@ eMASReferencialJs.FetchPost = function (ruta, dataBody, fnSuccessCallback, fnCal
         .then(fnSuccessCallback)
         .then(fnCallback2.bind(null, parameter1Callback2, parameter2Callback2))
         .catch(function (error) {
+            eMASReferencialJs.ocultarProgress();
             console.log('Fetchpost Generic Error', error);
         });
 };

@@ -2,6 +2,7 @@
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,7 +65,8 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
                 return View("Error");
             }
 
-            TramiteReportClientViewModel obj = TempData[idreporte] as TramiteReportClientViewModel;
+            string strObj = TempData[idreporte] as string;
+            TramiteReportClientViewModel obj = JsonConvert.DeserializeObject<TramiteReportClientViewModel>(strObj);
 
             if (obj == null)
             {

@@ -206,33 +206,14 @@ const SMC50002 = function () {
     const EvtImprimir = function () {
         let _id = document.getElementById("IdTramite");
 
-        if (_id.value > 0) {
-            let _appConfig = eMASReferencialJs.ObtenerAppConfig();
-            //let rutaBase = _appConfig.RutaBase;
-            //rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
-            //let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneral?id='+idTramite;
-            //let url = 'Comodatos/SMC50002/GenerateReportGeneral';
-            let rutaBase = _appConfig.RutaBase;
-            rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
-            let url = rutaBase + nameArea + "/" + nameController + "/" + namePrintAction1;
+        if (_id.value > 0) {            
             let dataBody = {
                 id: _id.value
             };
-            eMASReferencialJs.Ajax({
-                type: "POST",
-                data: dataBody,
-                url: url,
-                //jsonpCallback: 'jsonCallback',
-                //contentType: "application/json",
-                //dataType: 'jsonp',
-                beforeSend: function (response) {
-                    eMASReferencialJs.mostrarProgress();
-                },
-                success: function (response) {
-                    console.log("d");
-                }
-            }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
+            eMASReferencialJs.mostrarProgress();
+            eMASReferencialJs.FetchPost("Comodatos/SMC50002/GenerateReportGeneral", dataBody, objSMC50002.ImpresionReporteGeneral, eMASReferencialJs.FnGeneralVacia, "");            
         }
+
         
     };
 
@@ -459,22 +440,21 @@ const SMC50002 = function () {
         return eMASReferencialJs.EsDecimalConPunto(event);
     };
 
-    const Print = function (response) {
-        debugger;
-        console.log("hola");
-        //if (response == null || response == undefined) {
-        //    console.log("No se ha podido imprimir el reporte.");
-        //    return;
-        //}
-        //if (response.tipo == "ADVERTENCIA") {
-        //    eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
-        //} else if (response.tipo == "EXITO") {
-        //    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
-        //    let rutaBase = _appConfig.RutaBase;
-        //    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
-        //    let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneralSystem?idreporte=' + response.mensaje;
-        //    window.open(url, "_blank");
-        //}
+    const ImprimirReporteGeneral1 = function (response) {
+        eMASReferencialJs.ocultarProgress();
+        if (response == null || response == undefined) {
+            console.log("No se ha podido imprimir el reporte.");
+            return;
+        }
+        if (response.tipo == "ADVERTENCIA") {
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
+        } else if (response.tipo == "EXITO") {
+            let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+            let rutaBase = _appConfig.RutaBase;
+            rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+            let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneralSystem?idreporte=' + response.mensaje;
+            window.open(url, "_blank");
+        }
     };
     
     const fnSetearEvtCustomizado = function () {
@@ -487,18 +467,18 @@ const SMC50002 = function () {
         if (idTramite > 0) {
             let _btnImprimirReporteCtrl = document.querySelector(".form-content-edit .exportar-edit")
             if (_btnImprimirReporteCtrl != undefined) {
-                //_btnImprimirReporteCtrl.addEventListener('click', EvtImprimir);
+                _btnImprimirReporteCtrl.addEventListener('click', EvtImprimir);
 
-                _btnImprimirReporteCtrl.addEventListener('click', function (e) {
-                    e.preventDefault();
+                //_btnImprimirReporteCtrl.addEventListener('click', function (e) {
+                //    e.preventDefault();
 
-                    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
-                    let rutaBase = _appConfig.RutaBase;
-                    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
-                    let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneral?id='+idTramite;
-                    window.open(url, "_blank");
+                //    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+                //    let rutaBase = _appConfig.RutaBase;
+                //    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+                //    let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneral?id='+idTramite;
+                //    window.open(url, "_blank");
 
-                });
+                //});
             }
         }        
 

@@ -8,6 +8,7 @@ using eMAS.TerrenosComodatos.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -271,22 +272,22 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         }
 
         [HttpPost]
-        public JsonResult GenerateReportGeneral(SinglePrintModelClient model)
+        public JsonResult GenerateReportGeneral([FromBody] SinglePrintModelClient model)
         {
             ResultadoDTO<int> response = new ResultadoDTO<int>();
-            response.dataresult = 1;
-            response.mensaje = "";
             response.tipo = "EXITO";
-            var respuestaServidor = new TramiteReportClientViewModel { canContinue = true };
-                //_casesUsesTramite.ReporteGeneral(model.id);
+            string _nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
 
+            var respuestaServidor = _casesUsesTramite.ReporteGeneral(model.id, _nombre);
+            
             if (respuestaServidor.canContinue)
             {
                 string hashString = StringManipulation.GenerateRandom();
                 if (TempData[hashString] != null)
                     TempData.Remove(hashString);
 
-                TempData[hashString] = respuestaServidor;
+                TempData[hashString] = JsonConvert.SerializeObject(respuestaServidor);
+                TempData.Keep();
                 response.mensaje = hashString;
                 response.tipo = "EXITO";
             }

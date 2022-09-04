@@ -70,6 +70,20 @@ class Tramite {
             }
         }
 
+
+        if (!(objCtrlWithValues.fechaInspeccionEdit == null || objCtrlWithValues.fechaInspeccionEdit == undefined || objCtrlWithValues.fechaInspeccionEdit == "")) {
+            let _dataFechaInspeccion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaInspeccionEdit);
+            const dtFechaInspeccion = new Date(_dataFechaInspeccion);
+            const dtFechaActual = new Date();
+
+            if (dtFechaInspeccion > dtFechaActual) {
+                objRespuesta.mensaje = "La fecha Inspecci&oacute;n no puede ser mayor a la fecha actual.";
+                objRespuesta.isValid = false;
+                return objRespuesta;
+            }
+
+        }
+
         let _fechaInspeccion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaInspeccionEdit);
         let _fechaAprobacion = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaAprobacionEdit);
         let _fechaEscritura = eMASReferencialJs.FormatearFecha(objCtrlWithValues.fechaEscrituraEdit);
