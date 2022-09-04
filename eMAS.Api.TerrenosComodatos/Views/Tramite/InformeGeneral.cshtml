@@ -15,70 +15,99 @@
 <html>
 <head>
     <style>
-        html body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 13px;
-        }
+                html body {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 13px;
+                }
 
-        .container {
-            width: 90%;
+                .container {
+                    width: 90%;
+                    margin-left: 30px;
+                }
+
+                .etiqueta {
+                    font-weight: bold;
+                }
+
+                table {
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                    table tr,
+                    table td {
+                        margin-left: 0;
+                    }
+
+                    /*table td {
+                        margin-bottom: 1em;
+                    }
+
+                        table td label {
+                            margin-bottom: 0.8em;
+                        }
+        */
+                    table.tabla-detalle-oficio {
+                        border-collapse: collapse;
+                    }
+
+                        table.tabla-detalle-oficio td, table.tabla-detalle-oficio th {
+                            border: 1px solid #ddd;
+                            padding: 4px;
+                        }
+
+                        table.tabla-detalle-oficio tr:nth-child(even) {
+                            background-color: #f2f2f2;
+                        }
+
+
+                        table.tabla-detalle-oficio th {
+                            padding-top: 12px;
+                            padding-bottom: 12px;
+                            text-align: left;
+                            background-color: #2BB5FA;
+                            color: white;
+                        }
+
+                td {
+                    page-break-inside: avoid;
+                }
+
+                table {
+                    page-break-inside: avoid;
+                }
+
+        .footer {
+            position: fixed;
+            font-size: 9px;
+            text-align: right;
             margin-left: 15px;
+            bottom: 0px;
+            padding-right: 15px;
+            padding-top:15px;
         }
-
-        .etiqueta {
-            font-weight: bold;
-        }
-
-        table {
-            width: 100%;
-            margin:0;
-            padding:0;
-        }
-            table tr,
-            table td {
-                margin-left:0;
-            }
-
-            /*table td {
-                margin-bottom: 1em;
-            }
-
-                table td label {
-                    margin-bottom: 0.8em;
-                }
-*/
-            table.tabla-detalle-oficio {
-                border-collapse: collapse;
-            }
-
-                table.tabla-detalle-oficio td, table.tabla-detalle-oficio th {
-                    border: 1px solid #ddd;
-                    padding: 4px;
+                /*@@page   {
+                    size: A4;
                 }
 
-                table.tabla-detalle-oficio tr:nth-child(even) {
-                    background-color: #f2f2f2;
-                }
+                @@media print {
+                    footer {
+                        position: fixed;
+                        bottom: 0;
+                        margin-left: 30px;
+                    }*/
 
-
-                table.tabla-detalle-oficio th {
-                    padding-top: 12px;
-                    padding-bottom: 12px;
-                    text-align: left;
-                    background-color: #2BB5FA;
-                    color: white;
-                }
-        td {
-            page-break-inside: avoid;
-        }
-        table {
-            page-break-inside: avoid;
-        }
+                /*            html, body {
+                        width: 210mm;
+                        height: 297mm;
+                    }*/
+                /*}*/
     </style>
 </head>
 <body>
     <div style="break-after:page" class="container">
-        <table style="width:100%;"class="tabla-principal">
+        <table style="width:100%;" class="tabla-principal">
             <tr class="titulo">
                 <td style="width:100%;">
                     <table class="tabla-titulo">
@@ -86,7 +115,21 @@
                             <td style="width:20%">
                                 <img style="width:110%" src="@Model.srcimage" />
                             </td>
-                            <td style="width:60%;text-align:center"><h2>TRAMITE @Model.anio - @Model.secuencia</h2></td>
+                            <td style="width:60%;text-align:center">
+                                <table style="width:100%;">
+                                    <tr class="titulo-reporte">
+                                        <td style="width:100%;">
+                                            <h2 style="padding:0 0; margin:0 0;"> DIRECCION DE TERRENOS</h2>
+                                        </td>
+                                    </tr>
+                                    <tr class="titulo-reporte">
+                                        <td style="width:100%;">
+                                            <h2 style="padding:0 0; margin:0 0;">TRAMITE @Model.anio - @Model.secuencia</h2>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                            </td>
                             <td style="width:20%"><b>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</b></td>
                         </tr>
                     </table>
@@ -322,132 +365,138 @@
                                 </table>
                             </td>
                         </tr>
-                    </table>    
+                    </table>
                 </td>
             </tr>
             <tr style="width:100%;">
                 <td style="width:100%;">
-                    <table  style="width:100%;break-after:page;" >
+                    <table style="width:100%;break-after:page;">
                         <tr>
                             <td style="text-align:center;">
                                 <h3>Detalle Control de Oficios</h3>
                             </td>
                         </tr>
-                            @{
-                                if (Model.lsOficios != null & Model.lsOficios.Count > 0)
+                        @{
+                            if (Model.lsOficios != null & Model.lsOficios.Count > 0)
+                            {
+                                foreach (var det in Model.lsOficios.OrderBy(o => o.direccion).ThenBy(t => t.secuencia))
                                 {
-                                    foreach (var det in Model.lsOficios.OrderBy(o=> o.direccion).ThenBy(t=> t.secuencia))
-                                    {
-                                        string txtTmpFechaEnvio = det.fechaenvio == null ? "-" : det.fechaenvio.Value.ToString("dd/MM/yyyy");
-                                        string txtTmpFechaRespuesta = det.fecharespuesta == null ? "-" : det.fecharespuesta.Value.ToString("dd/MM/yyyy");
-                                        <tr>
-
-                                            <td>
-                                                <table style="width:100%">
-                                                    <tr>
-                                                        <td>
-                                                            <table style="width:100%" class="tabla-detalle-oficio">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="width:80%" class="etiqueta">Direcci&oacute;n</th>
-                                                                        <th style="width:20%" class="etiqueta">Secuencia</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>@det.direccion</td>
-                                                                        <td>@det.secuencia</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <label class="etiqueta">
-                                                                                            Oficio
-                                                                                        </label>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        @det.oficio
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <label class="etiqueta">
-                                                                                            Fecha de Env&iacute;o
-                                                                                        </label>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        @txtTmpFechaEnvio
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <label class="etiqueta">
-                                                                                            Oficio Respuesta
-                                                                                        </label>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        @det.oficiorespuesta
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <label class="etiqueta">
-                                                                                            Fecha de Oficio Respuesta
-                                                                                        </label>                                                                                        
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        @txtTmpFechaRespuesta
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                        <td>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    }
-                                }
-                                else
-                                {
+                                    string txtTmpFechaEnvio = det.fechaenvio == null ? "-" : det.fechaenvio.Value.ToString("dd/MM/yyyy");
+                                    string txtTmpFechaRespuesta = det.fecharespuesta == null ? "-" : det.fecharespuesta.Value.ToString("dd/MM/yyyy");
                                     <tr>
+
                                         <td>
                                             <table style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="etiqueta">Datos Detalle</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="width:100%;text-align:center">No hay Registros</td>
-                                                    </tr>
-                                                </tbody>
+                                                <tr>
+                                                    <td>
+                                                        <table style="width:100%" class="tabla-detalle-oficio">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width:80%" class="etiqueta">Direcci&oacute;n</th>
+                                                                    <th style="width:20%" class="etiqueta">Secuencia</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>@det.direccion</td>
+                                                                    <td>@det.secuencia</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <label class="etiqueta">
+                                                                                        Oficio
+                                                                                    </label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    @det.oficio
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <label class="etiqueta">
+                                                                                        Fecha de Env&iacute;o
+                                                                                    </label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    @txtTmpFechaEnvio
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <label class="etiqueta">
+                                                                                        Oficio Respuesta
+                                                                                    </label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    @det.oficiorespuesta
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <label class="etiqueta">
+                                                                                        Fecha de Oficio Respuesta
+                                                                                    </label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    @txtTmpFechaRespuesta
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
-                                    </tr>  
+                                    </tr>
                                 }
                             }
-                        
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th class="etiqueta">Datos Detalle</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width:100%;text-align:center">No hay Registros</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+
                     </table>
                 </td>
             </tr>
         </table>
     </div>
+    <div class="footer">
+        Usuario Impresi&oacute;n: @Model.namereport
+    </div>
 </body>
 </html>
+
+

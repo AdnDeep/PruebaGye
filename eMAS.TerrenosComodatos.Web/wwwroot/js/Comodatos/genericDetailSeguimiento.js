@@ -52,12 +52,12 @@ class Oficio {
             return objRespuesta;
         }
         if (data.oficio == null || data.oficio == undefined || data.oficio == "") {
-            objRespuesta.mensaje = "El enlace es un campo obligatorio.";
+            objRespuesta.mensaje = "El Oficio es un campo obligatorio.";
             objRespuesta.isvalid = false;
             return objRespuesta;
         }
         if (data.fechaenvio == null || data.fechaenvio == undefined || data.fechaenvio == "") {
-            objRespuesta.mensaje = "La fecha Envio es un campo obligatorio.";
+            objRespuesta.mensaje = "La fecha Env&iacute;o es un campo obligatorio.";
             objRespuesta.isvalid = false;
             return objRespuesta;
         }
@@ -66,9 +66,17 @@ class Oficio {
                 objRespuesta.mensaje = "La fecha Respuesta es un campo obligatorio.";
                 objRespuesta.isvalid = false;
                 return objRespuesta;
+            } else {
+                const dtFechaRespuesta = new Date(data.fecharespuesta);
+                const dtFechaEnvio = new Date(data.fechaenvio);
+
+                if (dtFechaEnvio > dtFechaRespuesta) {
+                    objRespuesta.mensaje = "La fecha Env&iacute;o no puede ser mayor a la fecha Respuesta.";
+                    objRespuesta.isvalid = false;
+                    return objRespuesta;
+                }
             }
         }
-
         return objRespuesta;
     }
     FnCallbackDetailGuardarSuccess(response) {
@@ -189,10 +197,12 @@ class Oficio {
         let btnNuevo = document.querySelector(".container-oficio-detail button.nuevo-detail");
         if (btnNuevo != undefined) {
             btnNuevo.addEventListener("click", this.FnCallbackBtnNuevo.bind(this), false);
+            btnNuevo.setAttribute("title", "Agregar Oficio");
         }
         let btnRefresh = document.querySelector(".container-oficio-detail button.refresh-detail");
         if (btnRefresh != undefined) {
             btnRefresh.addEventListener("click", this.FnListarAll.bind(this), false);
+            btnRefresh.setAttribute("title", "Refrescar Oficios");
         }
     }
     fillDataResponse(response) {
@@ -245,7 +255,7 @@ class Oficio {
                 valign: 'middle',
                 clickToSelect: false,
                 formatter: function (value, row, index) {
-                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Oficio\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
+                    let strFnButtons = '<button type="button" title="Editar Oficio" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Oficio\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
                     //strFnButtons += '<button type="button" onclick="objSMC50002.BtnDeleteRowItemDetail(' + row.id + ',\'Oficio\' );" title="Eliminar" class=\'btn btn-outline-primary \'><i class="fa fa-trash"></i></button>';
                     return strFnButtons;
                 }

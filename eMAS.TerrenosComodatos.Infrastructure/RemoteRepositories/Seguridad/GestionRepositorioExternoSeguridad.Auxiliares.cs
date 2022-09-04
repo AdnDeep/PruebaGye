@@ -45,7 +45,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
                 using (_logger.BeginScope(props))
                 {
                     _logger.LogError($"Error procesando el método: {metodo}. Se produjo una excepción {entrada.Item2}");
-                    mensaje = "Se ha producido un error en el Servidor Remoto.";
+                    mensaje = "Se ha producido un inconveniente en el Servidor Remoto.";
                 }
                 return;
             }

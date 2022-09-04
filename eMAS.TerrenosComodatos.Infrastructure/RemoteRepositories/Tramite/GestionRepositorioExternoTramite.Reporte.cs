@@ -10,10 +10,10 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
 {
     public partial class GestionRepositorioExternoTramite : IGestionRepositorioExternoTramite
     {
-        public ResultadoDTO<TramiteReportServerViewModel> ObtenerReportePdfTramite(short id)
+        public ResultadoDTO<TramiteReportServerViewModel> ObtenerReportePdfTramite(short id, string name)
         {
             ResultadoDTO<TramiteReportServerViewModel> resultado = new ResultadoDTO<TramiteReportServerViewModel>();
-            string parameters = string.Format("?idEntity={0}", id);
+            string parameters = string.Format("?idEntity={0}&name={1}", id, name);
 
             string urlResource = string.Concat(methodReporteGeneralPdf, parameters);
 

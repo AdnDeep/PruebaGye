@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace eMAS.TerrenosComodatos.Web.Models
 {
+    public class SinglePrintModelClient 
+    {
+        public short id { get; set; }
+    }
     public class ColumnViewModel 
     {
         public string id { get; set; }

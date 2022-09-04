@@ -101,12 +101,12 @@ eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCa
     function RetreiveDataFromServer(data) {
         if (data == null || data == undefined) {
             console.error("Se ha producido una respuesta vacia desde el servidor");
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {1}.");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido una novedad en el aplicativo, por favor intente nuevamente en unos minutos {1}.");
             return;
         }
         if (data.messagetype != "EXITO" ) {
             console.error(data.message);
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {2}.");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido una novedad en el aplicativo, por favor intente nuevamente en unos minutos {2}.");
             return;
         }
         popup.find('.modal-body').html(data.content);
@@ -167,24 +167,28 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
 	popup.find('.modal-footer').css('background-color', 'transparent');
 	popup.find('.modal-footer').css('display', 'unset');
 
+    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+
+    let rutaBase = _appConfig.RutaBase;
+    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
 
     if (tipoMensaje === eMASReferencialJs.tipoMensaje.Exito) {
         popup.find('.modal-content').css('border', '1px solid #60a174');
-		popup.find('.modal-header').css('background', '#e6f1e9 url("' + eMASReferencialJs.serverPath + 'Referencial/Images/success50.png") no-repeat right center');
+        popup.find('.modal-header').css('background', '#e6f1e9 url("' + rutaBase + 'Referencial/Images/success50.png") no-repeat right center');
         for (var itemS in botones) {
 			contenidoBotones.append('<a class="btn btn-sm btnSuccess" onclick="' + botones[itemS].Accion + '">' + botones[itemS].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Error) {
         popup.find('.modal-content').css('border', '1px solid #924949');
-		popup.find('.modal-header').css('background', '#f2e4e4 url("' + eMASReferencialJs.serverPath + 'Referencial/Images/error50.png") no-repeat right center');
+        popup.find('.modal-header').css('background', '#f2e4e4 url("' + rutaBase + 'Referencial/Images/error50.png") no-repeat right center');
         for (var itemE in botones) {
             contenidoBotones.append('<a class="btn btn-sm btnError" onclick="' + botones[itemE].Accion + '">' + botones[itemE].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Advertencia) {
         popup.find('.modal-content').css('border', '1px solid #c5a524');
-		popup.find('.modal-header').css('background', '#fffcd9 url("' + eMASReferencialJs.serverPath + 'Referencial/Images/warning50.png") no-repeat right center');
+        popup.find('.modal-header').css('background', '#fffcd9 url("' + rutaBase + 'Referencial/Images/warning50.png") no-repeat right center');
 
         for (var itemA in botones) {
 			contenidoBotones.append('<a class="btn btn-sm btnWarning" onclick="' + botones[itemA].Accion + '">' + botones[itemA].Nombre + '</a>');
@@ -192,14 +196,14 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Prompt) {
 		popup.find('.modal-content').css('border', '1px solid #5b4f4f');
-		popup.find('.modal-header').css('background', '#d5d8da url("' + eMASReferencialJs.serverPath + 'Referencial/Images/prompt50.png") no-repeat right center');
+        popup.find('.modal-header').css('background', '#d5d8da url("' + rutaBase + 'Referencial/Images/prompt50.png") no-repeat right center');
 		for (var itemP in botones) {
 			if (botones[itemP].Nombre === 'Si')
 				contenidoBotones.append('<a class="btn btn-sm btnSi" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
 			else if (botones[itemP].Nombre === 'No')
 				contenidoBotones.append('<a class="btn btn-sm btnNo" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
 			else
-				contenidoBotones.append('<a class="btn btn-sm" style="background:#fff url(' + eMASReferencialJs.serverPath + 'Referencial/Images/prompt_header.gif) repeat-x; color: #6C6767; border:1px solid #5b4f4f; padding: 0rem 0.5rem;" href="#" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
+                contenidoBotones.append('<a class="btn btn-sm" style="background:#fff url(' + rutaBase + 'Referencial/Images/prompt_header.gif) repeat-x; color: #6C6767; border:1px solid #5b4f4f; padding: 0rem 0.5rem;" href="#" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
         }
     }
 	else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Contrato) {
@@ -228,22 +232,27 @@ eMASReferencialJs.mostrarPanelMensajes = function (tipoMensaje, mensajes) {
 
     popup.empty();
 
+    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+
+    let rutaBase = _appConfig.RutaBase;
+    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+
     for (var item in mensajes) {
         popup.append(mensajes[item].Description + '<br>');
     }
 
     if (tipoMensaje === eMASReferencialJs.tipoMensaje.Exito) {
-        popup.css('background', '#fff url("' + eMASReferencialJs.serverPath + 'Referencial/Images/success_header.gif") repeat-x');
+        popup.css('background', '#fff url("' + rutaBase + 'Referencial/Images/success_header.gif") repeat-x');
         popup.css('color', '#3c7f51');
         popup.css('border', '1px solid #60a174');
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Error) {
-        popup.css('background', '#fff url("' + eMASReferencialJs.serverPath + 'Referencial/Images/error_header.gif") repeat-x');
+        popup.css('background', '#fff url("' + rutaBase + 'Referencial/Images/error_header.gif") repeat-x');
         popup.css('color', '#6f2c2c');
         popup.css('border', '1px solid #924949');
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Advertencia) {
-        popup.css('background', '#fff url("' + eMASReferencialJs.serverPath + 'Referencial/Images/warning_header.gif") repeat-x');
+        popup.css('background', '#fff url("' + rutaBase + 'Referencial/Images/warning_header.gif") repeat-x');
         popup.css('color', '#957c17');
         popup.css('border', '1px solid #c5a524');
     }
@@ -576,8 +585,13 @@ eMASReferencialJs.LimpiarComponenteSelector = function (select) {
 eMASReferencialJs.Ajax = function (request, failFunction, typeMessage, alwaysFunction) {
     $.ajax(
         request
-	).fail(function (response, textstatus, errorThrown) {
-		var texto = '';
+    ).fail(function (response, textstatus, errorThrown) {
+        debugger;
+        var texto = '';
+        let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+
+        let rutaBase = _appConfig.RutaBase;
+        rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
 		if (response.status === 403 || response.status === 401) {
 			eMASReferencialJs.ocultarProgress();
             texto = "<span>Su sesi&oacute;n ha caducado, para volver a iniciar presione </span><a href='" + eMASReferencialJs.serverPath + "'><b>Aqu&iacute;</b></a>";
@@ -949,6 +963,27 @@ eMASReferencialJs.EsDecimalConPunto = function (evt) {
             return false;
     }
     return true;
+}
+
+eMASReferencialJs.EsDigito = function (evt) {
+    let codigoCaracter = (evt.which) ? evt.which : evt.keyCode;
+    if (codigoCaracter > 31 &&
+        (codigoCaracter < 48 || codigoCaracter > 57)) {
+            evt.preventDefault();
+        return false;
+    }
+    return true;
+}
+
+eMASReferencialJs.EsDigitoToPaste = function (evt) {
+    const reg = new RegExp('^[0-9]+$');
+    let pasteData = (event.clipboardData || window.clipboardData).getData('text');
+    if (reg.test(pasteData)) {
+        return true;
+    }
+    evt.preventDefault();
+    return false;
+    
 }
 
 eMASReferencialJs.SetearLabelError = function (mostrar, elementName, mensaje) {

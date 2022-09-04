@@ -40,7 +40,7 @@ namespace eMAS.TerrenosComodatos.Web.Extensions
                 {
                     if (!(string.IsNullOrEmpty(mensajeError) || string.IsNullOrWhiteSpace(mensajeError)) && mensajeError != "OK")
                     {
-                        controller.TempData["ERROR_API_SEGURIDAD"] = mensajeError;
+                        controller.TempData["ERROR_API_SEGURIDAD"] = $"{mensajeError} Es probable que necesite cerrar e iniciar sesión nuevamente.";
                         controller.TempData.Keep();
                     }
                     string rutaBase = _appSettings.RutaBase;

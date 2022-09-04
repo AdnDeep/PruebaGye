@@ -4,6 +4,8 @@ const SMC50002 = function () {
     const nameEditAction = "EditView";
     const nameSaveAction = "EditSave";
     const nameDeleteAction = "EditDelete";
+    const namePrintAction1 = "GenerateReportGeneral";
+
     const nameArea = "Comodatos";
     const nameController = "SMC50002";
     const dsrTipoContrato = "DSRTIPOCONTRATO";
@@ -200,6 +202,38 @@ const SMC50002 = function () {
 
     const EvtEliminarFormularo = function () {
         fnEliminarRegistroConsult();
+    };
+    const EvtImprimir = function () {
+        let _id = document.getElementById("IdTramite");
+
+        if (_id.value > 0) {
+            let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+            //let rutaBase = _appConfig.RutaBase;
+            //rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+            //let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneral?id='+idTramite;
+            //let url = 'Comodatos/SMC50002/GenerateReportGeneral';
+            let rutaBase = _appConfig.RutaBase;
+            rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+            let url = rutaBase + nameArea + "/" + nameController + "/" + namePrintAction1;
+            let dataBody = {
+                id: _id.value
+            };
+            eMASReferencialJs.Ajax({
+                type: "POST",
+                data: dataBody,
+                url: url,
+                //jsonpCallback: 'jsonCallback',
+                //contentType: "application/json",
+                //dataType: 'jsonp',
+                beforeSend: function (response) {
+                    eMASReferencialJs.mostrarProgress();
+                },
+                success: function (response) {
+                    console.log("d");
+                }
+            }, function () { eMASReferencialJs.ocultarProgress(); }, undefined, eMASReferencialJs.ocultarProgress);
+        }
+        
     };
 
     const EvtRegresarFormulario = function () {
@@ -425,6 +459,24 @@ const SMC50002 = function () {
         return eMASReferencialJs.EsDecimalConPunto(event);
     };
 
+    const Print = function (response) {
+        debugger;
+        console.log("hola");
+        //if (response == null || response == undefined) {
+        //    console.log("No se ha podido imprimir el reporte.");
+        //    return;
+        //}
+        //if (response.tipo == "ADVERTENCIA") {
+        //    eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
+        //} else if (response.tipo == "EXITO") {
+        //    let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+        //    let rutaBase = _appConfig.RutaBase;
+        //    rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+        //    let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneralSystem?idreporte=' + response.mensaje;
+        //    window.open(url, "_blank");
+        //}
+    };
+    
     const fnSetearEvtCustomizado = function () {
         let _beneficiarioEditCtrl = document.querySelector("#beneficiarioEdit");
         if (_beneficiarioEditCtrl != undefined) {
@@ -435,6 +487,8 @@ const SMC50002 = function () {
         if (idTramite > 0) {
             let _btnImprimirReporteCtrl = document.querySelector(".form-content-edit .exportar-edit")
             if (_btnImprimirReporteCtrl != undefined) {
+                //_btnImprimirReporteCtrl.addEventListener('click', EvtImprimir);
+
                 _btnImprimirReporteCtrl.addEventListener('click', function (e) {
                     e.preventDefault();
 
@@ -442,7 +496,6 @@ const SMC50002 = function () {
                     let rutaBase = _appConfig.RutaBase;
                     rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
                     let url = rutaBase + 'Comodatos/SMC50002/GetReportGeneral?id='+idTramite;
-
                     window.open(url, "_blank");
 
                 });
@@ -480,7 +533,7 @@ const SMC50002 = function () {
     const fnPagedDataFromControllerListTramites = function (response) {
         $("#pagineoListadoTramites").empty();
         if (response == null || response == undefined) {
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {1}.");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido una novedad en el aplicativo, por favor intente nuevamente en unos minutos {1}.");
             return;
         }
         if (response.tipo !== "EXITO") {
@@ -698,6 +751,9 @@ const SMC50002 = function () {
         },
         CallbackPosEliminarDetalleExito: function (entidad, mensaje) {
             fnEliminarDetalleExito(entidad, mensaje);
+        },
+        ImpresionReporteGeneral: function (data) {
+            ImprimirReporteGeneral1(data);
         }
     };
 }

@@ -1,5 +1,6 @@
 ﻿using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Web.Models;
+using eMAS.TerrenosComodatos.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -69,6 +70,13 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
             string _nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
             ViewData["ErrorMessage"] = $"Estimado usuario {_nombre}, no tiene permiso para ingresar a este controlador. {mensajeErrApiSeguridad}";
             return PartialView("Error");
+        }
+        [Route("/Home/HandleError/{code:int}")]
+        public IActionResult HandleError(int code)
+        {
+            ViewData["code"] = code;
+            ViewData["ErrorMessage"] = MessagesApp.GetMessageByStatusCode(code);
+            return PartialView("HandleError");
         }
     }
 }

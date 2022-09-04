@@ -44,7 +44,7 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
         [HttpGet]
         [Route("GetSingleTramiteDsr")]
         [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
-        public async Task<IActionResult> GetSingleTramiteDsr(short idEntity)
+        public async Task<IActionResult> GetSingleTramiteDsr(short idEntity, string name)
         {
             var parametros = $"PrintPdfController Service Layer Try: id {idEntity}";
             var props = new Dictionary<string, object>(){
@@ -75,7 +75,7 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
                 
                 reportPath = "Tramite/InformeGeneral";
                 data.dataresult.srcimage = imagePath;
-                
+                model.namereport = name;
                 strReport = await _razorViewService.GetHtmlViewAsStringAsync(reportPath, model);
 
                 var respuesta = _servicePdf.ConvertirHtmlAPdf(strReport);

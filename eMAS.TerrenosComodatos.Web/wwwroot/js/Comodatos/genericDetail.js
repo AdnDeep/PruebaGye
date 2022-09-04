@@ -131,10 +131,12 @@ class Anexo {
         let btnNuevo = document.querySelector(".container-anexo-detail button.nuevo-detail");
         if (btnNuevo != undefined) {
             btnNuevo.addEventListener("click", this.FnCallbackBtnNuevo.bind(this), false);
+            btnNuevo.setAttribute("title", "Agregar Anexo");
         }
         let btnRefresh = document.querySelector(".container-anexo-detail button.refresh-detail");
         if (btnRefresh != undefined) {
             btnRefresh.addEventListener("click", this.FnListarAll.bind(this), false);
+            btnRefresh.setAttribute("title", "Refrescar Anexos");
         }
     }
     fillDataResponse(response) {
@@ -184,7 +186,7 @@ class Anexo {
                 valign: 'middle',
                 clickToSelect: false,
                 formatter: function (value, row, index) {
-                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Anexo\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
+                    let strFnButtons = '<button type="button" title="Editar Anexo" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Anexo\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
                     return strFnButtons;
                 }
             },
@@ -344,10 +346,12 @@ class Observacion {
         let btnNuevo = document.querySelector(".container-observacion-detail button.nuevo-detail");
         if (btnNuevo != undefined) {
             btnNuevo.addEventListener("click", this.FnCallbackBtnNuevo.bind(this), false);
+            btnNuevo.setAttribute("title", "Agregar Observacion");
         }
         let btnRefresh = document.querySelector(".container-observacion-detail button.refresh-detail");
         if (btnRefresh != undefined) {
             btnRefresh.addEventListener("click", this.FnListarAll.bind(this), false);
+            btnRefresh.setAttribute("title", "Refrescar Observaciones");
         }
     }
     fillDataResponse(response) {
@@ -398,7 +402,7 @@ class Observacion {
                 valign: 'middle',
                 clickToSelect: false,
                 formatter: function (value, row, index) {
-                    let strFnButtons = '<button type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Observacion\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
+                    let strFnButtons = '<button title="Editar Anexo" type="button" onclick="objSMC50002.BtnEditRowItemDetail(' + row.id + ',\'Observacion\' );" title="Editar" class=\'btn btn-outline-primary \'><i class="fa fa-pencil-square-o"></i></button>';
                     return strFnButtons;
                 }
             },

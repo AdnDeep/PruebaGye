@@ -1,6 +1,7 @@
 class Tramite {
     constructor(_arrCtrls) {
         this.arrCtrls = _arrCtrls;
+        this.MAX_SOLAR_VALUE = 99999999999;
     };
     GetDataWithValues() {
         let ctrlValues = {};
@@ -18,33 +19,42 @@ class Tramite {
         
         if (objCtrlWithValues.beneficiarioEdit == undefined || objCtrlWithValues.beneficiarioEdit == null) {
             objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Seleccionar el Beneficiario es Obligatorio.";
+            objRespuesta.mensaje = "Seleccionar el Beneficiario es Obligatorio  y no puede ser 0.";
             return;
         }
-        //if (objCtrlWithValues.sectorEdit == undefined || objCtrlWithValues.sectorEdit == null
-        //    || objCtrlWithValues.sectorEdit == 0) {
-        //    objRespuesta.isValid = false;
-        //    objRespuesta.mensaje = "Indicar el sector es Obligatorio.";
-        //    return;
-        //}
-        //if (objCtrlWithValues.manzanaEdit == undefined || objCtrlWithValues.manzanaEdit == null
-        //    || objCtrlWithValues.manzanaEdit == 0) {
-        //    objRespuesta.isValid = false;
-        //    objRespuesta.mensaje = "Indicar la manzana es Obligatorio.";
-        //    return;
-        //}
-        //if (objCtrlWithValues.loteEdit == undefined || objCtrlWithValues.loteEdit == null
-        //    || objCtrlWithValues.loteEdit == 0) {
-        //    objRespuesta.isValid = false;
-        //    objRespuesta.mensaje = "Indicar el Lote es Obligatorio.";
-        //    return;
-        //}
+        if (objCtrlWithValues.sectorEdit == undefined || objCtrlWithValues.sectorEdit == null
+            || objCtrlWithValues.sectorEdit == 0) {
+            objRespuesta.isValid = false;
+            objRespuesta.mensaje = "Indicar el sector es Obligatorio y no puede ser 0.";
+            return;
+        }
+        if (objCtrlWithValues.manzanaEdit == undefined || objCtrlWithValues.manzanaEdit == null
+            || objCtrlWithValues.manzanaEdit == 0) {
+            objRespuesta.isValid = false;
+            objRespuesta.mensaje = "Indicar la manzana es Obligatorio  y no puede ser 0.";
+            return;
+        }
+        if (objCtrlWithValues.loteEdit == undefined || objCtrlWithValues.loteEdit == null
+            || objCtrlWithValues.loteEdit == 0) {
+            objRespuesta.isValid = false;
+            objRespuesta.mensaje = "Indicar el Lote es Obligatorio.";
+            return;
+        }
         //if (objCtrlWithValues.divisionEdit == undefined || objCtrlWithValues.divisionEdit == null
         //    || objCtrlWithValues.divisionEdit == 0) {
         //    objRespuesta.isValid = false;
         //    objRespuesta.mensaje = "Indicar la divisi&oacute;n es Obligatorio.";
-        //    return;
+        //    return;solarEdit
         //}
+        if (!(objCtrlWithValues.solarEdit == undefined || objCtrlWithValues.loteEdit == null)) {
+            let _solarTmp = parseFloat(objCtrlWithValues.solarEdit);
+
+            if (_solarTmp > this.MAX_SOLAR_VALUE) {
+                objRespuesta.isValid = false;
+                objRespuesta.mensaje = `El solar no puede ser mayor a ${this.MAX_SOLAR_VALUE.toString()}`;
+                return;
+            }
+        }
         if (objCtrlWithValues.tipoContratoEdit == undefined || objCtrlWithValues.tipoContratoEdit == null
             || objCtrlWithValues.tipoContratoEdit == 0) {
             objRespuesta.isValid = false;

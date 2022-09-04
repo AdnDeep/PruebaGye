@@ -23,7 +23,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
             salida.Division = entrada.division;
             salida.Phv = entrada.phv;
             salida.Phh  = entrada.phh;
-            salida.Numero = entrada.numero;
+            salida.Numero = entrada.numero == 0 ? (short)1 : entrada.numero;
             salida.IdBeneficiario = entrada.idbeneficiario;
             salida.IdTipoContrato = entrada.idtipocontrato;
             salida.AreaSolar = entrada.areasolar;

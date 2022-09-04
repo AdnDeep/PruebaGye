@@ -7,7 +7,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
     public partial class CasesUsesGestionTramite : ICasesUsesGestionTramite
     {
         
-        public TramiteReportClientViewModel ReporteGeneral(short id)
+        public TramiteReportClientViewModel ReporteGeneral(short id, string name)
         {
             TramiteReportClientViewModel resultadoVista = new TramiteReportClientViewModel();
             ResultadoDTO<TramiteReportServerViewModel> resultadoServidor = new ResultadoDTO<TramiteReportServerViewModel>();
@@ -17,7 +17,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
             if (!respValCli)
                 return resultadoVista;
 
-            var respRepExterno = _repositorioExterno.ObtenerReportePdfTramite(id);
+            var respRepExterno = _repositorioExterno.ObtenerReportePdfTramite(id, name);
 
             bool respValServ = _validadores.RespuestaReporteGeneralServidorRemotoById(ref respRepExterno, ref resultadoVista);
 

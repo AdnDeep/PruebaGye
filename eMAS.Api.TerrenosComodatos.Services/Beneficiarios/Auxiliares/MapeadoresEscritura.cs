@@ -15,6 +15,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
         {
             salida.Id = tipoMapeo == "AGREGAR" ? 0 : entrada.id;
             salida.nombre = entrada.nombre;
+            salida.ruc = entrada.ruc;
         }
         public void MapearModelBeneficiarioEditViewAModelBeneficiario(ref BeneficiarioEditViewModel entrada
             , ref SmcBeneficiario salida, string usuario, string controlador, string pcclient)

@@ -17,14 +17,10 @@
     width: 100%
 }
 
-.peligro {
-    border-left-color: #d9534f;
-    background-color: rgba(217,83,79,.1)
+.error-label.peligro {
+    border-left-color: #ffeb3b;
+    background-color: #ffffcc;
 }
-
-    .peligro strong {
-        color: #d9534f
-    }
 
 textarea {
     resize: none

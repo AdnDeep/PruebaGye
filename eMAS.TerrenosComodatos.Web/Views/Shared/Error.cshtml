@@ -1,10 +1,15 @@
 ﻿@model ErrorViewModel
 @{
     ViewData["Title"] = "Error";
+    int code = ViewData["code"] != null ? (int)ViewData["code"] : 0;
 }
 
 @*<h1 class="text-danger">Error.</h1>*@
-<h2 class="text-danger">Se ha producido un error.</h2>
+<h2 class="text-danger">Se ha producido una novedad.</h2>
+
 <p class="text-center">
     <strong>@ViewData["ErrorMessage"]</strong>
 </p>
+
+
+

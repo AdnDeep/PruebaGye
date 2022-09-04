@@ -3,6 +3,8 @@ using eMAS.TerrenosComodatos.Domain.Constantes;
 using eMAS.TerrenosComodatos.Domain.DTOs;
 using eMAS.TerrenosComodatos.Web.Controllers;
 using eMAS.TerrenosComodatos.Web.Extensions;
+using eMAS.TerrenosComodatos.Web.Models;
+using eMAS.TerrenosComodatos.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -250,8 +252,11 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
         [HttpGet]
         public ActionResult GetReportGeneral(short id) 
         {
-            var respuestaServidor = _casesUsesTramite.ReporteGeneral(id);
+            string _nombre = HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? HttpContext.User.Identity.Name;
 
+            var respuestaServidor = _casesUsesTramite.ReporteGeneral(id, _nombre);
+
+            
             if (respuestaServidor.canContinue)
             {
                 var bytPdf = Convert.FromBase64String(respuestaServidor.contentReport);
@@ -264,7 +269,35 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
                 return View("Error");
             }
         }
-        
+
+        [HttpPost]
+        public JsonResult GenerateReportGeneral(SinglePrintModelClient model)
+        {
+            ResultadoDTO<int> response = new ResultadoDTO<int>();
+            response.dataresult = 1;
+            response.mensaje = "";
+            response.tipo = "EXITO";
+            var respuestaServidor = new TramiteReportClientViewModel { canContinue = true };
+                //_casesUsesTramite.ReporteGeneral(model.id);
+
+            if (respuestaServidor.canContinue)
+            {
+                string hashString = StringManipulation.GenerateRandom();
+                if (TempData[hashString] != null)
+                    TempData.Remove(hashString);
+
+                TempData[hashString] = respuestaServidor;
+                response.mensaje = hashString;
+                response.tipo = "EXITO";
+            }
+            else
+            {
+                response.mensaje = respuestaServidor.mensaje;
+                response.tipo = "ADVERTENCIA";
+            }
+
+            return Json(new { tipo = response.tipo, mensaje= response.mensaje});
+        }
         #endregion
     }
 }

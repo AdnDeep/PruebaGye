@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace eMAS.TerrenosComodatos.Web.Controllers
@@ -52,6 +53,38 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
                 userName = "";
             }
             return userName;
+        }
+
+        [HttpGet]
+        public ActionResult GetReportGeneralSystem(string idreporte)
+        {
+            if (string.IsNullOrEmpty(idreporte) || string.IsNullOrWhiteSpace(idreporte))
+            {
+                ViewData["ErrorMessage"] = "No existe reporte para imprimir. [1]";
+                return View("Error");
+            }
+
+            TramiteReportClientViewModel obj = TempData[idreporte] as TramiteReportClientViewModel;
+
+            if (obj == null)
+            {
+                ViewData["ErrorMessage"] = "No existe reporte para imprimir. [2]";
+                return View("Error");
+            }
+
+            if (obj.canContinue) 
+            {
+                var bytPdf = Convert.FromBase64String(obj.contentReport);
+
+                TempData.Remove(idreporte);
+                return File(new MemoryStream(bytPdf), "application/octet-stream", obj.fileName);
+            }
+            else
+            {
+                TempData.Remove(idreporte);
+                ViewData["ErrorMessage"] = obj.mensaje;
+                return View("Error");
+            }
         }
     }
 }

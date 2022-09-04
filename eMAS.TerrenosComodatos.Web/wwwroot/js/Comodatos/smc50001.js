@@ -137,8 +137,21 @@ const SMC50001 = function () {
     const fnSetearEvtFormulario = function () {
         eMASReferencialJs.SetearEvtFormularioGenerico(EvtRegresarFormulario, EvtCancelarFormulario, EvtGuardarFormulario, EvtEliminarFormularo);
         eMASReferencialJs.setearInputsEventsEnFormulario(".form-general input.text-control");
+        fnSetearEvtCustomizado();
     };
-
+    const fnSetearEvtCustomizado = function () {
+        let _rucEditCtrl = document.querySelector("#ruc-edit");
+        if (_rucEditCtrl != undefined) {
+            _rucEditCtrl.addEventListener('keypress', EvtKeyPressRucEdit);
+            _rucEditCtrl.addEventListener('paste', EvtpasteRucEdit);
+        }
+    };
+    const EvtpasteRucEdit = function (event) {
+        return eMASReferencialJs.EsDigitoToPaste(event);
+    };
+    const EvtKeyPressRucEdit = function (event) {
+        return eMASReferencialJs.EsDigito(event);
+    };
     const fnDestruirFormularioEdicion = function () {
         let frmEdit = document.querySelector('.form-edit-container')
         while (frmEdit.firstChild) frmEdit.removeChild(frmEdit.firstChild);
@@ -209,25 +222,17 @@ const SMC50001 = function () {
         return sData;
     };
 
-    //const EvtClickEditarElemento = function (e, row, $element) {
-    //    let codigoB = row['id'];
-    //    fnEditarElemento(codigoB);
-    //};
     const EvtClickEditarElemento = function (id) {
         let codigoB = id;
         fnEditarElemento(codigoB);
     };
-
-    //const SetearEventosDataGridListado = function () {
-    //    //$('#DataListadoBeneficiarios').off('click-row.bs.table').on('click-row.bs.table', EvtClickEditarElemento);
-    //};
 
     const fnPagedDataFromControllerListBeneficiarios = function (response) {
         
         $("#pagineoListadoBeneficiarios").empty();
         if (response == null || response == undefined) {
             //console.log("No hay datos Listado (0)");
-            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido un error en el aplicativo {1}.");
+            eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido una novedad en el aplicativo, por favor intente nuevamente en unos minutos {1}.");
             return;
         }
         if (response.tipo !== "EXITO") {
@@ -335,7 +340,6 @@ const SMC50001 = function () {
     }
 
     const EvtBtnNuevo = function () {
-        console.log("click1");
         let _appConfig = eMASReferencialJs.ObtenerAppConfig();
 
         let rutaBase = _appConfig.RutaBase;

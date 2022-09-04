@@ -8,6 +8,8 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -85,8 +87,15 @@ namespace eMAS.TerrenosComodatos.Web
 
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
-            services.AddOptions();
-            services.Configure<OpenIdConnectOptions>(Configuration.GetSection("AzureAdLogin"));
+            
+            services.AddOptions();            
+            services.Configure<OpenIdConnectOptions>(options=> {
+                Configuration.GetSection("AzureAdLogin");
+                options.Events.OnTokenValidated = async context =>
+                {
+                    context.Properties.ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15);
+                };
+            });
         }
         public static void AddSessionServicesExtensions(this IServiceCollection services)
         {

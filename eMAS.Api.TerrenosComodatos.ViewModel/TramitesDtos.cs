@@ -38,6 +38,7 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
         public string baseorigen { get; set; }
         public string oficioag { get; set; }
         public string oficiodase { get; set; }
+        public string namereport { get; set; }
         public List<OficioTramiteListViewModel> lsOficios { get; set; }
         public TramiteEditViewModel()
         {

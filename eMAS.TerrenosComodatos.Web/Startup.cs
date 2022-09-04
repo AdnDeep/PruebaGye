@@ -57,12 +57,16 @@ namespace eMAS.TerrenosComodatos.Web
                 app.UseHsts();
             }
             app.UseSession();
+            app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            //app.UseCors(x => x
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader()
+            //    .SetIsOriginAllowed(origin => true) 
+            //    .AllowCredentials());
             app.UseAuthentication();
             app.UseAuthorization();
 

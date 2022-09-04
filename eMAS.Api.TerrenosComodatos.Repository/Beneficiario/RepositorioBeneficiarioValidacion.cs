@@ -30,7 +30,8 @@ namespace eMAS.Api.TerrenosComodatos.Repository
             var panelFilterParameter = new
             {
                 Id = validacionFilter.Id,
-                nombre = validacionFilter.nombre
+                nombre = validacionFilter.nombre,
+                ruc = validacionFilter.ruc
             };
             string strBenficiarioFilterParameter = JsonSerializer.Serialize(panelFilterParameter);
 

@@ -93,6 +93,33 @@ namespace eMAS.Api.TerrenosComodatos.Services
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
+
+            var dataRucTmp = dataTmp.FirstOrDefault(fod => fod.clave == "RUC");
+            if (dataRucTmp == null)
+            {
+                using (_logger.BeginScope(props))
+                {
+                    _logger.LogError($"La clave Ruc no se encuentra en la BD.");
+                }
+                salida.mensaje = "Se produjo un inconveniente Interno en la aplicación. (8)";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
+
+            if (dataRucTmp.valorNumerico >= 1)
+            {
+                List<Mensaje> mensajes = new List<Mensaje>();
+                mensajes.Add(new Mensaje
+                {
+                    codigo = "VLNVALSERV",
+                    descripcion = "El Ruc a grabar ya existe en el sistema, por favor ingrese otro.",
+                    tipo = "ADVERTENCIA"
+                });
+                salida.mensajes = mensajes;
+                salida.mensaje = "El Ruc a grabar ya existe en el sistema, por favor ingrese otro.";
+                salida.tipo = "ADVERTENCIA";
+                return puedeContinuar;
+            }
             puedeContinuar = true;
             return puedeContinuar;
         }
