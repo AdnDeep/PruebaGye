@@ -21,9 +21,9 @@ namespace eMAS.TerrenosComodatos.Web.Extensions
         public void OnActionExecuting(ActionExecutingContext context)
         {
             string userName = context.HttpContext?.User?.Claims?.FirstOrDefault(w => w.Type == "preferred_username")?.Value;
-
+            string userNameViewUser = context.HttpContext.User?.Claims?.FirstOrDefault(fod => fod.Type == "name")?.Value ?? context.HttpContext.User.Identity.Name;
             var controller = context.Controller as Controller;
-
+            controller.ViewData["username"] = userNameViewUser;
             var nameController = controller?.ControllerContext?.ActionDescriptor?.ControllerName;
 
             if (nameController == "SMC50001" || nameController == "SMC50002")
