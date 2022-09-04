@@ -36,7 +36,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"Input Request Incorrecta, el objeto Panel Filter no es correcto. Excepcion {ex.Message}");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo (1).";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos (1).";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
@@ -62,7 +62,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"La respuesta desde el servidor es un objeto nulo [1].");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo [1].";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos [1].";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
@@ -72,7 +72,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"El tipo de respuesta desde el servidor es de tipo incorrecto [2].");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo [2].";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos [2].";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
@@ -102,7 +102,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"El resultado del objeto respuesta desde el servidor es un objeto nulo [3].");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo [3].";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos [3].";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }

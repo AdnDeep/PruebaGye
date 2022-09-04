@@ -102,7 +102,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"Input Request Incorrecta, el objeto Panel Filter no es correcto. Excepcion {ex.Message}");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo (1).";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos (1).";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
@@ -113,7 +113,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"Input Request Incorrecta, el objeto está vacío resultContainer");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo (2).";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos (2).";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }

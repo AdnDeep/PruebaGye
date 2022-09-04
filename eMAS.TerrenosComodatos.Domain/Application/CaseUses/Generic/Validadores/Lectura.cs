@@ -56,7 +56,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"La respuesta desde el servidor es un objeto nulo [1].");
                 }
-                salida.target = "Se produjo un error en el aplicativo [1].";
+                salida.target = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos [1].";
                 salida.key = "ERROR";
                 return puedeContinuar;
             }
@@ -67,7 +67,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"El tipo de respuesta desde el servidor es de tipo incorrecto [3].");
                 }
-                salida.target = "Se produjo un error en el aplicativo [3].";
+                salida.target = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos [3].";
                 salida.key = "ERROR";
                 return puedeContinuar;
             }
@@ -90,7 +90,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"El resultado del objeto respuesta desde el servidor es un objeto nulo [4].");
                 }
-                salida.target = "Se produjo un error en el aplicativo [4].";
+                salida.target = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos [4].";
                 salida.key = "ERROR";
                 return puedeContinuar;
             }

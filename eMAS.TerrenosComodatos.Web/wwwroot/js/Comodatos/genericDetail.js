@@ -36,7 +36,7 @@ class Anexo {
     FnCallbackDetailGuardarSuccess(response) {
         if (response == null || response == undefined) {
             console.error("La respuesta desde el servidor es vacío.");
-            eMASReferencialJs.SetearLabelError(true, this.contenedorErrorDefault, "Se ha producido un error en el aplicativo.");
+            eMASReferencialJs.SetearLabelError(true, this.contenedorErrorDefault, "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos.");
             return;
         }
         if (response.tipo != "EXITO") {
@@ -247,7 +247,7 @@ class Observacion {
     FnCallbackDetailGuardarSuccess(response) {
         if (response == null || response == undefined) {
             console.error("La respuesta desde el servidor es vacío.");
-            eMASReferencialJs.SetearLabelError(true, this.contenedorErrorDefault, "Se ha producido un error en el aplicativo.");
+            eMASReferencialJs.SetearLabelError(true, this.contenedorErrorDefault, "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos.");
             return;
         }
         if (response.tipo != "EXITO") {

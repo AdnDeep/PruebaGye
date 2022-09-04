@@ -255,7 +255,7 @@ const SMC50002 = function () {
     const EvtClickEditarElementDetail = function (id, entidad) {
         let idTramite = document.getElementById("IdTramite").value;
         if (idTramite <= 0) {
-            console.error("Se produjo un error dado que el tramite no existe.");
+            console.error("Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos.");
             return;
         }
         let objAnexoDetail = new GenericDetail(idTramite, id, entidad);
@@ -265,7 +265,7 @@ const SMC50002 = function () {
     const EvtClickDeleteElementDetail = function (id, entidad) {
         let idTramite = document.getElementById("IdTramite").value;
         if (idTramite <= 0) {
-            console.error("Se produjo un error dado que el tramite no existe.");
+            console.error("Se produjo un inconveniente, el tramite no existe.");
             return;
         }
         let strAccionSi = "";

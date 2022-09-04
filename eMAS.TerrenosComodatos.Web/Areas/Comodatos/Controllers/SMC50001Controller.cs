@@ -58,7 +58,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"{ex.Message}");
-                response.SetResultadoViewJson(false, "ADVERTENCIA", "Se produjo un error al generar el formulario de Edición.");
+                response.SetResultadoViewJson(false, "ADVERTENCIA", "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos.");
             }
             
             return Json(response);
@@ -77,7 +77,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"{ex.Message}");
-                response.mensaje = "Se produjo un error en el aplicativo.";
+                response.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos.";
                 response.tipo = "ADVERTENCIA";
             }
 
@@ -96,7 +96,7 @@ namespace eMAS.TerrenosComodatos.Web.Areas.Comodatos.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"{ex.Message}");
-                response.mensaje = "Se produjo un error en el aplicativo.";
+                response.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos.";
                 response.tipo = "ADVERTENCIA";
             }
 

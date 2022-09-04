@@ -45,7 +45,7 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 {
                     _logger.LogError($"Input Request Incorrecta debe ser mayor que 0");
                 }
-                salida.mensaje = "Se produjo un error en el aplicativo {1}.";
+                salida.mensaje = "Se ha producido un inconveniente en el aplicativo, favor intente de nuevo en unos minutos {1}.";
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
