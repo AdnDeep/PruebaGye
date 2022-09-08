@@ -694,7 +694,10 @@ const SMC50002 = function () {
                 ctrlTmp.removeEventListener("keydown", eMASReferencialJs.keyDownOnlyPositiveNumbersValidation);
                 ctrlTmp.addEventListener("keydown", eMASReferencialJs.keyDownOnlyPositiveNumbersValidation);
             }
-        });        
+        });
+
+
+        eMASReferencialJs.whenClickOutsideCombobox();
     };
 
     const inicializacionPanel = function () {

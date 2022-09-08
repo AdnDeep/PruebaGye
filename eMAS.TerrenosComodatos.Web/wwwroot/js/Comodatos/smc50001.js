@@ -145,6 +145,21 @@ const SMC50001 = function () {
             _rucEditCtrl.addEventListener('keypress', EvtKeyPressRucEdit);
             _rucEditCtrl.addEventListener('paste', EvtpasteRucEdit);
         }
+        let _nameEditCtrl = document.querySelector("#name-edit");
+        if (_nameEditCtrl != undefined) {
+            _nameEditCtrl.addEventListener('blur', eMASReferencialJs.replaceSpecialCharacters);
+            _nameEditCtrl.addEventListener('focus', eMASReferencialJs.replaceSpecialCharacters);
+        }
+        let _nameRepresentativeCtrl = document.querySelector("#representative-name-edit");
+        if (_nameRepresentativeCtrl != undefined) {
+            _nameRepresentativeCtrl.addEventListener('keypress', eMASReferencialJs.replaceSpecialCharacters);
+            _nameRepresentativeCtrl.addEventListener('paste', eMASReferencialJs.replaceSpecialCharacters);
+        }
+        let _contactoEditCtrl = document.querySelector("#contacto-edit");
+        if (_contactoEditCtrl != undefined) {
+            _contactoEditCtrl.addEventListener('blur', eMASReferencialJs.replaceSpecialCharacters);
+            _contactoEditCtrl.addEventListener('focus', eMASReferencialJs.replaceSpecialCharacters);
+        }
     };
     const EvtpasteRucEdit = function (event) {
         return eMASReferencialJs.EsDigitoToPaste(event);

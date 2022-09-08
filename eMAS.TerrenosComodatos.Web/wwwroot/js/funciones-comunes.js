@@ -87,7 +87,7 @@ eMASReferencialJs.ocultarMensajes = function () {
         popup.modal('hide');
 };
 
-eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCargar, funcionCerrar) {
+eMASReferencialJs.mostrarPopupDetail = function (titulo, url, dataBody, funcionCargar, funcionCerrar) {
     let popup = $("#popup-detail");
     popup.find('.modal-title').html(titulo);
     popup.find('.modal-content').css('border', '1px solid #4f6d81');
@@ -104,7 +104,7 @@ eMASReferencialJs.mostrarPopupDetail = function (titulo, url,dataBody, funcionCa
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido una novedad en el aplicativo, por favor intente nuevamente en unos minutos {1}.");
             return;
         }
-        if (data.messagetype != "EXITO" ) {
+        if (data.messagetype != "EXITO") {
             console.error(data.message);
             eMASReferencialJs.SetearMensajeDefaultAdvertencia("Se ha producido una novedad en el aplicativo, por favor intente nuevamente en unos minutos {2}.");
             return;
@@ -146,7 +146,7 @@ eMASReferencialJs.generarBoton = function (nombre, accion) {
 
 eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, botones) {
     var popup = $("#VentanaMensajes");
-        //.clone().appendTo("#Popups");
+    //.clone().appendTo("#Popups");
 
     popup.find('.modal-header').html(titulo).css('fontWeight', 'bold');
 
@@ -157,15 +157,15 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
     }
 
     var contenidoBotones = popup.find(".modal-footer");
-	contenidoBotones.html('');
-	popup.find('.modal-content').css('background', 'white');
-	popup.find('.modal-header').css('color', '#000');
-	//popup.find('.modal-header').css('background', 'white');
-	//popup.find('.modal-body').css('background', 'white');
-	popup.find('.modal-body').css('color', '#000');
-	popup.find('.modal-body').css('min-height', '80px');
-	popup.find('.modal-footer').css('background-color', 'transparent');
-	popup.find('.modal-footer').css('display', 'unset');
+    contenidoBotones.html('');
+    popup.find('.modal-content').css('background', 'white');
+    popup.find('.modal-header').css('color', '#000');
+    //popup.find('.modal-header').css('background', 'white');
+    //popup.find('.modal-body').css('background', 'white');
+    popup.find('.modal-body').css('color', '#000');
+    popup.find('.modal-body').css('min-height', '80px');
+    popup.find('.modal-footer').css('background-color', 'transparent');
+    popup.find('.modal-footer').css('display', 'unset');
 
     let _appConfig = eMASReferencialJs.ObtenerAppConfig();
 
@@ -176,7 +176,7 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
         popup.find('.modal-content').css('border', '1px solid #60a174');
         popup.find('.modal-header').css('background', '#e6f1e9 url("' + rutaBase + 'Referencial/Images/success50.png") no-repeat right center');
         for (var itemS in botones) {
-			contenidoBotones.append('<a class="btn btn-sm btnSuccess" onclick="' + botones[itemS].Accion + '">' + botones[itemS].Nombre + '</a>');
+            contenidoBotones.append('<a class="btn btn-sm btnSuccess" onclick="' + botones[itemS].Accion + '">' + botones[itemS].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Error) {
@@ -191,27 +191,27 @@ eMASReferencialJs.mostrarMensajes = function (titulo, tipoMensaje, mensajes, bot
         popup.find('.modal-header').css('background', '#fffcd9 url("' + rutaBase + 'Referencial/Images/warning50.png") no-repeat right center');
 
         for (var itemA in botones) {
-			contenidoBotones.append('<a class="btn btn-sm btnWarning" onclick="' + botones[itemA].Accion + '">' + botones[itemA].Nombre + '</a>');
+            contenidoBotones.append('<a class="btn btn-sm btnWarning" onclick="' + botones[itemA].Accion + '">' + botones[itemA].Nombre + '</a>');
         }
     }
     else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Prompt) {
-		popup.find('.modal-content').css('border', '1px solid #5b4f4f');
+        popup.find('.modal-content').css('border', '1px solid #5b4f4f');
         popup.find('.modal-header').css('background', '#d5d8da url("' + rutaBase + 'Referencial/Images/prompt50.png") no-repeat right center');
-		for (var itemP in botones) {
-			if (botones[itemP].Nombre === 'Si')
-				contenidoBotones.append('<a class="btn btn-sm btnSi" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
-			else if (botones[itemP].Nombre === 'No')
-				contenidoBotones.append('<a class="btn btn-sm btnNo" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
-			else
+        for (var itemP in botones) {
+            if (botones[itemP].Nombre === 'Si')
+                contenidoBotones.append('<a class="btn btn-sm btnSi" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
+            else if (botones[itemP].Nombre === 'No')
+                contenidoBotones.append('<a class="btn btn-sm btnNo" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
+            else
                 contenidoBotones.append('<a class="btn btn-sm" style="background:#fff url(' + rutaBase + 'Referencial/Images/prompt_header.gif) repeat-x; color: #6C6767; border:1px solid #5b4f4f; padding: 0rem 0.5rem;" href="#" onclick="' + botones[itemP].Accion + '">' + botones[itemP].Nombre + '</a>');
         }
     }
-	else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Contrato) {
-		popup.find('.modal-header').css('background', '#93d9e4');
+    else if (tipoMensaje === eMASReferencialJs.tipoMensaje.Contrato) {
+        popup.find('.modal-header').css('background', '#93d9e4');
         for (var itemC in botones) {
             contenidoBotones.append('<a class="' + botones[item].Clase + '" onclick="' + botones[itemC].Accion + '">' + botones[itemC].Nombre + '</a>');
         }
-    }    
+    }
 
     popup.modal({
         "backdrop": "static",
@@ -269,14 +269,14 @@ function funcionCerrar() { }
 eMASReferencialJs.generateBuscador = function (buscador, nombreBuscador, nombreBtnBuscador, required, classInput, maxLength) {
     buscador.addClass('input-group');
     buscador.css('width', '100%');
-	var strRequired = required ? "required" : "";
-	var strMaxLength = maxLength === null || maxLength === undefined || maxLength === '' ? '' : 'maxlength="' + maxLength + '"';
-	if (classInput === null || classInput === undefined || classInput === "") {
-		buscador.append('<input type="text" class="form-control nopegar noAceptaCaracterEspecial" name="' + nombreBuscador + '" ' + strRequired + ' ' + strMaxLength + ' />');
-	}
-	else {
-		buscador.append('<input type="text" class="form-control ' + classInput + '" name="' + nombreBuscador + '" ' + strRequired + ' ' + strMaxLength + ' />');
-	}
+    var strRequired = required ? "required" : "";
+    var strMaxLength = maxLength === null || maxLength === undefined || maxLength === '' ? '' : 'maxlength="' + maxLength + '"';
+    if (classInput === null || classInput === undefined || classInput === "") {
+        buscador.append('<input type="text" class="form-control nopegar noAceptaCaracterEspecial" name="' + nombreBuscador + '" ' + strRequired + ' ' + strMaxLength + ' />');
+    }
+    else {
+        buscador.append('<input type="text" class="form-control ' + classInput + '" name="' + nombreBuscador + '" ' + strRequired + ' ' + strMaxLength + ' />');
+    }
     buscador.append('<div class="input-group-append"><button type="button" class="btn btnBuscar" id="' + nombreBtnBuscador + '" name="' + nombreBtnBuscador + '"><i class="fa fa-search"></i></button></div>');
     if (required) {
         buscador.append('<div class="invalid-feedback">Campo requerido.</div>');
@@ -352,10 +352,10 @@ eMASReferencialJs.EventoAceptaRangoValorDecimal = function () {
 /*Devuelve un mensaje unificado de una lista de mensajes*/
 eMASReferencialJs.FormarMensaje = function (mensajes) {
     var mensaje = "";
-	for (var i = 0; i < mensajes.length; i++) {
-		if (mensajes.length === 1) {
-			mensaje += mensajes[i];
-		}
+    for (var i = 0; i < mensajes.length; i++) {
+        if (mensajes.length === 1) {
+            mensaje += mensajes[i];
+        }
         else if (i !== mensajes.length - 1) {
             mensaje += "* " + mensajes[i] + "<br>";
         }
@@ -370,7 +370,7 @@ eMASReferencialJs.FormarMensaje = function (mensajes) {
 
 /*Crea el componente de la fecha y hora*/
 eMASReferencialJs.GenerarComponenteFechaHora = function (dateTimePicker, format, defaultDateTime, name, isRequired) {
-	var faDateOrTime = format === "TIME" ? "'fa fa-clock-o'" : "'fa fa-calendar'";
+    var faDateOrTime = format === "TIME" ? "'fa fa-clock-o'" : "'fa fa-calendar'";
     dateTimePicker.addClass('input-group date');
     dateTimePicker.css('width', '100%');
     if (name !== undefined && isRequired !== undefined) {
@@ -435,46 +435,46 @@ eMASReferencialJs.ObtenerFechaFormatoYYYYMMDD = function (componente) {
 };
 
 eMASReferencialJs.FormatoMes = function (valor, fila, posicion) {
-	var texto;
+    var texto;
     switch (valor) {
         case 1:
-			texto = "Enero";
+            texto = "Enero";
             break;
         case 2:
-			texto = "Febrero";
+            texto = "Febrero";
             break;
         case 3:
-			texto = "Marzo";
+            texto = "Marzo";
             break;
         case 4:
-			texto = "Abril";
+            texto = "Abril";
             break;
         case 5:
-			texto = "Mayo";
+            texto = "Mayo";
             break;
         case 6:
-			texto = "Junio";
+            texto = "Junio";
             break;
         case 7:
-			texto = "Julio";
+            texto = "Julio";
             break;
         case 8:
-			texto = "Agosto";
+            texto = "Agosto";
             break;
         case 9:
-			texto = "Septiembre";
+            texto = "Septiembre";
             break;
         case 10:
-			texto = "Octubre";
+            texto = "Octubre";
             break;
         case 11:
-			texto = "Noviembre";
+            texto = "Noviembre";
             break;
         case 12:
-			texto = "Diciembre";
+            texto = "Diciembre";
             break;
-	}
-	return texto;
+    }
+    return texto;
 };
 
 eMASReferencialJs.FormatoFecha = function (valor, fila, posicion) {
@@ -548,10 +548,10 @@ eMASReferencialJs.InsertarElementosComponenteSelector = function (select, items)
             value: item.Value,
             text: item.Text
         }));
-	});
-	if (value !== null && items.findIndex(x => x.Value === value) < 0) {
-		value = 0;
-	}
+    });
+    if (value !== null && items.findIndex(x => x.Value === value) < 0) {
+        value = 0;
+    }
     select.val(value !== null ? value : 0);
     select.trigger("chosen:updated");
 };
@@ -592,32 +592,32 @@ eMASReferencialJs.Ajax = function (request, failFunction, typeMessage, alwaysFun
 
         let rutaBase = _appConfig.RutaBase;
         rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
-		if (response.status === 403 || response.status === 401) {
-			eMASReferencialJs.ocultarProgress();
+        if (response.status === 403 || response.status === 401) {
+            eMASReferencialJs.ocultarProgress();
             texto = "<span>Su sesi&oacute;n ha caducado, para volver a iniciar presione </span><a href='" + eMASReferencialJs.serverPath + "'><b>Aqu&iacute;</b></a>";
             eMASReferencialJs.mostrarMensajes("Sesión", eMASReferencialJs.tipoMensaje.Advertencia, [{ Description: texto }], []);
-		}
-		else {
+        }
+        else {
 
-			var mensaje = eMASReferencialJs.Error.ErrorGeneral + " Detalle los siguientes datos para salucionar el problema. </br>" + "Ruta: " + request.url;
-			//+ "</br> Estado: " + textstatus + "</br> Error: " + errorThrown;
-			if (response.status.toString() !== "") {
-				mensaje = mensaje + "</br> StatusCode: " + response.status.toString();
-			}
-			if (response.statusText !== "") {
-				mensaje = mensaje + "</br> StatusText: " + response.statusText;
-			}
-			if (response.responseText !== "") {
-				mensaje = mensaje + "</br> ResponseText: " + response.responseText;
-			}
+            var mensaje = eMASReferencialJs.Error.ErrorGeneral + " Detalle los siguientes datos para salucionar el problema. </br>" + "Ruta: " + request.url;
+            //+ "</br> Estado: " + textstatus + "</br> Error: " + errorThrown;
+            if (response.status.toString() !== "") {
+                mensaje = mensaje + "</br> StatusCode: " + response.status.toString();
+            }
+            if (response.statusText !== "") {
+                mensaje = mensaje + "</br> StatusText: " + response.statusText;
+            }
+            if (response.responseText !== "") {
+                mensaje = mensaje + "</br> ResponseText: " + response.responseText;
+            }
 
             if (failFunction !== null)
                 failFunction();
-			if (typeMessage === 'alert')
-				$('#div-alert').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" + mensaje + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-			else {				
-				eMASReferencialJs.mostrarMensajes("Error", eMASReferencialJs.tipoMensaje.Error, [{ Description: mensaje }], [eMASReferencialJs.botonAceptar]);
-			}                
+            if (typeMessage === 'alert')
+                $('#div-alert').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" + mensaje + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            else {
+                eMASReferencialJs.mostrarMensajes("Error", eMASReferencialJs.tipoMensaje.Error, [{ Description: mensaje }], [eMASReferencialJs.botonAceptar]);
+            }
         }
     }).always(function () {
         if (alwaysFunction != undefined)
@@ -655,7 +655,7 @@ eMASReferencialJs.ObtenerAppConfig = function () {
 
     let _appConfig = {
         "RutaBase": _rutaBase,
-        "FormatoFechaCliente":"dd/MM/yyyy"
+        "FormatoFechaCliente": "dd/MM/yyyy"
     }
 
     return _appConfig;
@@ -684,14 +684,14 @@ eMASReferencialJs.FormSetVisibilityConsult = function (visibility, tableName) {
 
 eMASReferencialJs.FormSetVisibilityPanel = function (visibility) {
     let _panelFilter = document.querySelector(".panel-filter");
-    
+
     if (_panelFilter != undefined)
         _panelFilter.style.display = visibility ? "" : "none";
 };
 
-eMASReferencialJs.htmlToElement = function(html) {
+eMASReferencialJs.htmlToElement = function (html) {
     var template = document.createElement('template');
-    html = html.trim(); 
+    html = html.trim();
     template.innerHTML = html;
     return template.content.firstChild;
 }
@@ -742,7 +742,7 @@ eMASReferencialJs.SetearPlantillaPagineo = function (metodoBusqueda, pagineoCont
 
     plantilla += "<ul class=\"pagination justify-content-center\">";
     plantilla += "<li class=\"page-item\">";
-    plantilla += "<a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda +"('" + primeraPagina + "')\">";
+    plantilla += "<a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda + "('" + primeraPagina + "')\">";
     plantilla += "<i class=\"fa fa-fast-backward\"></i>";
     plantilla += "</a></li>";
     plantilla += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"" + metodoBusqueda + "('" + retroceder + "')\">";
@@ -813,14 +813,25 @@ eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnL
     eMASReferencialJs.FormSetVisibilityConsult(false);
 }
 
-eMASReferencialJs.CargarCombosGenerico = function (data) {    
-    data.forEach(function (_dataItem) {
-        let dataBody = { key1: _dataItem.key, target: _dataItem.ctrl };
-        let parameter1Callback2 = _dataItem.parameter1 == undefined ? "" : _dataItem.parameter1;
-        let parameter2Callback2 = _dataItem.parameter2 == undefined ? "" : _dataItem.parameter2;
-        eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta
-            , _dataItem.fnCallback2, parameter1Callback2, parameter2Callback2);
-    });
+eMASReferencialJs.CargarCombosGenerico = function (data) {
+    let lenData = data.length;
+    if (lenData > 0) {
+        for (let i = 0; i < lenData; i++) {
+            let _dataItem = data[i];
+            let dataBody = { key1: _dataItem.key, target: _dataItem.ctrl };
+            let parameter1Callback2 = _dataItem.parameter1 == undefined ? "" : _dataItem.parameter1;
+            let parameter2Callback2 = _dataItem.parameter2 == undefined ? "" : _dataItem.parameter2;
+            eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta
+                , _dataItem.fnCallback2, parameter1Callback2, parameter2Callback2);
+        }
+    }
+    //data.forEach(function (_dataItem) {
+    //    let dataBody = { key1: _dataItem.key, target: _dataItem.ctrl };
+    //    let parameter1Callback2 = _dataItem.parameter1 == undefined ? "" : _dataItem.parameter1;
+    //    let parameter2Callback2 = _dataItem.parameter2 == undefined ? "" : _dataItem.parameter2;
+    //    eMASReferencialJs.FetchPost(_dataItem.ruta, dataBody, eMASReferencialJs.CargarCombosGenericoRespuesta
+    //        , _dataItem.fnCallback2, parameter1Callback2, parameter2Callback2);
+    //});
 };
 
 eMASReferencialJs.LimpiarControlesHtml = function (panelName) {
@@ -843,6 +854,14 @@ eMASReferencialJs.LimpiarControlesHtml = function (panelName) {
             element.selectedIndex = -1;
         });
     }
+
+    let dropdownsSelect = ctrlContenedor.querySelectorAll(".dropdown-select span");
+
+    if (!(dropdownsSelect == null || dropdownsSelect == undefined)) {
+        dropdownsSelect.forEach(function (element) {
+            element.textContent = "";
+        });
+    }
 };
 
 eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
@@ -863,11 +882,26 @@ eMASReferencialJs.CargarCombosGenericoRespuesta = function (data) {
         let itemCtrlSelect = document.querySelector(`#${data.target}`);
         if (!(itemCtrlSelect == undefined || itemCtrlSelect == null)) {
             let options = "";
-            data.datasource.forEach(function(item) {
-                options += `<option value=${item.key}>${item.value}</option>\n`;
-            });
-            itemCtrlSelect.innerHTML = options;
-            itemCtrlSelect.selectedIndex = -1;
+
+            let lengthDataSource = data.datasource.length;
+            if (lengthDataSource > 0) {
+                for (let i = 0; i < lengthDataSource; i++) {
+                    options += `<option value=${data.datasource[i].key}>${data.datasource[i].value}</option>\n`;
+                }
+                itemCtrlSelect.innerHTML = options;
+                itemCtrlSelect.selectedIndex = -1;
+                eMASReferencialJs.createCustomDropdown(`${data.target}`);
+
+            }
+            
+            //data.datasource.forEach(function (item) {
+                
+            //});
+            //itemCtrlSelect.innerHTML = options;
+            //itemCtrlSelect.selectedIndex = -1;
+            //setTimeout(function () {
+            //    eMASReferencialJs.createCustomDropdown(`${data.target}`);
+            //}, 500);
         }
     }
 };
@@ -902,19 +936,22 @@ eMASReferencialJs.ObtenerAnioSistema = function () {
 eMASReferencialJs.FadeOutEffect = function (selector, timeInterval, callback) {
     let _targetSelector = document.querySelector(selector);
 
-    let _time = timeInterval / 1000;
-    _targetSelector.style.transition = _time + 's';
-    _targetSelector.style.opacity = 0
+    if (_targetSelector != undefined) {
+        let _time = timeInterval / 1000;
+        _targetSelector.style.transition = _time + 's';
+        _targetSelector.style.opacity = 0
 
-    const fnFadeEffect = setInterval(function () {
+        const fnFadeEffect = setInterval(function () {
 
-        if (_targetSelector.style.opacity <= 0) {
-            clearInterval(fnFadeEffect);
-            if (callback != undefined) {
-                callback();
+            if (_targetSelector.style.opacity <= 0) {
+                clearInterval(fnFadeEffect);
+                if (callback != undefined) {
+                    callback();
+                }
             }
-        }
-    }, timeInterval);
+        }, timeInterval);
+    }
+    
 }
 
 eMASReferencialJs.SetearFechaBootstrap = function (selectorElement) {
@@ -926,10 +963,12 @@ eMASReferencialJs.SetearFechaBootstrap = function (selectorElement) {
     });
 }
 
-eMASReferencialJs.SelectItemByValue = function(element, value) {
+eMASReferencialJs.SelectItemByValue = function (element, value) {
     for (var i = 0; i < element.options.length; i++) {
         if (element.options[i].value === value) {
             element.selectedIndex = i;
+            //console.log(element.id);
+            document.querySelector(".dropdown-select-" + element.id + " span").textContent = element.options[i].text;
             break;
         }
     }
@@ -941,13 +980,13 @@ eMASReferencialJs.FormatearFecha = function (valFecha) {
     let fechaConvertida = "";
     let dateTmp = valFecha.split("/");
 
-    if(dateTmp.length== 3)
+    if (dateTmp.length == 3)
         fechaConvertida = dateTmp[2] + "-" + dateTmp[1] + "-" + dateTmp[0];
 
     return fechaConvertida;
 }
 
-eMASReferencialJs.EsDecimalConPunto = function (evt) {    
+eMASReferencialJs.EsDecimalConPunto = function (evt) {
     let valorTexto = evt.target.value;
     let codigoCaracter = (evt.which) ? evt.which : evt.keyCode;
     if (codigoCaracter == 46) {
@@ -961,7 +1000,7 @@ eMASReferencialJs.EsDecimalConPunto = function (evt) {
         if (codigoCaracter > 31 &&
             (codigoCaracter < 48 || codigoCaracter > 57))
             evt.preventDefault();
-            return false;
+        return false;
     }
     return true;
 }
@@ -970,7 +1009,7 @@ eMASReferencialJs.EsDigito = function (evt) {
     let codigoCaracter = (evt.which) ? evt.which : evt.keyCode;
     if (codigoCaracter > 31 &&
         (codigoCaracter < 48 || codigoCaracter > 57)) {
-            evt.preventDefault();
+        evt.preventDefault();
         return false;
     }
     return true;
@@ -984,7 +1023,7 @@ eMASReferencialJs.EsDigitoToPaste = function (evt) {
     }
     evt.preventDefault();
     return false;
-    
+
 }
 
 eMASReferencialJs.SetearLabelError = function (mostrar, elementName, mensaje) {
@@ -1012,7 +1051,7 @@ eMASReferencialJs.EmisionPromptWarning = function (mensaje, accionSi, accionNo) 
         accionNoTmp = accionCierre;
 
     let accionSiTmp = accionSi;
-        //+ accionCierre;
+    //+ accionCierre;
     eMASReferencialJs.mostrarMensajes(eMASReferencialJs.Advertencia.Titulo
         , eMASReferencialJs.tipoMensaje.Prompt
         , [{ Description: mensaje }]
@@ -1029,7 +1068,7 @@ eMASReferencialJs.EmisionPromptWarning = function (mensaje, accionSi, accionNo) 
     );
 };
 
-eMASReferencialJs.ConsultPosLlenarComboGeneric = function (parameter1, parameter2) {    
+eMASReferencialJs.ConsultPosLlenarComboGeneric = function (parameter1, parameter2) {
     let _ctrl = document.querySelector(`#${parameter1}`);
     let _idEntity = document.querySelector(`#${parameter2}`);
     if (_ctrl != undefined && _idEntity != undefined)
@@ -1062,9 +1101,129 @@ eMASReferencialJs.setearInputsEventsEnFormulario = function (selectorFormInputs)
 eMASReferencialJs.keyDownOnlyPositiveNumbersValidation = function (e) {
     if (!((e.keyCode > 95 && e.keyCode < 106)
         || (e.keyCode > 47 && e.keyCode < 58)
-        || e.keyCode == 8)) {
+        || e.keyCode == 8 || e.keyCode == 9)) {
         e.preventDefault();
         return false;
     }
     return true;
+};
+
+eMASReferencialJs.replaceSpecialCharacters = function (e) {
+    debugger;
+    let valInput = e.target.value;
+
+    if (!(valInput == null || valInput == undefined)) {
+        valInput = valInput.replace('á', 'a');
+        valInput = valInput.replace('é', 'e');
+        valInput = valInput.replace('í', 'i');
+        valInput = valInput.replace('ó', 'o');
+        valInput = valInput.replace('ú', 'u');
+
+        valInput = valInput.replace('Á', 'A');
+        valInput = valInput.replace('É', 'E');
+        valInput = valInput.replace('Í', 'I');
+        valInput = valInput.replace('Ó', 'O');
+        valInput = valInput.replace('Ú', 'U');
+
+    }
+
+    e.target.value = valInput;
+};
+
+eMASReferencialJs.whenClickOutsideCombobox = function () {
+    $(document).on('click', function (event) {
+        if ($(event.target).closest('.dropdown-select').length === 0) {
+            $('.dropdown-select').removeClass('open');
+            $('.dropdown-select .option').removeAttr('tabindex');
+        }
+        event.stopPropagation();
+    });
+};
+
+eMASReferencialJs.createCustomDropdown = function (ctrlName) {
+    $('#' + ctrlName).each(function (i, select) {
+        if (!$(this).next().hasClass('dropdown-select-' + ctrlName)) {
+            $(this).after('<div class="dropdown-select dropdown-select-' + ctrlName + ' wide ' + ($(this).attr('class') || '') + '" tabindex="0"><span class="current"></span><div class="list"><ul></ul></div></div>');
+            var dropdown = $(this).next();
+            var options = $(select).find('option');
+            var selected = $(this).find('option:selected');
+            dropdown.find('.current').html(selected.data('display-text') || selected.text());
+
+            for (let i = 0; i < options.length; i++) {
+                var display = $(options[i]).data('display-text') || '';
+                dropdown.find('ul').append('<li class="option ' + ($(options[i]).is(':selected') ? 'selected' : '') + '" data-value="' + $(options[i]).val() + '" data-display-text="' + display + '">' + $(options[i]).text() + '</li>');
+            }
+
+            $('.dropdown-select-' + ctrlName + ' ul').before('<div class="dd-search"><input autocomplete="off" onkeyup="eMASReferencialJs.filterTextInCombobox(\'' + ctrlName + '\')" class="txtSearchValue-' + ctrlName + ' dd-searchbox" type="text"></div>');
+
+            $('.dropdown-select-' + ctrlName).on('click', function (event) {
+                if ($(event.target).hasClass('dd-searchbox')) {
+                    return;
+                }
+                $('.dropdown-select-' + ctrlName).not($(this)).removeClass('open');
+                $(this).toggleClass('open');
+                if ($(this).hasClass('open')) {
+                    $(this).find('.option').attr('tabindex', 0);
+                    $(this).find('.selected').focus();
+                } else {
+                    $(this).find('.option').removeAttr('tabindex');
+                    $(this).focus();
+                }
+            });
+
+            $('.dropdown-select-' + ctrlName + ' .option').on('click', function (event) {
+                $(this).closest('.list').find('.selected').removeClass('selected');
+                $(this).addClass('selected');
+                var text = $(this).data('display-text') || $(this).text();
+                $(this).closest('.dropdown-select-' + ctrlName).find('.current').text(text);
+                $(this).closest('.dropdown-select-' + ctrlName).prev('select').val($(this).data('value')).trigger('change');
+            });
+
+            // Keyboard events
+            $('.dropdown-select-' + ctrlName).on('keydown', function (event) {
+                var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[0]);
+
+                if (event.keyCode == 13) {
+                    if ($(this).hasClass('open')) {
+                        focused_option.trigger('click');
+                    } else {
+                        $(this).trigger('click');
+                    }
+                    return false;
+                    // Down
+                } else if (event.keyCode == 40) {
+                    if (!$(this).hasClass('open')) {
+                        $(this).trigger('click');
+                    } else {
+                        focused_option.next().focus();
+                    }
+                    return false;
+                    // Up
+                } else if (event.keyCode == 38) {
+                    if (!$(this).hasClass('open')) {
+                        $(this).trigger('click');
+                    } else {
+                        var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[0]);
+                        focused_option.prev().focus();
+                    }
+                    return false;
+                    // Esc
+                } else if (event.keyCode == 27) {
+                    if ($(this).hasClass('open')) {
+                        $(this).trigger('click');
+                    }
+                    return false;
+                }
+            });
+        }
+
+    });
+}
+
+eMASReferencialJs.filterTextInCombobox = function (ctrlName) {
+    var valThis = $('.txtSearchValue-' + ctrlName).val();
+    $('.dropdown-select-' + ctrlName + ' ul > li').each(function () {
+        var text = $(this).text();
+        (text.toLowerCase().indexOf(valThis.toLowerCase()) > -1) ? $(this).show() : $(this).hide();
+    });
 };
