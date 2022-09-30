@@ -86,6 +86,7 @@ namespace eMAS.Api.TerrenosComodatos.Repository
                 lsTramites = lsTramites ?? new List<SmcTramitePaginado>();
                 var sTotalPaginas = totalPaginas.Value?.ToString();
                 Int32.TryParse(sTotalPaginas, out iTotalPaginas);
+
             }
             data = new Tuple<List<SmcTramitePaginado>, int>(lsTramites, iTotalPaginas);
 

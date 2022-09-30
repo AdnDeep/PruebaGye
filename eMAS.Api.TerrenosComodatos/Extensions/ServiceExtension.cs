@@ -1,4 +1,5 @@
 ﻿using eMAS.Api.Comun.Lib;
+using eMAS.Api.TerrenosComodatos.Comun;
 using eMAS.Api.TerrenosComodatos.Data;
 using eMAS.Api.TerrenosComodatos.Extensions;
 using eMAS.Api.TerrenosComodatos.IRepository;
@@ -37,10 +38,12 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddTransient<IGestionRepositorioLecturaTramites, RepositorioTramiteLectura>();
             services.AddTransient<IGestionRepositorioEscrituraTramites, RepositorioTramiteEscritura>();
             services.AddTransient<IGestionRepositorioEliminacionTramites, RepositorioTramiteEliminacion>();
+            services.AddTransient<IGestionRepositorioLecturaUsuarios, RepositorioUsuarioLectura>();
             // Logica
             services.AddTransient<TramiteLogicLectura>();
             services.AddTransient<TramiteLogicEscritura>();
             services.AddTransient<TramiteLogicEliminacion>();
+            services.AddTransient<UsuarioLogicLectura>();
 
             // Servicios
             services.AddTransient<IServiceTramiteLectura, ServiceTramiteLectura>();
@@ -56,6 +59,11 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddTransient<ValidadoresEscrituraTramite>(); 
             services.AddTransient<ValidadoresEliminacionTramite>();
             services.AddTransient<ValidadoresTramitesRequest>();
+        }
+        public static void AddServicesComunExtensions(this IServiceCollection services)
+        {
+            services.AddTransient<Token>();
+            services.AddTransient<ApiService>();
         }
         public static void AddServicesGenericExtensions(this IServiceCollection services)
         {

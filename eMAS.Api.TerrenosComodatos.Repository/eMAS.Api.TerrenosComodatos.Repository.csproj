@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.Comun\eMAS.Api.TerrenosComodatos.Comun.csproj" />
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.Data\eMAS.Api.TerrenosComodatos.Data.csproj" />
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.IRepository\eMAS.Api.TerrenosComodatos.IRepository.csproj" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.ViewModel
 {
@@ -71,6 +72,42 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
             dataresult = default(T);
         }
     }
+    public class RespuestaViewModel<T> : IDisposable
+    {
+        public RespuestaViewModel() 
+        {
+            this.Resultado = new ResultadoViewModel();
+        }
+        public T DataResult { get; set; }
+        public ResultadoViewModel Resultado { get; set; }
+
+        public void Dispose()
+        {
+            if (Resultado != null)
+                Resultado.Dispose();
+        }
+    }
+    public class ResultadoViewModel :IDisposable
+    {
+        public ResultadoViewModel() 
+        {
+            this.Ok = true;
+            this.ErrorValidacion = false;
+            this.Mensajes = new List<string>();
+        }
+
+        public bool Ok { get; set; }
+        public string Titulo { get; set; }
+        public int TipoMensaje { get; set; }
+        public List<string> Mensajes { get; set; }
+        public bool ErrorValidacion { get; set; }
+        public int StatusCode { get; set; }
+
+        public void Dispose()
+        {
+            this.Mensajes = null;
+        }
+    }
     public class Mensaje 
     {
         public string codigo { get; set; }
@@ -81,5 +118,5 @@ namespace eMAS.Api.TerrenosComodatos.ViewModel
     {
         public const string Titulo = "ConfApp";
         public string RutaBase { get; set; }
-    }
+    }    
 }

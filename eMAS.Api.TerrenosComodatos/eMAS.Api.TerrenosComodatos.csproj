@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.Comun\eMAS.Api.TerrenosComodatos.Comun.csproj" />
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.IRepository\eMAS.Api.TerrenosComodatos.IRepository.csproj" />
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.IServices\eMAS.Api.TerrenosComodatos.IServices.csproj" />
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.Repository\eMAS.Api.TerrenosComodatos.Repository.csproj" />

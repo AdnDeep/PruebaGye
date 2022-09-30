@@ -784,14 +784,14 @@ eMASReferencialJs.SetearEvtFormularioGenerico = function (fnRegresar, fnCancelar
 
 };
 
-eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnConsultar, dataLsTable) {
+eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnLimpiar, fnExportar, fnConsultar, dataLsTable) {
     let _panelFilter = document.querySelector("#" + nombrePanel + " .panel-body");
     let _consultLs = document.querySelector(".consult-ls");
     let _btnConsultar = document.querySelector(".consultar");
     let _btnLimpiar = document.querySelector(".limpiar");
     let _btnNuevoLs = document.querySelectorAll(".nuevo");
-    //let _btnNuevo = document.querySelector(".nuevo");
-
+    let _btnExportar = document.querySelector(".exportar");
+    
     if (_panelFilter != undefined)
         eMASReferencialJs.SetearEventosPanel(dataLsTable);
 
@@ -803,6 +803,9 @@ eMASReferencialJs.InicializarPanelGenerico = function (nombrePanel, fnNuevo, fnL
     }
     if (_btnLimpiar != undefined) {
         _btnLimpiar.addEventListener('click', fnLimpiar);
+    }
+    if (_btnExportar != undefined) {
+        _btnExportar.addEventListener('click', fnExportar);
     }
     if (_btnNuevoLs != undefined) {
         _btnNuevoLs.forEach(function (btnNuevo) {
@@ -1226,4 +1229,21 @@ eMASReferencialJs.filterTextInCombobox = function (ctrlName) {
         var text = $(this).text();
         (text.toLowerCase().indexOf(valThis.toLowerCase()) > -1) ? $(this).show() : $(this).hide();
     });
+};
+
+eMASReferencialJs.exportacionReporteGeneralResult = function (response) {
+    eMASReferencialJs.ocultarProgress();
+    if (response == null || response == undefined) {
+        eMASReferencialJs.SetearMensajeDefaultAdvertencia("No se ha podido imprimir el reporte.");
+        return;
+    }
+    if (response.tipo == "ADVERTENCIA") {
+        eMASReferencialJs.SetearMensajeDefaultAdvertencia(response.mensaje);
+    } else if (response.tipo == "EXITO") {
+        let _appConfig = eMASReferencialJs.ObtenerAppConfig();
+        let rutaBase = _appConfig.RutaBase;
+        rutaBase = rutaBase === "/" ? "/" : (rutaBase + "/");
+        let url = rutaBase + response.rutaretorno + response.mensaje;
+        window.open(url, "_blank");
+    }
 };

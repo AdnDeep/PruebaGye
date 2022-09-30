@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.Services
 {
-    public class ValidadoresGeneric
+    public partial class ValidadoresGeneric
     {
         private readonly ILogger<ValidadoresGeneric> _logger;
         public ValidadoresGeneric(ILogger<ValidadoresGeneric> logger)

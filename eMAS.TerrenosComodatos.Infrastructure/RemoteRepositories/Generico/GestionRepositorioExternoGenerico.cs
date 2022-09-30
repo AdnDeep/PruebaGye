@@ -12,6 +12,7 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
     {
         const string resourceComodato = "AzureAdLogin:ResourceComodato";
         private const string methodGetDataDsr = "api/SingleSelector/GetDataDsr";
+        private const string methodGetExportData = "api/Export/GetSingleGenericData";
         private readonly string _baseAddress;
         private readonly ILogger<GestionRepositorioExternoGenerico> _logger;
         private readonly ApiService _clientHttpSvc;
@@ -35,6 +36,21 @@ namespace eMAS.TerrenosComodatos.Infrastructure.RemoteRepositories
                                                             .GetAsync(_baseAddress, resourceComodato, urlResource)).Result;
             // Procesa Respuesta
             ProcesaRespuestaServidorRemoto<StructKeyValueSelect>(ref resultadoRepositorioExterno, "ObtenerListadoGenerico", ref resultado);
+
+            return resultado;
+        }
+        public ResultadoDTO<ExportSingleResult> ObtenerDataExportacion(string codigo, string paramsFilter)
+        {
+            ResultadoDTO<ExportSingleResult> resultado = new ResultadoDTO<ExportSingleResult>();
+            string parameters = string.Format("?codigo={0}&paramsFilter={1}", codigo, paramsFilter);
+
+            string urlResource = string.Concat(methodGetExportData, parameters);
+
+            // Consume Método de Api Service
+            var resultadoRepositorioExterno = Task.Run(async () => await _clientHttpSvc
+                                                            .GetAsync(_baseAddress, resourceComodato, urlResource)).Result;
+            // Procesa Respuesta
+            ProcesaRespuestaServidorRemotoExportacion<ExportSingleResult>(ref resultadoRepositorioExterno, "ObtenerDataExportacion", ref resultado);
 
             return resultado;
         }

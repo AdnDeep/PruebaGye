@@ -1,5 +1,6 @@
 ﻿using eMAS.TerrenosComodatos.Domain.Application;
 using eMAS.TerrenosComodatos.Domain.DTOs;
+using eMAS.TerrenosComodatos.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -54,8 +55,7 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
                 userName = "";
             }
             return userName;
-        }
-
+        }        
         [HttpGet]
         public ActionResult GetReportGeneralSystem(string idreporte)
         {
@@ -87,6 +87,57 @@ namespace eMAS.TerrenosComodatos.Web.Controllers
                 ViewData["ErrorMessage"] = obj.mensaje;
                 return View("Error");
             }
+        }
+        [HttpPost]
+        public ActionResult ExportDataSystem([FromBody] ExportSingleRequest request)
+        {
+            ResultadoDTO<int> response = new ResultadoDTO<int>();
+            response.tipo = "EXITO";
+
+            var respuestaServidor = _casesUsesGeneric.GetSingleExport(request);
+
+            if (respuestaServidor.tipo == "ADVERTENCIA")
+            {
+                response.mensaje = respuestaServidor.mensaje;
+                response.tipo = "ADVERTENCIA";
+            }
+            else
+            {
+                string hashString = StringManipulation.GenerateRandom();
+                if (TempData[hashString] != null)
+                    TempData.Remove(hashString);
+
+                TempData[hashString] = JsonConvert.SerializeObject(respuestaServidor.dataresult);
+                TempData.Keep(hashString);
+                response.mensaje = hashString;
+                response.tipo = "EXITO";
+            }
+
+            return Json(new { tipo = response.tipo, mensaje = response.mensaje, rutaretorno = respuestaServidor.dataresult?.RutaRetorno });
+        }
+        [HttpGet]
+        public ActionResult GetExportDataCsvSystem(string idexport)
+        {
+            if (string.IsNullOrEmpty(idexport) || string.IsNullOrWhiteSpace(idexport))
+            {
+                ViewData["ErrorMessage"] = "No existe reporte para imprimir. [1]";
+                return View("Error");
+            }
+            
+            if (TempData[idexport] == null)
+            {
+                ViewData["ErrorMessage"] = "No existe reporte para imprimir. [2]";
+                return View("Error");
+            }
+
+            string strObj = TempData[idexport] as string;
+
+
+            ExportSingleResult obj = JsonConvert.DeserializeObject<ExportSingleResult>(strObj);
+
+            TempData.Remove(idexport);
+            return File(new MemoryStream(obj.bytecontenidoarchivo), "application/csv", obj.nombrearchivo);
+            
         }
     }
 }

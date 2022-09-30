@@ -12,7 +12,7 @@ using System.Text.Json;
 
 namespace eMAS.Api.TerrenosComodatos.Repository
 {
-    public class GenericRepository : IGenericRepository
+    public partial class GenericRepository : IGenericRepository
     {
         private readonly IServiceProvider _serviceProvider;
         public GenericRepository(IServiceProvider serviceProvider)
@@ -46,5 +46,6 @@ namespace eMAS.Api.TerrenosComodatos.Repository
 
             return data;
         }
+        
     }
 }

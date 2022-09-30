@@ -11,6 +11,7 @@ namespace eMAS.Api.TerrenosComodatos.Services
 {
     public partial class ServiceTramiteEscritura : IServiceTramiteEscritura
     {
+        private string[] perfilesPermitidosOficio = { "JEFE DE COMODATO" ,"JEFE COMODATO"};
         private const string objValidadotEscrituraTramiteTopografia = "SmcPr_SmcTopografiaTerreno_GetDataValidationTramiteTopografiaEscritura";
         private const string objValidadotEscrituraTramiteObservacion = "SmcPr_SmcTramitesDescs_GetDataValidationTramiteObservacionEscritura";
         private const string objValidadotEscrituraTramiteOficio = "SmcPr_SmcOficioOtrasDirecciones_GetDataValidationTramiteOficioEscritura";
@@ -20,12 +21,15 @@ namespace eMAS.Api.TerrenosComodatos.Services
         private readonly MapeadoresEscrituraTramite _mapeadores;
         private readonly ValidadoresEscrituraTramite _validadores;
         private readonly TramiteLogicEscritura _logic;
+        private readonly UsuarioLogicLectura _logicUsuario;
         private readonly ILogger<ServiceTramiteEscritura> _logger;
         public ServiceTramiteEscritura(TramiteLogicEscritura     logic
+            , UsuarioLogicLectura logicUsuario
             , MapeadoresEscrituraTramite mapeadores
             , ValidadoresEscrituraTramite validadores
             , ILogger<ServiceTramiteEscritura> logger)
         {
+            _logicUsuario = logicUsuario;
             _mapeadores = mapeadores;
             _logic = logic;
             _validadores = validadores;

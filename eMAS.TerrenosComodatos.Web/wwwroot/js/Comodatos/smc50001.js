@@ -375,7 +375,19 @@ const SMC50001 = function () {
     }
 
     const inicializacionPanel = function () {
-        eMASReferencialJs.InicializarPanelGenerico("panelFilterBeneficiario", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar, "DataListadoBeneficiarios");
+        eMASReferencialJs.InicializarPanelGenerico("panelFilterBeneficiario", EvtBtnNuevo, EvtBtnLimpiarFormPanel, objSMC50001.ExportacionReporteGeneral, EvtBtnConsultar, "DataListadoBeneficiarios");
+    };
+
+    const exportacionReporteGeneralRequest = function () {
+        let dataFilter = fnGetDataFilter();
+
+        let dataBody = {
+            Codigo: "DATABENEFICIARIOSG1",
+            ParamsFilter: dataFilter,
+            RutaRetorno: "Comodatos/SMC50001/GetExportDataCsvSystem?idexport="
+        };
+        eMASReferencialJs.mostrarProgress();
+        eMASReferencialJs.FetchPost("Comodatos/SMC50001/ExportDataSystem", dataBody, eMASReferencialJs.exportacionReporteGeneralResult, eMASReferencialJs.FnGeneralVacia, "");
     };
 
     return {
@@ -387,6 +399,9 @@ const SMC50001 = function () {
         },
         BtnEditRowItem: function (id) {
             EvtClickEditarElemento(id);
+        },
+        ExportacionReporteGeneral: function () {
+            exportacionReporteGeneralRequest();
         }
     };
 }

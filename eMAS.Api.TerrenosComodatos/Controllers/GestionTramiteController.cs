@@ -2,7 +2,9 @@
 using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web;
 using ComunLib = eMAS.Api.Comun.Lib;
 
 namespace eMAS.Api.TerrenosComodatos.Controllers
@@ -10,7 +12,7 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class GestionTramiteController : ControllerBase
+    public class GestionTramiteController : DefaultController
     {
         private readonly ValidadoresEliminacionTramite _validadoresEliminacion;
         private readonly ValidadoresEscrituraTramite _validadoresEscritura;
@@ -23,7 +25,8 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
             , IServiceTramiteEliminacion serviceTramiteEliminacion
             , ValidadoresEliminacionTramite validadoresEliminacion
             , ValidadoresEscrituraTramite validadoresEscritura
-            , ValidadoresTramitesRequest validadoresRequest)
+            , ValidadoresTramitesRequest validadoresRequest
+            , IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             _validadoresEliminacion = validadoresEliminacion;
             _validadoresRequest = validadoresRequest;

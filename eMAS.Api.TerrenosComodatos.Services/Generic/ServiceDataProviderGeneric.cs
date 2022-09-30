@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace eMAS.Api.TerrenosComodatos.Services
 {
-    public class ServiceDataProviderGeneric : IServiceDataProviderGeneric
+    public partial class ServiceDataProviderGeneric : IServiceDataProviderGeneric
     {
         private readonly ValidadoresGeneric _validadoresGeneric;
         private readonly MapeadoresGeneric _mapeadoresGeneric;

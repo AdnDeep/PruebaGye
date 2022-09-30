@@ -2,6 +2,7 @@
 using eMAS.Api.TerrenosComodatos.Services;
 using eMAS.Api.TerrenosComodatos.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ComunLib = eMAS.Api.Comun.Lib;
 
@@ -10,7 +11,7 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class GestionBeneficiarioController : ControllerBase
+    public class GestionBeneficiarioController : DefaultController
     {
         private readonly ValidadoresBeneficiariosRequest _validadoresRequest;
         private readonly IServiceBeneficiarioEscritura _serviceBeneficiarioEscritura;
@@ -19,7 +20,8 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
         public GestionBeneficiarioController(IServiceBeneficiarioLecturaTodos serviceBeneficiarioLecturaTodos
             , IServiceBeneficiarioEscritura serviceBeneficiarioEscritura
             , IServiceBeneficiarioEliminacion serviceBeneficiarioEliminacion
-            , ValidadoresBeneficiariosRequest validadoresRequest)
+            , ValidadoresBeneficiariosRequest validadoresRequest
+            , IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             _validadoresRequest = validadoresRequest;
             _serviceBeneficiarioLecturaTodos = serviceBeneficiarioLecturaTodos;

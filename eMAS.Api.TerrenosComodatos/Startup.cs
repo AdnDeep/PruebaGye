@@ -23,11 +23,14 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddServicesBeneficiariosExtensions();
             services.AddServicesGenericExtensions();
             services.AddSessionServicesExtensions();
+            services.AddServicesComunExtensions();
             services.AddSwaggerConfiguration();
             services.AddOpenApiDocumentation();
             services.AddHelperExtensions();
             services.AddAuthenticationServices(Configuration);
             services.AddServicesTelemetry();
+
+            services.AddHttpContextAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

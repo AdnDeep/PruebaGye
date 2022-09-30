@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace eMAS.Api.TerrenosComodatos.Services
 {
@@ -98,6 +99,20 @@ namespace eMAS.Api.TerrenosComodatos.Services
             ResultadoDTO<int> resultadoVista = new ResultadoDTO<int>();
 
             Tuple<List<SmcValidaDataServidor>, string> respuestaLogicDataValidation = null;
+
+            #region Validacion de Perfil
+
+            var respuestaObtenerPermisoUsuario = Task.Run(async () => await _logicUsuario.ObtenerPerfilesPorUsuario(usuario)).Result;
+            bool validaRespuestaPermisosUsuario = _validadores
+                                                        .ValidarRespuestaServidorPermisosUsuario(ref respuestaObtenerPermisoUsuario
+                                                        , ref resultadoVista
+                                                        , perfilesPermitidosOficio
+                                                        , "Modificar Tramite");
+
+            if (!validaRespuestaPermisosUsuario)
+                return resultadoVista;
+
+            #endregion
 
             string strParamValidator = _mapeadores
                                         .MapearTramiteEditViewModelADataValidationEscritura(ref model);

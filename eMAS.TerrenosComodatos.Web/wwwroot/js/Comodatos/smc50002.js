@@ -203,6 +203,7 @@ const SMC50002 = function () {
     const EvtEliminarFormularo = function () {
         fnEliminarRegistroConsult();
     };
+
     const EvtImprimir = function () {
         let _id = document.getElementById("IdTramite");
 
@@ -213,8 +214,6 @@ const SMC50002 = function () {
             eMASReferencialJs.mostrarProgress();
             eMASReferencialJs.FetchPost("Comodatos/SMC50002/GenerateReportGeneral", dataBody, objSMC50002.ImpresionReporteGeneral, eMASReferencialJs.FnGeneralVacia, "");            
         }
-
-        
     };
 
     const EvtRegresarFormulario = function () {
@@ -685,6 +684,18 @@ const SMC50002 = function () {
         });
     };
 
+    const exportacionReporteGeneralRequest = function () {
+        let dataFilter = fnGetDataFilter();
+
+        let dataBody = {
+            Codigo: "DATATRAMITESG1",
+            ParamsFilter: dataFilter,
+            RutaRetorno: "Comodatos/SMC50002/GetExportDataCsvSystem?idexport="
+        };
+        eMASReferencialJs.mostrarProgress();
+        eMASReferencialJs.FetchPost("Comodatos/SMC50002/ExportDataSystem", dataBody, eMASReferencialJs.exportacionReporteGeneralResult, eMASReferencialJs.FnGeneralVacia, "");
+    };
+
     const CustomControlsPanel = function () {
         let arrControlsCodigoCatastral = ["sector", "manzana", "lote", "division", "phv", "phh", "numero"];
 
@@ -701,7 +712,7 @@ const SMC50002 = function () {
     };
 
     const inicializacionPanel = function () {
-        eMASReferencialJs.InicializarPanelGenerico("panelFilterTramite", EvtBtnNuevo, EvtBtnLimpiarFormPanel, EvtBtnConsultar, "DataListadoTramites");
+        eMASReferencialJs.InicializarPanelGenerico("panelFilterTramite", EvtBtnNuevo, EvtBtnLimpiarFormPanel, objSMC50002.ExportacionReporteGeneral, EvtBtnConsultar, "DataListadoTramites");
         cargaDatosCombosPanel();
         // Customizar Controles
         CustomControlsPanel();
@@ -737,6 +748,9 @@ const SMC50002 = function () {
         },
         ImpresionReporteGeneral: function (data) {
             ImprimirReporteGeneral1(data);
+        },
+        ExportacionReporteGeneral: function () {
+            exportacionReporteGeneralRequest();
         }
     };
 }

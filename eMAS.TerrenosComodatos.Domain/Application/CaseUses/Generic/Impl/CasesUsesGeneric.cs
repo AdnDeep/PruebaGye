@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eMAS.TerrenosComodatos.Domain.Application
 {
-    public class CasesUsesGeneric : ICasesUsesGeneric
+    public partial class CasesUsesGeneric : ICasesUsesGeneric
     {
         private readonly IGestionRepositorioExternoGenerico _repositorioExterno;
         private readonly ValidadoresGenerico _validadores;
