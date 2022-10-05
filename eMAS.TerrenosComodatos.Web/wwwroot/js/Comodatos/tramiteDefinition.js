@@ -34,12 +34,12 @@ class Tramite {
             objRespuesta.mensaje = "Indicar la manzana es Obligatorio  y no puede ser 0.";
             return;
         }
-        if (objCtrlWithValues.loteEdit == undefined || objCtrlWithValues.loteEdit == null
-            || objCtrlWithValues.loteEdit == 0) {
-            objRespuesta.isValid = false;
-            objRespuesta.mensaje = "Indicar el Lote es Obligatorio.";
-            return;
-        }
+        //if (objCtrlWithValues.loteEdit == undefined || objCtrlWithValues.loteEdit == null
+        //    || objCtrlWithValues.loteEdit == 0) {
+        //    objRespuesta.isValid = false;
+        //    objRespuesta.mensaje = "Indicar el Lote es Obligatorio.";
+        //    return;
+        //}
         //if (objCtrlWithValues.divisionEdit == undefined || objCtrlWithValues.divisionEdit == null
         //    || objCtrlWithValues.divisionEdit == 0) {
         //    objRespuesta.isValid = false;

@@ -104,12 +104,12 @@ namespace eMAS.TerrenosComodatos.Domain.Application
                 salida.tipo = "ADVERTENCIA";
                 return puedeContinuar;
             }
-            if (entrada.lote <= 0)
-            {
-                salida.mensaje = "Indicar el lote es obligatorio y no puede ser 0. (3)";
-                salida.tipo = "ADVERTENCIA";
-                return puedeContinuar;
-            }
+            //if (entrada.lote <= 0)
+            //{
+            //    salida.mensaje = "Indicar el lote es obligatorio y no puede ser 0. (3)";
+            //    salida.tipo = "ADVERTENCIA";
+            //    return puedeContinuar;
+            //}
             //if (entrada.division <= 0)
             //{
             //    salida.mensaje = "Indicar la división es obligatorio. (3)";
