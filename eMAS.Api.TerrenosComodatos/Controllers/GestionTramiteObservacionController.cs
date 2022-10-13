@@ -101,6 +101,7 @@ namespace eMAS.Api.TerrenosComodatos.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("Actualizar")]
+        [ComunLib.OpenApiExplorerSettings(Flow = ComunLib.OAuthFlow.AuthCodeAAD)]
         public ActionResult<ResultadoDTO<int>> Actualizar(ObservacionTramiteEditViewModel model, string usuario, string controlador, string pcclient)
         {
             ResultadoDTO<int> respuesta = new ResultadoDTO<int>();
