@@ -8,6 +8,7 @@ using eMAS.Api.TerrenosComodatos.Logic;
 using eMAS.Api.TerrenosComodatos.Logic.Generic;
 using eMAS.Api.TerrenosComodatos.Repository;
 using eMAS.Api.TerrenosComodatos.Services;
+//using eMAS.Api.TerrenosComodatos.Services.Jobs;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,7 +26,7 @@ using OpenApiInfo = Microsoft.OpenApi.Models.OpenApiInfo;
 
 namespace eMAS.Api.TerrenosComodatos
 {
-    public static class ServiceExtension
+    public static partial class ServiceExtension
     {
         public static void AddHttpServices(this IServiceCollection services)
         {
@@ -243,6 +244,11 @@ namespace eMAS.Api.TerrenosComodatos
                 defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
                 options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
             });
+        }
+        public static void AddJobServices(this IServiceCollection services)
+        {
+            services.AddSingleton<INotificationTramiteOficioJob, NotificationTramiteOficioJob>();
+            services.AddTransient<IServiceNotificationTramiteOficio, ServiceNotificationTramiteOficio>();
         }
     }
 }

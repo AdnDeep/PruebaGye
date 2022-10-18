@@ -1,8 +1,11 @@
+using eMAS.Api.TerrenosComodatos.Extensions;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace eMAS.Api.TerrenosComodatos
 {
@@ -31,9 +34,14 @@ namespace eMAS.Api.TerrenosComodatos
             services.AddServicesTelemetry();
 
             services.AddHttpContextAccessor();
+            services.AddJobServices();
+            services.AddHangFireServices(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env
+            , IBackgroundJobClient backgroundJobClient
+            , IRecurringJobManager recurringJobManager
+            , IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -60,7 +68,10 @@ namespace eMAS.Api.TerrenosComodatos
             {
                 endpoints.MapControllers();
                 endpoints.MapSwagger();
+                
             });
+            app.UseHangfireDashboard();
+            app.AddJobConfiguration(recurringJobManager, serviceProvider, Configuration);
         }
     }
 }

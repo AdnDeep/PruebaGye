@@ -42,6 +42,8 @@ namespace eMAS.Api.TerrenosComodatos.Data
         public virtual DbSet<ExportSingle> ExportsSingle { get; set; }
         public virtual DbSet<SmcValidacionEscritura> SmcValidacionsEscritura { get; set; }    
         public virtual DbSet<SmcValidaDataServidor> SmcValidaDatasServidor { get; set; }
+        public virtual DbSet<SmcCatalogoConfiguracion> SmcCatalogosConfiguracion { get; set; }
+        public virtual DbSet<SmcNotificacionPendiente> SmcNotificacionPendientes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -748,6 +750,16 @@ namespace eMAS.Api.TerrenosComodatos.Data
             });
 
             modelBuilder.Entity<SmcValidacionEscritura>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcCatalogoConfiguracion>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<SmcNotificacionPendiente>(entity =>
             {
                 entity.HasNoKey();
             });

@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMAS.TerrenosComodatos.ServiciosWindows", "eMAS.TerrenosComodatos.ServiciosWindows\eMAS.TerrenosComodatos.ServiciosWindows.csproj", "{FD35C561-9499-4A86-82EB-A1F09DE165F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.IServices", "eMAS.Api.TerrenosComodatos.IServices\eMAS.Api.TerrenosComodatos.IServices.csproj", "{E5285040-EE6A-43AC-B116-A7048AE424AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Services", "eMAS.Api.TerrenosComodatos.Services\eMAS.Api.TerrenosComodatos.Services.csproj", "{55DC9656-C14B-449F-9BF7-57CF61300604}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.IRepository", "eMAS.Api.TerrenosComodatos.IRepository\eMAS.Api.TerrenosComodatos.IRepository.csproj", "{CBB32248-941C-47CE-8FCB-53C568088D35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Repository", "eMAS.Api.TerrenosComodatos.Repository\eMAS.Api.TerrenosComodatos.Repository.csproj", "{CDB65A0F-17C5-4A5D-8BBC-83B5BD6BD6A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Entities", "eMAS.Api.TerrenosComodatos.Entities\eMAS.Api.TerrenosComodatos.Entities.csproj", "{A1B54161-B926-40DF-9D4D-73FAFD363780}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Data", "eMAS.Api.TerrenosComodatos.Data\eMAS.Api.TerrenosComodatos.Data.csproj", "{596C4944-720A-46D7-8694-D93CDDAB681E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Logic", "eMAS.Api.TerrenosComodatos.Logic\eMAS.Api.TerrenosComodatos.Logic.csproj", "{5F440776-84AD-45A3-BF0B-39F72F928655}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.ViewModel", "eMAS.Api.TerrenosComodatos.ViewModel\eMAS.Api.TerrenosComodatos.ViewModel.csproj", "{D15FED16-B559-4E4A-880A-B6D0069ECD45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD35C561-9499-4A86-82EB-A1F09DE165F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD35C561-9499-4A86-82EB-A1F09DE165F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD35C561-9499-4A86-82EB-A1F09DE165F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD35C561-9499-4A86-82EB-A1F09DE165F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5285040-EE6A-43AC-B116-A7048AE424AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5285040-EE6A-43AC-B116-A7048AE424AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5285040-EE6A-43AC-B116-A7048AE424AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5285040-EE6A-43AC-B116-A7048AE424AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55DC9656-C14B-449F-9BF7-57CF61300604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55DC9656-C14B-449F-9BF7-57CF61300604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55DC9656-C14B-449F-9BF7-57CF61300604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55DC9656-C14B-449F-9BF7-57CF61300604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB32248-941C-47CE-8FCB-53C568088D35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB32248-941C-47CE-8FCB-53C568088D35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB32248-941C-47CE-8FCB-53C568088D35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB32248-941C-47CE-8FCB-53C568088D35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB65A0F-17C5-4A5D-8BBC-83B5BD6BD6A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB65A0F-17C5-4A5D-8BBC-83B5BD6BD6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB65A0F-17C5-4A5D-8BBC-83B5BD6BD6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB65A0F-17C5-4A5D-8BBC-83B5BD6BD6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B54161-B926-40DF-9D4D-73FAFD363780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B54161-B926-40DF-9D4D-73FAFD363780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B54161-B926-40DF-9D4D-73FAFD363780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B54161-B926-40DF-9D4D-73FAFD363780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596C4944-720A-46D7-8694-D93CDDAB681E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596C4944-720A-46D7-8694-D93CDDAB681E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596C4944-720A-46D7-8694-D93CDDAB681E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596C4944-720A-46D7-8694-D93CDDAB681E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F440776-84AD-45A3-BF0B-39F72F928655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F440776-84AD-45A3-BF0B-39F72F928655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F440776-84AD-45A3-BF0B-39F72F928655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F440776-84AD-45A3-BF0B-39F72F928655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D15FED16-B559-4E4A-880A-B6D0069ECD45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D15FED16-B559-4E4A-880A-B6D0069ECD45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D15FED16-B559-4E4A-880A-B6D0069ECD45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D15FED16-B559-4E4A-880A-B6D0069ECD45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F18B4F56-1338-4BA2-8526-CF3FC167C31A}
+	EndGlobalSection
+EndGlobal
