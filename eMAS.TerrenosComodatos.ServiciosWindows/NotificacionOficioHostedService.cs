@@ -17,20 +17,17 @@ namespace eMAS.TerrenosComodatos.ServiciosWindows
         private int? _exitCode;
 
         private TelemetryClient _telemetryClient;
-        //private readonly IServiceScopeFactory _scopeFactory;
         private readonly ILogger _logger;
         private readonly IHostApplicationLifetime _appLifetime;
         private readonly INotificationTramiteOficioJob _notificationTramiteOficioJob;
 
         public NotificacionOficioHostedService(
-            //IServiceScopeFactory scopeFactory,
             ILogger<NotificacionOficioHostedService> logger,
             IHostApplicationLifetime appLifetime,
             INotificationTramiteOficioJob notificationTramiteOficioJob, 
             TelemetryClient tc
             )
         {
-            //_scopeFactory = scopeFactory;
             _logger = logger;
             _appLifetime = appLifetime;
             _notificationTramiteOficioJob = notificationTramiteOficioJob;
@@ -52,31 +49,14 @@ namespace eMAS.TerrenosComodatos.ServiciosWindows
                 {
                     try
                     {
-                        // You can still use services with a different life scope (transient, scoped)
-                        // using (var scope = _scopeFactory.CreateScope())
-                        // {
-                        //    var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
-                        // }
-
                         await _notificationTramiteOficioJob.Execute();
                         
-                        _exitCode = 0;
-                        throw new Exception("test");
-                        
+                        _exitCode = 0;                        
                     }
                     catch (Exception ex)
                     {
-                        //var p = _telemetryClient.StartOperation("operation");
-                        //_telemetryClient.StartOperation<ExceptionTelemetry>(new ExceptionTelemetry(ex))
-                        //using ()
-                        {
-                            //using (_logger.BeginScope(props))
-                            //{
-                                //_logger.LogError(ex, "Unhandled exception");
-                            _telemetryClient.TrackException(ex);
-                            _telemetryClient.Flush();
-                            //}
-                        }
+                        _telemetryClient.TrackException(ex);
+                         
                         _exitCode = 1;
                     }
                     finally
@@ -93,7 +73,6 @@ namespace eMAS.TerrenosComodatos.ServiciosWindows
         {
             _logger.LogDebug($"Exiting with return code: {_exitCode}");
 
-            // Exit code may be null if the user cancelled via Ctrl+C/SIGTERM
             Environment.ExitCode = _exitCode.GetValueOrDefault(-1);
             return Task.CompletedTask;
         }
