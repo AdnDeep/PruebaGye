@@ -245,10 +245,6 @@ namespace eMAS.Api.TerrenosComodatos
                 options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
             });
         }
-        public static void AddJobServices(this IServiceCollection services)
-        {
-            services.AddSingleton<INotificationTramiteOficioJob, NotificationTramiteOficioJob>();
-            services.AddTransient<IServiceNotificationTramiteOficio, ServiceNotificationTramiteOficio>();
-        }
+        
     }
 }
