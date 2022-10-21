@@ -29,7 +29,7 @@ namespace eMAS.Api.TerrenosComodatos.IServices
             this._notificacionLogic = notificacionLogic;
             this._mailLogic = mailLogic;
         }
-        public async Task ObtenerOficiosSinRespuestaYNotificar()
+        public async Task ObtenerOficiosSinRespuestaYNotificar(string pathBase)
         {
             Task<List<SmcCatalogoConfiguracion>> taskConfCorreoDestinatario = _catalogoLogic.ObtenerCatalogoPorCodigoYTipo("EMAIL_RECEPTOR", "CONFIGURACION", "RECNOTOFIC", "");
             Task<List<SmcNotificacionPendiente>> taskNotificacionesPendiente = _notificacionLogic.ObtenerTramiteOficioPendienteSinRespuesta();
@@ -55,7 +55,7 @@ namespace eMAS.Api.TerrenosComodatos.IServices
 
             var mailTo = lsResultDestinatarios.Select(s => s.ValorAlfaNumerico1).ToList();
 
-            string emailTemplate = _mailLogic.GetEmailTemplate<List<SmcNotificacionPendiente>>("NotificacionOficiosPendientes", lsResultNotificacionPendiente);
+            string emailTemplate = _mailLogic.GetEmailTemplate<List<SmcNotificacionPendiente>>("NotificacionOficiosPendientes", pathBase, lsResultNotificacionPendiente);
 
             string fecha = DateTime.Now.ToString("yyyy-MMMM-dd");
             string subject = $"Sistema Comodato Notificaciones para Tramites Oficios {fecha}";

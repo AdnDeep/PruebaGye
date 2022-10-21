@@ -5,6 +5,6 @@ namespace eMAS.Api.TerrenosComodatos.IServices
 {
     public interface IServiceNotificationTramiteOficio
     {
-        Task ObtenerOficiosSinRespuestaYNotificar();
+        Task ObtenerOficiosSinRespuestaYNotificar(string pathBase);
     }
 }

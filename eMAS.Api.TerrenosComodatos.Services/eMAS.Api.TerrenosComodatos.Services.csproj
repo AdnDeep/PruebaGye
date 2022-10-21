@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.IServices\eMAS.Api.TerrenosComodatos.IServices.csproj" />
     <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.Logic\eMAS.Api.TerrenosComodatos.Logic.csproj" />
-    <ProjectReference Include="..\eMAS.Api.TerrenosComodatos.ViewModel\eMAS.Api.TerrenosComodatos.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

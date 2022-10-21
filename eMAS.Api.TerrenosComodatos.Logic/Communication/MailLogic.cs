@@ -106,9 +106,9 @@ namespace eMAS.Api.TerrenosComodatos.Logic.Communication
             }
         }
         
-        public string GetEmailTemplate<T>(string emailTemplate, T emailTemplateModel)
+        public string GetEmailTemplate<T>(string emailTemplate, string pathBase, T emailTemplateModel)
         {
-            string mailTemplate = LoadTemplate(emailTemplate);
+            string mailTemplate = LoadTemplate(emailTemplate, pathBase);
             string mailOutput = "";
             IRazorEngine razorEngine = new RazorEngine();
             IRazorEngineCompiledTemplate modifiedMailTemplate = null;
@@ -132,9 +132,10 @@ namespace eMAS.Api.TerrenosComodatos.Logic.Communication
             return mailOutput;
         }
 
-        public string LoadTemplate(string emailTemplate)
+        public string LoadTemplate(string emailTemplate, string pathBase)
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = pathBase;
+                //AppDomain.CurrentDomain.BaseDirectory;
             string templateDir = Path.Combine(baseDir, "MailTemplates");
             string templatePath = Path.Combine(templateDir, $"{emailTemplate}.cshtml");
 

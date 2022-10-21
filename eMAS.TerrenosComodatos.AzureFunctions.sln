@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMAS.TerrenosComodatos.AzureFunctions", "eMAS.TerrenosComodatos.AzureFunctions\eMAS.TerrenosComodatos.AzureFunctions.csproj", "{4060B142-AB19-49A7-AF71-B62D3BE750C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Comun", "eMAS.Api.TerrenosComodatos.Comun\eMAS.Api.TerrenosComodatos.Comun.csproj", "{D8B56366-7869-4356-94E4-BB5C92C6BCA6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Data", "eMAS.Api.TerrenosComodatos.Data\eMAS.Api.TerrenosComodatos.Data.csproj", "{CB96FDE8-ABF8-4E96-B41D-8151D47EB71A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Entities", "eMAS.Api.TerrenosComodatos.Entities\eMAS.Api.TerrenosComodatos.Entities.csproj", "{74BD848E-0E0C-468B-9483-D471DC277DC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.IRepository", "eMAS.Api.TerrenosComodatos.IRepository\eMAS.Api.TerrenosComodatos.IRepository.csproj", "{1B18902D-0BF6-4A5C-B5C9-0AF698521768}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.IServices", "eMAS.Api.TerrenosComodatos.IServices\eMAS.Api.TerrenosComodatos.IServices.csproj", "{EB9CDADC-A575-4766-872E-E17F02B30465}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Logic", "eMAS.Api.TerrenosComodatos.Logic\eMAS.Api.TerrenosComodatos.Logic.csproj", "{498CCD4E-07E2-493C-945A-A2C5B2D07D6C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Repository", "eMAS.Api.TerrenosComodatos.Repository\eMAS.Api.TerrenosComodatos.Repository.csproj", "{449C85AE-E1C9-444C-92AD-F9BDD9981B6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.Services", "eMAS.Api.TerrenosComodatos.Services\eMAS.Api.TerrenosComodatos.Services.csproj", "{E5E53C37-2415-4BFE-9DBC-2B73D05A9C4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMAS.Api.TerrenosComodatos.ViewModel", "eMAS.Api.TerrenosComodatos.ViewModel\eMAS.Api.TerrenosComodatos.ViewModel.csproj", "{1A7B5117-6CD0-4288-B0B2-E5CAB157C221}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4060B142-AB19-49A7-AF71-B62D3BE750C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4060B142-AB19-49A7-AF71-B62D3BE750C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4060B142-AB19-49A7-AF71-B62D3BE750C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4060B142-AB19-49A7-AF71-B62D3BE750C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8B56366-7869-4356-94E4-BB5C92C6BCA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B56366-7869-4356-94E4-BB5C92C6BCA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B56366-7869-4356-94E4-BB5C92C6BCA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B56366-7869-4356-94E4-BB5C92C6BCA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB96FDE8-ABF8-4E96-B41D-8151D47EB71A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB96FDE8-ABF8-4E96-B41D-8151D47EB71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB96FDE8-ABF8-4E96-B41D-8151D47EB71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB96FDE8-ABF8-4E96-B41D-8151D47EB71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74BD848E-0E0C-468B-9483-D471DC277DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74BD848E-0E0C-468B-9483-D471DC277DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74BD848E-0E0C-468B-9483-D471DC277DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74BD848E-0E0C-468B-9483-D471DC277DC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B18902D-0BF6-4A5C-B5C9-0AF698521768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B18902D-0BF6-4A5C-B5C9-0AF698521768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B18902D-0BF6-4A5C-B5C9-0AF698521768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B18902D-0BF6-4A5C-B5C9-0AF698521768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB9CDADC-A575-4766-872E-E17F02B30465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB9CDADC-A575-4766-872E-E17F02B30465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB9CDADC-A575-4766-872E-E17F02B30465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB9CDADC-A575-4766-872E-E17F02B30465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{498CCD4E-07E2-493C-945A-A2C5B2D07D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498CCD4E-07E2-493C-945A-A2C5B2D07D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498CCD4E-07E2-493C-945A-A2C5B2D07D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498CCD4E-07E2-493C-945A-A2C5B2D07D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449C85AE-E1C9-444C-92AD-F9BDD9981B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449C85AE-E1C9-444C-92AD-F9BDD9981B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449C85AE-E1C9-444C-92AD-F9BDD9981B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449C85AE-E1C9-444C-92AD-F9BDD9981B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5E53C37-2415-4BFE-9DBC-2B73D05A9C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E53C37-2415-4BFE-9DBC-2B73D05A9C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E53C37-2415-4BFE-9DBC-2B73D05A9C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E53C37-2415-4BFE-9DBC-2B73D05A9C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A7B5117-6CD0-4288-B0B2-E5CAB157C221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A7B5117-6CD0-4288-B0B2-E5CAB157C221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A7B5117-6CD0-4288-B0B2-E5CAB157C221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A7B5117-6CD0-4288-B0B2-E5CAB157C221}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F18B4F56-1338-4BA2-8526-CF3FC167C31A}
+	EndGlobalSection
+EndGlobal
