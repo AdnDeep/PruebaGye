@@ -21,7 +21,7 @@ namespace eMAS.TerrenosComodatos.AzureFunctions
             this._executionContext = executionContext;
         }
         [FunctionName("FnNotificacionOficiosSinRespuesta")]
-        public async Task Run([TimerTrigger("%CRON_EXP_FN_OFICIOS_SIN_RESPUESTA%")]TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("0 /1 0 * * 1-5")]TimerInfo myTimer, ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
