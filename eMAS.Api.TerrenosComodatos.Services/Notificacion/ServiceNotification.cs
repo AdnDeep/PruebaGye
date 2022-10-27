@@ -5,6 +5,7 @@ using eMAS.Api.TerrenosComodatos.Logic;
 using eMAS.Api.TerrenosComodatos.Logic.Communication;
 
 using eMAS.Api.TerrenosComodatos.ViewModel;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,13 +19,16 @@ namespace eMAS.Api.TerrenosComodatos.IServices
         private readonly MailLogic _mailLogic;
         private readonly CatalogoLogic _catalogoLogic;
         private readonly NotificacionLogic _notificacionLogic;
+        private readonly ILogger _log;
         //private readonly RenderViewService _razorViewService;
 
         public ServiceNotificationTramiteOficio(CatalogoLogic catalogoLogic
             , NotificacionLogic notificacionLogic
             , MailLogic mailLogic
+            , ILogger log
             )
         {
+            this._log = log;
             this._catalogoLogic = catalogoLogic;
             this._notificacionLogic = notificacionLogic;
             this._mailLogic = mailLogic;
@@ -49,9 +53,16 @@ namespace eMAS.Api.TerrenosComodatos.IServices
             var lsResultDestinatarios = taskConfCorreoDestinatario.Result;
 
             if (lsResultNotificacionPendiente.Count == 0)
+            {
+                _log.LogError("Se termina proceso sin envío de correo, no hay notificaciones pendientes.");
                 return;
+            }
+
             if (lsResultDestinatarios.Count == 0)
+            {
+                _log.LogError("Se termina proceso sin envío de correo, no hay destinatarios.");
                 return;
+            }
 
             var mailTo = lsResultDestinatarios.Select(s => s.ValorAlfaNumerico1).ToList();
 
@@ -63,7 +74,24 @@ namespace eMAS.Api.TerrenosComodatos.IServices
 
             MailData mailData = new MailData(mailTo, subject, emailTemplate);
             
-            await _mailLogic.SendAsync(mailData);
+            var resultSendMail =  await _mailLogic.SendAsync(mailData);
+
+            if (resultSendMail == null)
+            {
+                _log.LogError("No se produjo respuesta al proceso de envío de correo;");
+                return;
+            }
+            if (!resultSendMail.dataresult)
+            {
+                _log.LogError("Se produjo un error en el envío de correo");
+                string respuesta = resultSendMail.mensaje;
+
+                if(!(string.IsNullOrEmpty(respuesta) || string.IsNullOrWhiteSpace(respuesta)))
+                    _log.LogError(respuesta);
+
+                return;
+            }
+            _log.LogInformation("Proceso terminado con correo enviado.");
         }
     }
 }

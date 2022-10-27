@@ -21,7 +21,7 @@ namespace eMAS.TerrenosComodatos.AzureFunctions
             this._executionContext = executionContext;
         }
         [FunctionName("FnNotificacionOficiosSinRespuesta")]
-        public async Task Run([TimerTrigger("%CRON_EXP_FN_OFICIOS_SIN_RESPUESTA%")]TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("%CronExpOficiosSinResp%")]TimerInfo myTimer, ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
@@ -29,7 +29,6 @@ namespace eMAS.TerrenosComodatos.AzureFunctions
             var rootDir = context.AppDirectory; 
 
             await _serviceNotificationTramiteOficio.ObtenerOficiosSinRespuestaYNotificar(rootDir);
-            //
         }
     }
 }
