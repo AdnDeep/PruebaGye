@@ -19,16 +19,16 @@ namespace eMAS.Api.TerrenosComodatos.IServices
         private readonly MailLogic _mailLogic;
         private readonly CatalogoLogic _catalogoLogic;
         private readonly NotificacionLogic _notificacionLogic;
-        private readonly ILogger _log;
+        //private readonly ILogger _log;
         //private readonly RenderViewService _razorViewService;
 
         public ServiceNotificationTramiteOficio(CatalogoLogic catalogoLogic
             , NotificacionLogic notificacionLogic
             , MailLogic mailLogic
-            , ILogger log
+          //  , ILogger log
             )
         {
-            this._log = log;
+            //this._log = log;
             this._catalogoLogic = catalogoLogic;
             this._notificacionLogic = notificacionLogic;
             this._mailLogic = mailLogic;
@@ -54,13 +54,13 @@ namespace eMAS.Api.TerrenosComodatos.IServices
 
             if (lsResultNotificacionPendiente.Count == 0)
             {
-                _log.LogError("Se termina proceso sin envío de correo, no hay notificaciones pendientes.");
+                //_log.LogError("Se termina proceso sin envío de correo, no hay notificaciones pendientes.");
                 return;
             }
 
             if (lsResultDestinatarios.Count == 0)
             {
-                _log.LogError("Se termina proceso sin envío de correo, no hay destinatarios.");
+                //_log.LogError("Se termina proceso sin envío de correo, no hay destinatarios.");
                 return;
             }
 
@@ -78,20 +78,20 @@ namespace eMAS.Api.TerrenosComodatos.IServices
 
             if (resultSendMail == null)
             {
-                _log.LogError("No se produjo respuesta al proceso de envío de correo;");
+              //  _log.LogError("No se produjo respuesta al proceso de envío de correo;");
                 return;
             }
             if (!resultSendMail.dataresult)
             {
-                _log.LogError("Se produjo un error en el envío de correo");
+              //  _log.LogError("Se produjo un error en el envío de correo");
                 string respuesta = resultSendMail.mensaje;
 
-                if(!(string.IsNullOrEmpty(respuesta) || string.IsNullOrWhiteSpace(respuesta)))
-                    _log.LogError(respuesta);
+               // if(!(string.IsNullOrEmpty(respuesta) || string.IsNullOrWhiteSpace(respuesta)))
+               //     _log.LogError(respuesta);
 
                 return;
             }
-            _log.LogInformation("Proceso terminado con correo enviado.");
+            //_log.LogInformation("Proceso terminado con correo enviado.");
         }
     }
 }
