@@ -229,7 +229,7 @@ const SMC50002 = function () {
 
     const fnEditarElemento = function (id) {
         if (id == null || id == undefined) {
-            console.log("No hay ningún código de Registro");
+            console.log("No hay ningÃºn cÃ³digo de Registro");
             return;
         }
         let _appConfig = eMASReferencialJs.ObtenerAppConfig();
@@ -626,7 +626,8 @@ const SMC50002 = function () {
 
     const SetearValoresInicialesFormulario = function () {
         let num_anio = document.querySelector("#exp-anio");
-        num_anio.value = "2022";
+        // obtener el aÃ±o actual
+        num_anio.value = new Date().getFullYear();
     };
 
     const fnLimpiarFormularioPanel = function () {
